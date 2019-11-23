@@ -4,7 +4,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { simpleAction } from "./actions/simpleAction";
 import MaterialUIButtons from "./materialUiButton";
-import VectorIcon from "./components/atoms/VectorIcon";
+import VectorIcon from "./components/utilComponents/VectorIcon";
 import { heart, pause, play } from "./assets/vectorIcons";
 
 function App(props) {
