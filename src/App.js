@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import logo from "./logo.svg";
 import "./App.css";
 import { simpleAction } from "./actions/simpleAction";
 import MaterialUIButtons from "./components/utilComponents/materialUiButton";
