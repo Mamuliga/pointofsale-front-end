@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import logo from "./logo.svg";
 import "./App.css";
 import { simpleAction } from "./actions/simpleAction";
-import MaterialUIButtons from "./materialUiButton";
+import MaterialUIButtons from "./components/utilComponents/materialUiButton";
 import VectorIcon from "./components/utilComponents/VectorIcon";
 import { heart, pause, play } from "./assets/vectorIcons";
 
