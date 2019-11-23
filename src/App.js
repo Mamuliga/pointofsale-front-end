@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import "./App.css";
-import { simpleAction } from "./actions/simpleAction";
+import { simpleAction } from "./store/actions/simpleAction";
 import MaterialUIButtons from "./components/utilComponents/materialUiButton";
 import VectorIcon from "./components/utilComponents/VectorIcon";
 import { heart, pause, play } from "./assets/vectorIcons";
@@ -10,9 +9,7 @@ function App(props) {
   return (
     <div className="App">
       <pre>
-        {
-          JSON.stringify(props)
-        }
+        {JSON.stringify(props)}
       </pre>
       <header className="App-header">
         EIP POS FRONT END
