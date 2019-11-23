@@ -16,21 +16,10 @@ function App(props) {
         }
       </pre>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        EIP POS FRONT END
         <MaterialUIButtons />
         <VectorIcon name={heart} /> <VectorIcon name={play} />
         <VectorIcon name={pause} />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
         <button onClick={() => props.simpleAction()}>Click me</button>
       </header>
     </div>
