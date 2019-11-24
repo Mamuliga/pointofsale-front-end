@@ -1,6 +1,8 @@
+import * as ACTION_TYPES from '../actions/actionTypes'
+
 export default (state = {}, action) => {
   switch (action.type) {
-    case "AUTHENTICATION":
+    case ACTION_TYPES.AUTHENTICATION:
       return {
         isAuthenticated: action.payload
       };

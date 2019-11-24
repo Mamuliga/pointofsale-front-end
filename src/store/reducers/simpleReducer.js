@@ -1,6 +1,8 @@
+import * as ACTION_TYPES from '../actions/actionTypes';
+
 export default (state = {}, action) => {
   switch (action.type) {
-    case "SIMPLE_ACTION":
+    case ACTION_TYPES.SIMPLE_ACTION:
       return {
         result: action.payload
       };
