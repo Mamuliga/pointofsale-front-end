@@ -4,6 +4,8 @@ import { simpleAction } from "./store/actions/simpleAction";
 import MaterialUIButtons from "./components/uis/materialUiButton";
 import VectorIcon from "./components/uis/VectorIcon";
 import { heart, pause, play } from "./assets/vectorIcons";
+import { DatePicker } from 'antd';
+import 'antd/dist/antd.css';
 
 function App(props) {
   return (
@@ -17,6 +19,7 @@ function App(props) {
         <VectorIcon name={heart} /> <VectorIcon name={play} />
         <VectorIcon name={pause} />
         <button onClick={() => props.simpleAction()}>Click me</button>
+        <DatePicker />
       </header>
     </div>
   );
