@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { simpleAction } from "./store/actions/simpleAction";
-import MaterialUIButtons from "./components/utilComponents/materialUiButton";
-import VectorIcon from "./components/utilComponents/VectorIcon";
+import MaterialUIButtons from "./components/uis/materialUiButton";
+import VectorIcon from "./components/uis/VectorIcon";
 import { heart, pause, play } from "./assets/vectorIcons";
 
 function App(props) {
