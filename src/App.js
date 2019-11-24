@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { simpleAction } from "./store/actions/simpleAction";
+import { simpleAction, postRequest, putRequest, deleteRequest } from "./store/actions/simpleAction";
 import VectorIcon from "./components/uis/VectorIcon";
 import { heart, pause, play } from "./assets/vectorIcons";
 import { DatePicker } from 'antd';
@@ -19,6 +19,9 @@ function App(props) {
         <VectorIcon name={pause} />
         <button onClick={() => props.simpleAction()}>Click me</button>
         <button onClick={() => props.authenticate()}>Authenticate</button>
+        <button onClick={() => props.postRequest()}>Post Request</button>
+        <button onClick={() => props.putRequest()}>Put Request</button>
+        <button onClick={() => props.deleteRequest()}>delete Request</button>
         <DatePicker />
       </header>
     </div>
@@ -31,7 +34,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   simpleAction: () => dispatch(simpleAction()),
-  authenticate: () => dispatch(authenticate())
+  authenticate: () => dispatch(authenticate()),
+  postRequest: () => dispatch(postRequest()),
+  putRequest: () => dispatch(putRequest()),
+  deleteRequest: () => dispatch(deleteRequest())
 });
 
 export default connect(
