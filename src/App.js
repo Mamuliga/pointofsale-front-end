@@ -6,11 +6,12 @@ import { heart, pause, play } from "./assets/vectorIcons";
 import { DatePicker } from 'antd';
 import 'antd/dist/antd.css';
 import { authenticate } from "./store/actions/authActions";
+import LoginPage from "./components/login";
 
 function App(props) {
   return (
     <div className="App">
-      <pre>
+      {/* <pre>
         {JSON.stringify(props)}
       </pre>
       <header className="App-header">
@@ -22,8 +23,10 @@ function App(props) {
         <button onClick={() => props.postRequest()}>Post Request</button>
         <button onClick={() => props.putRequest()}>Put Request</button>
         <button onClick={() => props.deleteRequest()}>delete Request</button>
-        <DatePicker />
-      </header>
+
+        <DatePicker /> */}
+        <LoginPage />
+      {/* </header> */}
     </div>
   );
 }
