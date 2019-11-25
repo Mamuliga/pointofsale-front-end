@@ -1,10 +1,11 @@
 import React from 'react';
-import {Button} from 'antd'
+import { Button } from 'antd'
 
 const LoginPage = () => {
-    return(<div>
+    return (<div>
         <h1>THis is login LoginPage</h1>
         <Button>Log in</Button>
+        <Button>submit</Button>
     </div>)
 }
 export default LoginPage;
