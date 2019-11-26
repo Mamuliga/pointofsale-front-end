@@ -25,7 +25,7 @@ const LoginPage = () => {
             <Button type="primary" block>
                 Login
             </Button>
-            <a className="login-form-forgot`" href="">
+            <a className="login-form-forgot" href="">
                 Forgot password
           </a>
 
