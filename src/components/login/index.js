@@ -1,14 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
 import { authenticate, logout } from "../../store/actions/authActions";
-import {Button} from 'antd'
+import { Button } from "antd";
 
-const Login = ({ authReducer, authenticate, logout  }) => (
+const Login = ({ authReducer, authenticate, logout, history }) => (
   <div>
     <h1>This is Login page</h1>
     <pre>{JSON.stringify(authReducer)}</pre>
     <h2>Click here to login/logut</h2>
-    <Button type="primary" onClick={authReducer && authReducer.isAuthenticated?logout:authenticate}>
+    <Button
+      type="primary"
+      onClick={() => {
+        if (authReducer && authReducer.isAuthenticated) {
+          logout();
+        } else {
+          authenticate();
+          history.push("./sales");
+        }
+      }}
+    >
       {authReducer && authReducer.isAuthenticated ? "Log out" : "Log in"}
     </Button>
   </div>
