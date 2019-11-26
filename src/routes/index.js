@@ -1,5 +1,3 @@
-//Switch case
-//Import to app.js
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Main from "../components/main";
