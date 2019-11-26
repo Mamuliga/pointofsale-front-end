@@ -7,6 +7,7 @@ import Customers from "../components/customers";
 import Suppliers from "../components/suppliers";
 import Sales from "../components/sales";
 import Login from "../components/login";
+import ProtectedRoute from "./protectedRoute";
 
 const Routes = () => (
   <div>
@@ -15,7 +16,7 @@ const Routes = () => (
       <Route exact path="/login" component={Login} />
       <Route exact path="/customers" component={Customers} />
       <Route exact path="/suppliers" component={Suppliers} />
-      <Route exact path="/sales" component={Sales} />
+      <ProtectedRoute exact path="/sales" component={Sales} isAuthenticated={false} />
     </Switch>
   </div>
 );
