@@ -14,7 +14,7 @@ const ProtectedRoute = ({
       if (isAuthenticated) {
         return <Component />;
       } else {
-        return <Redirect to={{ pathname: "/login" }} />;
+        return <Redirect to={{ pathname: "/customers" }} />;
       }
     }}
   />
