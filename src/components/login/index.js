@@ -1,14 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Icon, Input, Button, Form, Anchor } from 'antd';
+import { Icon, Input, Button, Form } from 'antd';
 import './login.css';
-
-
+import { logo } from '../../assets/images';
+// import logo from '../../assets/images/emraldIT.jpeg';
 
 const LoginPage = () => {
     return (
         <Form className="login-form">
             <h1 className="center">Welcome</h1>
+            <img src={logo} width="100" height="150" alt="go" />
+
             <Form.Item label="UserName">
                 <Input
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -22,12 +23,14 @@ const LoginPage = () => {
                     placeholder="Password"
                 />
             </Form.Item>
+
             <Button type="primary" block>
                 Login
             </Button>
             <a className="login-form-forgot" href="">
                 Forgot password
           </a>
+
 
         </Form>
     );
