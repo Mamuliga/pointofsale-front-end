@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Icon, Input, Button, Form } from 'antd';
+import { Icon, Input, Button, Form, Anchor } from 'antd';
 import './login.css';
 
 
