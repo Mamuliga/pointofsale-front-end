@@ -8,7 +8,7 @@ import Routes from "./routes";
 function App(props) {
   return (
     <div className="App">
-      <Routes />
+      <Routes {...props}/>
     </div>
   );
 }

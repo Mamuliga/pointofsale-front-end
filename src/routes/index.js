@@ -6,10 +6,11 @@ import Suppliers from "../components/suppliers";
 import Sales from "../components/sales";
 import Login from "../components/login";
 import ProtectedRoute from "./ProtectedRoute";
-import NotFoundPage from '../components/NotFoundPage'
+import NotFoundPage from "../components/NotFoundPage";
 
-const Routes = (props) => (
-  <div>
+const Routes = props => (
+  <div>InROUTES
+  <pre>{JSON.stringify(props)}</pre>
     <Switch>
       <Route exact path="/" component={Main} />
       <Route exact path="/login" component={Login} />
@@ -19,8 +20,10 @@ const Routes = (props) => (
         exact
         path="/sales"
         component={Sales}
-        isAuthenticated={props.authReducer ? props.authReducer.isAuthenticated : false}
-      /> 
+        isAuthenticated={
+          props.authReducer ? props.authReducer.isAuthenticated : false
+        }
+      />
       <Route component={NotFoundPage} />
     </Switch>
   </div>
