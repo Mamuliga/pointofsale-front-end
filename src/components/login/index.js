@@ -2,7 +2,6 @@ import React from 'react';
 import { Icon, Input, Button, Form } from 'antd';
 import './login.css';
 import { logo } from '../../assets/images';
-// import logo from '../../assets/images/emraldIT.jpeg';
 
 const LoginPage = () => {
     return (
@@ -12,7 +11,7 @@ const LoginPage = () => {
                 <img src={logo} width="100" height="100" alt="logo" />
             </div>
 
-            <Form.Item label="UserName">
+            <Form.Item className="Uname" label="UserName">
                 <Input
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                     placeholder="Username"
@@ -22,18 +21,18 @@ const LoginPage = () => {
             <Form.Item label="Password">
                 <Input
                     prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    placeholder="Password"
+                    placeholder="Password" type="password"
                 />
             </Form.Item>
 
             <Button type="primary" block>
                 Login
             </Button>
-            <a className="login-form-forgot" href="">
-                Forgot password
-          </a>
-
-
+            <div align="right">
+                <a className="login-form-forgot" href="">
+                    Forgot password
+            </a>
+            </div>
         </Form>
     );
 }

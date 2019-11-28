@@ -10,9 +10,12 @@
   text-align: center;
 }
 
-/* img {
-  text-align: left;
+.logo {
+  margin-bottom: 33px;
+}
 
-} */
+.Uname {
+  margin-bottom: 5px;
+}
 
 
