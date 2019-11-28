@@ -5,17 +5,24 @@ const ProtectedRoute = ({
   component: Component,
   isAuthenticated,
   path,
-  exact
-}) => (
+  exact,
+  ...rest
+}) => 
   <Route
+    {...rest}
     path={path}
     exact={exact}
     render={props => {
       if (isAuthenticated) {
-        return <Component />;
-      } else {
-        return <Redirect to={{ pathname: "/customers" }} />;
+        return <Component {...props} />;
       }
+      return (
+        <Redirect
+          to={
+            { pathname: "/customers" }
+          }
+          state={ from: props.location }
+        />;
     }}
   />
 );
