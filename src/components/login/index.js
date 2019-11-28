@@ -8,7 +8,9 @@ const LoginPage = () => {
     return (
         <Form className="login-form">
             <h1 className="center">Welcome</h1>
-            <img src={logo} width="100" height="150" alt="go" />
+            <div class="logo" align="center">
+                <img src={logo} width="100" height="150" alt="go" />
+            </div>
 
             <Form.Item label="UserName">
                 <Input
