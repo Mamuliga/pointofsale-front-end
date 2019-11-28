@@ -8,7 +8,7 @@ const LoginPage = () => {
     return (
         <Form className="login-form">
             <h1 className="center">Welcome</h1>
-            <div class="logo" align="center">
+            <div className="logo" align="center">
                 <img src={logo} width="100" height="100" alt="logo" />
             </div>
 
