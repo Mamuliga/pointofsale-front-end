@@ -1,12 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { authenticate, logout } from "../../store/actions/authActions";
 import { Button } from "antd";
 
-const Login = ({ authReducer, authenticate, logout }) => {
-  let history = useHistory();
-  return (
+const Login = ({ authReducer, authenticate, logout }) => 
     <div>
       <h1>This is Login page</h1>
       <pre>{JSON.stringify(authReducer)}</pre>
@@ -25,8 +22,6 @@ const Login = ({ authReducer, authenticate, logout }) => {
         {authReducer && authReducer.isAuthenticated ? "Log out" : "Log in"}
       </Button>
     </div>
-  );
-};
 
 const mapStateToProps = state => ({
   ...state
