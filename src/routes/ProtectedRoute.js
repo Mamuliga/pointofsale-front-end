@@ -7,7 +7,7 @@ const ProtectedRoute = ({
   path,
   exact,
   ...rest
-}) => 
+}) => (
   <Route
     {...rest}
     path={path}
@@ -18,11 +18,14 @@ const ProtectedRoute = ({
       }
       return (
         <Redirect
-          to={
-            { pathname: "/customers" }
-          }
-          state={ from: props.location }
-        />;
+          to={{
+            pathname: "/customers",
+            state: {
+              from: props.location
+            }
+          }}
+        />
+      );
     }}
   />
 );
