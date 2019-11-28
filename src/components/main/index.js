@@ -7,16 +7,19 @@ const Main = ({ logout, authReducer, history }) => (
   <div>
     <pre>{JSON.stringify({ authReducer })}</pre>
     <h1>Main page</h1>
-    <Button
-      type="danger"
-      onClick={() => {
-        logout();
-        history.push("/login");
-      }}
-    >
-      Log out
-    </Button>
-    <Link to="/sales">Sales</Link>
+    {authReducer.isAuthenticated ? (
+      <Button
+        type="danger"
+        onClick={() => {
+          logout();
+          history.push("/login");
+        }}
+      >
+        Log out
+      </Button>
+    ) : (
+      <Link to="/login">Login</Link>
+    )}
   </div>
 );
 
