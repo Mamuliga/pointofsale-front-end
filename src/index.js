@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import configureStore from "./store";
 import "./assets/fontello/css/animation.css";
 import "./assets/fontello/css/fontello.css";
-import "./index.css";
+import './assets/css/styles.css'
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 

@@ -1,39 +1,44 @@
-import React from 'react';
-import { Icon, Input, Button, Form } from 'antd';
-import './login.css';
-import { logo } from '../../assets/images';
+import React from "react";
+import { Icon, Input, Button, Form } from "antd";
+import { logo } from "../../assets/images";
 
 const LoginPage = () => {
     return (
-        <Form className="login-form">
-            <h1 className="center">Welcome</h1>
-            <div className="logo" align="center">
-                <img src={logo} width="100" height="100" alt="logo" />
+        <div className="login-page-container">
+            <div className="login-form-container">
+                <Form className="login-form">
+                    <h2 className="login-title">Welcome to EIT POS</h2>
+                    <hr className="divider" />
+                    <div className="login-logo">
+                        <img className="logo-image" src={logo} alt="logo" />
+                    </div>
+
+                    <Form.Item className="username" label="Username">
+                        <Input
+                            prefix={<Icon type="user" />}
+                            placeholder="Username"
+                        />
+                    </Form.Item>
+
+                    <Form.Item label="Password">
+                        <Input
+                            prefix={<Icon type="lock" />}
+                            placeholder="Password"
+                            type="password"
+                        />
+                    </Form.Item>
+
+                    <Button type="primary" block>
+                        Login
+      </Button>
+                    <div className="login-forgot-password">
+                        <a className="login-form-forgot" href="/forgot-password">
+                            Forgot password
+        </a>
+                    </div>
+                </Form>
             </div>
-
-            <Form.Item className="Uname" label="UserName">
-                <Input
-                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    placeholder="Username"
-                />
-            </Form.Item>
-
-            <Form.Item label="Password">
-                <Input
-                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    placeholder="Password" type="password"
-                />
-            </Form.Item>
-
-            <Button type="primary" block>
-                Login
-            </Button>
-            <div align="right">
-                <a className="login-form-forgot" href="">
-                    Forgot password
-            </a>
-            </div>
-        </Form>
+        </div>
     );
-}
+};
 export default LoginPage;

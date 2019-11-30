@@ -1,0 +1,58 @@
+/**
+ * All Google Font imports should be here as **ONE LINK**
+ * Font List goes here
+ * 1. 'Calistoga', cursive;
+ */
+@import url("https://fonts.googleapis.com/css?family=Calistoga&display=swap");
+:root {
+  --primary-color: #1890ff;
+  --white-color: #fcfcfc;
+  --dark-color: #222;
+  --light-color: #efefef;
+  --title-font-family: "Calistoga", cursive;
+  font-size: 16px;
+}
+
+.login-page-container {
+  height: 100vh;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form-container {
+  background-color: var(--white-color);
+  max-width: 350px;
+  margin: auto;
+  box-shadow: var(--dark-color) 10px 10px 50px;
+  padding: 25px;
+  border-radius: 5px;
+}
+
+.login-title {
+  text-align: center;
+  letter-spacing: 0.2rem;
+  font-family: var(--title-font-family);
+}
+
+.login-logo {
+  width: 100%;
+  max-height: 120px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.logo-image {
+  width: 100%;
+}
+
+.login-forgot-password {
+  text-align: right;
+  padding: 15px 0;
+}
+
+.divider {
+  border-width: 0.5px;
+  border-color: var(--light-color);
+}

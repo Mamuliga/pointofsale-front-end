@@ -25,7 +25,7 @@ function App(props) {
         <button onClick={() => props.deleteRequest()}>delete Request</button>
 
         <DatePicker /> */}
-        <LoginPage />
+      <LoginPage />
       {/* </header> */}
     </div>
   );
