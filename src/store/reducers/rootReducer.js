@@ -3,6 +3,6 @@ import simpleReducer from "./simpleReducer";
 import authReducer from "./authReducer";
 
 export default combineReducers({
-  simpleReducer,
-  authReducer
+  simple: simpleReducer,
+  auth: authReducer
 });

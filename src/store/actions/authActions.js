@@ -1,9 +1,15 @@
-import * as ACTION_TYPES from "./actionTypes";
+import { LOAD_AUTH_DATA, AUTHENTICATION, LOGOUT } from "./actionTypes";
+
+export const setPersistentData = authData => dispatch => {
+  if (authData && authData.token) {
+    dispatch({ type: LOAD_AUTH_DATA, payload: authData });
+  }
+};
 
 export const authenticate = () => dispatch => {
-  dispatch({ type: ACTION_TYPES.AUTHENTICATION, payload: true });
+  dispatch({ type: AUTHENTICATION, payload: true });
 };
 
 export const logout = () => dispatch => {
-  dispatch({ type: ACTION_TYPES.LOGOUT, payload: false });
+  dispatch({ type: LOGOUT, payload: false });
 };
