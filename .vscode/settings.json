@@ -7,7 +7,7 @@
   "editor.fontLigatures": true,
   "editor.tabSize": 2,
   "editor.suggestSelection": "first",
-  "javascript.implicitProjectConfig.checkJs": true,
+  // "javascript.implicitProjectConfig.checkJs": true,
   "todo-tree.filtering.excludedWorkspaces": ["node_modules"],
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

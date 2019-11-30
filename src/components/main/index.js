@@ -5,7 +5,6 @@ import { Button } from "antd";
 import { Link } from "react-router-dom";
 const Main = ({ logout, authReducer, history }) => (
   <div>
-    <pre>{JSON.stringify({ authReducer })}</pre>
     <h1>Main page</h1>
     {authReducer.isAuthenticated ? (
       <Button

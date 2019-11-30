@@ -1,0 +1,16 @@
+[
+  {
+    "firstName": "Rizan",
+    "lastName": "Mohomed",
+    "outstanding": 12500,
+    "email": "musthafarizan@gmail.com",
+    "isActive": true
+  },
+  {
+    "firstName": "Marjan",
+    "lastName": "Mukram",
+    "outstanding": 2300,
+    "email": "",
+    "isActive": false
+  }
+]

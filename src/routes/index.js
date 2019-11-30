@@ -9,8 +9,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import NotFoundPage from "../components/NotFoundPage";
 
 const Routes = props => (
-  <div>InROUTES
-  <pre>{JSON.stringify(props)}</pre>
+  <div>
     <Switch>
       <Route exact path="/" component={Main} />
       <Route exact path="/login" component={Login} />
