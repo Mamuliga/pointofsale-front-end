@@ -1,0 +1,15 @@
+.table-container {
+  padding: 20px;
+}
+
+.table-in-icon {
+  font-size: 1.2rem;
+}
+
+.active-icon {
+  color: green;
+}
+
+.inactive-icon {
+  color: red;
+}
