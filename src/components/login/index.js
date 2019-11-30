@@ -1,34 +1,44 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { authenticate, logout } from "../../store/actions/authActions";
-import { Button } from "antd";
+import { Icon, Input, Button, Form } from "antd";
+import { logo } from "../../assets/images";
 
-const Login = ({ authReducer, authenticate, logout, history }) => (
-  <div>
-    <h1>This is Login page</h1>
-    <pre>{JSON.stringify(authReducer)}</pre>
-    <h2>Click here to login/logut</h2>
-    <Button
-      type="primary"
-      onClick={() => {
-        authenticate();
-        history.push("./");
-      }}
-    >
-      {authReducer && authReducer.isAuthenticated ? "Log out" : "Log in"}
-    </Button>
-    <Link to="/sales">Sales</Link>
-  </div>
-);
+const LoginPage = () => {
+  return (
+    <div className="login-page-container">
+      <div className="login-form-container">
+        <Form className="login-form">
+          <h2 className="login-title">Welcome to EIT POS</h2>
+          <hr className="divider" />
+          <div className="login-logo">
+            <img className="logo-image" src={logo} alt="logo" />
+          </div>
 
-const mapStateToProps = state => ({
-  ...state
-});
+          <Form.Item className="username" label="Username">
+            <Input
+              prefix={<Icon type="user" />}
+              placeholder="Username"
+            />
+          </Form.Item>
 
-const mapDispatchToProps = dispatch => ({
-  authenticate: () => dispatch(authenticate()),
-  logout: () => dispatch(logout())
-});
+          <Form.Item label="Password">
+            <Input
+              prefix={<Icon type="lock" />}
+              placeholder="Password"
+              type="password"
+            />
+          </Form.Item>
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+          <Button type="primary" block>
+            Login
+      </Button>
+          <div className="login-forgot-password">
+            <a className="login-form-forgot" href="/forgot-password">
+              Forgot password
+        </a>
+          </div>
+        </Form>
+      </div>
+    </div>
+  );
+};
+export default LoginPage;
