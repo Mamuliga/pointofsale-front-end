@@ -6,6 +6,10 @@ export default (state = {}, action) => {
       return {
         isAuthenticated: action.payload
       };
+      case ACTION_TYPES.LOGOUT:
+        return {
+          isAuthenticated:action.payload
+        }
     default:
       return state;
   }
