@@ -10,11 +10,7 @@ function App(props) {
     props.loadAuthData(JSON.parse(persistedAuthData));
   };
   useEffect(loadPersistentAuthData, []);
-  return (
-    <div className="App">
-      <Routes {...props} />
-    </div>
-  );
+  return <Routes {...props} />;
 }
 
 const mapStateToProps = state => ({

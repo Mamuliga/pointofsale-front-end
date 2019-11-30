@@ -1,9 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import PropType from "prop-types";
 import { Route, Redirect } from "react-router-dom";
+import Loading from "../components/uis/Loading";
 
 const ProtectedRoute = props => {
-  return props.isAuthLoading ? null : props.isAuthenticated ? (
+  if (!props.authRequired) return <Route {...props} />;
+  return props.isAuthenticated === null ? (
+    <Loading />
+  ) : props.isAuthenticated ? (
     <Route {...props} />
   ) : (
     <Redirect to="/login" />
@@ -11,12 +16,18 @@ const ProtectedRoute = props => {
 };
 
 ProtectedRoute.propTypes = {
-  isAuthLoading: PropType.bool.isRequired,
-  isAuthenticated: PropType.bool.isRequired
+  loading: PropType.bool,
+  isAuthenticated: PropType.bool,
+  authRequired: PropType.bool
 };
 ProtectedRoute.defaultProps = {
-  isAuthLoading: false,
-  isAuthenticated: false
+  loading: false,
+  isAuthenticated: false,
+  authRequired: true
 };
 
-export default ProtectedRoute;
+const mapStateToProps = ({ auth }) => ({
+  ...auth
+});
+
+export default connect(mapStateToProps)(ProtectedRoute);
