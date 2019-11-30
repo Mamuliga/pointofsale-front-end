@@ -14,10 +14,7 @@ const LoginPage = () => {
           </div>
 
           <Form.Item className="username" label="Username">
-            <Input
-              prefix={<Icon type="user" />}
-              placeholder="Username"
-            />
+            <Input prefix={<Icon type="user" />} placeholder="Username" />
           </Form.Item>
 
           <Form.Item label="Password">
@@ -30,11 +27,11 @@ const LoginPage = () => {
 
           <Button type="primary" block>
             Login
-      </Button>
+          </Button>
           <div className="login-forgot-password">
             <a className="login-form-forgot" href="/forgot-password">
               Forgot password
-        </a>
+            </a>
           </div>
         </Form>
       </div>
