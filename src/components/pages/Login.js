@@ -2,7 +2,7 @@ import React from "react";
 import { Icon, Input, Button, Form } from "antd";
 import { logo } from "../../assets/images";
 
-const LoginPage = () => {
+const Login = () => {
   return (
     <div className="login-page-container">
       <div className="login-form-container">
@@ -38,4 +38,4 @@ const LoginPage = () => {
     </div>
   );
 };
-export default LoginPage;
+export default Login;
