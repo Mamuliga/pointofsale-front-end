@@ -1,9 +1,9 @@
-import * as ACTION_TYPES from "../actions/actionTypes";
+import { SIMPLE_ACTION } from "../actions/actionTypes";
 
 export default (state = {}, action) => {
   const newState = { ...state };
   switch (action.type) {
-    case ACTION_TYPES.SIMPLE_ACTION:
+    case SIMPLE_ACTION:
       newState.result = action.payload;
       break;
     default:

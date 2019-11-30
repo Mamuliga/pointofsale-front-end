@@ -1,6 +1,12 @@
-import { AUTHENTICATION, LOGOUT } from "../actions/actionTypes";
+import {
+  AUTHENTICATION,
+  LOGOUT,
+  SET_AUTH_LOADING
+} from "../actions/actionTypes";
+import { AUTH_LOCAL_STORAGE } from "../../utilities/constants";
 
 const INITIAL_STATE = {
+  loading: false,
   isAuthenticated: null,
   token: null
 };
@@ -8,6 +14,9 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   const newState = { ...state };
   switch (action.type) {
+    case SET_AUTH_LOADING:
+      newState.loading = !!action.payload;
+      break;
     case AUTHENTICATION:
       newState.isAuthenticated = true;
       newState.token = action.payload;
@@ -19,6 +28,6 @@ export default (state = INITIAL_STATE, action) => {
     default:
       return state;
   }
-  localStorage.setItem("auth", JSON.stringify(newState));
+  localStorage.setItem(AUTH_LOCAL_STORAGE, JSON.stringify(newState));
   return newState;
 };
