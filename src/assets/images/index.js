@@ -1,1 +1,1 @@
-export { default as logo } from './emraldIT.jpeg'
+export { default as logo } from './logo.jpeg'
