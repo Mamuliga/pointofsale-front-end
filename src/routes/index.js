@@ -1,32 +1,20 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-import Main from "../components/main";
-import Customers from "../components/customers";
-import Suppliers from "../components/suppliers";
-import Sales from "../components/sales";
-import Login from "../components/login";
+import { Switch } from "react-router-dom";
+import { Dashboard, Login, Customers, NotFoundPage } from "../components/pages";
 import ProtectedRoute from "./ProtectedRoute";
-import NotFoundPage from "../components/NotFoundPage";
 
 const Routes = props => (
-  <div>InROUTES
-  <pre>{JSON.stringify(props)}</pre>
-    <Switch>
-      <Route exact path="/" component={Main} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/customers" component={Customers} />
-      <Route exact path="/suppliers" component={Suppliers} />
-      <ProtectedRoute
-        exact
-        path="/sales"
-        component={Sales}
-        isAuthenticated={
-          props.authReducer ? props.authReducer.isAuthenticated : false
-        }
-      />
-      <Route component={NotFoundPage} />
-    </Switch>
-  </div>
+  <Switch>
+    <ProtectedRoute exact path="/" component={Dashboard} />
+    <ProtectedRoute
+      exact
+      path="/login"
+      component={Login}
+      authRequired={false}
+    />
+    <ProtectedRoute exact path="/customers" component={Customers} />
+    <ProtectedRoute component={NotFoundPage} authRequired={false} />
+  </Switch>
 );
 
 export default Routes;
