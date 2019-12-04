@@ -11,6 +11,8 @@ import { AUTH_LOCAL_STORAGE } from "../../utilities/constants";
 export const setPersistentData = authData => dispatch => {
   if (authData && authData.token) {
     dispatch({ type: LOAD_AUTH_DATA, payload: authData });
+  } else {
+    dispatch({ type: LOGOUT });
   }
 };
 
