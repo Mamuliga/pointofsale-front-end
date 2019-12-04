@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Table } from "antd";
+import React from "react";
 import mockCustomers from "../../utilities/mockData/customers.json";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers";
+import CustomizedTable from "../uis/CustomizedTable.js";
 
 const Customers = () => {
   const customerTableContent = () => {
@@ -10,39 +10,15 @@ const Customers = () => {
     }));
   };
   const customerRowKey = customer => `${customer.username}`;
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
-  const selectRow = record => {
-    if (selectedRowKeys.indexOf(record.key) >= 0) {
-      selectedRowKeys.splice(selectedRowKeys.indexOf(record.key), 1);
-    } else {
-      selectedRowKeys.push(record.key);
-    }
-    setSelectedRowKeys(selectedRowKeys);
+  const getSelectedRows = selectedRows => {
+    console.log("In Customers", selectedRows);
   };
-
-  const handleChangeRowSelection = selectedRowKeys => {
-    setSelectedRowKeys(selectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: handleChangeRowSelection
-  };
-
-  const handleOnRow = record => ({
-    onClick: selectRow(record)
-  });
-
-  console.log(selectedRowKeys);
-
   return (
-    <Table
+    <CustomizedTable
       columns={getCustomerTableHeaders()}
       dataSource={customerTableContent()}
       rowKey={customerRowKey}
-      rowSelection={rowSelection}
-      onRow={handleOnRow}
+      getSelectedRows={getSelectedRows}
     />
   );
 };
