@@ -130,11 +130,7 @@ const CustomizedTable = ({
       selectedColumns.includes(header.title)
     );
     setTableHeaders(filteredTableHeaders);
-    console.log(selectedColumns);
-    console.log(filteredTableHeaders);
   };
-  console.log(rowKey);
-  console.log(selectedRowKeys);
   return (
     <React.Fragment>
       <Icon type="search" onClick={handleIconClick} />
