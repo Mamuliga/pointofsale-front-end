@@ -2,7 +2,13 @@ import React, { useState, useRef } from "react";
 import { Table, Icon, Button, Input } from "antd";
 import Highlighter from "react-highlight-words";
 
-const CustomizedTable = ({ columns, dataSource, rowKey, getSelectedRows }) => {
+const CustomizedTable = ({
+  columns,
+  dataSource,
+  rowKey,
+  getSelectedRows,
+  noOfItemsPerPage
+}) => {
   const searchInput = useRef();
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [searchText, setSearchedText] = useState("");
@@ -111,6 +117,9 @@ const CustomizedTable = ({ columns, dataSource, rowKey, getSelectedRows }) => {
       rowKey={rowKey}
       rowSelection={rowSelection}
       onRow={handleOnRow}
+      pagination={{
+        pageSize: noOfItemsPerPage || 10
+      }}
     />
   );
 };
