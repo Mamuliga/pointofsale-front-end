@@ -47,6 +47,10 @@
   height: calc(100% - 50px);
 }
 
+.cursorPointer {
+  cursor: pointer;
+}
+
 .main-route {
   flex: 1;
   min-height: 100%;
@@ -152,4 +156,10 @@
 
 .inactive-icon {
   color: var(--success-color) !important;
+}
+
+.customizedTable-column-filter {
+  text-align: right;
+  font-weight: bold;
+  margin: 10px;
 }
