@@ -15,8 +15,8 @@ const Customers = () => {
   };
   return (
     <CustomizedTable
-      columns={getCustomerTableHeaders()}
-      dataSource={customerTableContent()}
+      columns={getCustomerTableHeaders}
+      dataSource={customerTableContent}
       rowKey={customerRowKey}
       getSelectedRows={getSelectedRows}
     />

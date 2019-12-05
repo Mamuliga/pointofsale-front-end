@@ -2,7 +2,7 @@ import React from "react";
 import { Icon } from "antd";
 import classnames from "classnames";
 
-export function getCustomerTableHeaders() {
+export function getCustomerTableHeaders(getColumnSearchProps) {
   return [
     {
       title: "",
@@ -26,7 +26,8 @@ export function getCustomerTableHeaders() {
       dataIndex: "firstName",
       key: "firstName",
       width: "3%",
-      sorter: true
+      sorter: true,
+      ...getColumnSearchProps("firstName")
     },
     {
       title: "Last Name",
