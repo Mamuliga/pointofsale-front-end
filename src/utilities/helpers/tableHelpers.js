@@ -3,6 +3,10 @@ import { Icon } from "antd";
 import classnames from "classnames";
 
 export function getCustomerTableHeaders(getColumnSearchProps) {
+  let columnSearchProps = () => {};
+  if (typeof getColumnSearchProps === "function") {
+    columnSearchProps = getColumnSearchProps;
+  }
   return [
     {
       title: "",
@@ -27,7 +31,7 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
       key: "firstName",
       // width: "3%",
       sorter: true,
-      ...getColumnSearchProps("firstName")
+      ...columnSearchProps("firstName")
     },
     {
       title: "Last Name",
