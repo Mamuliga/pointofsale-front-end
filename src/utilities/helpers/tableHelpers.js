@@ -25,7 +25,7 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
       title: "First Name",
       dataIndex: "firstName",
       key: "firstName",
-      width: "3%",
+      // width: "3%",
       sorter: true,
       ...getColumnSearchProps("firstName")
     },
@@ -33,14 +33,14 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
       title: "Last Name",
       dataIndex: "lastName",
       key: "lastName",
-      width: "3%",
+      // width: "3%",
       sorter: true
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      width: "2%",
+      // width: "2%",
       sorter: true,
       render(text) {
         return text ? <a href={`mailto:${text}`}>{text}</a> : <span>-</span>;
@@ -50,7 +50,7 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
       title: "Outstanding",
       dataIndex: "outstanding",
       key: "outstanding",
-      width: "1%",
+      // width: "1%",
       align: "right",
       defaultSortOrder: "ascend",
       sorter(v1, v2) {
