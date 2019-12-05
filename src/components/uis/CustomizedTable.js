@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Table, Icon, Button, Input } from "antd";
+import { Table, Icon, Button, Input, Checkbox } from "antd";
 import Highlighter from "react-highlight-words";
 
 const CustomizedTable = ({
@@ -13,6 +13,9 @@ const CustomizedTable = ({
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [searchText, setSearchedText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
+  const [showColumnFilter, toggleColumnFilter] = useState(false);
+  const [headerTitles, setHeaderTitles] = useState([]);
+
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchedText(selectedKeys[0]);
@@ -86,6 +89,10 @@ const CustomizedTable = ({
       )
   });
 
+  const [tableHeaders, setTableHeaders] = useState(
+    columns(getColumnSearchProps)
+  );
+
   const selectRow = record => {
     if (selectedRowKeys.indexOf(record.key) >= 0) {
       selectedRowKeys.splice(selectedRowKeys.indexOf(record.key), 1);
@@ -109,18 +116,45 @@ const CustomizedTable = ({
     onClick: selectRow(record)
   });
 
+  const handleIconClick = () => {
+    if (headerTitles.length === 0) {
+      setHeaderTitles(tableHeaders.map(columnObj => columnObj.title));
+    }
+    toggleColumnFilter(!showColumnFilter);
+  };
+
+  const handleColumnFilter = selectedColumns => {
+    const tableHeaders = columns(getColumnSearchProps);
+    const filteredTableHeaders = tableHeaders.filter(header =>
+      selectedColumns.includes(header.title)
+    );
+    setTableHeaders(filteredTableHeaders);
+    console.log(selectedColumns);
+    console.log(filteredTableHeaders);
+  };
+  console.log(rowKey);
   console.log(selectedRowKeys);
   return (
-    <Table
-      columns={columns(getColumnSearchProps)}
-      dataSource={dataSource()}
-      rowKey={rowKey}
-      rowSelection={rowSelection}
-      onRow={handleOnRow}
-      pagination={{
-        pageSize: noOfItemsPerPage || 10
-      }}
-    />
+    <React.Fragment>
+      <Icon type="search" onClick={handleIconClick} />
+      {showColumnFilter && (
+        <Checkbox.Group
+          options={headerTitles}
+          onChange={handleColumnFilter}
+          defaultValue={headerTitles}
+        />
+      )}
+      <Table
+        columns={tableHeaders}
+        dataSource={dataSource()}
+        rowKey={rowKey}
+        rowSelection={rowSelection}
+        onRow={handleOnRow}
+        pagination={{
+          pageSize: noOfItemsPerPage || 10
+        }}
+      />
+    </React.Fragment>
   );
 };
 
