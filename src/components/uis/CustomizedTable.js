@@ -118,7 +118,8 @@ const CustomizedTable = ({
 
   const handleIconClick = () => {
     if (headerTitles.length === 0) {
-      setHeaderTitles(tableHeaders.map(columnObj => columnObj.title));
+      const headers = tableHeaders.map(columnObj => columnObj.title);
+      setHeaderTitles(headers.filter(header => header));
     }
     toggleColumnFilter(!showColumnFilter);
   };
