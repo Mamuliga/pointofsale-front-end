@@ -121,6 +121,7 @@ const CustomizedTable = ({
       const headers = tableHeaders.map(columnObj => columnObj.title);
       setHeaderTitles(headers.filter(header => header));
     }
+    setTableHeaders(columns(getColumnSearchProps));
     toggleColumnFilter(!showColumnFilter);
   };
 
