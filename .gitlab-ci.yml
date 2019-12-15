@@ -1,0 +1,21 @@
+image: node:10.16.3
+
+cache:
+  paths: 
+    - node_modules/
+
+befoe_script:
+  - npm install
+
+pages:
+  stage: deploy
+  script:
+    - CI=true npm run build
+    - rm -rf public
+    - mv build public
+    artifacts:
+      paths:
+        - public
+    
+    only:
+      - staging
