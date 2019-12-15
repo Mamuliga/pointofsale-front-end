@@ -1,6 +1,6 @@
 {
   "name": "eit-pos-front-end",
-  "homepage": "https://gitlab.io/eit-pos-frontend",
+  "homepage": "https://marjan.emeraldit.gitlab.io/eit-pos-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
