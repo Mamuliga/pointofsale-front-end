@@ -6,7 +6,7 @@ import { DashboardTablecolumns, DashboardTabledata } from "../../utilities/helpe
 const Dashboard = () => {
   return (
     <div>
-      <Table columns={DashboardTablecolumns} dataSource={DashboardTabledata} />
+      <h1>Dashboard</h1>
     </div>
   );
 };

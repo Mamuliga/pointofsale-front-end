@@ -1,38 +1,44 @@
 import React from "react";
+import { Avatar, Icon } from 'antd';
 
 export const CustomersTablecolumns = [
+
+  {
+    title: 'Profile Picture',
+    dataIndex: 'address',
+    key: 'address 3',
+    render: () => <Avatar icon="user" />,
+    ellipsis: true,
+    // width: 100,
+  },
+
   {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    render: text => <a href='#'>{text}</a>,
-    width: 150,
+    render: text => <a href='/'>{text}</a>,
+    // width: 150,
   },
   {
     title: 'Email',
     dataIndex: 'age',
     key: 'age',
-    width: 80,
+    // width: 80,
   },
   {
-    title: 'Contects',
+    title: 'Contacts',
     dataIndex: 'building',
     key: 'building',
-    width: 100,
+    // width: 100,
   },
   {
     title: 'Company Name',
     dataIndex: 'address',
     key: 'address 2',
     ellipsis: true,
+    // width: 100,
   },
-  {
-    title: 'Profile Picture',
-    dataIndex: 'address',
-    key: 'address 3',
-    ellipsis: true,
-  },
+
 
 ];
 
@@ -42,7 +48,6 @@ export const CustomersTabledata = [
     key: '1',
     name: 'John Brown',
     age: 32,
-    address: 'New York No. 1 Lake Park, New York No. 1 Lake Park',
     tags: ['nice', 'developer'],
   },
   {
