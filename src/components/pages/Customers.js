@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import mockCustomers from "../../utilities/mockData/customers.json";
-import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers";
+import { getCustomerTableHeaders, CustomersTablecolumns, CustomersTabledata } from "../../utilities/helpers/tableHelpers";
 
 const Customers = () => {
   const customerTableContent = () => {
@@ -13,11 +13,7 @@ const Customers = () => {
   const customerRowKey = customer => `${customer.username}`;
 
   return (
-    <Table
-      columns={getCustomerTableHeaders()}
-      dataSource={customerTableContent()}
-      rowKey={customerRowKey}
-    />
+    <Table columns={CustomersTablecolumns} dataSource={CustomersTabledata} />
   );
 };
 
