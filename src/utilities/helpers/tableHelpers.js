@@ -214,6 +214,7 @@ export const DashboardTablecolumns = [
     ellipsis: true,
   },
 
+
 ];
 
 export const DashboardTabledata = [
