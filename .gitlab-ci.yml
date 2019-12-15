@@ -33,4 +33,4 @@ pages:
     paths:
       - public # mandatory, other folder won't work
   only:
-    - master # or dev, the branch you want to publish
+    - staging # or dev, the branch you want to publish
