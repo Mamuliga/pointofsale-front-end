@@ -4,7 +4,7 @@ cache:
   paths: 
     - node_modules/
 
-befoe_script:
+before_script:
   - npm install
 
 pages:
