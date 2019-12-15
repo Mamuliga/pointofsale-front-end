@@ -1,13 +1,12 @@
 import React from "react";
-import { Icon } from "antd";
-import classnames from "classnames";
 
 export const CustomersTablecolumns = [
   {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: text => <a>{text}</a>,
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+    render: text => <a href='#'>{text}</a>,
     width: 150,
   },
   {
@@ -38,6 +37,7 @@ export const CustomersTablecolumns = [
 ];
 
 export const CustomersTabledata = [
+
   {
     key: '1',
     name: 'John Brown',
@@ -60,119 +60,63 @@ export const CustomersTabledata = [
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '4',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '5',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '6',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '7',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '8',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '9',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '10',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '11',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
+    key: '12',
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
@@ -186,7 +130,7 @@ export const DashboardTablecolumns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: text => <a>{text}</a>,
+    render: text => text,
     width: 150,
   },
   {

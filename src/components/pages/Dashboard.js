@@ -1,7 +1,6 @@
 import React from "react";
 import { Table } from 'antd';
-import { columns, data, DashboardTablecolumns, DashboardTabledata } from "../../utilities/helpers/tableHelpers";
-import Column from "antd/lib/table/Column";
+import { DashboardTablecolumns, DashboardTabledata } from "../../utilities/helpers/tableHelpers";
 
 
 const Dashboard = () => {
