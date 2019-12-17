@@ -47,7 +47,7 @@
   height: calc(100% - 50px);
 }
 
-.cursorPointer {
+.column-filter-icon {
   cursor: pointer;
 }
 

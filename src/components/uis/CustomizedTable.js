@@ -135,7 +135,7 @@ const CustomizedTable = ({
   return (
     <React.Fragment>
       <div className="customizedTable-column-filter">
-        <div onClick={handleIconClick} className="cursorPointer">
+        <div onClick={handleIconClick} className="column-filter-icon">
           <Icon type="filter" onClick={handleIconClick} />
           Filter columns
         </div>
