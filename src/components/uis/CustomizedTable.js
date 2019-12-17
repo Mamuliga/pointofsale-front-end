@@ -27,7 +27,9 @@ const CustomizedTable = ({
   };
 
   const handleReset = clearFilters => {
-    clearFilters();
+    if (typeof clearFilters === "function") {
+      clearFilters();
+    }
     setSearchedText("");
   };
 
