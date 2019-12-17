@@ -13,7 +13,7 @@ const CustomizedTable = ({
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [searchText, setSearchedText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
-  const [showColumnFilter, toggleColumnFilter] = useState(false);
+  const [showColumnFilter, setColumnFilter] = useState(false);
   const [headerTitles, setHeaderTitles] = useState([]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -122,7 +122,7 @@ const CustomizedTable = ({
       setHeaderTitles(headers.filter(header => header));
     }
     setTableHeaders(columns(getColumnSearchProps));
-    toggleColumnFilter(!showColumnFilter);
+    setColumnFilter(!showColumnFilter);
   };
 
   const handleColumnFilter = selectedColumns => {
