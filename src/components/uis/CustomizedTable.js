@@ -17,7 +17,9 @@ const CustomizedTable = ({
   const [headerTitles, setHeaderTitles] = useState([]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
+    if (typeof confirm === "function") {
+      confirm();
+    }
     setSearchedText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
