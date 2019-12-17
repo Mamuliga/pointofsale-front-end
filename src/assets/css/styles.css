@@ -163,3 +163,22 @@
   font-weight: bold;
   margin: 10px;
 }
+
+.customizedTable-search-input {
+  width: 190px;
+  margin: 5px;
+  display: block;
+}
+
+.customizedTable-search-buttons {
+  width: 90px;
+  margin: 5px;
+}
+
+.customizedTable-search-popup {
+  padding: 8px;
+}
+
+.customizedTable-search-icon {
+  color: #1890ff !important;
+}

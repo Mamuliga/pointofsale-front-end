@@ -40,8 +40,9 @@ const CustomizedTable = ({
       confirm,
       clearFilters
     }) => (
-      <div style={{ padding: 8 }}>
+      <div className="customizedTable-search-popup">
         <Input
+          className="customizedTable-search-input"
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
@@ -49,28 +50,30 @@ const CustomizedTable = ({
             setSelectedKeys(e.target.value ? [e.target.value] : [])
           }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: "block" }}
         />
         <Button
+          className="customizedTable-search-buttons"
           type="primary"
           onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
           icon="search"
           size="small"
-          style={{ width: 90, marginRight: 8 }}
         >
           Search
         </Button>
         <Button
+          className="customizedTable-search-buttons"
           onClick={() => handleReset(clearFilters)}
           size="small"
-          style={{ width: 90 }}
         >
           Reset
         </Button>
       </div>
     ),
     filterIcon: filtered => (
-      <Icon type="search" style={{ color: filtered ? "#1890ff" : undefined }} />
+      <Icon
+        type="search"
+        className={filtered ? "customizedTable-search-icon" : undefined}
+      />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
