@@ -20,7 +20,9 @@ const CustomizedTable = ({
     if (typeof confirm === "function") {
       confirm();
     }
-    setSearchedText(selectedKeys[0]);
+    if (Array.isArray(selectedKeys)) {
+      setSearchedText(selectedKeys[0]);
+    }
     setSearchedColumn(dataIndex);
   };
 
