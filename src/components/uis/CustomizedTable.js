@@ -11,7 +11,7 @@ const CustomizedTable = ({
 }) => {
   const searchInput = useRef();
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [searchText, setSearchedText] = useState("");
+  const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [showColumnFilter, setColumnFilter] = useState(false);
   const [headerTitles, setHeaderTitles] = useState([]);
@@ -21,7 +21,7 @@ const CustomizedTable = ({
       confirm();
     }
     if (Array.isArray(selectedKeys)) {
-      setSearchedText(selectedKeys[0]);
+      setSearchText(selectedKeys[0]);
     }
     setSearchedColumn(dataIndex);
   };
@@ -30,7 +30,7 @@ const CustomizedTable = ({
     if (typeof clearFilters === "function") {
       clearFilters();
     }
-    setSearchedText("");
+    setSearchText("");
   };
 
   const getColumnSearchProps = dataIndex => ({
@@ -88,7 +88,7 @@ const CustomizedTable = ({
     render: text =>
       searchedColumn === dataIndex ? (
         <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          highlightClassName="customizedTable-serch-highlighter"
           searchWords={[searchText]}
           autoEscape
           textToHighlight={text.toString()}

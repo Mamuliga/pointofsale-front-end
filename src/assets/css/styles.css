@@ -182,3 +182,8 @@
 .customizedTable-search-icon {
   color: #1890ff !important;
 }
+
+.customizedTable-serch-highlighter {
+  background-color: "#ffc069";
+  padding: 0;
+}
