@@ -16,59 +16,61 @@ const CustomizedTable = ({
   const [showColumnFilter, setColumnFilter] = useState(false);
   const [headerTitles, setHeaderTitles] = useState([]);
 
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    if (typeof confirm === "function") {
-      confirm();
-    }
-    if (Array.isArray(selectedKeys)) {
-      setSearchText(selectedKeys[0]);
-    }
-    setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = clearFilters => {
-    if (typeof clearFilters === "function") {
-      clearFilters();
-    }
-    setSearchText("");
-  };
-
   const getColumnSearchProps = dataIndex => ({
     filterDropdown: ({
       setSelectedKeys,
       selectedKeys,
       confirm,
       clearFilters
-    }) => (
-      <div className="customizedTable-search-popup">
-        <Input
-          className="customizedTable-search-input"
-          ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-        />
-        <Button
-          className="customizedTable-search-buttons"
-          type="primary"
-          onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          icon="search"
-          size="small"
-        >
-          Search
-        </Button>
-        <Button
-          className="customizedTable-search-buttons"
-          onClick={() => handleReset(clearFilters)}
-          size="small"
-        >
-          Reset
-        </Button>
-      </div>
-    ),
+    }) => {
+      const handleSearchInputChange = e =>
+        setSelectedKeys(e.target.value ? [e.target.value] : []);
+
+      const handleSearch = (selectedKeys, confirm, dataIndex) => {
+        if (typeof confirm === "function") {
+          confirm();
+        }
+        if (Array.isArray(selectedKeys)) {
+          setSearchText(selectedKeys[0]);
+        }
+        setSearchedColumn(dataIndex);
+      };
+
+      const handleReset = clearFilters => {
+        if (typeof clearFilters === "function") {
+          clearFilters();
+        }
+        setSearchText("");
+      };
+      return (
+        <div className="customizedTable-search-popup">
+          <Input
+            className="customizedTable-search-input"
+            ref={searchInput}
+            placeholder={`Search ${dataIndex}`}
+            value={selectedKeys && selectedKeys[0]}
+            onChange={handleSearchInputChange}
+            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          />
+          <Button
+            className="customizedTable-search-buttons"
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon="search"
+            size="small"
+          >
+            Search
+          </Button>
+          <Button
+            className="customizedTable-search-buttons"
+            onClick={() => handleReset(clearFilters)}
+            size="small"
+          >
+            Reset
+          </Button>
+        </div>
+      );
+    },
     filterIcon: filtered => (
       <Icon
         type="search"
