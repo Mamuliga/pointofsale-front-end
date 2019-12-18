@@ -91,7 +91,7 @@ const CustomizedTable = ({
       searchedColumn === dataIndex ? (
         <Highlighter
           highlightClassName="customizedTable-serch-highlighter"
-          searchWords={[searchText]}
+          searchWords={searchText.split}
           autoEscape
           textToHighlight={text.toString()}
         />
