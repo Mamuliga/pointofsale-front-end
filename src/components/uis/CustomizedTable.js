@@ -146,17 +146,23 @@ const CustomizedTable = ({
   return (
     <React.Fragment>
       <div className="customizedTable-column-filter">
-        <div onClick={handleIconClick} className="column-filter-icon">
-          <Icon type="filter" onClick={handleIconClick} />
+        <Button
+          type="link"
+          onClick={handleIconClick}
+          className="column-filter-icon"
+        >
+          <Icon type="filter" />
           Filter columns
+        </Button>
+        <div>
+          {showColumnFilter && (
+            <Checkbox.Group
+              options={headerTitles}
+              onChange={handleColumnFilter}
+              defaultValue={headerTitles}
+            />
+          )}
         </div>
-        {showColumnFilter && (
-          <Checkbox.Group
-            options={headerTitles}
-            onChange={handleColumnFilter}
-            defaultValue={headerTitles}
-          />
-        )}
       </div>
       <Table
         columns={tableHeaders}
