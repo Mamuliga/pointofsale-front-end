@@ -158,32 +158,32 @@
   color: var(--success-color) !important;
 }
 
-.customizedTable-column-filter {
+.tableBuilder-column-filter {
   text-align: right;
   font-weight: bold;
   margin: 10px;
 }
 
-.customizedTable-search-input {
+.tableBuilder-search-input {
   width: 190px;
   margin: 5px;
   display: block;
 }
 
-.customizedTable-search-buttons {
+.tableBuilder-search-buttons {
   width: 90px;
   margin: 5px;
 }
 
-.customizedTable-search-popup {
+.tableBuilder-search-popup {
   padding: 8px;
 }
 
-.customizedTable-search-icon {
+.tableBuilder-search-icon {
   color: var(--primary-color) !important;
 }
 
-.customizedTable-serch-highlighter {
+.tableBuilder-serch-highlighter {
   background-color: var(--success-color);
   padding: 0;
 }

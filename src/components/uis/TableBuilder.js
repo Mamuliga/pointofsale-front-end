@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { Table, Icon, Button, Input, Checkbox } from "antd";
 import Highlighter from "react-highlight-words";
 
-const CustomizedTable = ({
+const TableBuilder = ({
   columns,
   dataSource,
   rowKey,
@@ -43,9 +43,9 @@ const CustomizedTable = ({
         setSearchText("");
       };
       return (
-        <div className="customizedTable-search-popup">
+        <div className="tableBuilder-search-popup">
           <Input
-            className="customizedTable-search-input"
+            className="tableBuilder-search-input"
             ref={searchInput}
             placeholder={`Search ${dataIndex}`}
             value={selectedKeys && selectedKeys[0]}
@@ -53,7 +53,7 @@ const CustomizedTable = ({
             onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           />
           <Button
-            className="customizedTable-search-buttons"
+            className="tableBuilder-search-buttons"
             type="primary"
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
             icon="search"
@@ -62,7 +62,7 @@ const CustomizedTable = ({
             Search
           </Button>
           <Button
-            className="customizedTable-search-buttons"
+            className="tableBuilder-search-buttons"
             onClick={() => handleReset(clearFilters)}
             size="small"
           >
@@ -74,7 +74,7 @@ const CustomizedTable = ({
     filterIcon: filtered => (
       <Icon
         type="search"
-        className={filtered ? "customizedTable-search-icon" : undefined}
+        className={filtered ? "tableBuilder-search-icon" : undefined}
       />
     ),
     onFilter: (value, record) =>
@@ -90,7 +90,7 @@ const CustomizedTable = ({
     render: text =>
       searchedColumn === dataIndex ? (
         <Highlighter
-          highlightClassName="customizedTable-serch-highlighter"
+          highlightClassName="tableBuilder-serch-highlighter"
           searchWords={searchText.split}
           autoEscape
           textToHighlight={text.toString()}
@@ -145,7 +145,7 @@ const CustomizedTable = ({
   };
   return (
     <React.Fragment>
-      <div className="customizedTable-column-filter">
+      <div className="tableBuilder-column-filter">
         <Button
           type="link"
           onClick={handleIconClick}
@@ -178,4 +178,4 @@ const CustomizedTable = ({
   );
 };
 
-export default CustomizedTable;
+export default TableBuilder;

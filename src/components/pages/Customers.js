@@ -1,7 +1,7 @@
 import React from "react";
 import mockCustomers from "../../utilities/mockData/customers.json";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers";
-import CustomizedTable from "../uis/CustomizedTable.js";
+import TableBuilder from "../uis/TableBuilder.js";
 
 const Customers = () => {
   const customerTableContent = () => {
@@ -14,7 +14,7 @@ const Customers = () => {
     console.log("In Customers", selectedRows);
   };
   return (
-    <CustomizedTable
+    <TableBuilder
       columns={getCustomerTableHeaders}
       dataSource={customerTableContent}
       rowKey={customerRowKey}
