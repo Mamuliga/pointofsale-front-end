@@ -24,7 +24,7 @@ const TableBuilder = ({
       clearFilters
     }) => {
       const handleSearchInputChange = e =>
-        setSelectedKeys(e.target.value ? [e.target.value] : []);
+        setSelectedKeys(e.target.value ? e.target.value.split(" ") : []);
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         if (typeof confirm === "function") {
