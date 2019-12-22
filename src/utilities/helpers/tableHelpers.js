@@ -2,13 +2,17 @@ import React from "react";
 import { Icon } from "antd";
 import classnames from "classnames";
 
-export function getCustomerTableHeaders() {
+export function getCustomerTableHeaders(getColumnSearchProps) {
+  let columnSearchProps = () => {};
+  if (typeof getColumnSearchProps === "function") {
+    columnSearchProps = getColumnSearchProps;
+  }
   return [
     {
       title: "",
       dataIndex: "isActive",
       key: "isActive",
-      width: "0.5%",
+      width: "10%",
       render(isActive) {
         return (
           <Icon
@@ -25,21 +29,22 @@ export function getCustomerTableHeaders() {
       title: "First Name",
       dataIndex: "firstName",
       key: "firstName",
-      width: "3%",
-      sorter: true
+      width: "22%",
+      sorter: true,
+      ...columnSearchProps("firstName")
     },
     {
       title: "Last Name",
       dataIndex: "lastName",
       key: "lastName",
-      width: "3%",
+      width: "22%",
       sorter: true
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      width: "2%",
+      width: "22%",
       sorter: true,
       render(text) {
         return text ? <a href={`mailto:${text}`}>{text}</a> : <span>-</span>;
@@ -49,7 +54,7 @@ export function getCustomerTableHeaders() {
       title: "Outstanding",
       dataIndex: "outstanding",
       key: "outstanding",
-      width: "1%",
+      width: "22%",
       align: "right",
       defaultSortOrder: "ascend",
       sorter(v1, v2) {
