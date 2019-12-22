@@ -21,7 +21,7 @@
 #       - staging
 
 image: node:8.11.3 # can be upgraded, depending on your node version used
-
+variables: isEnvProductionProfile:true
 pages:
   stage: deploy
   script:
