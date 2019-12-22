@@ -1,4 +1,4 @@
-// export default {
-//   apiUrl: "http://localhost:3300",
-//   ...process.env
-// };
+export default {
+  apiUrl: "http://localhost:3300",
+  ...process.env
+};

@@ -25,6 +25,7 @@ variables: isEnvProductionProfile:true
 pages:
   stage: deploy
   script:
+    - echo isEnvProductionProfile
     - npm install
     - npm run build
     - rm -rf public
@@ -33,4 +34,4 @@ pages:
     paths:
       - public # mandatory, other folder won't work
   only:
-    - dev # or master, the branch you want to publish
+    - staging # or master, the branch you want to publish
