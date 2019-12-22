@@ -50,6 +50,7 @@
 .main-route {
   flex: 1;
   min-height: 100%;
+  overflow: scroll;
 }
 
 .right-menu-item {

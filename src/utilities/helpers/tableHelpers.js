@@ -4,7 +4,7 @@ import { Avatar, Icon } from 'antd';
 export const CustomersTablecolumns = [
 
   {
-    title: 'Profile Picture',
+    title: '',
     dataIndex: 'address',
     key: 'address 3',
     render: () => <Avatar icon="user" />,
