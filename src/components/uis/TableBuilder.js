@@ -9,13 +9,6 @@ const TableBuilder = ({
   getSelectedRows,
   noOfItemsPerPage
 }) => {
-  const searchInput = useRef();
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-  const [showColumnFilter, setColumnFilter] = useState(false);
-  const [headerTitles, setHeaderTitles] = useState([]);
-
   const getColumnSearchProps = dataIndex => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -100,6 +93,12 @@ const TableBuilder = ({
       )
   });
 
+  const searchInput = useRef();
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [searchedColumn, setSearchedColumn] = useState("");
+  const [showColumnFilter, setColumnFilter] = useState(false);
+  const [headerTitles, setHeaderTitles] = useState([]);
   const [tableHeaders, setTableHeaders] = useState(
     columns(getColumnSearchProps)
   );
