@@ -19,14 +19,17 @@ const TableBuilder = ({
       const handleSearchInputChange = e =>
         setSelectedKeys(e.target.value ? e.target.value.split(" ") : []);
 
-      const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        if (typeof confirm === "function") {
-          confirm();
-        }
-        if (Array.isArray(selectedKeys)) {
-          setSearchText(selectedKeys[0]);
-        }
-        setSearchedColumn(dataIndex);
+      const handleSearchFunc = (selectedKeys, confirm, dataIndex) => {
+        const handleSearch = () => {
+          if (typeof confirm === "function") {
+            confirm();
+          }
+          if (Array.isArray(selectedKeys)) {
+            setSearchText(selectedKeys[0]);
+          }
+          setSearchedColumn(dataIndex);
+        };
+        return handleSearch;
       };
 
       const handleReset = clearFilters => {
@@ -43,12 +46,12 @@ const TableBuilder = ({
             placeholder={`Search ${dataIndex}`}
             value={selectedKeys && selectedKeys[0]}
             onChange={handleSearchInputChange}
-            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            onPressEnter={handleSearchFunc(selectedKeys, confirm, dataIndex)}
           />
           <Button
             className="tableBuilder-search-buttons"
             type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            onClick={handleSearchFunc(selectedKeys, confirm, dataIndex)}
             icon="search"
             size="small"
           >
