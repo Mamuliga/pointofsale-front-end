@@ -32,12 +32,16 @@ const TableBuilder = ({
         return handleSearch;
       };
 
-      const handleReset = clearFilters => {
-        if (typeof clearFilters === "function") {
-          clearFilters();
-        }
-        setSearchText("");
+      const handleResetFunc = clearFilters => {
+        const handleReset = () => {
+          if (typeof clearFilters === "function") {
+            clearFilters();
+          }
+          setSearchText("");
+        };
+        return handleReset;
       };
+
       return (
         <div className="tableBuilder-search-popup">
           <Input
@@ -59,7 +63,7 @@ const TableBuilder = ({
           </Button>
           <Button
             className="tableBuilder-search-buttons"
-            onClick={() => handleReset(clearFilters)}
+            onClick={handleResetFunc(clearFilters)}
             size="small"
           >
             Reset
