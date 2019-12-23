@@ -47,6 +47,10 @@
   height: calc(100% - 50px);
 }
 
+.column-filter-icon {
+  cursor: pointer;
+}
+
 .main-route {
   flex: 1;
   min-height: 100%;
@@ -153,4 +157,34 @@
 
 .inactive-icon {
   color: var(--success-color) !important;
+}
+
+.tableBuilder-column-filter {
+  text-align: right;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.tableBuilder-search-input {
+  width: 190px;
+  margin: 5px;
+  display: block;
+}
+
+.tableBuilder-search-buttons {
+  width: 90px;
+  margin: 5px;
+}
+
+.tableBuilder-search-popup {
+  padding: 8px;
+}
+
+.tableBuilder-search-icon {
+  color: var(--primary-color) !important;
+}
+
+.tableBuilder-serch-highlighter {
+  background-color: var(--success-color);
+  padding: 0;
 }

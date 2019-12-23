@@ -1,10 +1,26 @@
 import React from "react";
-import { Table } from "antd";
-import { CustomersTablecolumns, CustomersTabledata } from "../../utilities/helpers/tableHelpers";
+import mockCustomers from "../../utilities/mockData/customers.json";
+import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers";
+import TableBuilder from "../uis/TableBuilder.js";
 
 const Customers = () => {
+  const customerTableContent = () => {
+    return mockCustomers.map(customer => ({
+      ...customer
+    }));
+  };
+  const customerRowKey = customer => `${customer.username}`;
+  const getSelectedRows = selectedRows => {
+    console.log("In Customers", selectedRows);
+  };
   return (
-    <Table columns={CustomersTablecolumns} dataSource={CustomersTabledata} />
+    // <Table columns={CustomersTablecolumns} dataSource={CustomersTabledata} />
+    <TableBuilder
+      columns={getCustomerTableHeaders}
+      dataSource={customerTableContent}
+      rowKey={customerRowKey}
+      getSelectedRows={getSelectedRows}
+    />
   );
 };
 
