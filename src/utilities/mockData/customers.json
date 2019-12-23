@@ -1,18 +1,38 @@
 [
   {
-    "firstName": "Rizan",
-    "lastName": "Mohomed",
-    "username": "rmohomed",
-    "outstanding": 12500,
-    "email": "musthafarizan@gmail.com",
+    "name": "John Brown",
+    "age": 32,
+    "contacts": "New York No. 1 Lake Park, New York No. 1 Lake Park",
     "isActive": true
   },
   {
-    "firstName": "Marjan",
-    "lastName": "Mukram",
-    "username": "mmukram",
-    "outstanding": 2300,
-    "email": "",
+    "name": "Jim Green",
+    "age": 42,
+    "contacts": "London No. 2 Lake Park, London No. 2 Lake Park",
+    "isActive": true
+  },
+  {
+    "name": "Joe Black",
+    "age": 32,
+    "contacts": "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+    "isActive": true
+  },
+  {
+    "name": "Joe Black",
+    "age": 32,
+    "contacts": "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
     "isActive": false
+  },
+  {
+    "name": "Joe Black",
+    "age": 32,
+    "contacts": "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+    "isActive": true
+  },
+  {
+    "name": "Joe Black",
+    "age": 32,
+    "contacts": "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+    "isActive": true
   }
 ]

@@ -9,12 +9,11 @@ const Customers = () => {
       ...customer
     }));
   };
-  const customerRowKey = customer => `${customer.username}`;
+  const customerRowKey = customer => `${customer.key}`;
   const getSelectedRows = selectedRows => {
     console.log("In Customers", selectedRows);
   };
   return (
-    // <Table columns={CustomersTablecolumns} dataSource={CustomersTabledata} />
     <TableBuilder
       columns={getCustomerTableHeaders}
       dataSource={customerTableContent}
