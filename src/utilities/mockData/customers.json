@@ -3,36 +3,42 @@
     "name": "John Brown",
     "age": 32,
     "contacts": "New York No. 1 Lake Park, New York No. 1 Lake Park",
+    "company name": "EmeraldIT",
     "isActive": true
   },
   {
     "name": "Jim Green",
     "age": 42,
     "contacts": "London No. 2 Lake Park, London No. 2 Lake Park",
+    "company name": "EmeraldIT",
     "isActive": true
   },
   {
     "name": "Joe Black",
     "age": 32,
     "contacts": "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+    "company name": "EmeraldIT",
     "isActive": true
   },
   {
     "name": "Joe Black",
     "age": 32,
     "contacts": "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+    "company name": "EmeraldIT",
     "isActive": false
   },
   {
     "name": "Joe Black",
     "age": 32,
     "contacts": "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+    "company name": "EmeraldIT",
     "isActive": true
   },
   {
     "name": "Joe Black",
     "age": 32,
     "contacts": "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+    "company name": "EmeraldIT",
     "isActive": true
   }
 ]

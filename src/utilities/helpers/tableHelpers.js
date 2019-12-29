@@ -49,7 +49,11 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
       width: "22%",
       sorter: true,
       render(text) {
-        return text ? <a href={`mailto:${text}`}>{text}</a> : <span>-</span>;
+        return text ? (
+          <a href={`mailto:${text}`}>{text}</a>
+        ) : (
+          <span>rimaz.emeraldit@gmail.com</span>
+        );
       }
     },
     {
