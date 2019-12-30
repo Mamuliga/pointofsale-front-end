@@ -83,10 +83,10 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
       render(text) {
         return (
           <span>
-            Rs:{" "}
-            {parseFloat(text).toLocaleString("en-us", {
+            Rs:{"1200"}
+            {/* {parseFloat(text).toLocaleString("en-us", {
               minimumFractionDigits: 2
-            })}
+            })} */}
           </span>
         );
       }
