@@ -9,7 +9,7 @@ const Customers = () => {
       ...customer
     }));
   };
-  const customerRowKey = customer => `${customer.name}`;
+  const customerRowKey = customer => `${customer.username}`;
   const getSelectedRows = selectedRows => {
     console.log("In Customers", selectedRows);
   };
