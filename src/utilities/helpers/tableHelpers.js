@@ -1,6 +1,6 @@
 import React from "react";
-import classNames from "classnames";
-import { Avatar, Icon } from "antd";
+import { Icon } from "antd";
+import classnames from "classnames";
 
 export function getCustomerTableHeaders(getColumnSearchProps) {
   let columnSearchProps = () => {};
@@ -17,7 +17,7 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
         return (
           <Icon
             type={`${isActive ? "check" : "close"}`}
-            className={classNames("table-in-icon", {
+            className={classnames("table-in-icon", {
               "active-icon": isActive,
               "inactive-icon": !isActive
             })}
@@ -26,21 +26,19 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
       }
     },
     {
-      title: "",
-      dataIndex: "avatar",
-      key: "avatar",
+      title: "First Name",
+      dataIndex: "firstName",
+      key: "firstName",
       width: "22%",
-      render: () => <Avatar icon="user" />,
-      ellipsis: true
+      sorter: true,
+      ...columnSearchProps("firstName")
     },
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Last Name",
+      dataIndex: "lastName",
+      key: "lastName",
       width: "22%",
-      render: text => <a href="/">{text}</a>,
-      sorter: true,
-      ...columnSearchProps("name")
+      sorter: true
     },
     {
       title: "Email",
@@ -49,26 +47,8 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
       width: "22%",
       sorter: true,
       render(text) {
-        return text ? (
-          <a href={`mailto:${text}`}>{text}</a>
-        ) : (
-          <span>rimaz.emeraldit@gmail.com</span>
-        );
+        return text ? <a href={`mailto:${text}`}>{text}</a> : <span>-</span>;
       }
-    },
-    {
-      title: "Contacts",
-      dataIndex: "contacts",
-      key: "contacts",
-      width: "22%",
-      sorter: true
-    },
-    {
-      title: "Company Name",
-      dataIndex: "company name",
-      key: "company name",
-      width: "22%",
-      sorter: true
     },
     {
       title: "Outstanding",
@@ -83,10 +63,10 @@ export function getCustomerTableHeaders(getColumnSearchProps) {
       render(text) {
         return (
           <span>
-            Rs:{"1200"}
-            {/* {parseFloat(text).toLocaleString("en-us", {
+            Rs:{" "}
+            {parseFloat(text).toLocaleString("en-us", {
               minimumFractionDigits: 2
-            })} */}
+            })}
           </span>
         );
       }
