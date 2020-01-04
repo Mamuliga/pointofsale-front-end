@@ -1,19 +1,23 @@
 import React from "react";
-import { Icon } from "antd";
-import classnames from "classnames";
+import classNames from "classnames";
+import { Avatar, Icon } from "antd";
 
-export function getCustomerTableHeaders() {
+export function getCustomerTableHeaders(getColumnSearchProps) {
+  let columnSearchProps = () => {};
+  if (typeof getColumnSearchProps === "function") {
+    columnSearchProps = getColumnSearchProps;
+  }
   return [
     {
       title: "",
       dataIndex: "isActive",
       key: "isActive",
-      width: "0.5%",
+      width: "10%",
       render(isActive) {
         return (
           <Icon
             type={`${isActive ? "check" : "close"}`}
-            className={classnames("table-in-icon", {
+            className={classNames("table-in-icon", {
               "active-icon": isActive,
               "inactive-icon": !isActive
             })}
@@ -22,34 +26,55 @@ export function getCustomerTableHeaders() {
       }
     },
     {
-      title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName",
-      width: "3%",
-      sorter: true
+      title: "",
+      dataIndex: "avatar",
+      key: "avatar",
+      width: "22%",
+      render: () => <Avatar icon="user" />,
+      ellipsis: true
     },
     {
-      title: "Last Name",
-      dataIndex: "lastName",
-      key: "lastName",
-      width: "3%",
-      sorter: true
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      width: "22%",
+      render: text => <a href="/">{text}</a>,
+      sorter: true,
+      ...columnSearchProps("name")
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      width: "2%",
+      width: "22%",
       sorter: true,
       render(text) {
-        return text ? <a href={`mailto:${text}`}>{text}</a> : <span>-</span>;
+        return text ? (
+          <a href={`mailto:${text}`}>{text}</a>
+        ) : (
+          <span>rimaz.emeraldit@gmail.com</span>
+        );
       }
+    },
+    {
+      title: "Contacts",
+      dataIndex: "contacts",
+      key: "contacts",
+      width: "22%",
+      sorter: true
+    },
+    {
+      title: "Company Name",
+      dataIndex: "company name",
+      key: "company name",
+      width: "22%",
+      sorter: true
     },
     {
       title: "Outstanding",
       dataIndex: "outstanding",
       key: "outstanding",
-      width: "1%",
+      width: "22%",
       align: "right",
       defaultSortOrder: "ascend",
       sorter(v1, v2) {
@@ -58,10 +83,10 @@ export function getCustomerTableHeaders() {
       render(text) {
         return (
           <span>
-            Rs:{" "}
-            {parseFloat(text).toLocaleString("en-us", {
+            Rs:{"1200"}
+            {/* {parseFloat(text).toLocaleString("en-us", {
               minimumFractionDigits: 2
-            })}
+            })} */}
           </span>
         );
       }

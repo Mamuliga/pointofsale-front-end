@@ -12,6 +12,7 @@ import {
 import SideMenuRoutes from "./routes/SideMenuRoutes";
 import { getUserList } from "./http/usersApi";
 
+
 function App(props) {
   const { pathname } = useLocation();
   const loadPersistentAuthData = () => {

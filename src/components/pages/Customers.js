@@ -1,7 +1,7 @@
 import React from "react";
-import { Table } from "antd";
 import mockCustomers from "../../utilities/mockData/customers.json";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers";
+import TableBuilder from "../uis/TableBuilder.js";
 
 const Customers = () => {
   const customerTableContent = () => {
@@ -9,14 +9,16 @@ const Customers = () => {
       ...customer
     }));
   };
-
-  const customerRowKey = customer => `${customer.username}`;
-
+  const customerRowKey = customer => `${customer.name}`;
+  const getSelectedRows = selectedRows => {
+    console.log("In Customers", selectedRows);
+  };
   return (
-    <Table
-      columns={getCustomerTableHeaders()}
-      dataSource={customerTableContent()}
+    <TableBuilder
+      columns={getCustomerTableHeaders}
+      dataSource={customerTableContent}
       rowKey={customerRowKey}
+      getSelectedRows={getSelectedRows}
     />
   );
 };
