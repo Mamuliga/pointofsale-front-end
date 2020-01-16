@@ -1,3 +1,8 @@
+import React from "react";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import PeopleIcon from "@material-ui/icons/People";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+
 export const PAGE_ROUTES = {
   home: "/dashboard",
   login: "/login",
@@ -19,25 +24,25 @@ export const TOP_MENU_ITEMS = [
     key: "home",
     path: PAGE_ROUTES.home,
     title: "Dashboard",
-    icon: "dashboard"
+    icon: <DashboardIcon />
   },
   {
     key: "customers",
     path: PAGE_ROUTES.customers,
     title: "Customers",
-    icon: "team"
+    icon: <PeopleIcon />
   },
   {
     key: "suppliers",
     path: PAGE_ROUTES.suppliers,
     title: "Suppliers",
-    icon: "team"
+    icon: <PeopleIcon />
   },
   {
     key: "sales",
     path: PAGE_ROUTES.sales,
     title: "Sales",
-    icon: "dollar"
+    icon: <AttachMoneyIcon />
   }
 ];
 

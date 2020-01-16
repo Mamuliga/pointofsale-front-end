@@ -1,15 +1,19 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Menu, Icon } from "antd";
+import { Icon } from "antd";
 import { TOP_MENU_ITEMS } from "../../services/routeService";
+import LockIcon from "@material-ui/icons/Lock";
+
+import MenuItem from "@material-ui/core/MenuItem";
 
 const TopMenu = props => {
   const { push } = useHistory();
 
-  const handleMenuClick = e => {
-    if (e.key.indexOf("null") === -1) {
-      push(e.key);
-    }
+  const handleMenuClick = menuItem => {
+    const menuClick = () => {
+      push(menuItem.path);
+    };
+    return menuClick;
   };
 
   const handleLogoutClick = e => {
@@ -19,30 +23,20 @@ const TopMenu = props => {
   };
 
   return (
-    <Menu
-      onClick={handleMenuClick}
-      selectedKeys={props.selectedKey}
-      selectable={false}
-      mode="horizontal"
-      theme="dark"
-      multiple={false}
-      style={{ display: "flex" }}
-    >
-      {TOP_MENU_ITEMS.map(menuItem => (
-        <Menu.Item key={menuItem.path}>
-          <Icon type={menuItem.icon} />
-          {menuItem.title}
-        </Menu.Item>
-      ))}
-
-      <Menu.Item key="null" className="right-menu-item" />
-
-      {/* Right menu Items go here */}
-      <Menu.Item key={"logout-null"} onClick={handleLogoutClick}>
-        <Icon type="logout" />
-        Logout
-      </Menu.Item>
-    </Menu>
+    <div>
+      <div style={{ display: "flex" }}>
+        {TOP_MENU_ITEMS.map(menuItem => (
+          <MenuItem key={menuItem.path} onClick={handleMenuClick(menuItem)}>
+            {menuItem.icon}
+            {menuItem.title}
+          </MenuItem>
+        ))}
+        <MenuItem key='logout-icon' onClick={handleLogoutClick}>
+          <LockIcon />
+          Logout
+        </MenuItem>
+      </div>
+    </div>
   );
 };
 
