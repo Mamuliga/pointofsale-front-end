@@ -1,22 +1,24 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Menu, Icon } from "antd";
+import { Paper, MenuList, MenuItem } from "@material-ui/core";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 
 const Dashboard = props => {
   const { location, push } = useHistory();
   return (
-    <Menu
-      className="side-menu"
-      theme="dark"
-      selectable={false}
-      selectedKeys={location.pathname}
-      onClick={e => push(`${location.pathname}/${e.key}`)}
-    >
-      <Menu.Item key="summery">
-        <Icon type="book" />
-        Summery
-      </Menu.Item>
-    </Menu>
+    <div>
+      <Paper>
+        <MenuList
+          onClick={e => {
+            push(`${location.pathname}/${e.key || "summary"}`);
+          }}
+        >
+          <MenuItem key='new'>
+            <MenuBookIcon /> Summary
+          </MenuItem>
+        </MenuList>
+      </Paper>
+    </div>
   );
 };
 
