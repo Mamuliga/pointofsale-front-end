@@ -44,7 +44,8 @@
 
 .body-container {
   display: flex;
-  height: calc(100% - 50px);
+  height: 679px;
+  /* height: calc(100% - 50px); */
 }
 
 .column-filter-icon {
