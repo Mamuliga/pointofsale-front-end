@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Icon } from "antd";
 import { TOP_MENU_ITEMS } from "../../services/routeService";
 import LockIcon from "@material-ui/icons/Lock";
 
@@ -23,7 +22,7 @@ const TopMenu = props => {
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
       <div style={{ display: "flex" }}>
         {TOP_MENU_ITEMS.map(menuItem => (
           <MenuItem key={menuItem.path} onClick={handleMenuClick(menuItem)}>
@@ -31,6 +30,8 @@ const TopMenu = props => {
             {menuItem.title}
           </MenuItem>
         ))}
+      </div>
+      <div>
         <MenuItem key='logout-icon' onClick={handleLogoutClick}>
           <LockIcon />
           Logout
