@@ -309,18 +309,6 @@ export default function EnhancedTable() {
                           inputProps={{ "aria-labelledby": labelId }}
                         />
                       </TableCell>
-                      {/* <TableCell
-                        component='th'
-                        id={labelId}
-                        scope='row'
-                        padding='none'
-                      >
-                        {row.name}
-                      </TableCell>
-                      <TableCell align='right'>{row[0]}</TableCell>
-                      <TableCell align='right'>{row[2]}</TableCell>
-                      <TableCell align='right'>{row.carbs}</TableCell>
-                      <TableCell align='right'>{row.protein}</TableCell> */}
                       {row.map(cell => {
                         return <TableCell align='right'>{cell}</TableCell>;
                       })}
