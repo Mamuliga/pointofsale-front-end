@@ -129,7 +129,10 @@ const useToolbarStyles = makeStyles(theme => ({
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
-  const handleFilterListIcon = () => {};
+  const [showFilterList, setShowFilterList] = useState(false);
+  const handleFilterListIcon = () => {
+    setShowFilterList(!showFilterList);
+  };
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -158,11 +161,12 @@ const EnhancedTableToolbar = props => {
         </Tooltip>
       ) : (
         <Tooltip title='Filter list'>
-          <IconButton aria-label='filter list'>
-            <FilterListIcon onClick={handleFilterListIcon} />
+          <IconButton onClick={handleFilterListIcon} aria-label='filter list'>
+            <FilterListIcon />
           </IconButton>
         </Tooltip>
       )}
+      {showFilterList && <div>This is filter list</div>}
     </Toolbar>
   );
 };
@@ -201,7 +205,7 @@ export default function TableBuilder({
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("calories");
+  const [orderBy, setOrderBy] = useState("outstanding");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
