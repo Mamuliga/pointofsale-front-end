@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -129,7 +129,7 @@ const useToolbarStyles = makeStyles(theme => ({
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
-
+  const handleFilterListIcon = () => {};
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -159,7 +159,7 @@ const EnhancedTableToolbar = props => {
       ) : (
         <Tooltip title='Filter list'>
           <IconButton aria-label='filter list'>
-            <FilterListIcon />
+            <FilterListIcon onClick={handleFilterListIcon} />
           </IconButton>
         </Tooltip>
       )}
@@ -200,11 +200,11 @@ export default function TableBuilder({
   tableHeaders: headers
 }) {
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("calories");
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
