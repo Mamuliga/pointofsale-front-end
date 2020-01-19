@@ -309,7 +309,7 @@ export default function EnhancedTable() {
                           inputProps={{ "aria-labelledby": labelId }}
                         />
                       </TableCell>
-                      <TableCell
+                      {/* <TableCell
                         component='th'
                         id={labelId}
                         scope='row'
@@ -317,10 +317,13 @@ export default function EnhancedTable() {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align='right'>{row.calories}</TableCell>
-                      <TableCell align='right'>{row.fat}</TableCell>
+                      <TableCell align='right'>{row[0]}</TableCell>
+                      <TableCell align='right'>{row[2]}</TableCell>
                       <TableCell align='right'>{row.carbs}</TableCell>
-                      <TableCell align='right'>{row.protein}</TableCell>
+                      <TableCell align='right'>{row.protein}</TableCell> */}
+                      {row.map(cell => {
+                        return <TableCell align='right'>{cell}</TableCell>;
+                      })}
                     </TableRow>
                   );
                 })}
