@@ -111,14 +111,14 @@
   align-items: center;
 }
 
-.login-form-container {
+/* .login-form-container {
   background-color: var(--white-color);
   max-width: 350px;
   margin: auto;
   box-shadow: var(--dark-color) 10px 10px 50px;
   padding: 25px;
   border-radius: 5px;
-}
+} */
 
 .login-title {
   text-align: center;
