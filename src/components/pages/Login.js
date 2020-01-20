@@ -8,12 +8,12 @@ import Button from "@material-ui/core/Button";
 import PersonOutlineRoundedIcon from "@material-ui/icons/PersonOutlineRounded";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Grid from "@material-ui/core/Grid";
-import { FormGroup } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Link from "@material-ui/core/Link";
+import GridListTile from "@material-ui/core/GridListTile";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,16 +48,15 @@ const Login = props => {
 
   return (
     <div className="login-page-container">
-      <div className={classes.root}>
+      <div className={classes.paper}>
         <Paper className={classes.Paper}>
           <Paper elevation={2} />
-          {/* <h2 className="login-title">Welcome to EIT POS</h2> */}
-          <Typography component="div">
+          <Typography component="div" className="header">
             <Box
               fontFamily="Monospace"
               textAlign="center"
               fontWeight="bold"
-              fontSize="h6.fontSize"
+              fontSize="h5.fontSize"
               m={6}
             >
               Welcome to EIT POS
@@ -65,21 +64,26 @@ const Login = props => {
           </Typography>
 
           <hr className="divider" />
-          <div className="login-logo">
-            {/* <GridListTile key={logo}>/ */}
-            <img className="logo-image" src={logo} alt="logo" />
-            {/* <img src={logo} alt={logo.title} /> */}
-          </div>
-          {/* </GridListTile> */}
 
-          <div className={FormGroup.margin}>
-            <Grid container spacing={4} alignItems="flex-end">
+          <GridListTile key={logo} className="login-logo">
+            <img src={logo} alt={logo.title} />
+          </GridListTile>
+
+          <div className={classes.paper}>
+            <Grid
+              container
+              spacing={2}
+              alignItems="flex-end"
+              className="person-icon"
+            >
               <Grid item>
                 <PersonOutlineRoundedIcon />
               </Grid>
+
               <Grid item>
                 <TextField
                   id="input-with-icon-grid"
+                  xs={3}
                   label="username"
                   name="username"
                   onChange={handleFieldChanges}
@@ -87,42 +91,43 @@ const Login = props => {
                 />
               </Grid>
             </Grid>
-            <Grid container spacing={4} alignItems="flex-end">
-              <Grid item>
-                <LockOpenIcon />
-              </Grid>
-              <Grid item>
-                <TextField
-                  id="input-with-icon-grid"
-                  label="password"
-                  type="password"
-                  name="password"
-                  onChange={handleFieldChanges}
-                  value={loginCredential.password}
-                />
-              </Grid>
+          </div>
+          <Grid
+            container
+            spacing={2}
+            alignItems="flex-end"
+            className="lock-icon"
+          >
+            <Grid item>
+              <LockOpenIcon />
             </Grid>
-            <div className="btn-div">
-              <Button
-                className="button"
-                variant="contained"
-                loading={loading}
-                color="primary"
-                onClick={handleLoginClick}
-                disableElevation
-              >
-                Login
-              </Button>
-            </div>
+            <Grid item>
+              <TextField
+                id="input-with-icon-grid"
+                xs={3}
+                label="password"
+                type="password"
+                name="password"
+                onChange={handleFieldChanges}
+                value={loginCredential.password}
+              />
+            </Grid>
+          </Grid>
+          <div className="btn-div">
+            <Button
+              className="button"
+              variant="contained"
+              loading={loading}
+              color="primary"
+              onClick={handleLoginClick}
+              disableElevation
+            >
+              Login
+            </Button>
+          </div>
 
-            <div className="login-forgot-password">
-              {/* <a className="login-form-forgot" href="/forgot-password">
-                Forgot password
-              </a> */}
-              <Link href="/forgot-password" className="link">
-                Forgot password
-              </Link>
-            </div>
+          <div className="login-forgot-password">
+            <Link href="/forgot-password">Forgot password</Link>
           </div>
         </Paper>
       </div>

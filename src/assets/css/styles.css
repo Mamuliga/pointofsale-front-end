@@ -111,19 +111,6 @@
   align-items: center;
 }
 
-.link {
-  padding: 30px;
-}
-
-/* .login-form-container {
-  background-color: var(--white-color);
-  max-width: 350px;
-  margin: auto;
-  box-shadow: var(--dark-color) 10px 10px 50px;
-  padding: 25px;
-  border-radius: 5px;
-} */
-
 .login-title {
   text-align: center;
   letter-spacing: 0.2rem;
@@ -131,26 +118,31 @@
 }
 
 .login-logo {
-  width: 100%;
-  max-height: 120px;
-  overflow: hidden;
+  width: 400px;
+  height: 197px;
   margin: 10px 0;
-}
-.username {
-  font-weight: bold;
+  transform: translateY(-5px);
 }
 
-.password {
-  font-weight: bold;
+.header {
+  height: 20px;
 }
 
-.logo-image {
+.person-icon {
+  padding: 25px 15px 10px;
+}
+
+.lock-icon {
+  padding: 0 15px 25px;
+}
+
+.input {
   width: 100%;
 }
 
 .login-forgot-password {
   text-align: right;
-  padding: 2px 0;
+  padding: 0 77px 50px;
 }
 
 .divider {
@@ -158,9 +150,11 @@
   border-color: var(--light-color);
 }
 .btn-div {
-  margin: 50px 0;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
+
 .button {
   width: 250px;
 }
