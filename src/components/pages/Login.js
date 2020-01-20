@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -115,9 +116,12 @@ const Login = props => {
             </div>
 
             <div className="login-forgot-password">
-              <a className="login-form-forgot" href="/forgot-password">
+              {/* <a className="login-form-forgot" href="/forgot-password">
                 Forgot password
-              </a>
+              </a> */}
+              <Link href="/forgot-password" className="link">
+                Forgot password
+              </Link>
             </div>
           </div>
         </Paper>

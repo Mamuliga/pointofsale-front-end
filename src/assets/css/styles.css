@@ -111,6 +111,10 @@
   align-items: center;
 }
 
+.link {
+  padding: 30px;
+}
+
 /* .login-form-container {
   background-color: var(--white-color);
   max-width: 350px;
