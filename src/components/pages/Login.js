@@ -19,9 +19,9 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexWrap: "wrap",
     "& > *": {
-      margin: theme.spacing(30),
-      width: theme.spacing(25),
-      height: theme.spacing(5)
+      margin: theme.spacing(10),
+      width: theme.spacing(50),
+      height: theme.spacing(70)
     }
   }
 }));
@@ -47,7 +47,7 @@ const Login = props => {
 
   return (
     <div className="login-page-container">
-      <div className={classes.paper}>
+      <div className={classes.root}>
         <Paper className={classes.Paper}>
           <Paper elevation={2} />
           {/* <h2 className="login-title">Welcome to EIT POS</h2> */}
