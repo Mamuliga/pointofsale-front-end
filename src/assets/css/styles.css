@@ -122,10 +122,15 @@
   height: 197px;
   margin: 10px 0;
   transform: translateY(-5px);
+  list-style: none;
+}
+
+.login-input-width {
+  width: 180%;
 }
 
 .header {
-  height: 20px;
+  height: 40px;
 }
 
 .person-icon {
