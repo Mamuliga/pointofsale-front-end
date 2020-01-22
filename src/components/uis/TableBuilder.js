@@ -166,7 +166,18 @@ const EnhancedTableToolbar = props => {
           </IconButton>
         </Tooltip>
       )}
-      {showFilterList && <div>This is filter list</div>}
+      {showFilterList && (
+        <div>
+          {props.headers.map(header => {
+            return (
+              <span>
+                {/*  <Checkbox /> */}
+                {header.label}
+              </span>
+            );
+          })}
+        </div>
+      )}
     </Toolbar>
   );
 };
@@ -262,7 +273,7 @@ export default function TableBuilder({
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} headers={headers} />
         <TableContainer>
           <Table
             className={classes.table}
@@ -284,17 +295,17 @@ export default function TableBuilder({
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.firstName);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.name)}
+                      onClick={event => handleClick(event, row.firstName)}
                       role='checkbox'
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.firstName}
                       selected={isItemSelected}
                     >
                       <TableCell padding='checkbox'>
