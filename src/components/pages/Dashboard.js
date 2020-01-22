@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
-      <Button variant='contained' color='primary'>
+      <Button variant="contained" color="primary">
         Button from material ui
       </Button>
     </div>
