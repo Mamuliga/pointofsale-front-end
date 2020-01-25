@@ -44,26 +44,26 @@ const Login = props => {
     onLoginClick(loginCredential);
   };
 
-  if (isAuthenticated) return <Redirect to='/' />;
+  if (isAuthenticated) return <Redirect to="/" />;
 
   return (
-    <div className='login-page-container'>
+    <div className="login-page-container">
       <div className={classes.paper}>
         <Paper className={classes.Paper}>
           <Paper elevation={2} />
-          <Typography component='div' className='header'>
+          <Typography component="div" className="header">
             <Box
-              fontFamily='Monospace'
-              textAlign='center'
-              fontWeight='bold'
-              fontSize='h5.fontSize'
+              fontFamily="Monospace"
+              textAlign="center"
+              fontWeight="bold"
+              fontSize="h5.fontSize"
               m={6}
             >
               Welcome to EIT POS
             </Box>
           </Typography>
 
-          <GridListTile key={logo} className='login-logo'>
+          <GridListTile key={logo} className="login-logo">
             <img src={logo} alt={logo.title} />
           </GridListTile>
 
@@ -71,8 +71,8 @@ const Login = props => {
             <Grid
               container
               spacing={2}
-              alignItems='flex-end'
-              className='person-icon'
+              alignItems="flex-end"
+              className="person-icon"
             >
               <Grid item>
                 <PersonOutlineRoundedIcon />
@@ -80,11 +80,11 @@ const Login = props => {
 
               <Grid item>
                 <TextField
-                  className='login-input-width'
-                  id='input-with-icon-grid'
+                  className="login-input-width"
+                  id="input-with-icon-grid"
                   xs={3}
-                  label='username'
-                  name='username'
+                  label="username"
+                  name="username"
                   onChange={handleFieldChanges}
                   value={loginCredential.username}
                 />
@@ -93,32 +93,32 @@ const Login = props => {
             <Grid
               container
               spacing={2}
-              alignItems='flex-end'
-              className='lock-icon'
+              alignItems="flex-end"
+              className="lock-icon"
             >
               <Grid item>
                 <LockOpenIcon />
               </Grid>
               <Grid item>
                 <TextField
-                  className='login-input-width'
-                  id='input-with-icon-grid'
+                  className="login-input-width"
+                  id="input-with-icon-grid"
                   xs={3}
-                  label='password'
-                  type='password'
-                  name='password'
+                  label="password"
+                  type="password"
+                  name="password"
                   onChange={handleFieldChanges}
                   value={loginCredential.password}
                 />
               </Grid>
             </Grid>
           </div>
-          <div className='btn-div'>
+          <div className="btn-div">
             <Button
-              className='button'
-              variant='contained'
+              className="button"
+              variant="contained"
               loading={loading}
-              color='primary'
+              color="primary"
               onClick={handleLoginClick}
               disableElevation
             >
@@ -126,8 +126,8 @@ const Login = props => {
             </Button>
           </div>
 
-          <div className='login-forgot-password'>
-            <Link href='/forgot-password'>Forgot password</Link>
+          <div className="login-forgot-password">
+            <Link href="/forgot-password">Forgot password</Link>
           </div>
         </Paper>
       </div>
