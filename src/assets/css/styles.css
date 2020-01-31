@@ -106,7 +106,7 @@
 
 .login-page-container {
   height: 100vh;
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -151,8 +151,61 @@
   height: 40px;
 }
 
-.main-div {
+.person-gender {
   text-align: center;
+}
+
+.male-check {
+  text-align: center;
+}
+
+.female-check {
+  text-align: center;
+}
+
+.fname-div {
+  text-align: center;
+  width: 100%;
+}
+
+.f-name {
+  width: 400px;
+}
+
+.l-name {
+  width: 400px;
+}
+
+.address {
+  width: 400px;
+}
+
+.email {
+  width: 400px;
+}
+
+.p-number {
+  width: 400px;
+}
+
+.lname-div {
+  text-align: center;
+  padding: 0;
+}
+
+.address-div {
+  text-align: center;
+  padding: 15px;
+}
+
+.email-div {
+  text-align: center;
+  padding: 15px;
+}
+
+.pnumber-div {
+  text-align: center;
+  padding: 15px;
 }
 
 .paper-width {
