@@ -1,7 +1,5 @@
 import React from "react";
-// import Paper from "@material-ui/core/Paper";
 import { FormGroup } from "@material-ui/core";
-// import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -40,8 +38,6 @@ const Form = () => {
                   id="input-with-icon-grid"
                   label="First Name"
                   name="firstname"
-                  // onChange={handleFieldChanges}
-                  // value={loginCredential.password}
                 />
               </Grid>
             </Grid>
@@ -62,8 +58,6 @@ const Form = () => {
                   id="input-with-icon-grid"
                   label="Last Name"
                   name="lastname"
-                  // onChange={handleFieldChanges}
-                  // value={loginCredential.password}
                 />
               </Grid>
             </Grid>
@@ -105,8 +99,6 @@ const Form = () => {
                   id="input-with-icon-grid"
                   label="Address"
                   name="address"
-                  // onChange={handleFieldChanges}
-                  // value={loginCredential.password}
                 />
               </Grid>
             </Grid>
@@ -127,8 +119,6 @@ const Form = () => {
                   id="input-with-icon-grid"
                   label="Email"
                   name="email"
-                  // onChange={handleFieldChanges}
-                  // value={loginCredential.password}
                 />
               </Grid>
             </Grid>
@@ -149,8 +139,6 @@ const Form = () => {
                   id="input-with-icon-grid"
                   label="Phone Number"
                   name="phonenumber"
-                  // onChange={handleFieldChanges}
-                  // value={loginCredential.password}
                 />
               </Grid>
             </Grid>
