@@ -45,7 +45,6 @@
 .body-container {
   display: flex;
   height: 679px;
-  /* height: calc(100% - 50px); */
 }
 
 .column-filter-icon {
@@ -104,47 +103,9 @@
   align-items: center;
 }
 
-.login-page-container {
-  height: 100vh;
-  /* background-color: var(--primary-color); */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-title {
-  text-align: center;
-  letter-spacing: 0.2rem;
-  font-family: var(--title-font-family);
-}
-
-.login-logo {
-  width: 400px;
-  height: 197px;
-  margin: 10px 0;
-  transform: translateY(-5px);
-  list-style: none;
-}
-
-.login-input-width {
-  width: 180%;
-}
-
 .header {
   height: 40px;
 }
-
-.person-icon {
-  padding: 25px 15px 10px;
-}
-
-.lock-icon {
-  padding: 0 15px 25px;
-}
-
-/* .form-input-width {
-
-} */
 
 .form-header {
   text-align: center;
@@ -224,15 +185,6 @@
 .divider {
   border-width: 0.5px;
   border-color: var(--light-color);
-}
-.btn-div {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-.button {
-  width: 250px;
 }
 
 .table-in-icon {
