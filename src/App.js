@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { setPersistentData, logout } from "./store/actions/authActions";
 import Routes from "./routes";
 import { AUTH_LOCAL_STORAGE } from "./utilities/constants";
-import TopMenu from "./components/uis/TopMenu";
+import TopMenu from "./components/uis/TopMenu/index.js";
 import {
   showTopMenuForRoute,
   showSideMenuForRoute
@@ -23,17 +23,17 @@ function App(props) {
   };
   useEffect(loadPersistentAuthData, []);
   return (
-    <div className="App">
+    <div className='App'>
       {showTopMenuForRoute(pathname) && (
         <TopMenu selectedKey={pathname} onLogoutPress={props.onLogoutPress} />
       )}
-      <div className="body-container">
+      <div className='body-container'>
         {showSideMenuForRoute(pathname) && (
-          <div className="side-menu-route">
+          <div className='side-menu-route'>
             <SideMenuRoutes />
           </div>
         )}
-        <div className="main-route">
+        <div className='main-route'>
           <Routes {...props} />
         </div>
       </div>
