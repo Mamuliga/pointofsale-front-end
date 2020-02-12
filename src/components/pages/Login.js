@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
   input: {
     padding: theme.spacing(2)
   },
+  text: {
+    width: theme.spacing(36)
+  },
   forget: {
     width: theme.spacing(80)
   },
@@ -95,6 +98,7 @@ const Login = props => {
 
                 <Grid item>
                   <TextField
+                    className={classes.text}
                     id="input-with-icon-grid"
                     xs={3}
                     label="username"
@@ -115,6 +119,7 @@ const Login = props => {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.text}
                     id="input-with-icon-grid"
                     xs={3}
                     label="password"
