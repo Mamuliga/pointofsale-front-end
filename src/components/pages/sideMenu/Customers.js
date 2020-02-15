@@ -1,7 +1,7 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { MenuItem, MenuList, Paper } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { MenuItem, MenuList, Paper } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 
 const Customers = props => {
   const { location, push } = useHistory();
@@ -10,11 +10,11 @@ const Customers = props => {
       <Paper>
         <MenuList
           onClick={e => {
-            push(`${location.pathname}/${e.key || "new"}`);
+            push(`${location.pathname}/${e.key || 'new'}`);
           }}
         >
-          <MenuItem key='new'>
-            <AddIcon /> Create New
+          <MenuItem key="new">
+            <AddIcon>Create New</AddIcon>
           </MenuItem>
         </MenuList>
       </Paper>

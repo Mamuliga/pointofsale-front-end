@@ -1,8 +1,9 @@
-import React from "react";
-import { Switch } from "react-router-dom";
-import { Customers, Dashboard } from "../components/pages/sideMenu";
-import ProtectedRoute from "./ProtectedRoute";
-import { PAGE_ROUTES } from "../services/routeService";
+import React from 'react';
+import { Switch } from 'react-router-dom';
+import { Customers, Dashboard } from '../components/pages/sideMenu';
+import ProtectedRoute from './ProtectedRoute';
+import { PAGE_ROUTES } from '../services/routeService';
+import { Button } from '@material-ui/core';
 
 const SideMenuRoutes = props => {
   return (
