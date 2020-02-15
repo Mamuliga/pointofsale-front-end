@@ -54,6 +54,7 @@
 .main-route {
   flex: 1;
   min-height: 100%;
+  margin-top: 80px;
 }
 
 .right-menu-item {
