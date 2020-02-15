@@ -295,17 +295,17 @@ export default function TableBuilder({
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.firstName);
+                  const isItemSelected = isSelected(row.username);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.firstName)}
+                      onClick={event => handleClick(event, row.username)}
                       role='checkbox'
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.firstName}
+                      key={row.username}
                       selected={isItemSelected}
                     >
                       <TableCell padding='checkbox'>
@@ -314,8 +314,12 @@ export default function TableBuilder({
                           inputProps={{ "aria-labelledby": labelId }}
                         />
                       </TableCell>
-                      {Object.values(row).map(cell => {
-                        return <TableCell align='right'>{cell}</TableCell>;
+                      {Object.values(row).map((cell, index) => {
+                        return (
+                          <TableCell key={index} align='right'>
+                            {cell}
+                          </TableCell>
+                        );
                       })}
                     </TableRow>
                   );
