@@ -45,7 +45,6 @@
 .body-container {
   display: flex;
   height: 679px;
-  /* height: calc(100% - 50px); */
 }
 
 .column-filter-icon {
@@ -104,42 +103,74 @@
   align-items: center;
 }
 
-.login-page-container {
-  height: 100vh;
-  background-color: var(--primary-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-title {
-  text-align: center;
-  letter-spacing: 0.2rem;
-  font-family: var(--title-font-family);
-}
-
-.login-logo {
-  width: 400px;
-  height: 197px;
-  margin: 10px 0;
-  transform: translateY(-5px);
-  list-style: none;
-}
-
-.login-input-width {
-  width: 180%;
-}
-
 .header {
   height: 40px;
 }
 
-.person-icon {
-  padding: 25px 15px 10px;
+.form-header {
+  text-align: center;
+  height: 40px;
 }
 
-.lock-icon {
-  padding: 0 15px 25px;
+.person-gender {
+  text-align: center;
+}
+
+.male-check {
+  text-align: center;
+}
+
+.female-check {
+  text-align: center;
+}
+
+.fname-div {
+  text-align: center;
+  width: 100%;
+}
+
+.f-name {
+  width: 400px;
+}
+
+.l-name {
+  width: 400px;
+}
+
+.address {
+  width: 400px;
+}
+
+.email {
+  width: 400px;
+}
+
+.p-number {
+  width: 400px;
+}
+
+.lname-div {
+  text-align: center;
+  padding: 0;
+}
+
+.address-div {
+  text-align: center;
+  padding: 15px;
+}
+
+.email-div {
+  text-align: center;
+  padding: 15px;
+}
+
+.pnumber-div {
+  text-align: center;
+  padding: 15px;
+}
+
+.paper-width {
+  width: 40%;
 }
 
 .input {
@@ -154,15 +185,6 @@
 .divider {
   border-width: 0.5px;
   border-color: var(--light-color);
-}
-.btn-div {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-.button {
-  width: 250px;
 }
 
 .table-in-icon {
