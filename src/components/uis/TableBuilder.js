@@ -18,6 +18,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import EditIcon from "@material-ui/icons/Edit";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -149,7 +150,7 @@ const EnhancedTableToolbar = props => {
         </Typography>
       ) : (
         <Typography className={classes.title} variant='h6' id='tableTitle'>
-          Nutrition
+          {props.title}
         </Typography>
       )}
 
@@ -212,7 +213,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function TableBuilder({
   tableData: rows,
-  tableHeaders: headers
+  tableHeaders: headers,
+  onRowClick,
+  title
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -273,7 +276,11 @@ export default function TableBuilder({
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} headers={headers} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          headers={headers}
+          title={title}
+        />
         <TableContainer>
           <Table
             className={classes.table}
@@ -321,6 +328,9 @@ export default function TableBuilder({
                           </TableCell>
                         );
                       })}
+                      <TableCell key={"edit"} align='right'>
+                        <EditIcon onClick={onRowClick} />
+                      </TableCell>
                     </TableRow>
                   );
                 })}
