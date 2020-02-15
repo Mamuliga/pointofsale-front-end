@@ -27,7 +27,7 @@ const Customers = () => {
     username,
     outstanding
   ) {
-    return [isActive, firstName, lastName, username, outstanding];
+    return { isActive, firstName, lastName, username, outstanding };
   }
   return (
     <TableBuilder

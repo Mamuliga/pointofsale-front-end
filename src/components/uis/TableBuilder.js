@@ -314,7 +314,7 @@ export default function TableBuilder({
                           inputProps={{ "aria-labelledby": labelId }}
                         />
                       </TableCell>
-                      {row.map(cell => {
+                      {Object.values(row).map(cell => {
                         return <TableCell align='right'>{cell}</TableCell>;
                       })}
                     </TableRow>
