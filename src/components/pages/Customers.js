@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import TableBuilder from "../uis/TableBuilder.js";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 import { getCustomerList } from "../../http/usersApi.js";
-import FormBuilder from "../uis/FormBuilder.js";
+import FormCustomer from "./FormCustomer.js";
 
 const Customers = () => {
   const [customerList, setCustomerList] = useState([]);
   const [editView, setEditView] = useState(false);
+  const [customer, setCustomer] = useState({});
   useEffect(() => {
     console.log("In use effect");
     getCustomerList()
@@ -34,8 +35,12 @@ const Customers = () => {
     console.log("In Customers", selectedRows);
   };
 
-  const handleRowClick = () => {
-    setEditView(true);
+  const handleRowClick = customer => {
+    const rowClick = () => {
+      setEditView(!editView);
+      setCustomer(customer);
+    };
+    return rowClick;
   };
 
   function createCustomerData(
@@ -48,7 +53,7 @@ const Customers = () => {
     return { firstName, lastName, phoneNo, gender, bankAccount };
   }
   if (editView) {
-    return <FormBuilder />;
+    return <FormCustomer onClick={handleRowClick} customer={customer} />;
   }
   return (
     <TableBuilder

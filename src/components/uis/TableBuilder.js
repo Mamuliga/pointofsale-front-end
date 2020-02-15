@@ -329,7 +329,7 @@ export default function TableBuilder({
                         );
                       })}
                       <TableCell key={"edit"} align='right'>
-                        <EditIcon onClick={onRowClick} />
+                        <EditIcon onClick={onRowClick(row)} />
                       </TableCell>
                     </TableRow>
                   );
