@@ -1,10 +1,10 @@
 import React from "react";
-import Form from "./Form";
+import FormBuilder from "../uis/FormBuilder";
 
 const Dashboard = () => {
   return (
     <div>
-      <Form></Form>
+      <FormBuilder></FormBuilder>
     </div>
   );
 };

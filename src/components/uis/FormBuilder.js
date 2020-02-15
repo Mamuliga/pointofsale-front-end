@@ -10,23 +10,23 @@ import HomeIcon from "@material-ui/icons/Home";
 import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 
-const Form = () => {
+const FormBuilder = () => {
   return (
-    <div className="login-page-container">
+    <div>
       <div className={FormGroup.root}>
-        <div className="main-div">
+        <div>
           <Grid>
-            <Typography className="form-header" variant="h6" noWrap>
+            <Typography className='form-header' variant='h6' noWrap>
               Customer Details
             </Typography>
           </Grid>
 
-          <div className="fname-div">
+          <div className='fname-div'>
             <Grid
               container
               spacing={2}
-              alignItems="center"
-              className="person-icon"
+              alignItems='center'
+              className='person-icon'
             >
               <Grid item>
                 <PersonIcon />
@@ -34,111 +34,111 @@ const Form = () => {
 
               <Grid item>
                 <TextField
-                  className="f-name"
-                  id="input-with-icon-grid"
-                  label="First Name"
-                  name="firstname"
+                  className='f-name'
+                  id='input-with-icon-grid'
+                  label='First Name'
+                  name='firstname'
                 />
               </Grid>
             </Grid>
           </div>
-          <div className="lname-div">
+          <div className='lname-div'>
             <Grid
               container
               spacing={2}
-              alignItems="center"
-              className="person-icon"
+              alignItems='center'
+              className='person-icon'
             >
               <Grid item>
                 <PersonIcon />
               </Grid>
               <Grid item>
                 <TextField
-                  className="l-name"
-                  id="input-with-icon-grid"
-                  label="Last Name"
-                  name="lastname"
+                  className='l-name'
+                  id='input-with-icon-grid'
+                  label='Last Name'
+                  name='lastname'
                 />
               </Grid>
             </Grid>
           </div>
           <Grid item>
             <Typography
-              className="person-gender"
-              alignItems="center"
-              variant="h6"
+              className='person-gender'
+              alignItems='center'
+              variant='h6'
               noWrap
             >
               Gender
             </Typography>
           </Grid>
-          <div className="male-check">
+          <div className='male-check'>
             <FormControlLabel
-              control={<Checkbox value="checkedB" color="primary" />}
-              label="Male"
+              control={<Checkbox value='checkedB' color='primary' />}
+              label='Male'
             />
 
             <FormControlLabel
-              control={<Checkbox value="checkedB" color="primary" />}
-              label="Female"
+              control={<Checkbox value='checkedB' color='primary' />}
+              label='Female'
             />
           </div>
-          <div className="address-div">
+          <div className='address-div'>
             <Grid
               container
               spacing={2}
-              alignItems="center"
-              className="home-icon"
+              alignItems='center'
+              className='home-icon'
             >
               <Grid item>
                 <HomeIcon />
               </Grid>
               <Grid item>
                 <TextField
-                  className="address"
-                  id="input-with-icon-grid"
-                  label="Address"
-                  name="address"
+                  className='address'
+                  id='input-with-icon-grid'
+                  label='Address'
+                  name='address'
                 />
               </Grid>
             </Grid>
           </div>
-          <div className="email-div">
+          <div className='email-div'>
             <Grid
               container
               spacing={2}
-              alignItems="center"
-              className="email-icon"
+              alignItems='center'
+              className='email-icon'
             >
               <Grid item>
                 <EmailIcon />
               </Grid>
               <Grid item>
                 <TextField
-                  className="email"
-                  id="input-with-icon-grid"
-                  label="Email"
-                  name="email"
+                  className='email'
+                  id='input-with-icon-grid'
+                  label='Email'
+                  name='email'
                 />
               </Grid>
             </Grid>
           </div>
-          <div className="pnumber-div">
+          <div className='pnumber-div'>
             <Grid
               container
               spacing={2}
-              alignItems="center"
-              className="email-icon"
+              alignItems='center'
+              className='email-icon'
             >
               <Grid item>
                 <PhoneIcon />
               </Grid>
               <Grid item>
                 <TextField
-                  className="p-number"
-                  id="input-with-icon-grid"
-                  label="Phone Number"
-                  name="phonenumber"
+                  className='p-number'
+                  id='input-with-icon-grid'
+                  label='Phone Number'
+                  name='phonenumber'
                 />
               </Grid>
             </Grid>
@@ -149,4 +149,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FormBuilder;
