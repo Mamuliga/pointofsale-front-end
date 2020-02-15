@@ -1,39 +1,51 @@
-import React from "react";
-import mockCustomers from "../../utilities/mockData/customers.json";
+import React, { useEffect, useState } from "react";
+// import mockCustomers from "../../utilities/mockData/customers.json";
 import TableBuilder from "../uis/TableBuilder.js";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
+import { getCustomerList } from "../../http/usersApi.js";
 
 const Customers = () => {
-  const customerRowKey = customer => `${customer.username}`;
+  const [customerList, setCustomerList] = useState([]);
+  useEffect(() => {
+    console.log("In use effect");
+    getCustomerList()
+      .then(res => {
+        console.log(res);
+        const displayCustomerList = res.data.map(customer =>
+          createCustomerData(
+            customer.firstName,
+            customer.lastName,
+            customer.phoneNo,
+            customer.gender,
+            customer.bankAccount
+          )
+        );
+        setCustomerList(displayCustomerList);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  const customerRowKey = customer => `${customer.firstName}`;
   const getSelectedRows = selectedRows => {
     console.log("In Customers", selectedRows);
   };
-  const customerTableContent = () => {
-    return mockCustomers.map(customer =>
-      createCustomerData(
-        customer.isActive ? "Active" : "Inactive",
-        customer.firstName,
-        customer.lastName,
-        customer.username,
-        customer.outstanding
-      )
-    );
-  };
 
   function createCustomerData(
-    isActive,
     firstName,
     lastName,
-    username,
-    outstanding
+    phoneNo,
+    gender,
+    bankAccount
   ) {
-    return { isActive, firstName, lastName, username, outstanding };
+    return { firstName, lastName, phoneNo, gender, bankAccount };
   }
   return (
     <TableBuilder
       rowKey={customerRowKey}
       getSelectedRows={getSelectedRows}
-      tableData={customerTableContent()}
+      tableData={customerList}
       tableHeaders={getCustomerTableHeaders}
     />
   );
