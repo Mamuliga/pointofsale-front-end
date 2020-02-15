@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import mockCustomers from "../../utilities/mockData/customers.json";
 import TableBuilder from "../uis/TableBuilder.js";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
-import { getCustomerList } from "../../http/usersApi.js";
+import { getCustomerList } from "../../http/customerApi";
 import FormCustomer from "./FormCustomer.js";
 
 const Customers = () => {
