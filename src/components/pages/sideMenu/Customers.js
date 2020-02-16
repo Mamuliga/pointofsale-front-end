@@ -1,24 +1,31 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { MenuItem, MenuList, Paper } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import React, { Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
+import {
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider
+} from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 
 const Customers = props => {
   const { location, push } = useHistory();
   return (
-    <div>
-      <Paper>
-        <MenuList
-          onClick={e => {
-            push(`${location.pathname}/${e.key || "new"}`);
-          }}
-        >
-          <MenuItem key='new'>
-            <AddIcon /> Create New
-          </MenuItem>
-        </MenuList>
-      </Paper>
-    </div>
+    <Fragment>
+      <Divider />
+      <ListItem
+        onClick={e => {
+          push(`${location.pathname}/${e.key || 'new'}`);
+        }}
+        button
+      >
+        <ListItemIcon>
+          <AddIcon />
+        </ListItemIcon>
+        <ListItemText>Create</ListItemText>
+      </ListItem>
+      <Divider />
+    </Fragment>
   );
 };
 

@@ -4,10 +4,10 @@ import { TOP_MENU_ITEMS } from '../../../services/routeService';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import AppBar from '@material-ui/core/AppBar';
-import ToolBar from '@material-ui/core/ToolBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import useStyle from './useStyle';
+import useStyle from '../../../styles/useStyles';
 
 const TopMenu = props => {
   const { push } = useHistory();
@@ -27,8 +27,8 @@ const TopMenu = props => {
   };
 
   return (
-    <AppBar color="primary">
-      <ToolBar>
+    <AppBar className={classes.appBar} color="primary">
+      <Toolbar>
         <Typography className={classes.leftMenubar}>
           {TOP_MENU_ITEMS.map(menuItem => (
             <Typography key={menuItem.key} className={classes.navButton}>
@@ -53,7 +53,7 @@ const TopMenu = props => {
             Logout
           </Button>
         </Typography>
-      </ToolBar>
+      </Toolbar>
     </AppBar>
   );
 };
