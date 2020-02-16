@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import mockCustomers from "../../utilities/mockData/customers.json";
 import TableBuilder from "../uis/TableBuilder.js";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
-import { getCustomerList } from "../../http/customerApi";
+import { getCustomerList, getCustomerById } from "../../http/customerApi";
 import FormCustomer from "./FormCustomer.js";
 
 const Customers = () => {
@@ -16,6 +16,7 @@ const Customers = () => {
         console.log(res);
         const displayCustomerList = res.data.map(customer =>
           createCustomerData(
+            customer.id,
             customer.firstName,
             customer.lastName,
             customer.phoneNo,
@@ -37,6 +38,7 @@ const Customers = () => {
 
   const handleRowClick = customer => {
     const rowClick = () => {
+      getCustomerById(customer.id);
       setEditView(!editView);
       setCustomer(customer);
     };
@@ -44,13 +46,14 @@ const Customers = () => {
   };
 
   function createCustomerData(
+    id,
     firstName,
     lastName,
     phoneNo,
     gender,
     bankAccount
   ) {
-    return { firstName, lastName, phoneNo, gender, bankAccount };
+    return { id, firstName, lastName, phoneNo, gender, bankAccount };
   }
   if (editView) {
     return <FormCustomer onClick={handleRowClick} customer={customer} />;

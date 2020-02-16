@@ -213,7 +213,7 @@ export default function TableBuilder({
                       hover
                       role='checkbox'
                       tabIndex={-1}
-                      key={row.lastName}
+                      key={row.id}
                       onClick={onRowClick(row)}
                     >
                       {Object.values(row).map((cell, index) => {
