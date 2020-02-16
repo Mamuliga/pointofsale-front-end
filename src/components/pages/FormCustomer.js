@@ -6,7 +6,19 @@ const FormCustomer = ({ onClick, customer }) => {
   return (
     <div>
       {console.log(customer)}
-      <FormBuilder />
+      <FormBuilder
+        title={"Customer Details"}
+        data={[
+          {
+            type: "textField",
+            label: "First Name"
+          },
+          {
+            type: "textField",
+            label: "Last Name"
+          }
+        ]}
+      />
       <Button variant='contained' color='primary' onClick={onClick()}>
         Submit
       </Button>

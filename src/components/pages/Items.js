@@ -54,6 +54,7 @@ const Items = () => {
       tableData={itemTableContent()}
       tableHeaders={getItemTableHeaders}
       onRowClick={() => {}}
+      title={"Items"}
     />
   );
 };
