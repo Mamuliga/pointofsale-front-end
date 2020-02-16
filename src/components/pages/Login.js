@@ -10,20 +10,38 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Link from "@material-ui/core/Link";
-import GridListTile from "@material-ui/core/GridListTile";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: theme.spacing(10),
-      width: theme.spacing(50),
-      height: theme.spacing(70)
-    }
+    flexWrap: "wrap"
+  },
+  paper: {
+    width: theme.spacing(50),
+    height: theme.spacing(20)
+  },
+
+  button: {
+    width: theme.spacing(40),
+    display: "flex"
+  },
+  input: {
+    padding: theme.spacing(2)
+  },
+  text: {
+    width: theme.spacing(36)
+  },
+  forget: {
+    width: theme.spacing(80)
+  },
+  "& > *": {
+    margin: theme.spacing(10),
+    width: theme.spacing(80),
+    height: theme.spacing(70)
   }
 }));
 
@@ -44,94 +62,109 @@ const Login = props => {
     onLoginClick(loginCredential);
   };
 
-  if (isAuthenticated) return <Redirect to='/' />;
+  if (isAuthenticated) return <Redirect to="/" />;
 
   return (
-    <div className='login-page-container'>
-      <div className={classes.paper}>
-        <Paper className={classes.Paper}>
-          <Paper elevation={2} />
-          <Typography component='div' className='header'>
+    <React.Fragment>
+      <CssBaseline />
+      <Container className={classes.main} maxWidth="sm">
+        <div className={classes.paper}>
+          <Paper className={classes.root}>
+            <Paper elevation={2} />
             <Box
-              fontFamily='Monospace'
-              textAlign='center'
-              fontWeight='bold'
-              fontSize='h5.fontSize'
-              m={6}
+              fontFamily="Monospace"
+              fontSize="h5.fontSize"
+              fontWeight="fontWeightBold"
+              m={1}
+              mx={8}
+              height={40}
+              width={263}
+              display="inline-block"
             >
               Welcome to EIT POS
             </Box>
-          </Typography>
+            <img src={logo} width="100%" height={250} alt={logo.title} />
 
-          <GridListTile key={logo} className='login-logo'>
-            <img src={logo} alt={logo.title} />
-          </GridListTile>
+            <div className={classes.paper}>
+              <Grid
+                container
+                spacing={2}
+                className={classes.input}
+                alignItems="flex-end"
+              >
+                <Grid item>
+                  <PersonOutlineRoundedIcon />
+                </Grid>
 
-          <div className={classes.paper}>
-            <Grid
-              container
-              spacing={2}
-              alignItems='flex-end'
-              className='person-icon'
+                <Grid item>
+                  <TextField
+                    className={classes.text}
+                    id="input-with-icon-grid"
+                    xs={3}
+                    label="username"
+                    name="username"
+                    onChange={handleFieldChanges}
+                    value={loginCredential.username}
+                  />
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                spacing={2}
+                className={classes.input}
+                alignItems="flex-end"
+              >
+                <Grid item>
+                  <LockOpenIcon />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    className={classes.text}
+                    id="input-with-icon-grid"
+                    xs={3}
+                    label="password"
+                    type="password"
+                    name="password"
+                    onChange={handleFieldChanges}
+                    value={loginCredential.password}
+                  />
+                </Grid>
+              </Grid>
+            </div>
+            <Box
+              display="flex"
+              width={475}
+              height={80}
+              alignItems="center"
+              justifyContent="center"
             >
-              <Grid item>
-                <PersonOutlineRoundedIcon />
-              </Grid>
-
-              <Grid item>
-                <TextField
-                  className='login-input-width'
-                  id='input-with-icon-grid'
-                  xs={3}
-                  label='username'
-                  name='username'
-                  onChange={handleFieldChanges}
-                  value={loginCredential.username}
-                />
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={2}
-              alignItems='flex-end'
-              className='lock-icon'
+              <Button
+                className={classes.button}
+                variant="contained"
+                xs={12}
+                loading={loading}
+                color="primary"
+                onClick={handleLoginClick}
+                disableElevation
+              >
+                Login
+              </Button>
+            </Box>
+            <Box
+              className={classes.forget}
+              display="flex"
+              height={50}
+              alignItems="left"
+              justifyContent="center"
             >
-              <Grid item>
-                <LockOpenIcon />
-              </Grid>
-              <Grid item>
-                <TextField
-                  className='login-input-width'
-                  id='input-with-icon-grid'
-                  xs={3}
-                  label='password'
-                  type='password'
-                  name='password'
-                  onChange={handleFieldChanges}
-                  value={loginCredential.password}
-                />
-              </Grid>
-            </Grid>
-          </div>
-          <div className='btn-div'>
-            <Button
-              className='button'
-              variant='contained'
-              loading={loading}
-              color='primary'
-              onClick={handleLoginClick}
-              disableElevation
-            >
-              Login
-            </Button>
-          </div>
-
-          <div className='login-forgot-password'>
-            <Link href='/forgot-password'>Forgot password</Link>
-          </div>
-        </Paper>
-      </div>
-    </div>
+              <Link href="/forgot-password" className={classes.link}>
+                Forgot password
+              </Link>
+            </Box>
+          </Paper>
+        </div>
+      </Container>
+    </React.Fragment>
   );
 };
 
