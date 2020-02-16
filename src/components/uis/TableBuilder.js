@@ -217,11 +217,7 @@ export default function TableBuilder({
                       onClick={onRowClick(row)}
                     >
                       {Object.values(row).map((cell, index) => {
-                        return (
-                          <TableCell key={index} align='right'>
-                            {cell}
-                          </TableCell>
-                        );
+                        return <TableCell key={index}>{cell}</TableCell>;
                       })}
                     </TableRow>
                   );

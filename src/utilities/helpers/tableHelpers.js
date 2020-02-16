@@ -1,29 +1,23 @@
 export const getCustomerTableHeaders = [
   {
     id: "firstName",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "First Name"
   },
-  { id: "lastName", numeric: true, disablePadding: false, label: "Last Name" },
-  { id: "email", numeric: true, disablePadding: false, label: "Email" },
+  { id: "lastName", numeric: false, disablePadding: false, label: "Last Name" },
+  { id: "email", numeric: false, disablePadding: false, label: "Email" },
   {
     id: "gender",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "Gender"
   },
   {
     id: "bankAccount",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "Acc no"
-  },
-  {
-    id: "outstanding",
-    numeric: true,
-    disablePadding: false,
-    label: "Outstanding"
   }
 ];
 export const getItemTableHeaders = [
