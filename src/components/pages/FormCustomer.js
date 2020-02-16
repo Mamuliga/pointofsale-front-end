@@ -16,6 +16,9 @@ const FormCustomer = ({ onClick, customer }) => {
           {
             type: "textField",
             label: "Last Name"
+          },
+          {
+            type: "gender"
           }
         ]}
       />
