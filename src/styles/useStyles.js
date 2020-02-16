@@ -50,5 +50,14 @@ export default makeStyles(theme => ({
   leftMenubar: {
     display: 'flex',
     flex: 1
+  },
+  copyrightLabel: {
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: theme.palette.primary.dark,
+    textAlign: 'center',
+    width: '100%',
+    color: theme.palette.grey[100],
+    lineHeight: 0.2
   }
 }));

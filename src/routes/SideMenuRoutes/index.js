@@ -1,21 +1,13 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import {
-  Drawer,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText
-} from '@material-ui/core';
-import { Create } from '@material-ui/icons';
+import { Drawer, Divider, List } from '@material-ui/core';
 import { Customers, Dashboard } from '../../components/pages/sideMenu';
 import ProtectedRoute from '../ProtectedRoute';
 import { PAGE_ROUTES } from '../../services/routeService';
-import useStyle from '../../styles/useStyles';
+import useStyles from '../../styles/useStyles';
 
 const SideMenuRoutes = props => {
-  const classes = useStyle();
+  const classes = useStyles();
   return (
     <Drawer
       variant="persistent"
@@ -26,26 +18,25 @@ const SideMenuRoutes = props => {
       <div className={classes.sideMenuContainer}>
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <Create />
-            </ListItemIcon>
-            <ListItemText>Create</ListItemText>
-          </ListItem>
+          <Switch>
+            <ProtectedRoute
+              path={PAGE_ROUTES.customers}
+              component={Customers}
+            />
+            <ProtectedRoute
+              path={PAGE_ROUTES.suppliers}
+              component={Customers}
+            />
+            <ProtectedRoute path={PAGE_ROUTES.sales} component={Customers} />
+            <ProtectedRoute path={PAGE_ROUTES.home} component={Dashboard} />
+            <ProtectedRoute component={Dashboard} authRequired />
+          </Switch>
         </List>
-        <Divider />
-        {/* <Switch>
-        <ProtectedRoute path={PAGE_ROUTES.customers} component={Customers} />
-        <ProtectedRoute path={PAGE_ROUTES.suppliers} component={Customers} />
-        <ProtectedRoute path={PAGE_ROUTES.sales} component={Customers} />
-        <ProtectedRoute path={PAGE_ROUTES.home} component={Dashboard} />
-        <ProtectedRoute component={Dashboard} authRequired />
-      </Switch> */}
-        {/* <div className="side-menu-copyright">
-        <p>Emerald IT</p>
-        <p>Point of sale Solution</p>
-        <p>All right reserved</p>
-      </div> */}
+        <div className={classes.copyrightLabel}>
+          <p>Emerald IT</p>
+          <p>Point of sale Solution</p>
+          <p>&copy; All right reserved</p>
+        </div>
       </div>
     </Drawer>
   );
