@@ -18,7 +18,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import EditIcon from "@material-ui/icons/Edit";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -170,12 +169,7 @@ const EnhancedTableToolbar = props => {
       {showFilterList && (
         <div>
           {props.headers.map(header => {
-            return (
-              <span>
-                {/*  <Checkbox /> */}
-                {header.label}
-              </span>
-            );
+            return <span>{header.label}</span>;
           })}
         </div>
       )}
@@ -239,26 +233,6 @@ export default function TableBuilder({
     setSelected([]);
   };
 
-  const handleClick = (event, key) => {
-    const selectedIndex = selected.indexOf(key);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, key);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -301,26 +275,18 @@ export default function TableBuilder({
             <TableBody>
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
+                .map(row => {
                   const isItemSelected = isSelected(row.lastName);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.lastName)}
                       role='checkbox'
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.lastName}
                       selected={isItemSelected}
+                      onClick={onRowClick(row)}
                     >
-                      <TableCell padding='checkbox'>
-                        <Checkbox
-                          checked={isItemSelected}
-                          inputProps={{ "aria-labelledby": labelId }}
-                        />
-                      </TableCell>
                       {Object.values(row).map((cell, index) => {
                         return (
                           <TableCell key={index} align='right'>
@@ -328,9 +294,6 @@ export default function TableBuilder({
                           </TableCell>
                         );
                       })}
-                      <TableCell key={"edit"} align='right'>
-                        <EditIcon onClick={onRowClick(row)} />
-                      </TableCell>
                     </TableRow>
                   );
                 })}
