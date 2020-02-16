@@ -11,9 +11,12 @@ import {
 } from './services/routeService';
 import SideMenuRoutes from './routes/SideMenuRoutes';
 import { getUserList } from './http/usersApi';
+import useStyles from './styles/useStyles';
 
 function App(props) {
   const { pathname } = useLocation();
+  const classes = useStyles();
+
   const loadPersistentAuthData = () => {
     getUserList()
       .then(res => console.log('res', res))
@@ -21,6 +24,7 @@ function App(props) {
     const persistedAuthData = localStorage.getItem(AUTH_LOCAL_STORAGE);
     props.loadAuthData(JSON.parse(persistedAuthData));
   };
+
   useEffect(loadPersistentAuthData, []);
   return (
     <div className="App">
@@ -28,11 +32,8 @@ function App(props) {
         <TopMenu selectedKey={pathname} onLogoutPress={props.onLogoutPress} />
       )}
       <div>
-        {/* {showSideMenuForRoute(pathname) && (
-          <div className="side-menu-route"></div>
-        )} */}
-        <SideMenuRoutes />
-        <div className="main-route">
+        {showSideMenuForRoute(pathname) && <SideMenuRoutes />}
+        <div className={classes.mainRouteView}>
           <Routes {...props} />
         </div>
       </div>

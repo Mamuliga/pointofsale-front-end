@@ -7,7 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import useStyle from './useStyle';
+import useStyle from '../../../styles/useStyles';
 
 const TopMenu = props => {
   const { push } = useHistory();
@@ -27,7 +27,7 @@ const TopMenu = props => {
   };
 
   return (
-    <AppBar color="primary">
+    <AppBar className={classes.appBar} color="primary">
       <Toolbar>
         <Typography className={classes.leftMenubar}>
           {TOP_MENU_ITEMS.map(menuItem => (
