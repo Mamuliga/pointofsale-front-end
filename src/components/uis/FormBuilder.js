@@ -20,6 +20,7 @@ const FormBuilder = ({ title, data, onClick }) => {
           {data.map(entry => {
             switch (entry.type) {
               case "text":
+              case "date":
               case "email":
                 return (
                   <CustomTextField
