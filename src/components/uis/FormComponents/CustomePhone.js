@@ -15,7 +15,6 @@ const CustomPhone = ({ label, required }) => {
           required={required}
           label={label}
           type='number'
-          variant='filled'
         />
       </Grid>
     </Grid>
