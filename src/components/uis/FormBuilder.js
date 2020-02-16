@@ -5,8 +5,9 @@ import Grid from "@material-ui/core/Grid";
 import CustomTextField from "./FormComponents/CustomTextField";
 import CustomGender from "./FormComponents/CustomGender";
 import CustomPhone from "./FormComponents/CustomePhone";
+import { Button } from "@material-ui/core";
 
-const FormBuilder = ({ title, data }) => {
+const FormBuilder = ({ title, data, onClick }) => {
   return (
     <div>
       <div className={FormGroup.root}>
@@ -27,6 +28,7 @@ const FormBuilder = ({ title, data }) => {
                     name={entry.name}
                     icon={entry.icon}
                     required={entry.required}
+                    value={entry.value}
                   />
                 );
               case "radio":
@@ -37,6 +39,9 @@ const FormBuilder = ({ title, data }) => {
                 return null;
             }
           })}
+          <Button variant='contained' color='primary' onClick={onClick()}>
+            Submit
+          </Button>
         </div>
       </div>
     </div>

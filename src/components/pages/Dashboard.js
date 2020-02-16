@@ -47,6 +47,7 @@ const Dashboard = () => {
           required: true
         }
       ]}
+      onClick={() => {}}
     />
   );
 };
