@@ -41,7 +41,7 @@ const FormBuilder = ({ title, data, onClick }) => {
                 return null;
             }
           })}
-          <Button variant='contained' color='primary' onClick={onClick()}>
+          <Button variant='contained' color='primary' onClick={onClick}>
             Submit
           </Button>
         </div>

@@ -36,6 +36,10 @@ const Customers = () => {
     console.log("In Customers", selectedRows);
   };
 
+  const handleFormSubmit = () => {
+    setEditView(!editView);
+  };
+
   const handleRowClick = customer => {
     const rowClick = () => {
       getCustomerById(customer.id);
@@ -56,7 +60,7 @@ const Customers = () => {
     return { id, firstName, lastName, phoneNo, gender, bankAccount };
   }
   if (editView) {
-    return <FormCustomer onClick={handleRowClick} customer={customer} />;
+    return <FormCustomer onClick={handleFormSubmit} customer={customer} />;
   }
   return (
     <TableBuilder
