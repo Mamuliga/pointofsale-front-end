@@ -4,11 +4,14 @@ import TableBuilder from "../uis/TableBuilder.js";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 import { getCustomerList, getCustomerById } from "../../http/customerApi";
 import FormCustomer from "./FormCustomer.js";
+import { getCustomerFormData } from "../../utilities/helpers/formHelpers/customerForm";
 
 const Customers = () => {
   const [customerList, setCustomerList] = useState([]);
   const [editView, setEditView] = useState(false);
   const [customer, setCustomer] = useState({});
+  const [dataWithValue, setDataWithValue] = useState([]);
+
   useEffect(() => {
     console.log("In use effect");
     getCustomerList()
@@ -42,9 +45,26 @@ const Customers = () => {
 
   const handleRowClick = customer => {
     const rowClick = () => {
-      getCustomerById(customer.id);
-      setEditView(!editView);
-      setCustomer(customer);
+      const data = getCustomerFormData;
+      const dataArray = [];
+
+      getCustomerById(customer.id)
+        .then(res => {
+          Object.keys(res.data).forEach(id => {
+            data.forEach(entry => {
+              if (id === entry.id) {
+                dataArray.push({ ...entry, value: customer[`${id}`] });
+              }
+              return null;
+            });
+          });
+          setDataWithValue([...dataArray]);
+          setEditView(!editView);
+          setCustomer(res.data);
+        })
+        .catch(err => {
+          console.err(err);
+        });
     };
     return rowClick;
   };
@@ -60,7 +80,13 @@ const Customers = () => {
     return { id, firstName, lastName, phoneNo, gender, bankAccount };
   }
   if (editView) {
-    return <FormCustomer onClick={handleFormSubmit} customer={customer} />;
+    return (
+      <FormCustomer
+        onClick={handleFormSubmit}
+        customer={customer}
+        data={dataWithValue}
+      />
+    );
   }
   return (
     <TableBuilder

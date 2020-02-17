@@ -1,14 +1,13 @@
 import React from "react";
 import FormBuilder from "../uis/FormBuilder";
-import { getCustomerFormData } from "../../utilities/helpers/formHelpers/customerForm";
 
-const FormCustomer = ({ onClick, customer }) => {
+const FormCustomer = ({ onClick, customer, data }) => {
   return (
     <div>
       {console.log(customer)}
       <FormBuilder
         title={"Customer Details"}
-        data={getCustomerFormData}
+        data={data}
         onClick={onClick}
         actor={customer}
       />
