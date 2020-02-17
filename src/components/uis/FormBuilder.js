@@ -8,7 +8,7 @@ import CustomPhone from "./FormComponents/CustomPhone";
 import { Button } from "@material-ui/core";
 import CustomAvatar from "./FormComponents/CustomAvatar";
 
-const FormBuilder = ({ title, data, onClick }) => {
+const FormBuilder = ({ title, data, onClick, actor }) => {
   return (
     <div>
       <div className={FormGroup.root}>

@@ -10,6 +10,7 @@ const FormCustomer = ({ onClick, customer }) => {
         title={"Customer Details"}
         data={getCustomerFormData}
         onClick={onClick}
+        actor={customer}
       />
     </div>
   );
