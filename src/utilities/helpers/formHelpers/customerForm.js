@@ -6,6 +6,7 @@ import DescriptionIcon from "@material-ui/icons/Description";
 
 export const getCustomerFormData = [
   {
+    id: "firstName",
     type: "text",
     label: "First Name",
     name: "firstName",
@@ -13,6 +14,7 @@ export const getCustomerFormData = [
     icon: <PersonIcon />
   },
   {
+    id: "lastName",
     type: "text",
     label: "Last Name",
     name: "lastName",
@@ -20,6 +22,7 @@ export const getCustomerFormData = [
     icon: <PersonIcon />
   },
   {
+    id: "companyName",
     type: "text",
     label: "Company Name",
     name: "companyName",
@@ -27,6 +30,7 @@ export const getCustomerFormData = [
     icon: <HomeIcon />
   },
   {
+    id: "email",
     type: "email",
     label: "Email",
     name: "email",
@@ -34,11 +38,13 @@ export const getCustomerFormData = [
     icon: <EmailIcon />
   },
   {
+    id: "phoneNo",
     type: "number",
     label: "phone",
     required: true
   },
   {
+    id: "gender",
     type: "text",
     label: "Address",
     name: "address",
@@ -46,14 +52,17 @@ export const getCustomerFormData = [
     icon: <HomeIcon />
   },
   {
+    id: "address",
     type: "radio",
     label: "gender"
   },
   {
+    id: "dob",
     type: "date",
     label: "Date of Birth"
   },
   {
+    id: "description",
     type: "text",
     label: "Description",
     name: "description",
@@ -63,12 +72,14 @@ export const getCustomerFormData = [
     icon: <DescriptionIcon />
   },
   {
+    id: "profilePicture",
     type: "avatar",
     label: "avatar",
     src: "",
     alt: "profile pic"
   },
   {
+    id: "defaultDiscount",
     type: "text",
     label: "Default Discount",
     name: "defaultDiscount",
@@ -76,6 +87,7 @@ export const getCustomerFormData = [
     icon: <HomeIcon />
   },
   {
+    id: "bankAccount",
     type: "text",
     label: "Bank Account",
     name: "bankAccount",
@@ -83,6 +95,7 @@ export const getCustomerFormData = [
     icon: <HomeIcon />
   },
   {
+    id: "regDate",
     type: "text",
     label: "Reg Date",
     name: "regDate",
@@ -90,6 +103,7 @@ export const getCustomerFormData = [
     icon: <HomeIcon />
   },
   {
+    id: "recruiter",
     type: "text",
     label: "Recruiter",
     name: "recruiter",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormGroup } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -9,6 +9,24 @@ import { Button } from "@material-ui/core";
 import CustomAvatar from "./FormComponents/CustomAvatar";
 
 const FormBuilder = ({ title, data, onClick, actor }) => {
+  const [dataWithValue, setDataWithValue] = useState([]);
+  useEffect(() => {
+    const dataArray = [];
+    console.log(actor);
+    console.log(Object.keys(actor));
+    Object.keys(actor).forEach(id => {
+      data.forEach(entry => {
+        if (id === entry.id) {
+          dataArray.push({ ...entry, value: actor[`${id}`] });
+        }
+        return null;
+      });
+    });
+    console.log(data);
+    console.log(dataArray);
+    setDataWithValue([...dataArray]);
+    // actor.forEach(act => {});
+  }, [actor, data, dataWithValue, setDataWithValue]);
   return (
     <div>
       <div className={FormGroup.root}>
@@ -18,7 +36,7 @@ const FormBuilder = ({ title, data, onClick, actor }) => {
               {title}
             </Typography>
           </Grid>
-          {data.map(entry => {
+          {dataWithValue.map(entry => {
             switch (entry.type) {
               case "text":
               case "date":
