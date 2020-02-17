@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import CustomTextField from "./FormComponents/CustomTextField";
 import CustomGender from "./FormComponents/CustomGender";
-import CustomPhone from "./FormComponents/CustomePhone";
+import CustomPhone from "./FormComponents/CustomPhone";
 import { Button } from "@material-ui/core";
 
 const FormBuilder = ({ title, data, onClick }) => {
