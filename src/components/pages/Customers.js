@@ -18,24 +18,7 @@ const Customers = () => {
 
   useEffect(() => {
     console.log("In use effect");
-    getCustomerList()
-      .then(res => {
-        console.log(res);
-        const displayCustomerList = res.data.map(customer =>
-          createCustomerData(
-            customer.id,
-            customer.firstName,
-            customer.lastName,
-            customer.phoneNo,
-            customer.gender,
-            customer.bankAccount
-          )
-        );
-        setCustomerList(displayCustomerList);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    getAllCustomerList(createCustomerData, setCustomerList);
   }, []);
 
   const customerRowKey = customer => `${customer.firstName}`;
@@ -48,7 +31,9 @@ const Customers = () => {
       updateCustomerById(updatedCustomer.id, updatedCustomer)
         .then(res => {
           console.log(res.data);
+          setCustomer(updatedCustomer);
           setEditView(!editView);
+          getAllCustomerList(createCustomerData, setCustomerList);
         })
         .catch(err => {
           console.log(err);
@@ -72,9 +57,9 @@ const Customers = () => {
               return null;
             });
           });
+          setCustomer(res.data);
           setDataWithValue([...dataArray]);
           setEditView(!editView);
-          setCustomer(res.data);
         })
         .catch(err => {
           console.err(err);
@@ -115,3 +100,23 @@ const Customers = () => {
 };
 
 export default Customers;
+function getAllCustomerList(createCustomerData, setCustomerList) {
+  getCustomerList()
+    .then(res => {
+      console.log(res);
+      const displayCustomerList = res.data.map(customer =>
+        createCustomerData(
+          customer.id,
+          customer.firstName,
+          customer.lastName,
+          customer.phoneNo,
+          customer.gender,
+          customer.bankAccount
+        )
+      );
+      setCustomerList(displayCustomerList);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}

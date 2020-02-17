@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormGroup } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -9,6 +9,11 @@ import { Button } from "@material-ui/core";
 import CustomAvatar from "./FormComponents/CustomAvatar";
 
 const FormBuilder = ({ title, data, onClick, actor }) => {
+  const [newActor, setNewActor] = useState({ ...actor });
+  const getValue = ({ target: { value, name } }) => {
+    setNewActor({ ...actor, [name]: value });
+    console.log({ ...actor, [name]: value });
+  };
   return (
     <div>
       <div className={FormGroup.root}>
@@ -23,7 +28,13 @@ const FormBuilder = ({ title, data, onClick, actor }) => {
               case "text":
               case "date":
               case "email":
-                return <CustomTextField entry={entry} key={entry.label} />;
+                return (
+                  <CustomTextField
+                    entry={entry}
+                    key={entry.label}
+                    getValue={getValue}
+                  />
+                );
               case "radio":
                 return <CustomGender key={entry.label} />;
               case "number":
@@ -34,7 +45,11 @@ const FormBuilder = ({ title, data, onClick, actor }) => {
                 return null;
             }
           })}
-          <Button variant='contained' color='primary' onClick={onClick(actor)}>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={onClick(newActor)}
+          >
             Submit
           </Button>
         </div>
