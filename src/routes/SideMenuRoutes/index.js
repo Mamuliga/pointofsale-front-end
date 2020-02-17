@@ -1,17 +1,17 @@
-import React from 'react';
-import { Switch } from 'react-router-dom';
-import { Drawer, Divider, List } from '@material-ui/core';
-import { Customers, Dashboard } from '../../components/pages/sideMenu';
-import ProtectedRoute from '../ProtectedRoute';
-import { PAGE_ROUTES } from '../../services/routeService';
-import useStyles from '../../styles/useStyles';
+import React from "react";
+import { Switch } from "react-router-dom";
+import { Drawer, Divider, List } from "@material-ui/core";
+import { Customers, Dashboard } from "../../components/pages/sideMenu";
+import ProtectedRoute from "../ProtectedRoute";
+import { PAGE_ROUTES } from "../../services/routeService";
+import useStyles from "../../styles/useStyles";
 
 const SideMenuRoutes = props => {
   const classes = useStyles();
   return (
     <Drawer
-      variant="persistent"
-      anchor="left"
+      variant='persistent'
+      anchor='left'
       open
       classes={{ paper: classes.drawerPaper }}
     >

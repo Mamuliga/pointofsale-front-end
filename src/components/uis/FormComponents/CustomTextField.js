@@ -9,7 +9,7 @@ const CustomTextField = ({ label, name, icon, type, required, value }) => {
 
       <Grid item>
         <TextField
-          id='input-with-icon-grid'
+          id={name}
           label={label}
           name={name}
           type={type}
