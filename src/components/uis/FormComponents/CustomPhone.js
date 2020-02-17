@@ -3,7 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import PhoneIcon from "@material-ui/icons/Phone";
 
-const CustomPhone = ({ label, required }) => {
+const CustomPhone = ({ entry }) => {
+  const { label, required } = entry;
   return (
     <Grid container spacing={2} alignItems='center' className='email-icon'>
       <Grid item>

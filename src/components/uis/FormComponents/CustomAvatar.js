@@ -11,7 +11,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CustomAvatar = ({ src, alt }) => {
+const CustomAvatar = ({ entry }) => {
+  const { src, alt } = entry;
   const classes = useStyles();
 
   return (

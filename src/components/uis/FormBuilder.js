@@ -23,31 +23,13 @@ const FormBuilder = ({ title, data, onClick }) => {
               case "text":
               case "date":
               case "email":
-                return (
-                  <CustomTextField
-                    type={entry.type}
-                    label={entry.label}
-                    name={entry.name}
-                    icon={entry.icon}
-                    required={entry.required}
-                    value={entry.value}
-                    key={entry.label}
-                    multiline={entry.multiline}
-                    rows={entry.rows}
-                  />
-                );
+                return <CustomTextField entry={entry} key={entry.label} />;
               case "radio":
                 return <CustomGender key={entry.label} />;
               case "number":
-                return <CustomPhone label={entry.label} key={entry.label} />;
+                return <CustomPhone entry={entry} key={entry.label} />;
               case "avatar":
-                return (
-                  <CustomAvatar
-                    key={entry.label}
-                    alt={entry.alt}
-                    src={entry.src}
-                  />
-                );
+                return <CustomAvatar key={entry.label} entry={entry} />;
               default:
                 return null;
             }
