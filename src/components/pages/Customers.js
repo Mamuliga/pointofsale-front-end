@@ -49,15 +49,16 @@ const Customers = () => {
 
       getCustomerById(customer.id)
         .then(res => {
+          const newCustomer = res.data;
           Object.keys(res.data).forEach(id => {
             data.forEach(entry => {
               if (id === entry.id) {
-                dataArray.push({ ...entry, value: customer[`${id}`] });
+                dataArray.push({ ...entry, value: newCustomer[`${id}`] });
               }
               return null;
             });
           });
-          setCustomer(res.data);
+          setCustomer(newCustomer);
           setDataWithValue([...dataArray]);
           setEditView(!editView);
         })
