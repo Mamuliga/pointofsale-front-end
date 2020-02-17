@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 // import mockCustomers from "../../utilities/mockData/customers.json";
 import TableBuilder from "../uis/TableBuilder.js";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
-import { getCustomerList, getCustomerById } from "../../http/customerApi";
+import {
+  getCustomerList,
+  getCustomerById,
+  updateCustomerById
+} from "../../http/customerApi";
 import FormCustomer from "./FormCustomer.js";
 import { getCustomerFormData } from "../../utilities/helpers/formHelpers/customerForm";
 
@@ -39,8 +43,18 @@ const Customers = () => {
     console.log("In Customers", selectedRows);
   };
 
-  const handleFormSubmit = () => {
-    setEditView(!editView);
+  const handleFormSubmit = updatedCustomer => {
+    const formSubmit = () => {
+      updateCustomerById(updatedCustomer.id, updatedCustomer)
+        .then(res => {
+          console.log(res.data);
+          setEditView(!editView);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+    return formSubmit;
   };
 
   const handleRowClick = customer => {

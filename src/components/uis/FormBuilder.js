@@ -8,7 +8,7 @@ import CustomPhone from "./FormComponents/CustomPhone";
 import { Button } from "@material-ui/core";
 import CustomAvatar from "./FormComponents/CustomAvatar";
 
-const FormBuilder = ({ title, data, onClick }) => {
+const FormBuilder = ({ title, data, onClick, actor }) => {
   return (
     <div>
       <div className={FormGroup.root}>
@@ -34,7 +34,7 @@ const FormBuilder = ({ title, data, onClick }) => {
                 return null;
             }
           })}
-          <Button variant='contained' color='primary' onClick={onClick}>
+          <Button variant='contained' color='primary' onClick={onClick(actor)}>
             Submit
           </Button>
         </div>

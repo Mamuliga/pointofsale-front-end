@@ -7,3 +7,7 @@ export async function getCustomerList() {
 export async function getCustomerById(id) {
   return await http.get(`./customers/${id}`);
 }
+
+export async function updateCustomerById(id, body) {
+  return await http.put(`./customers/${id}`, body);
+}
