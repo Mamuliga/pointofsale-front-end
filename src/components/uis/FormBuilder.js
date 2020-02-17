@@ -30,12 +30,13 @@ const FormBuilder = ({ title, data, onClick }) => {
                     icon={entry.icon}
                     required={entry.required}
                     value={entry.value}
+                    key={entry.label}
                   />
                 );
               case "radio":
-                return <CustomGender />;
+                return <CustomGender key={entry.label} />;
               case "number":
-                return <CustomPhone label={entry.label} />;
+                return <CustomPhone label={entry.label} key={entry.label} />;
               default:
                 return null;
             }
