@@ -6,6 +6,7 @@ import CustomTextField from "./FormComponents/CustomTextField";
 import CustomGender from "./FormComponents/CustomGender";
 import CustomPhone from "./FormComponents/CustomPhone";
 import { Button } from "@material-ui/core";
+import CustomAvatar from "./FormComponents/CustomAvatar";
 
 const FormBuilder = ({ title, data, onClick }) => {
   return (
@@ -31,12 +32,22 @@ const FormBuilder = ({ title, data, onClick }) => {
                     required={entry.required}
                     value={entry.value}
                     key={entry.label}
+                    multiline={entry.multiline}
+                    rows={entry.rows}
                   />
                 );
               case "radio":
                 return <CustomGender key={entry.label} />;
               case "number":
                 return <CustomPhone label={entry.label} key={entry.label} />;
+              case "avatar":
+                return (
+                  <CustomAvatar
+                    key={entry.label}
+                    alt={entry.alt}
+                    src={entry.src}
+                  />
+                );
               default:
                 return null;
             }
