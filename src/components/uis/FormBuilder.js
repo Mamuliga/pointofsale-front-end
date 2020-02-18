@@ -9,10 +9,10 @@ import { Button } from "@material-ui/core";
 import CustomAvatar from "./FormComponents/CustomAvatar";
 
 const FormBuilder = ({ title, data, onClick, actor }) => {
-  const [newActor, setNewActor] = useState({ ...actor });
+  const [newActor, setNewActor] = useState({ ...actor,  });
   const getValue = ({ target: { value, name } }) => {
-    setNewActor({ ...actor, [name]: value });
-    console.log({ ...actor, [name]: value });
+    setNewActor({ ...newActor, [name]: value });
+    console.log({ ...newActor, [name]: value });
   };
   return (
     <div>

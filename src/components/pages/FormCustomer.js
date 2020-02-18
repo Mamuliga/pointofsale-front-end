@@ -2,14 +2,33 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import FormBuilder from "../uis/FormBuilder";
 import { getCustomerFormData } from "../../utilities/helpers/formHelpers/customerForm";
-import { updateCustomerById, getCustomerById } from "../../http/customerApi";
+import {
+  updateCustomerById,
+  getCustomerById,
+  createCustomer
+} from "../../http/customerApi";
 import { PAGE_ROUTES } from "../../services/routeService";
 
 const FormCustomer = () => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
-  const [customer, setCustomer] = useState({});
+  const [customer, setCustomer] = useState({
+    firstName: null,
+    lastName: null,
+    companyName: null,
+    email: null,
+    phoneNo: "0771234567",
+    gender: "male",
+    address: null,
+    dob: "95-01-02",
+    description: null,
+    profilePicture: "hh",
+    defaultDiscount: null,
+    bankAccount: null,
+    regDate: null,
+    recruiter: null
+  });
 
   useEffect(() => {
     getCustomerById(id).then(res => {
@@ -29,6 +48,21 @@ const FormCustomer = () => {
       setDataWithValue([...dataArray]);
     });
   }, [customer.id, id]);
+
+  const handleCreateNewCustomer = newCustomer => {
+    const createNewCustomer = () => {
+      createCustomer(newCustomer)
+        .then(() => {
+          alert("New Customer created");
+          push(PAGE_ROUTES.customers);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+    return createNewCustomer;
+  };
+
   const handleFormSubmit = updatedCustomer => {
     const formSubmit = () => {
       updateCustomerById(updatedCustomer.id, updatedCustomer)
@@ -42,33 +76,28 @@ const FormCustomer = () => {
     };
     return formSubmit;
   };
-  const dumbClick = () => {};
   if (customer.id) {
     return (
       <div>
         {console.log(customer)}
         <FormBuilder
-          title={"Customer Details"}
+          title={"Edit Customer"}
           data={dataWithValue}
-          onClick={handleFormSubmit || dumbClick}
+          onClick={handleFormSubmit}
           actor={customer}
         />
       </div>
     );
   } else {
-    return null;
+    return (
+      <FormBuilder
+        title={"Create new Customer"}
+        data={getCustomerFormData}
+        onClick={handleCreateNewCustomer}
+        actor={customer}
+      />
+    );
   }
-  // return (
-  //   <div>
-  //     {console.log(customer)}
-  //     <FormBuilder
-  //       title={"Customer Details"}
-  //       data={dataWithValue || getCustomerFormData}
-  //       onClick={handleFormSubmit || dumbClick}
-  //       actor={customer || {}}
-  //     />
-  //   </div>
-  // );
 };
 
 export default FormCustomer;

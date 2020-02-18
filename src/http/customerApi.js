@@ -11,3 +11,7 @@ export async function getCustomerById(id) {
 export async function updateCustomerById(id, body) {
   return await http.put(`./customers/${id}`, body);
 }
+
+export async function createCustomer(body) {
+  return await http.post("./customers", body);
+}

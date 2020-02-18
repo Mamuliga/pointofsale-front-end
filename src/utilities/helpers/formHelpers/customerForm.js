@@ -39,6 +39,7 @@ export const getCustomerFormData = [
   },
   {
     id: "phoneNo",
+    name: "phoneNo",
     type: "number",
     label: "phone",
     required: true
@@ -52,12 +53,14 @@ export const getCustomerFormData = [
     icon: <HomeIcon />
   },
   {
-    id: "address",
+    id: "gender",
+    name: "gender",
     type: "radio",
     label: "gender"
   },
   {
     id: "dob",
+    name: "dob",
     type: "date",
     label: "Date of Birth"
   },
@@ -73,6 +76,7 @@ export const getCustomerFormData = [
   },
   {
     id: "profilePicture",
+    name: "profilePicture",
     type: "avatar",
     label: "avatar",
     src: "",
