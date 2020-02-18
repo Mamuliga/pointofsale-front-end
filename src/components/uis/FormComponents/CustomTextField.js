@@ -8,7 +8,9 @@ const CustomTextField = ({ entry, getValue }) => {
   const handleChange = e => {
     console.log(e.target.value);
     setNewValue(e.target.value);
-    getValue && getValue(e);
+    if (typeof getValue === "function") {
+      getValue(e);
+    }
   };
   return (
     <Grid container spacing={2} alignItems='center' className='person-icon'>

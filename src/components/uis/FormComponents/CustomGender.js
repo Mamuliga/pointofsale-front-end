@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
@@ -66,21 +66,33 @@ function StyledRadio(props) {
   );
 }
 
-const CustomGender = () => {
+const CustomGender = ({ entry, getValue }) => {
+  const { value, name } = entry;
+  const [newValue, setNewValue] = useState(value);
+  const handleChange = e => {
+    console.log(e.target.value);
+    setNewValue(e.target.value);
+    if (typeof getValue === "function") {
+      getValue(e);
+    }
+  };
   return (
     <FormControl component='fieldset'>
       <FormLabel component='legend'>Gender</FormLabel>
       <RadioGroup
-        defaultValue='female'
+        defaultValue='male'
+        value={newValue}
         aria-label='gender'
-        name='customized-radios'
+        name={name}
+        onChange={handleChange}
       >
+        <FormControlLabel value='male' control={<StyledRadio />} label='Male' />
+
         <FormControlLabel
           value='female'
           control={<StyledRadio />}
           label='Female'
         />
-        <FormControlLabel value='male' control={<StyledRadio />} label='Male' />
       </RadioGroup>
     </FormControl>
   );

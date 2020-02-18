@@ -36,9 +36,21 @@ const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
                   />
                 );
               case "radio":
-                return <CustomGender key={entry.label} />;
+                return (
+                  <CustomGender
+                    entry={entry}
+                    key={entry.label}
+                    getValue={getValue}
+                  />
+                );
               case "number":
-                return <CustomPhone entry={entry} key={entry.label} />;
+                return (
+                  <CustomPhone
+                    entry={entry}
+                    key={entry.label}
+                    getValue={getValue}
+                  />
+                );
               case "avatar":
                 return <CustomAvatar key={entry.label} entry={entry} />;
               default:

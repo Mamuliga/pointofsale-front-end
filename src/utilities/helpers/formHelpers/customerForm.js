@@ -45,7 +45,7 @@ export const getCustomerFormData = [
     required: true
   },
   {
-    id: "gender",
+    id: "address",
     type: "text",
     label: "Address",
     name: "address",
