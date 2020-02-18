@@ -1,5 +1,11 @@
 export const getCustomerTableHeaders = [
   {
+    id: "id",
+    numeric: false,
+    disablePadding: false,
+    label: "Customer Id"
+  },
+  {
     id: "firstName",
     numeric: false,
     disablePadding: false,
