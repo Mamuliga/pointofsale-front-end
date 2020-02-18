@@ -31,5 +31,8 @@ export default {
   },
   delete: async function(url, queryParams) {
     return await request({ method: "DELETE", url, params: queryParams });
+  },
+  deleteById: async function(url, id) {
+    return await request({ method: "DELETE", url: `${url}/${id}` });
   }
 };

@@ -8,8 +8,8 @@ import CustomPhone from "./FormComponents/CustomPhone";
 import { Button } from "@material-ui/core";
 import CustomAvatar from "./FormComponents/CustomAvatar";
 
-const FormBuilder = ({ title, data, onClick, actor }) => {
-  const [newActor, setNewActor] = useState({ ...actor,  });
+const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
+  const [newActor, setNewActor] = useState({ ...actor });
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
     console.log({ ...newActor, [name]: value });
@@ -52,6 +52,15 @@ const FormBuilder = ({ title, data, onClick, actor }) => {
           >
             Submit
           </Button>
+          {newActor.id && (
+            <Button
+              variant='contained'
+              color='secondary'
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
+          )}
         </div>
       </div>
     </div>

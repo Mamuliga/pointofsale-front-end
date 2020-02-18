@@ -15,3 +15,7 @@ export async function updateCustomerById(id, body) {
 export async function createCustomer(body) {
   return await http.post("./customers", body);
 }
+
+export async function deleteCustomer(id) {
+  return await http.deleteById("./customers", id);
+}

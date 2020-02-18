@@ -5,7 +5,8 @@ import { getCustomerFormData } from "../../utilities/helpers/formHelpers/custome
 import {
   updateCustomerById,
   getCustomerById,
-  createCustomer
+  createCustomer,
+  deleteCustomer
 } from "../../http/customerApi";
 import { PAGE_ROUTES } from "../../services/routeService";
 
@@ -76,6 +77,17 @@ const FormCustomer = () => {
     };
     return formSubmit;
   };
+
+  const handleDelete = () => {
+    deleteCustomer(customer.id)
+      .then(() => {
+        alert("Succuessfully deleted");
+        push(PAGE_ROUTES.customers);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   if (customer.id) {
     return (
       <div>
@@ -85,6 +97,7 @@ const FormCustomer = () => {
           data={dataWithValue}
           onClick={handleFormSubmit}
           actor={customer}
+          handleDelete={handleDelete}
         />
       </div>
     );
