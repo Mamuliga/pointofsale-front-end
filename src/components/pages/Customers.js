@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 // import mockCustomers from "../../utilities/mockData/customers.json";
 import TableBuilder from "../uis/TableBuilder.js";
+import { useHistory } from "react-router-dom";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
-import {
-  getCustomerList,
-  getCustomerById,
-  updateCustomerById
-} from "../../http/customerApi";
-import FormCustomer from "./FormCustomer.js";
-import { getCustomerFormData } from "../../utilities/helpers/formHelpers/customerForm";
+import { getCustomerList } from "../../http/customerApi";
 
 const Customers = () => {
+  const { location, push } = useHistory();
   const [customerList, setCustomerList] = useState([]);
-  const [editView, setEditView] = useState(false);
-  const [customer, setCustomer] = useState({});
-  const [dataWithValue, setDataWithValue] = useState([]);
 
   useEffect(() => {
     console.log("In use effect");
@@ -26,45 +19,9 @@ const Customers = () => {
     console.log("In Customers", selectedRows);
   };
 
-  const handleFormSubmit = updatedCustomer => {
-    const formSubmit = () => {
-      updateCustomerById(updatedCustomer.id, updatedCustomer)
-        .then(res => {
-          console.log(res.data);
-          setCustomer(updatedCustomer);
-          setEditView(!editView);
-          getAllCustomerList(createCustomerData, setCustomerList);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    };
-    return formSubmit;
-  };
-
   const handleRowClick = customer => {
     const rowClick = () => {
-      const data = getCustomerFormData;
-      const dataArray = [];
-
-      getCustomerById(customer.id)
-        .then(res => {
-          const newCustomer = res.data;
-          Object.keys(res.data).forEach(id => {
-            data.forEach(entry => {
-              if (id === entry.id) {
-                dataArray.push({ ...entry, value: newCustomer[`${id}`] });
-              }
-              return null;
-            });
-          });
-          setCustomer(newCustomer);
-          setDataWithValue([...dataArray]);
-          setEditView(!editView);
-        })
-        .catch(err => {
-          console.err(err);
-        });
+      push(`${location.pathname}/edit/${customer.id}`);
     };
     return rowClick;
   };
@@ -78,15 +35,6 @@ const Customers = () => {
     bankAccount
   ) {
     return { id, firstName, lastName, phoneNo, gender, bankAccount };
-  }
-  if (editView) {
-    return (
-      <FormCustomer
-        onClick={handleFormSubmit}
-        customer={customer}
-        data={dataWithValue}
-      />
-    );
   }
   return (
     <TableBuilder
