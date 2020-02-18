@@ -1,15 +1,15 @@
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import StorageIcon from '@material-ui/icons/Storage';
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import PeopleIcon from "@material-ui/icons/People";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import StorageIcon from "@material-ui/icons/Storage";
 
 export const PAGE_ROUTES = {
-  home: '/dashboard',
-  login: '/login',
-  customers: '/customers',
-  suppliers: '/suppliers',
-  sales: '/sales',
-  items: '/items'
+  home: "/dashboard",
+  login: "/login",
+  customers: "/customers",
+  suppliers: "/suppliers",
+  sales: "/sales",
+  items: "/items"
 };
 
 const TOP_MENU_HIDE_ROUTES = {
@@ -22,33 +22,33 @@ const SIDE_MENU_HIDE_ROUTES = {
 
 export const TOP_MENU_ITEMS = [
   {
-    key: 'home',
+    key: "home",
     path: PAGE_ROUTES.home,
-    title: 'Dashboard',
+    title: "Dashboard",
     icon: DashboardIcon
   },
   {
-    key: 'customers',
+    key: "customers",
     path: PAGE_ROUTES.customers,
-    title: 'Customers',
+    title: "Customers",
     icon: PeopleIcon
   },
   {
-    key: 'suppliers',
+    key: "suppliers",
     path: PAGE_ROUTES.suppliers,
-    title: 'Suppliers',
+    title: "Suppliers",
     icon: PeopleIcon
   },
   {
-    key: 'sales',
+    key: "sales",
     path: PAGE_ROUTES.sales,
-    title: 'Sales',
+    title: "Sales",
     icon: AttachMoneyIcon
   },
   {
-    key: 'items',
+    key: "items",
     path: PAGE_ROUTES.items,
-    title: 'Items',
+    title: "Items",
     icon: StorageIcon
   }
 ];
