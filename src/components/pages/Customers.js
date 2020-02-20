@@ -10,8 +10,24 @@ const Customers = () => {
   const [customerList, setCustomerList] = useState([]);
 
   useEffect(() => {
-    console.log("In use effect");
-    getAllCustomerList(createCustomerData, setCustomerList);
+    getCustomerList()
+      .then(res => {
+        console.log(res);
+        const displayCustomerList = res.data.map(customer =>
+          createCustomerData(
+            customer.id,
+            customer.firstName,
+            customer.lastName,
+            customer.phoneNo,
+            customer.gender,
+            customer.bankAccount
+          )
+        );
+        setCustomerList(displayCustomerList);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
 
   const handleRowClick = customer => {
@@ -42,23 +58,3 @@ const Customers = () => {
 };
 
 export default Customers;
-function getAllCustomerList(createCustomerData, setCustomerList) {
-  getCustomerList()
-    .then(res => {
-      console.log(res);
-      const displayCustomerList = res.data.map(customer =>
-        createCustomerData(
-          customer.id,
-          customer.firstName,
-          customer.lastName,
-          customer.phoneNo,
-          customer.gender,
-          customer.bankAccount
-        )
-      );
-      setCustomerList(displayCustomerList);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
