@@ -14,11 +14,6 @@ const Customers = () => {
     getAllCustomerList(createCustomerData, setCustomerList);
   }, []);
 
-  const customerRowKey = customer => `${customer.firstName}`;
-  const getSelectedRows = selectedRows => {
-    console.log("In Customers", selectedRows);
-  };
-
   const handleRowClick = customer => {
     const rowClick = () => {
       push(`${location.pathname}/edit/${customer.id}`);
@@ -38,8 +33,6 @@ const Customers = () => {
   }
   return (
     <TableBuilder
-      rowKey={customerRowKey}
-      getSelectedRows={getSelectedRows}
       tableData={customerList}
       tableHeaders={getCustomerTableHeaders}
       onRowClick={handleRowClick}
