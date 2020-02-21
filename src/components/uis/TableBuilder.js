@@ -112,12 +112,12 @@ const EnhancedTableToolbar = props => {
   };
   return (
     <Toolbar className={classes.root}>
-      <Typography className={classes.title} variant='h6' id='tableTitle'>
+      <Typography className={classes.title} variant="h6" id="tableTitle">
         {props.title}
       </Typography>
 
-      <Tooltip title='Filter list'>
-        <IconButton onClick={handleFilterListIcon} aria-label='filter list'>
+      <Tooltip title="Filter list">
+        <IconButton onClick={handleFilterListIcon} aria-label="filter list">
           <FilterListIcon />
         </IconButton>
       </Tooltip>
@@ -193,9 +193,9 @@ export default function TableBuilder({
         <TableContainer>
           <Table
             className={classes.table}
-            aria-labelledby='tableTitle'
+            aria-labelledby="tableTitle"
             size={"medium"}
-            aria-label='enhanced table'
+            aria-label="enhanced table"
           >
             <EnhancedTableHead
               classes={classes}
@@ -211,7 +211,7 @@ export default function TableBuilder({
                   return (
                     <TableRow
                       hover
-                      role='checkbox'
+                      role="checkbox"
                       tabIndex={-1}
                       key={row.id}
                       onClick={onRowClick(row)}
@@ -232,7 +232,7 @@ export default function TableBuilder({
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
-          component='div'
+          component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}

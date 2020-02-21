@@ -4,6 +4,7 @@ import {
   Dashboard,
   Login,
   Customers,
+  Employee,
   Items,
   NotFoundPage,
   FormCustomer
@@ -32,6 +33,7 @@ const Routes = props => (
       component={FormCustomer}
     />
     <ProtectedRoute exact path={PAGE_ROUTES.suppliers} component={Customers} />
+    <ProtectedRoute exact path={PAGE_ROUTES.employees} component={Employee} />
     <ProtectedRoute exact path={PAGE_ROUTES.sales} component={Customers} />
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
