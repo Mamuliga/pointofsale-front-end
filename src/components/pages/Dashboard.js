@@ -1,10 +1,10 @@
-import React from "react";
-import Form from "./Form";
+import React from 'react';
+import Form from './Form';
 
 const Dashboard = () => {
   return (
     <div>
-      <Form></Form>
+      <Form />
     </div>
   );
 };
