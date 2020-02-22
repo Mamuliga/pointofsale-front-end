@@ -1,11 +1,11 @@
 import React from "react";
 import PropType from "prop-types";
-import { Spin } from "antd";
+import { CircularProgress } from "@material-ui/core";
 
 const Loading = props => {
   return (
-    <div className="loading-container">
-      <Spin size={props.size} />
+    <div className='loading-container'>
+      <CircularProgress />
     </div>
   );
 };

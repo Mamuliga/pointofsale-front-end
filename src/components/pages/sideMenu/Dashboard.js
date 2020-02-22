@@ -1,22 +1,31 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { Menu, Icon } from "antd";
+import React, { Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
+import {
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from '@material-ui/core';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 const Dashboard = props => {
   const { location, push } = useHistory();
   return (
-    <Menu
-      className="side-menu"
-      theme="dark"
-      selectable={false}
-      selectedKeys={location.pathname}
-      onClick={e => push(`${location.pathname}/${e.key}`)}
-    >
-      <Menu.Item key="summery">
-        <Icon type="book" />
-        Summery
-      </Menu.Item>
-    </Menu>
+    <Fragment>
+      <Divider />
+      <ListItem
+        onClick={e => {
+          push(`${location.pathname}/${e.key || 'summery'}`);
+        }}
+        button
+      >
+        <ListItemIcon>
+          <MenuBookIcon />
+        </ListItemIcon>
+        <ListItemText>Summery</ListItemText>
+      </ListItem>
+      <Divider />
+    </Fragment>
   );
 };
 
