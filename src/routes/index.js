@@ -5,6 +5,7 @@ import {
   Login,
   Customers,
   Employee,
+  Supliers,
   Items,
   NotFoundPage,
   FormCustomer
@@ -32,7 +33,7 @@ const Routes = props => (
       path={`${PAGE_ROUTES.customers}/edit/:id`}
       component={FormCustomer}
     />
-    <ProtectedRoute exact path={PAGE_ROUTES.suppliers} component={Customers} />
+    <ProtectedRoute exact path={PAGE_ROUTES.suppliers} component={Supliers} />
     <ProtectedRoute exact path={PAGE_ROUTES.employees} component={Employee} />
     <ProtectedRoute exact path={PAGE_ROUTES.sales} component={Customers} />
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />

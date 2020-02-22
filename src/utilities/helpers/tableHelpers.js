@@ -56,6 +56,35 @@ export const getEmployeeTableHeaders = [
   }
 ];
 
+export const getSuplierTableHeaders = [
+  {
+    id: "id",
+    numeric: false,
+    disablePadding: false,
+    label: "Employee Id"
+  },
+  {
+    id: "firstName",
+    numeric: false,
+    disablePadding: false,
+    label: "First Name"
+  },
+  { id: "lastName", numeric: false, disablePadding: false, label: "Last Name" },
+  { id: "email", numeric: false, disablePadding: false, label: "Email" },
+  {
+    id: "gender",
+    numeric: false,
+    disablePadding: false,
+    label: "Gender"
+  },
+  {
+    id: "bankAccount",
+    numeric: true,
+    disablePadding: false,
+    label: "Acc no"
+  }
+];
+
 export const getItemTableHeaders = [
   {
     id: "itemid",
