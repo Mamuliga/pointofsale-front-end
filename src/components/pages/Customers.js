@@ -1,40 +1,59 @@
-import React from "react";
-import mockCustomers from "../../utilities/mockData/customers.json";
+import React, { useEffect, useState } from "react";
 import TableBuilder from "../uis/TableBuilder.js";
+import { useHistory } from "react-router-dom";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
+import { getCustomerList } from "../../http/customerApi";
 
 const Customers = () => {
-  const customerRowKey = customer => `${customer.username}`;
-  const getSelectedRows = selectedRows => {
-    console.log("In Customers", selectedRows);
-  };
-  const customerTableContent = () => {
-    return mockCustomers.map(customer =>
-      createCustomerData(
-        customer.isActive ? "Active" : "Inactive",
-        customer.firstName,
-        customer.lastName,
-        customer.username,
-        customer.outstanding
-      )
-    );
+  const { location, push } = useHistory();
+  const [customerList, setCustomerList] = useState([]);
+
+  useEffect(() => {
+    const handleGetCustomerResp = res => {
+      if (Array.isArray(res.data)) {
+        const displayCustomerList = res.data.map(customer =>
+          createCustomerData(
+            customer.id,
+            customer.firstName,
+            customer.lastName,
+            customer.phoneNo,
+            customer.gender,
+            customer.bankAccount
+          )
+        );
+        setCustomerList(displayCustomerList);
+      }
+    };
+    const handleGetCustomerErr = err => {};
+
+    getCustomerList()
+      .then(handleGetCustomerResp)
+      .catch(handleGetCustomerErr);
+  }, []);
+
+  const handleRowClick = customer => {
+    const rowClick = () => {
+      push(`${location.pathname}/edit/${customer.id}`);
+    };
+    return rowClick;
   };
 
   function createCustomerData(
-    isActive,
+    id,
     firstName,
     lastName,
-    username,
-    outstanding
+    phoneNo,
+    gender,
+    bankAccount
   ) {
-    return [isActive, firstName, lastName, username, outstanding];
+    return { id, firstName, lastName, phoneNo, gender, bankAccount };
   }
   return (
     <TableBuilder
-      rowKey={customerRowKey}
-      getSelectedRows={getSelectedRows}
-      tableData={customerTableContent()}
+      tableData={customerList}
       tableHeaders={getCustomerTableHeaders}
+      onRowClick={handleRowClick}
+      title={"Customers"}
     />
   );
 };
