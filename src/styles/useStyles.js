@@ -59,5 +59,11 @@ export default makeStyles(theme => ({
     width: '100%',
     color: theme.palette.grey[100],
     lineHeight: 0.2
+  },
+  customAvatarRoot: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1)
+    }
   }
 }));
