@@ -7,6 +7,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 
+// TODO: Need to move Global Styles
+// and make it much simpler
 const useStyles = makeStyles({
   root: {
     "&:hover": {
@@ -58,7 +60,7 @@ function StyledRadio(props) {
     <Radio
       className={classes.root}
       disableRipple
-      color='default'
+      color="default"
       checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
       icon={<span className={classes.icon} />}
       {...props}
@@ -77,21 +79,21 @@ const CustomGender = ({ entry, getValue }) => {
     }
   };
   return (
-    <FormControl component='fieldset'>
-      <FormLabel component='legend'>Gender</FormLabel>
+    <FormControl component="fieldset">
+      <FormLabel component="legend">Gender</FormLabel>
       <RadioGroup
-        defaultValue='male'
+        defaultValue="male"
         value={newValue}
-        aria-label='gender'
+        aria-label="gender"
         name={name}
         onChange={handleChange}
       >
-        <FormControlLabel value='male' control={<StyledRadio />} label='Male' />
+        <FormControlLabel value="male" control={<StyledRadio />} label="Male" />
 
         <FormControlLabel
-          value='female'
+          value="female"
           control={<StyledRadio />}
-          label='Female'
+          label="Female"
         />
       </RadioGroup>
     </FormControl>

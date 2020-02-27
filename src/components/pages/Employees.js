@@ -4,14 +4,13 @@ import { useHistory } from "react-router-dom";
 import { getEmployeeTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 import { getEmployeeList } from "../../http/employeeApi";
 
-const Employee = () => {
+const Employees = () => {
   const { location, push } = useHistory();
   const [employeeList, setEmployeeList] = useState([]);
 
   useEffect(() => {
-    getEmployeeList()
-      .then(res => {
-        console.log(res);
+    const handleGetEmployeeResp = res => {
+      if (Array.isArray(res.data)) {
         const displayEmployeeList = res.data.map(employee =>
           createEmployeeData(
             employee.id,
@@ -23,10 +22,13 @@ const Employee = () => {
           )
         );
         setEmployeeList(displayEmployeeList);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      }
+    };
+    const handleGetEmployeeErr = err => {};
+
+    getEmployeeList()
+      .then(handleGetEmployeeResp)
+      .catch(handleGetEmployeeErr);
   }, []);
 
   const handleRowClick = employee => {
@@ -51,9 +53,9 @@ const Employee = () => {
       tableData={employeeList}
       tableHeaders={getEmployeeTableHeaders}
       onRowClick={handleRowClick}
-      title={"Employee"}
+      title={"Employees"}
     />
   );
 };
 
-export default Employee;
+export default Employees;

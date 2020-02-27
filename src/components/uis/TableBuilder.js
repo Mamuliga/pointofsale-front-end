@@ -159,7 +159,6 @@ const useStyles = makeStyles(theme => ({
 export default function TableBuilder({
   tableData: rows,
   tableHeaders: headers,
-  onRowClick,
   title
 }) {
   const classes = useStyles();
@@ -214,7 +213,8 @@ export default function TableBuilder({
                       role="checkbox"
                       tabIndex={-1}
                       key={row.id}
-                      onClick={onRowClick(row)}
+                      // TODO: Need to cooprate proper onClick method
+                      // onClick={onRowClick(row)}
                     >
                       {Object.values(row).map((cell, index) => {
                         return <TableCell key={index}>{cell}</TableCell>;

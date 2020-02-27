@@ -19,12 +19,12 @@ const FormCustomer = () => {
     lastName: null,
     companyName: null,
     email: null,
-    phoneNo: "0771234567",
-    gender: "male",
+    phoneNo: "",
+    gender: "",
     address: null,
-    dob: "95-01-02",
+    dob: "",
     description: null,
-    profilePicture: "hh",
+    profilePicture: "",
     defaultDiscount: null,
     bankAccount: null,
     regDate: null,
@@ -91,7 +91,6 @@ const FormCustomer = () => {
   if (customer.id) {
     return (
       <div>
-        {console.log(customer)}
         <FormBuilder
           title={"Edit Customer"}
           data={dataWithValue}

@@ -53,7 +53,6 @@ const Items = () => {
       getSelectedRows={getSelectedRows}
       tableData={itemTableContent()}
       tableHeaders={getItemTableHeaders}
-      onRowClick={() => {}}
       title={"Items"}
     />
   );

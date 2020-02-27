@@ -10,8 +10,8 @@ const SideMenuRoutes = props => {
   const classes = useStyles();
   return (
     <Drawer
-      variant='persistent'
-      anchor='left'
+      variant="persistent"
+      anchor="left"
       open
       classes={{ paper: classes.drawerPaper }}
     >
@@ -23,6 +23,7 @@ const SideMenuRoutes = props => {
               path={PAGE_ROUTES.customers}
               component={Customers}
             />
+
             <ProtectedRoute
               path={PAGE_ROUTES.suppliers}
               component={Customers}

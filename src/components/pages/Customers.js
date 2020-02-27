@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import mockCustomers from "../../utilities/mockData/customers.json";
 import TableBuilder from "../uis/TableBuilder.js";
 import { useHistory } from "react-router-dom";
 import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
@@ -10,9 +9,8 @@ const Customers = () => {
   const [customerList, setCustomerList] = useState([]);
 
   useEffect(() => {
-    getCustomerList()
-      .then(res => {
-        console.log(res);
+    const handleGetCustomerResp = res => {
+      if (Array.isArray(res.data)) {
         const displayCustomerList = res.data.map(customer =>
           createCustomerData(
             customer.id,
@@ -24,10 +22,13 @@ const Customers = () => {
           )
         );
         setCustomerList(displayCustomerList);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      }
+    };
+    const handleGetCustomerErr = err => {};
+
+    getCustomerList()
+      .then(handleGetCustomerResp)
+      .catch(handleGetCustomerErr);
   }, []);
 
   const handleRowClick = customer => {

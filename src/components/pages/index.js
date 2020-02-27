@@ -1,18 +1,16 @@
 import Customers from "./Customers";
-import Employee from "./Employee";
 import Items from "./Items";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import NotFoundPage from "./NotFoundPage";
 import FormCustomer from "./FormCustomer";
-import Supliers from "./Supliers";
+import Employees from "./Employees";
 
 export {
   Dashboard,
   Login,
   Customers,
-  Employee,
-  Supliers,
+  Employees,
   Items,
   NotFoundPage,
   FormCustomer

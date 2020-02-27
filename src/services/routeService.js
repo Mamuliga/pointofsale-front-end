@@ -37,7 +37,7 @@ export const TOP_MENU_ITEMS = [
   {
     key: "employees",
     path: PAGE_ROUTES.employees,
-    title: "Employee",
+    title: "Employees",
     icon: PeopleIcon
   },
   {
