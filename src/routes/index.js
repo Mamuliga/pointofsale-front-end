@@ -8,7 +8,8 @@ import {
   // Supliers,
   Items,
   NotFoundPage,
-  FormCustomer
+  FormCustomer,
+  FormEmployee
 } from "../components/pages";
 import ProtectedRoute from "./ProtectedRoute";
 import { PAGE_ROUTES } from "../services/routeService";
@@ -27,6 +28,11 @@ const Routes = props => (
       exact
       path={`${PAGE_ROUTES.customers}/new`}
       component={FormCustomer}
+    />
+    <ProtectedRoute
+      exact
+      path={`${PAGE_ROUTES.employees}/new`}
+      component={FormEmployee}
     />
     <ProtectedRoute
       exact
