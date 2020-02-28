@@ -1,5 +1,5 @@
 import Customers from "./Customers";
-import Employees from "./Employeess";
+import Employees from "./Employees";
 import Dashboard from "./Dashboard";
 import Supliers from "./Supliers";
 
