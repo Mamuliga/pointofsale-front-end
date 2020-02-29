@@ -5,11 +5,12 @@ import {
   Login,
   Customers,
   Employees,
-  // Supliers,
+  Suppliers,
   Items,
   NotFoundPage,
   FormCustomer,
-  FormEmployee
+  FormEmployee,
+  FormSupplier
 } from "../components/pages";
 import ProtectedRoute from "./ProtectedRoute";
 import { PAGE_ROUTES } from "../services/routeService";
@@ -36,12 +37,17 @@ const Routes = props => (
     />
     <ProtectedRoute
       exact
+      path={`${PAGE_ROUTES.suppliers}/new`}
+      component={FormSupplier}
+    />
+    <ProtectedRoute
+      exact
       path={`${PAGE_ROUTES.customers}/edit/:id`}
       component={FormCustomer}
     />
-    <ProtectedRoute exact path={PAGE_ROUTES.suppliers} component={Customers} />
-    <ProtectedRoute exact path={PAGE_ROUTES.employees} component={Employees} />
     <ProtectedRoute exact path={PAGE_ROUTES.sales} component={Customers} />
+    <ProtectedRoute exact path={PAGE_ROUTES.employees} component={Employees} />
+    <ProtectedRoute exact path={PAGE_ROUTES.suppliers} component={Suppliers} />
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
   </Switch>

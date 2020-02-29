@@ -4,7 +4,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import HomeIcon from "@material-ui/icons/Home";
 import DescriptionIcon from "@material-ui/icons/Description";
 
-export const getSuplierFormData = [
+export const getSupplierFormData = [
   {
     id: "firstName",
     type: "text",
