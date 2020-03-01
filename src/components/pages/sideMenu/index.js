@@ -1,6 +1,6 @@
 import Customers from "./Customers";
 import Employees from "./Employees";
 import Dashboard from "./Dashboard";
-import Supliers from "./Supliers";
+import Suppliers from "./Suppliers";
 
-export { Customers, Employees, Supliers, Dashboard };
+export { Customers, Employees, Suppliers, Dashboard };

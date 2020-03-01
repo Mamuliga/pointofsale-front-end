@@ -4,6 +4,7 @@ import { Drawer, Divider, List } from "@material-ui/core";
 import {
   Customers,
   Employees,
+  Suppliers,
   Dashboard
 } from "../../components/pages/sideMenu";
 import ProtectedRoute from "../ProtectedRoute";
@@ -30,7 +31,7 @@ const SideMenuRoutes = props => {
 
             <ProtectedRoute
               path={PAGE_ROUTES.suppliers}
-              component={Customers}
+              component={Suppliers}
             />
             <ProtectedRoute path={PAGE_ROUTES.sales} component={Customers} />
             <ProtectedRoute

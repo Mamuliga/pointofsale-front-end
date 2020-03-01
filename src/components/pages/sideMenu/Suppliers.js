@@ -9,14 +9,14 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import { PAGE_ROUTES } from "../../../services/routeService";
 
-const Supliers = props => {
+const Suppliers = props => {
   const { push } = useHistory();
   return (
     <Fragment>
       <Divider />
       <ListItem
         onClick={e => {
-          push(`${PAGE_ROUTES.customers}/${e.key || "new"}`);
+          push(`${PAGE_ROUTES.suppliers}/${e.key || "new"}`);
         }}
         button
       >
@@ -30,4 +30,4 @@ const Supliers = props => {
   );
 };
 
-export default Supliers;
+export default Suppliers;
