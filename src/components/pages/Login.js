@@ -16,6 +16,7 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { getEmployeeList } from "../../http/employeeApi";
 import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { sendAuthData } from "../../http/authApi";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,12 +56,9 @@ const Login = props => {
   const classes = useStyles();
   const { loading, onLoginClick, isAuthenticated } = props;
 
-  const [loginCredential, setLoginCredential] = useState({
-    username: "",
-    password: ""
-  });
+  const [password, setPassword] = useState("");
   const [allEmployees, setAllEmployess] = useState(["Admin"]);
-  const [age, setAge] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
 
   const handleEmployeeResp = resp => {
     console.log(resp.data);
@@ -81,15 +79,25 @@ const Login = props => {
   }, []);
 
   const handleChange = event => {
-    setAge(event.target.value);
+    setEmployeeId(event.target.value);
   };
 
-  const handleFieldChanges = e =>
-    setLoginCredential({ ...loginCredential, [e.target.name]: e.target.value });
+  const handlePassword = e => setPassword(e.target.value);
 
+  const handleSendAuthDataResp = resp => {
+    if (resp.data !== null && typeof resp.data === "object") {
+      console.log(resp.data);
+      onLoginClick({ username: employeeId, password: resp.data.token });
+    }
+  };
+
+  const handleSendAuthDataError = () => {};
   const handleLoginClick = e => {
     e.preventDefault();
-    onLoginClick(loginCredential);
+    sendAuthData({ employeeId, password }).then(
+      handleSendAuthDataResp,
+      handleSendAuthDataError
+    );
   };
 
   if (isAuthenticated) return <Redirect to='/' />;
@@ -131,7 +139,7 @@ const Login = props => {
                     <Select
                       labelId='login-dropdown'
                       id='login-dropdown'
-                      value={age}
+                      value={employeeId}
                       onChange={handleChange}
                     >
                       {allEmployees.map(employee => (
@@ -161,8 +169,8 @@ const Login = props => {
                     label='password'
                     type='password'
                     name='password'
-                    onChange={handleFieldChanges}
-                    value={loginCredential.password}
+                    onChange={handlePassword}
+                    value={password}
                   />
                 </Grid>
               </Grid>
