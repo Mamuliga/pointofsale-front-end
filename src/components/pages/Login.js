@@ -27,6 +27,10 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(50),
     height: theme.spacing(20)
   },
+  paperForConfirmPwd: {
+    width: theme.spacing(50),
+    height: theme.spacing(30)
+  },
 
   button: {
     width: theme.spacing(40),
@@ -56,9 +60,10 @@ const Login = props => {
   const classes = useStyles();
   const { loading, onLoginClick, isAuthenticated } = props;
 
-  const [password, setPassword] = useState("");
+  const [password, setPwd] = useState("");
+  const [confirmPwd, setConfirmPwd] = useState("");
   const [allEmployees, setAllEmployess] = useState(["Admin"]);
-  const [employeeId, setEmployeeId] = useState("");
+  const [employee, setEmployee] = useState({});
 
   const handleEmployeeResp = resp => {
     console.log(resp.data);
@@ -79,25 +84,41 @@ const Login = props => {
   }, []);
 
   const handleChange = event => {
-    setEmployeeId(event.target.value);
+    setEmployee(event.target.value);
   };
 
-  const handlePassword = e => setPassword(e.target.value);
+  const handlePwd = e => setPwd(e.target.value);
+  const handleConfirmPwd = e => setConfirmPwd(e.target.value);
 
   const handleSendAuthDataResp = resp => {
     if (resp.data !== null && typeof resp.data === "object") {
       console.log(resp.data);
-      onLoginClick({ username: employeeId, password: resp.data.token });
+      onLoginClick({ username: employee.firstName, password: resp.data.token });
     }
+  };
+
+  const sendAuthValidation = () => {
+    if (employee.id && password) {
+      if (employee.isFirstTimeLogin) {
+        if (password && confirmPwd) {
+          return password === confirmPwd;
+        }
+        return false;
+      }
+      return true;
+    }
+    return false;
   };
 
   const handleSendAuthDataError = () => {};
   const handleLoginClick = e => {
     e.preventDefault();
-    sendAuthData({ employeeId, password }).then(
-      handleSendAuthDataResp,
-      handleSendAuthDataError
-    );
+    if (sendAuthValidation()) {
+      sendAuthData({ employeeId: employee.id, password }).then(
+        handleSendAuthDataResp,
+        handleSendAuthDataError
+      );
+    }
   };
 
   if (isAuthenticated) return <Redirect to='/' />;
@@ -123,7 +144,13 @@ const Login = props => {
             </Box>
             <img src={logo} width='100%' height={250} alt={logo.title} />
 
-            <div className={classes.paper}>
+            <div
+              className={
+                employee.isFirstTimeLogin
+                  ? classes.paperForConfirmPwd
+                  : classes.paper
+              }
+            >
               <Grid
                 container
                 spacing={2}
@@ -139,11 +166,11 @@ const Login = props => {
                     <Select
                       labelId='login-dropdown'
                       id='login-dropdown'
-                      value={employeeId}
+                      value={employee}
                       onChange={handleChange}
                     >
                       {allEmployees.map(employee => (
-                        <MenuItem value={employee.id}>
+                        <MenuItem value={employee}>
                           {" "}
                           {employee.firstName}
                         </MenuItem>
@@ -169,11 +196,35 @@ const Login = props => {
                     label='password'
                     type='password'
                     name='password'
-                    onChange={handlePassword}
+                    onChange={handlePwd}
                     value={password}
                   />
                 </Grid>
               </Grid>
+              {employee.isFirstTimeLogin && (
+                <Grid
+                  container
+                  spacing={2}
+                  className={classes.input}
+                  alignItems='flex-end'
+                >
+                  <Grid item>
+                    <LockOpenIcon />
+                  </Grid>
+                  <Grid item>
+                    <TextField
+                      className={classes.text}
+                      id='input-with-icon-grid'
+                      xs={3}
+                      label='password'
+                      type='password'
+                      name='password'
+                      onChange={handleConfirmPwd}
+                      value={confirmPwd}
+                    />
+                  </Grid>
+                </Grid>
+              )}
             </div>
             <Box
               display='flex'
