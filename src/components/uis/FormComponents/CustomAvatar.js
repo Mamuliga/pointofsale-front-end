@@ -1,6 +1,6 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import useStyles from '../../../styles/useStyles';
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import useStyles from "../../../styles/useStyles";
 
 const CustomAvatar = ({ entry }) => {
   const { src, alt } = entry;

@@ -7,6 +7,7 @@ export const PAGE_ROUTES = {
   home: "/dashboard",
   login: "/login",
   customers: "/customers",
+  employees: "/employees",
   suppliers: "/suppliers",
   sales: "/sales",
   items: "/items"
@@ -31,6 +32,12 @@ export const TOP_MENU_ITEMS = [
     key: "customers",
     path: PAGE_ROUTES.customers,
     title: "Customers",
+    icon: PeopleIcon
+  },
+  {
+    key: "employees",
+    path: PAGE_ROUTES.employees,
+    title: "Employees",
     icon: PeopleIcon
   },
   {

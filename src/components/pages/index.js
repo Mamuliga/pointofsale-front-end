@@ -4,5 +4,17 @@ import Dashboard from "./Dashboard";
 import Login from "./Login";
 import NotFoundPage from "./NotFoundPage";
 import FormCustomer from "./FormCustomer";
+import FormEmployee from "./FormEmployee";
 
-export { Dashboard, Login, Customers, Items, NotFoundPage, FormCustomer };
+import Employees from "./Employees";
+
+export {
+  Dashboard,
+  Login,
+  Customers,
+  Employees,
+  Items,
+  NotFoundPage,
+  FormCustomer,
+  FormEmployee
+};

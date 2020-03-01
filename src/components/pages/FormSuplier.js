@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import FormBuilder from "../uis/FormBuilder";
-import { getCustomerFormData } from "../../utilities/helpers/formHelpers/customerForm";
+import { getSuplierFormData } from "../../utilities/helpers/formHelpers/suplierForm";
 import {
-  updateCustomerById,
-  getCustomerById,
-  createCustomer,
-  deleteCustomer
-} from "../../http/customerApi";
+  updateSuplierById,
+  getSuplierById,
+  createSuplier,
+  deleteSuplier
+} from "../../http/suplierApi";
 import { PAGE_ROUTES } from "../../services/routeService";
 
-const FormCustomer = () => {
+const FormSuplier = () => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
-  const [customer, setCustomer] = useState({
+  const [suplier, setSuplier] = useState({
     firstName: null,
     lastName: null,
     companyName: null,
     email: null,
-    phoneNo: "",
-    gender: "",
+    phoneNo: "0771234567",
+    gender: "male",
     address: null,
-    dob: "",
+    dob: "95-01-02",
     description: null,
-    profilePicture: "",
+    profilePicture: "hh",
     defaultDiscount: null,
     bankAccount: null,
     regDate: null,
@@ -32,44 +32,44 @@ const FormCustomer = () => {
   });
 
   useEffect(() => {
-    getCustomerById(id).then(res => {
+    getSuplierById(id).then(res => {
       const dataArray = [];
-      const data = getCustomerFormData;
-      const newCustomer = res.data;
+      const data = getSuplierFormData;
+      const newSuplier = res.data;
       Object.keys(res.data).forEach(id => {
         data.forEach(entry => {
           if (id === entry.id) {
-            dataArray.push({ ...entry, value: newCustomer[`${id}`] });
+            dataArray.push({ ...entry, value: newSuplier[`${id}`] });
           }
           return null;
         });
       });
 
-      setCustomer(newCustomer);
+      setSuplier(newSuplier);
       setDataWithValue([...dataArray]);
     });
-  }, [customer.id, id]);
+  }, [suplier.id, id]);
 
-  const handleCreateNewCustomer = newCustomer => {
-    const createNewCustomer = () => {
-      createCustomer(newCustomer)
+  const handleCreateNewSuplier = newSuplier => {
+    const createNewSuplier = () => {
+      createSuplier(newSuplier)
         .then(() => {
-          alert("New Customer created");
-          push(PAGE_ROUTES.customers);
+          alert("New Suplier created");
+          push(PAGE_ROUTES.supliers);
         })
         .catch(err => {
           console.log(err);
         });
     };
-    return createNewCustomer;
+    return createNewSuplier;
   };
 
-  const handleFormSubmit = updatedCustomer => {
+  const handleFormSubmit = updatedSuplier => {
     const formSubmit = () => {
-      updateCustomerById(updatedCustomer.id, updatedCustomer)
+      updateSuplierById(updatedSuplier.id, updatedSuplier)
         .then(res => {
           console.log(res.data);
-          push(PAGE_ROUTES.customers);
+          push(PAGE_ROUTES.supliers);
         })
         .catch(err => {
           console.log(err);
@@ -79,23 +79,24 @@ const FormCustomer = () => {
   };
 
   const handleDelete = () => {
-    deleteCustomer(customer.id)
+    deleteSuplier(suplier.id)
       .then(() => {
         alert("Succuessfully deleted");
-        push(PAGE_ROUTES.customers);
+        push(PAGE_ROUTES.supliers);
       })
       .catch(err => {
         console.log(err);
       });
   };
-  if (customer.id) {
+  if (suplier.id) {
     return (
       <div>
+        {console.log(suplier)}
         <FormBuilder
-          title={"Edit Customer"}
+          title={"Edit Suplier"}
           data={dataWithValue}
           onClick={handleFormSubmit}
-          actor={customer}
+          actor={suplier}
           handleDelete={handleDelete}
         />
       </div>
@@ -103,13 +104,13 @@ const FormCustomer = () => {
   } else {
     return (
       <FormBuilder
-        title={"Create new Customer"}
-        data={getCustomerFormData}
-        onClick={handleCreateNewCustomer}
-        actor={customer}
+        title={"Create new Suplier"}
+        data={getSuplierFormData}
+        onClick={handleCreateNewSuplier}
+        actor={suplier}
       />
     );
   }
 };
 
-export default FormCustomer;
+export default FormSuplier;

@@ -1,7 +1,11 @@
 import React from "react";
 import { Switch } from "react-router-dom";
 import { Drawer, Divider, List } from "@material-ui/core";
-import { Customers, Dashboard } from "../../components/pages/sideMenu";
+import {
+  Customers,
+  Employees,
+  Dashboard
+} from "../../components/pages/sideMenu";
 import ProtectedRoute from "../ProtectedRoute";
 import { PAGE_ROUTES } from "../../services/routeService";
 import useStyles from "../../styles/useStyles";
@@ -10,8 +14,8 @@ const SideMenuRoutes = props => {
   const classes = useStyles();
   return (
     <Drawer
-      variant='persistent'
-      anchor='left'
+      variant="persistent"
+      anchor="left"
       open
       classes={{ paper: classes.drawerPaper }}
     >
@@ -23,11 +27,17 @@ const SideMenuRoutes = props => {
               path={PAGE_ROUTES.customers}
               component={Customers}
             />
+
             <ProtectedRoute
               path={PAGE_ROUTES.suppliers}
               component={Customers}
             />
             <ProtectedRoute path={PAGE_ROUTES.sales} component={Customers} />
+            <ProtectedRoute
+              path={PAGE_ROUTES.employees}
+              component={Employees}
+            />
+
             <ProtectedRoute path={PAGE_ROUTES.home} component={Dashboard} />
             <ProtectedRoute component={Dashboard} authRequired />
           </Switch>

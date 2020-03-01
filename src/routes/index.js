@@ -4,9 +4,12 @@ import {
   Dashboard,
   Login,
   Customers,
+  Employees,
+  // Supliers,
   Items,
   NotFoundPage,
-  FormCustomer
+  FormCustomer,
+  FormEmployee
 } from "../components/pages";
 import ProtectedRoute from "./ProtectedRoute";
 import { PAGE_ROUTES } from "../services/routeService";
@@ -28,10 +31,16 @@ const Routes = props => (
     />
     <ProtectedRoute
       exact
+      path={`${PAGE_ROUTES.employees}/new`}
+      component={FormEmployee}
+    />
+    <ProtectedRoute
+      exact
       path={`${PAGE_ROUTES.customers}/edit/:id`}
       component={FormCustomer}
     />
     <ProtectedRoute exact path={PAGE_ROUTES.suppliers} component={Customers} />
+    <ProtectedRoute exact path={PAGE_ROUTES.employees} component={Employees} />
     <ProtectedRoute exact path={PAGE_ROUTES.sales} component={Customers} />
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />

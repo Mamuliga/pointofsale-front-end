@@ -1,12 +1,12 @@
-import React from 'react';
-import mockItems from '../../utilities/mockData/items.json';
-import TableBuilder from '../uis/TableBuilder.js';
-import { getItemTableHeaders } from '../../utilities/helpers/tableHelpers.js';
+import React from "react";
+import mockItems from "../../utilities/mockData/items.json";
+import TableBuilder from "../uis/TableBuilder.js";
+import { getItemTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 
 const Items = () => {
   const itemRowKey = items => `${items.itemname}`;
   const getSelectedRows = selectedRows => {
-    console.log('In Customers', selectedRows);
+    console.log("In Customers", selectedRows);
   };
   const itemTableContent = () => {
     return mockItems.map(items =>
@@ -53,7 +53,7 @@ const Items = () => {
       getSelectedRows={getSelectedRows}
       tableData={itemTableContent()}
       tableHeaders={getItemTableHeaders}
-      title={'Items'}
+      title={"Items"}
     />
   );
 };

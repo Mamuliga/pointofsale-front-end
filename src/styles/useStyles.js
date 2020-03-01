@@ -1,19 +1,19 @@
-import { makeStyles } from '@material-ui/core';
-import { SIDE_BAR_WIDTH, TOP_MENU_MAX_HEIGHT } from '../utilities/constants';
+import { makeStyles } from "@material-ui/core";
+import { SIDE_BAR_WIDTH, TOP_MENU_MAX_HEIGHT } from "../utilities/constants";
 
 export default makeStyles(theme => ({
   root: {
-    display: 'flex'
+    display: "flex"
   },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: SIDE_BAR_WIDTH,
       flexShrink: 0,
-      zIndex: '1 !important'
+      zIndex: "1 !important"
     }
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       marginLeft: SIDE_BAR_WIDTH,
       zIndex: 20000
     }
@@ -23,8 +23,8 @@ export default makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none'
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
     }
   },
   toolbar: theme.mixins.toolbar,
@@ -48,15 +48,15 @@ export default makeStyles(theme => ({
     padding: theme.spacing(1)
   },
   leftMenubar: {
-    display: 'flex',
+    display: "flex",
     flex: 1
   },
   copyrightLabel: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     backgroundColor: theme.palette.primary.dark,
-    textAlign: 'center',
-    width: '100%',
+    textAlign: "center",
+    width: "100%",
     color: theme.palette.grey[100],
     lineHeight: 0.2
   },
