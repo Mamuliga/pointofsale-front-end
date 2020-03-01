@@ -32,7 +32,7 @@ export const getEmployeeTableHeaders = [
     id: "id",
     numeric: false,
     disablePadding: false,
-    label: "Customer Id"
+    label: "Employee Id"
   },
   {
     id: "firstName",
