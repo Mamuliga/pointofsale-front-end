@@ -61,7 +61,7 @@ export const getSupplierTableHeaders = [
     id: "id",
     numeric: false,
     disablePadding: false,
-    label: "Customer Id"
+    label: "Supplier Id"
   },
   {
     id: "firstName",
