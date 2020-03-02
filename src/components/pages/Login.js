@@ -17,6 +17,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { getEmployeeList } from "../../http/employeeApi";
 import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { sendAuthData } from "../../http/authApi";
+import ErrorDisplay from "../uis/ErrorDisplay";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,6 +65,7 @@ const Login = props => {
   const [confirmPwd, setConfirmPwd] = useState("");
   const [allEmployees, setAllEmployess] = useState(["Admin"]);
   const [employee, setEmployee] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleEmployeeResp = resp => {
     console.log(resp.data);
@@ -83,6 +85,13 @@ const Login = props => {
       .catch(handlegetEmployeeErr);
   }, []);
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setErrorMessage(null);
+  };
+
   const handleChange = event => {
     setEmployee(event.target.value);
   };
@@ -90,6 +99,20 @@ const Login = props => {
   const handlePwd = e => setPwd(e.target.value);
   const handleConfirmPwd = e => setConfirmPwd(e.target.value);
 
+  const sendAuthValidation = () => {
+    if (employee.id && password) {
+      if (employee.isFirstTimeLogin) {
+        if (password && confirmPwd) {
+          return password === confirmPwd;
+        }
+        setErrorMessage("Password mismatch");
+        return false;
+      }
+      return true;
+    }
+    setErrorMessage("Please enter username and password");
+    return false;
+  };
   const handleSendAuthDataResp = resp => {
     if (resp.data !== null && typeof resp.data === "object") {
       console.log(resp.data);
@@ -97,27 +120,16 @@ const Login = props => {
     }
   };
 
-  const sendAuthValidation = () => {
-    if (employee.id && password) {
-      if (employee.isFirstTimeLogin) {
-        if (password && confirmPwd) {
-          return password === confirmPwd;
-        }
-        return false;
-      }
-      return true;
-    }
-    return false;
+  const handleSendAuthDataError = errResp => {
+    setErrorMessage("Invalid credentials or network issue");
+    console.log(errResp);
   };
-
-  const handleSendAuthDataError = () => {};
   const handleLoginClick = e => {
     e.preventDefault();
     if (sendAuthValidation()) {
-      sendAuthData({ employeeId: employee.id, password }).then(
-        handleSendAuthDataResp,
-        handleSendAuthDataError
-      );
+      sendAuthData({ employeeId: employee.id, password })
+        .then(handleSendAuthDataResp)
+        .catch(handleSendAuthDataError);
     }
   };
 
@@ -259,6 +271,7 @@ const Login = props => {
           </Paper>
         </div>
       </Container>
+      <ErrorDisplay handleClose={handleClose} errorMessage={errorMessage} />
     </React.Fragment>
   );
 };
