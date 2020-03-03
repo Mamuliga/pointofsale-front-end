@@ -13,16 +13,17 @@ const Suppliers = () => {
     getSupplierList()
       .then(res => {
         console.log(res);
-        const displaySupplierList = res.data.map(supplier =>
-          createSupplierData(
-            supplier.id,
-            supplier.firstName,
-            supplier.lastName,
-            supplier.phoneNo,
-            supplier.gender,
-            supplier.bankAccount
-          )
-        );
+        const displaySupplierList = res.data.map(supplier => {
+          const {
+            id,
+            firstName,
+            lastName,
+            phoneNo,
+            gender,
+            bankAccount
+          } = supplier;
+          return { id, firstName, lastName, phoneNo, gender, bankAccount };
+        });
         setSupplierList(displaySupplierList);
       })
       .catch(err => {
@@ -37,16 +38,6 @@ const Suppliers = () => {
     return editClick;
   };
 
-  function createSupplierData(
-    id,
-    firstName,
-    lastName,
-    phoneNo,
-    gender,
-    bankAccount
-  ) {
-    return { id, firstName, lastName, phoneNo, gender, bankAccount };
-  }
   return (
     <TableBuilder
       tableData={supplierList}
