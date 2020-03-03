@@ -12,9 +12,6 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import FilterListIcon from "@material-ui/icons/FilterList";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -106,28 +103,11 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
-  const [showFilterList, setShowFilterList] = useState(false);
-  const handleFilterListIcon = () => {
-    setShowFilterList(!showFilterList);
-  };
   return (
     <Toolbar className={classes.root}>
-      <Typography className={classes.title} variant="h6" id="tableTitle">
+      <Typography className={classes.title} variant='h6' id='tableTitle'>
         {props.title}
       </Typography>
-
-      <Tooltip title="Filter list">
-        <IconButton onClick={handleFilterListIcon} aria-label="filter list">
-          <FilterListIcon />
-        </IconButton>
-      </Tooltip>
-      {showFilterList && (
-        <div>
-          {props.headers.map(header => {
-            return <span>{header.label}</span>;
-          })}
-        </div>
-      )}
     </Toolbar>
   );
 };
@@ -192,9 +172,9 @@ export default function TableBuilder({
         <TableContainer>
           <Table
             className={classes.table}
-            aria-labelledby="tableTitle"
+            aria-labelledby='tableTitle'
             size={"medium"}
-            aria-label="enhanced table"
+            aria-label='enhanced table'
           >
             <EnhancedTableHead
               classes={classes}
@@ -210,7 +190,7 @@ export default function TableBuilder({
                   return (
                     <TableRow
                       hover
-                      role="checkbox"
+                      role='checkbox'
                       tabIndex={-1}
                       key={row.id}
                       // TODO: Need to cooprate proper onClick method
@@ -232,7 +212,7 @@ export default function TableBuilder({
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
-          component="div"
+          component='div'
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
