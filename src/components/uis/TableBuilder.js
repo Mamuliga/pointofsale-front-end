@@ -12,6 +12,7 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import EditIcon from "@material-ui/icons/Edit";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -139,7 +140,8 @@ const useStyles = makeStyles(theme => ({
 export default function TableBuilder({
   tableData: rows,
   tableHeaders: headers,
-  title
+  title,
+  handleEdit
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -188,17 +190,13 @@ export default function TableBuilder({
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => {
                   return (
-                    <TableRow
-                      hover
-                      role='checkbox'
-                      tabIndex={-1}
-                      key={row.id}
-                      // TODO: Need to cooprate proper onClick method
-                      // onClick={onRowClick(row)}
-                    >
+                    <TableRow hover tabIndex={-1} key={row.id}>
                       {Object.values(row).map((cell, index) => {
                         return <TableCell key={index}>{cell}</TableCell>;
                       })}
+                      <TableCell key={"edit"} align='right'>
+                        <EditIcon onClick={handleEdit(row)} />
+                      </TableCell>
                     </TableRow>
                   );
                 })}

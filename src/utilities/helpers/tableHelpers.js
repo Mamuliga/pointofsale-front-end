@@ -1,3 +1,10 @@
+const getEditColumn = () => ({
+  id: "edit",
+  numeric: false,
+  disablePadding: false,
+  label: ""
+});
+
 export const getCustomerTableHeaders = [
   {
     id: "id",
@@ -24,7 +31,8 @@ export const getCustomerTableHeaders = [
     numeric: false,
     disablePadding: false,
     label: "Acc no"
-  }
+  },
+  getEditColumn()
 ];
 
 export const getEmployeeTableHeaders = [

@@ -31,11 +31,11 @@ const Employees = () => {
       .catch(handleGetEmployeeErr);
   }, []);
 
-  const handleRowClick = employee => {
-    const rowClick = () => {
+  const handleEdit = employee => {
+    const editClick = () => {
       push(`${location.pathname}/edit/${employee.id}`);
     };
-    return rowClick;
+    return editClick;
   };
 
   function createEmployeeData(
@@ -52,7 +52,7 @@ const Employees = () => {
     <TableBuilder
       tableData={employeeList}
       tableHeaders={getEmployeeTableHeaders}
-      onRowClick={handleRowClick}
+      handleEdit={handleEdit}
       title={"Employees"}
     />
   );

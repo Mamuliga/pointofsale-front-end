@@ -30,11 +30,11 @@ const Suppliers = () => {
       });
   }, []);
 
-  const handleRowClick = supplier => {
-    const rowClick = () => {
+  const handleEdit = supplier => {
+    const editClick = () => {
       push(`${location.pathname}/edit/${supplier.id}`);
     };
-    return rowClick;
+    return editClick;
   };
 
   function createSupplierData(
@@ -51,7 +51,7 @@ const Suppliers = () => {
     <TableBuilder
       tableData={supplierList}
       tableHeaders={getSupplierTableHeaders}
-      onRowClick={handleRowClick}
+      handleEdit={handleEdit}
       title={"Suppliers"}
     />
   );

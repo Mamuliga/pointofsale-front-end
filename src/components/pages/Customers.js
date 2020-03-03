@@ -31,11 +31,11 @@ const Customers = () => {
       .catch(handleGetCustomerErr);
   }, []);
 
-  const handleRowClick = customer => {
-    const rowClick = () => {
+  const handleEdit = customer => {
+    const editClick = () => {
       push(`${location.pathname}/edit/${customer.id}`);
     };
-    return rowClick;
+    return editClick;
   };
 
   function createCustomerData(
@@ -52,7 +52,7 @@ const Customers = () => {
     <TableBuilder
       tableData={customerList}
       tableHeaders={getCustomerTableHeaders}
-      onRowClick={handleRowClick}
+      handleEdit={handleEdit}
       title={"Customers"}
     />
   );
