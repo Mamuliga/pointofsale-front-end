@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import { logo } from "../../assets/images";
-import { authenticate } from "../../store/actions/authActions";
+import {
+  authenticate,
+  setLoginErrorFalse
+} from "../../store/actions/authActions";
 import Button from "@material-ui/core/Button";
 import PersonOutlineRoundedIcon from "@material-ui/icons/PersonOutlineRounded";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
@@ -15,8 +18,13 @@ import Link from "@material-ui/core/Link";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { getEmployeeList } from "../../http/employeeApi";
-import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
-import { sendAuthData } from "../../http/authApi";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  CircularProgress
+} from "@material-ui/core";
 import ErrorDisplay from "../uis/ErrorDisplay";
 
 const useStyles = makeStyles(theme => ({
@@ -54,12 +62,24 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120
+  },
+  progress: {
+    display: "flex",
+    "& > * + *": {
+      marginLeft: theme.spacing(2)
+    }
   }
 }));
 
 const Login = props => {
   const classes = useStyles();
-  const { loading, onLoginClick, isAuthenticated } = props;
+  const {
+    loading,
+    onLoginClick,
+    isAuthenticated,
+    loginError,
+    setLoginErrorFalse
+  } = props;
 
   const [password, setPwd] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
@@ -90,6 +110,7 @@ const Login = props => {
       return;
     }
     setErrorMessage(null);
+    setLoginErrorFalse();
   };
 
   const handleChange = event => {
@@ -103,7 +124,11 @@ const Login = props => {
     if (employee.id && password) {
       if (employee.isFirstTimeLogin) {
         if (password && confirmPwd) {
-          return password === confirmPwd;
+          if (password === confirmPwd) {
+            return true;
+          }
+          setErrorMessage("Password mismatch");
+          return false;
         }
         setErrorMessage("Password mismatch");
         return false;
@@ -113,23 +138,11 @@ const Login = props => {
     setErrorMessage("Please enter username and password");
     return false;
   };
-  const handleSendAuthDataResp = resp => {
-    if (resp.data !== null && typeof resp.data === "object") {
-      console.log(resp.data);
-      onLoginClick({ username: employee.firstName, password: resp.data.token });
-    }
-  };
 
-  const handleSendAuthDataError = errResp => {
-    setErrorMessage("Invalid credentials or network issue");
-    console.log(errResp);
-  };
   const handleLoginClick = e => {
     e.preventDefault();
     if (sendAuthValidation()) {
-      sendAuthData({ employeeId: employee.id, password })
-        .then(handleSendAuthDataResp)
-        .catch(handleSendAuthDataError);
+      onLoginClick({ employeeId: employee.id, password });
     }
   };
 
@@ -249,12 +262,18 @@ const Login = props => {
                 className={classes.button}
                 variant='contained'
                 xs={12}
-                loading={loading}
+                disabled={loading}
                 color='primary'
                 onClick={handleLoginClick}
                 disableElevation
               >
-                Login
+                {loading ? (
+                  <div className={classes.progress}>
+                    <CircularProgress />
+                  </div>
+                ) : (
+                  "Login"
+                )}
               </Button>
             </Box>
             <Box
@@ -271,7 +290,10 @@ const Login = props => {
           </Paper>
         </div>
       </Container>
-      <ErrorDisplay handleClose={handleClose} errorMessage={errorMessage} />
+      <ErrorDisplay
+        handleClose={handleClose}
+        errorMessage={errorMessage || loginError}
+      />
     </React.Fragment>
   );
 };
@@ -281,7 +303,8 @@ const mapStateToProps = ({ auth }) => ({
 });
 
 const mapActionToProps = {
-  onLoginClick: authenticate
+  onLoginClick: authenticate,
+  setLoginErrorFalse
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Login);
