@@ -4,16 +4,12 @@ import {
   Dashboard,
   Login,
   Customers,
-  Employees,
-  Suppliers,
   Items,
-  NotFoundPage,
-  FormCustomer,
-  FormEmployee,
-  FormSupplier
+  NotFoundPage
 } from "../components/pages";
 import ProtectedRoute from "./ProtectedRoute";
 import { PAGE_ROUTES } from "../services/routeService";
+import { customerRoutes, employeeRoutes, supplierRoutes } from "./routeHelper";
 
 const Routes = props => (
   <Switch>
@@ -24,30 +20,32 @@ const Routes = props => (
       component={Login}
       authRequired={false}
     />
-    <ProtectedRoute exact path={PAGE_ROUTES.customers} component={Customers} />
-    <ProtectedRoute
-      exact
-      path={`${PAGE_ROUTES.customers}/new`}
-      component={FormCustomer}
-    />
-    <ProtectedRoute
-      exact
-      path={`${PAGE_ROUTES.employees}/new`}
-      component={FormEmployee}
-    />
-    <ProtectedRoute
-      exact
-      path={`${PAGE_ROUTES.suppliers}/new`}
-      component={FormSupplier}
-    />
-    <ProtectedRoute
-      exact
-      path={`${PAGE_ROUTES.customers}/edit/:id`}
-      component={FormCustomer}
-    />
+    {customerRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
+    {employeeRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
+    {supplierRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
+
     <ProtectedRoute exact path={PAGE_ROUTES.sales} component={Customers} />
-    <ProtectedRoute exact path={PAGE_ROUTES.employees} component={Employees} />
-    <ProtectedRoute exact path={PAGE_ROUTES.suppliers} component={Suppliers} />
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
   </Switch>
