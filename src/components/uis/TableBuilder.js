@@ -172,12 +172,7 @@ export default function TableBuilder({
       <Paper className={classes.paper}>
         <EnhancedTableToolbar headers={headers} title={title} />
         <TableContainer>
-          <Table
-            className={classes.table}
-            aria-labelledby='tableTitle'
-            size={"medium"}
-            aria-label='enhanced table'
-          >
+          <Table className={classes.table} size={"medium"}>
             <EnhancedTableHead
               classes={classes}
               order={order}

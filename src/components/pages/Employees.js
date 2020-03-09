@@ -11,17 +11,11 @@ const Employees = () => {
   useEffect(() => {
     const handleGetEmployeeResp = res => {
       if (Array.isArray(res.data)) {
-        const displayEmployeeList = res.data.map(employee => {
-          const {
-            id,
-            firstName,
-            lastName,
-            phoneNo,
-            gender,
-            bankAccount
-          } = employee;
-          return { id, firstName, lastName, phoneNo, gender, bankAccount };
-        });
+        const displayEmployeeList = res.data.map(
+          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
+            return { id, firstName, lastName, phoneNo, gender, bankAccount };
+          }
+        );
         setEmployeeList(displayEmployeeList);
       }
     };

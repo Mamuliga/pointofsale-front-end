@@ -11,17 +11,11 @@ const Customers = () => {
   useEffect(() => {
     const handleGetCustomerResp = res => {
       if (Array.isArray(res.data)) {
-        const displayCustomerList = res.data.map(customer => {
-          const {
-            id,
-            firstName,
-            lastName,
-            phoneNo,
-            gender,
-            bankAccount
-          } = customer;
-          return { id, firstName, lastName, phoneNo, gender, bankAccount };
-        });
+        const displayCustomerList = res.data.map(
+          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
+            return { id, firstName, lastName, phoneNo, gender, bankAccount };
+          }
+        );
         setCustomerList(displayCustomerList);
       }
     };

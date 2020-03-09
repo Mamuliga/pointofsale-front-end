@@ -12,17 +12,11 @@ const Suppliers = () => {
     getSupplierList()
       .then(res => {
         console.log(res);
-        const displaySupplierList = res.data.map(supplier => {
-          const {
-            id,
-            firstName,
-            lastName,
-            phoneNo,
-            gender,
-            bankAccount
-          } = supplier;
-          return { id, firstName, lastName, phoneNo, gender, bankAccount };
-        });
+        const displaySupplierList = res.data.map(
+          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
+            return { id, firstName, lastName, phoneNo, gender, bankAccount };
+          }
+        );
         setSupplierList(displaySupplierList);
       })
       .catch(err => {
