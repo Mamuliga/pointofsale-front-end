@@ -1,5 +1,5 @@
-import React from "react";
-import { Switch } from "react-router-dom";
+import React from 'react';
+import { Switch } from 'react-router-dom';
 import {
   Dashboard,
   Login,
@@ -10,10 +10,11 @@ import {
   NotFoundPage,
   FormCustomer,
   FormEmployee,
-  FormSupplier
-} from "../components/pages";
-import ProtectedRoute from "./ProtectedRoute";
-import { PAGE_ROUTES } from "../services/routeService";
+  FormSupplier,
+  FormItem
+} from '../components/pages';
+import ProtectedRoute from './ProtectedRoute';
+import { PAGE_ROUTES } from '../services/routeService';
 
 const Routes = props => (
   <Switch>
@@ -30,6 +31,12 @@ const Routes = props => (
       path={`${PAGE_ROUTES.customers}/new`}
       component={FormCustomer}
     />
+    <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
+    <ProtectedRoute
+      exact
+      path={`${PAGE_ROUTES.items}/new`}
+      component={FormItem}
+    />
     <ProtectedRoute
       exact
       path={`${PAGE_ROUTES.employees}/new`}
@@ -44,6 +51,11 @@ const Routes = props => (
       exact
       path={`${PAGE_ROUTES.customers}/edit/:id`}
       component={FormCustomer}
+    />
+    <ProtectedRoute
+      exact
+      path={`${PAGE_ROUTES.items}/edit/:id`}
+      component={FormItem}
     />
     <ProtectedRoute exact path={PAGE_ROUTES.sales} component={Customers} />
     <ProtectedRoute exact path={PAGE_ROUTES.employees} component={Employees} />
