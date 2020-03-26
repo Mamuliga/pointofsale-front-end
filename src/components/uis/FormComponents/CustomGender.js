@@ -60,7 +60,7 @@ function StyledRadio(props) {
     <Radio
       className={classes.root}
       disableRipple
-      color="default"
+      color='default'
       checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
       icon={<span className={classes.icon} />}
       {...props}
@@ -79,21 +79,20 @@ const CustomGender = ({ entry, getValue }) => {
     }
   };
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">Gender</FormLabel>
+    <FormControl component='fieldset'>
+      <FormLabel component='legend'>Gender</FormLabel>
       <RadioGroup
-        defaultValue="male"
+        defaultValue='male'
         value={newValue}
-        aria-label="gender"
         name={name}
         onChange={handleChange}
       >
-        <FormControlLabel value="male" control={<StyledRadio />} label="Male" />
+        <FormControlLabel value='male' control={<StyledRadio />} label='Male' />
 
         <FormControlLabel
-          value="female"
+          value='female'
           control={<StyledRadio />}
-          label="Female"
+          label='Female'
         />
       </RadioGroup>
     </FormControl>

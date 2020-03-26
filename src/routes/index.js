@@ -4,9 +4,8 @@ import {
   Dashboard,
   Login,
   Customers,
-  Employees,
-  Suppliers,
   Items,
+<<<<<<< HEAD
   NotFoundPage,
   FormCustomer,
   FormEmployee,
@@ -15,6 +14,13 @@ import {
 } from '../components/pages';
 import ProtectedRoute from './ProtectedRoute';
 import { PAGE_ROUTES } from '../services/routeService';
+=======
+  NotFoundPage
+} from "../components/pages";
+import ProtectedRoute from "./ProtectedRoute";
+import { PAGE_ROUTES } from "../services/routeService";
+import { customerRoutes, employeeRoutes, supplierRoutes } from "./routeHelper";
+>>>>>>> develop
 
 const Routes = props => (
   <Switch>
@@ -25,6 +31,7 @@ const Routes = props => (
       component={Login}
       authRequired={false}
     />
+<<<<<<< HEAD
     <ProtectedRoute exact path={PAGE_ROUTES.customers} component={Customers} />
     <ProtectedRoute
       exact
@@ -57,9 +64,34 @@ const Routes = props => (
       path={`${PAGE_ROUTES.items}/edit/:id`}
       component={FormItem}
     />
+=======
+    {customerRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
+    {employeeRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
+    {supplierRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
+
+>>>>>>> develop
     <ProtectedRoute exact path={PAGE_ROUTES.sales} component={Customers} />
-    <ProtectedRoute exact path={PAGE_ROUTES.employees} component={Employees} />
-    <ProtectedRoute exact path={PAGE_ROUTES.suppliers} component={Suppliers} />
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
   </Switch>

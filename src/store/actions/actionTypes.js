@@ -8,3 +8,4 @@ export const LOGIN = "LOGIN";
 export const SET_AUTH_LOADING = "SET_AUTH_LOADING";
 export const LOGOUT = "LOGOUT";
 export const SET_ERROR_NOTIFICATION = "SET_ERROR_NOTIFICATION";
+export const SET_LOGIN_ERROR_FALSE = "SET_LOGIN_ERROR_FALSE";

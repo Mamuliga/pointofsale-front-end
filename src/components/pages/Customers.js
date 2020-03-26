@@ -11,15 +11,10 @@ const Customers = () => {
   useEffect(() => {
     const handleGetCustomerResp = res => {
       if (Array.isArray(res.data)) {
-        const displayCustomerList = res.data.map(customer =>
-          createCustomerData(
-            customer.id,
-            customer.firstName,
-            customer.lastName,
-            customer.phoneNo,
-            customer.gender,
-            customer.bankAccount
-          )
+        const displayCustomerList = res.data.map(
+          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
+            return { id, firstName, lastName, phoneNo, gender, bankAccount };
+          }
         );
         setCustomerList(displayCustomerList);
       }
@@ -31,28 +26,18 @@ const Customers = () => {
       .catch(handleGetCustomerErr);
   }, []);
 
-  const handleRowClick = customer => {
-    const rowClick = () => {
+  const handleEdit = customer => {
+    const editClick = () => {
       push(`${location.pathname}/edit/${customer.id}`);
     };
-    return rowClick;
+    return editClick;
   };
 
-  function createCustomerData(
-    id,
-    firstName,
-    lastName,
-    phoneNo,
-    gender,
-    bankAccount
-  ) {
-    return { id, firstName, lastName, phoneNo, gender, bankAccount };
-  }
   return (
     <TableBuilder
       tableData={customerList}
       tableHeaders={getCustomerTableHeaders}
-      onRowClick={handleRowClick}
+      handleEdit={handleEdit}
       title={"Customers"}
     />
   );

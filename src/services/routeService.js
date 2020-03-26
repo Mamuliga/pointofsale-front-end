@@ -4,6 +4,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import StorageIcon from '@material-ui/icons/Storage';
 
 export const PAGE_ROUTES = {
+<<<<<<< HEAD
   home: '/dashboard',
   login: '/login',
   customers: '/customers',
@@ -11,6 +12,21 @@ export const PAGE_ROUTES = {
   suppliers: '/suppliers',
   sales: '/sales',
   items: '/items'
+=======
+  home: "/dashboard",
+  login: "/login",
+  customers: "/customers",
+  newCustomer: "/customers/new",
+  editCustomer: "/customers/edit/:id",
+  employees: "/employees",
+  newEmployee: "/employees/new",
+  editEmployee: "/employees/edit/:id",
+  suppliers: "/suppliers",
+  newSupplier: "/suppliers/new",
+  editSupplier: "/suppliers/edit/:id",
+  sales: "/sales",
+  items: "/items"
+>>>>>>> develop
 };
 
 const TOP_MENU_HIDE_ROUTES = {
