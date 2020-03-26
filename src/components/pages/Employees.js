@@ -11,15 +11,10 @@ const Employees = () => {
   useEffect(() => {
     const handleGetEmployeeResp = res => {
       if (Array.isArray(res.data)) {
-        const displayEmployeeList = res.data.map(employee =>
-          createEmployeeData(
-            employee.id,
-            employee.firstName,
-            employee.lastName,
-            employee.phoneNo,
-            employee.gender,
-            employee.bankAccount
-          )
+        const displayEmployeeList = res.data.map(
+          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
+            return { id, firstName, lastName, phoneNo, gender, bankAccount };
+          }
         );
         setEmployeeList(displayEmployeeList);
       }
@@ -31,28 +26,18 @@ const Employees = () => {
       .catch(handleGetEmployeeErr);
   }, []);
 
-  const handleRowClick = employee => {
-    const rowClick = () => {
+  const handleEdit = employee => {
+    const editClick = () => {
       push(`${location.pathname}/edit/${employee.id}`);
     };
-    return rowClick;
+    return editClick;
   };
 
-  function createEmployeeData(
-    id,
-    firstName,
-    lastName,
-    phoneNo,
-    gender,
-    bankAccount
-  ) {
-    return { id, firstName, lastName, phoneNo, gender, bankAccount };
-  }
   return (
     <TableBuilder
       tableData={employeeList}
       tableHeaders={getEmployeeTableHeaders}
-      onRowClick={handleRowClick}
+      handleEdit={handleEdit}
       title={"Employees"}
     />
   );

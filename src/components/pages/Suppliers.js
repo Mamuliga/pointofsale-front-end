@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import mockCustomers from "../../utilities/mockData/customers.json";
 import TableBuilder from "../uis/TableBuilder.js";
 import { useHistory } from "react-router-dom";
 import { getSupplierTableHeaders } from "../../utilities/helpers/tableHelpers.js";
@@ -13,15 +12,10 @@ const Suppliers = () => {
     getSupplierList()
       .then(res => {
         console.log(res);
-        const displaySupplierList = res.data.map(supplier =>
-          createSupplierData(
-            supplier.id,
-            supplier.firstName,
-            supplier.lastName,
-            supplier.phoneNo,
-            supplier.gender,
-            supplier.bankAccount
-          )
+        const displaySupplierList = res.data.map(
+          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
+            return { id, firstName, lastName, phoneNo, gender, bankAccount };
+          }
         );
         setSupplierList(displaySupplierList);
       })
@@ -30,28 +24,18 @@ const Suppliers = () => {
       });
   }, []);
 
-  const handleRowClick = supplier => {
-    const rowClick = () => {
+  const handleEdit = supplier => {
+    const editClick = () => {
       push(`${location.pathname}/edit/${supplier.id}`);
     };
-    return rowClick;
+    return editClick;
   };
 
-  function createSupplierData(
-    id,
-    firstName,
-    lastName,
-    phoneNo,
-    gender,
-    bankAccount
-  ) {
-    return { id, firstName, lastName, phoneNo, gender, bankAccount };
-  }
   return (
     <TableBuilder
       tableData={supplierList}
       tableHeaders={getSupplierTableHeaders}
-      onRowClick={handleRowClick}
+      handleEdit={handleEdit}
       title={"Suppliers"}
     />
   );

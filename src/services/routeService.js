@@ -7,8 +7,14 @@ export const PAGE_ROUTES = {
   home: "/dashboard",
   login: "/login",
   customers: "/customers",
+  newCustomer: "/customers/new",
+  editCustomer: "/customers/edit/:id",
   employees: "/employees",
+  newEmployee: "/employees/new",
+  editEmployee: "/employees/edit/:id",
   suppliers: "/suppliers",
+  newSupplier: "/suppliers/new",
+  editSupplier: "/suppliers/edit/:id",
   sales: "/sales",
   items: "/items"
 };
