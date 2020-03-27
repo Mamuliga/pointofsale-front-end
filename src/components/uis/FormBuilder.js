@@ -9,24 +9,26 @@ import { Button } from "@material-ui/core";
 import CustomAvatar from "./FormComponents/CustomAvatar";
 import DatePicker from "./FormComponents/DatePicker";
 
-const FormBuilder = ({
-  title,
-  data,
-  onClick,
-  actor,
-  handleDelete,
-  datePickerLabel = "date"
-}) => {
+const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const getValue = ({ target: { value, name } }) => {
+    setNewActor({ ...newActor, [name]: value });
     console.log({ ...newActor, [name]: value });
   };
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedDate, setSelectedDate] = React.useState(
+    actor && actor.id ? new Date(actor.dob) : new Date()
+  );
   const handleDatePickerChange = (date, name) => {
     setSelectedDate(date);
-    console.log(date);
-    setNewActor({ ...newActor, ...(newActor[`${name}`] = date) });
-    console.log(newActor);
+    console.log(date.toLocaleDateString());
+    setNewActor({
+      ...newActor,
+      [name]: date.toLocaleDateString()
+    });
+    console.log({
+      ...newActor,
+      [name]: date.toLocaleDateString()
+    });
   };
   return (
     <div>
@@ -42,7 +44,7 @@ const FormBuilder = ({
               case "date":
                 return (
                   <DatePicker
-                    datePickerLabel={datePickerLabel}
+                    entry={entry}
                     selectedDate={selectedDate}
                     handleDatePickerChange={handleDatePickerChange}
                   />
