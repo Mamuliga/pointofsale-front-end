@@ -1,12 +1,14 @@
-import { PAGE_ROUTES } from "../services/routeService";
+import { PAGE_ROUTES } from '../services/routeService';
 import {
   Customers,
   FormCustomer,
   Employees,
   FormEmployee,
   Suppliers,
-  FormSupplier
-} from "../components/pages";
+  FormSupplier,
+  Items,
+  FormItem
+} from '../components/pages';
 
 export const customerRoutes = [
   {
@@ -48,5 +50,19 @@ export const supplierRoutes = [
   {
     path: PAGE_ROUTES.editSupplier,
     component: FormSupplier
+  }
+];
+export const itemRoutes = [
+  {
+    path: PAGE_ROUTES.items,
+    component: Items
+  },
+  {
+    path: PAGE_ROUTES.newItem,
+    component: FormItem
+  },
+  {
+    path: PAGE_ROUTES.editItem,
+    component: FormItem
   }
 ];
