@@ -9,7 +9,12 @@ import {
 } from "../components/pages";
 import ProtectedRoute from "./ProtectedRoute";
 import { PAGE_ROUTES } from "../services/routeService";
-import { customerRoutes, employeeRoutes, supplierRoutes } from "./routeHelper";
+import {
+  customerRoutes,
+  employeeRoutes,
+  supplierRoutes,
+  saleRoutes
+} from "./routeHelper";
 
 const Routes = props => (
   <Switch>
@@ -44,8 +49,17 @@ const Routes = props => (
         key={route.path}
       />
     ))}
+    {saleRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
 
-    <ProtectedRoute exact path={PAGE_ROUTES.sales} component={Customers} />
+    <ProtectedRoute exact path={PAGE_ROUTES.customers} component={Customers} />
+
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
   </Switch>

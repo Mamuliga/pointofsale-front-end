@@ -5,6 +5,7 @@ import {
   Employees,
   FormEmployee,
   Suppliers,
+  Sales,
   FormSupplier
 } from "../components/pages";
 
@@ -48,5 +49,12 @@ export const supplierRoutes = [
   {
     path: PAGE_ROUTES.editSupplier,
     component: FormSupplier
+  }
+];
+
+export const saleRoutes = [
+  {
+    path: PAGE_ROUTES.sales,
+    component: Sales
   }
 ];

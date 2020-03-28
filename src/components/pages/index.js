@@ -9,6 +9,7 @@ import FormSupplier from "./FormSupplier";
 
 import Employees from "./Employees";
 import Suppliers from "./Suppliers";
+import Sales from "./Sales";
 
 export {
   Dashboard,
@@ -16,6 +17,7 @@ export {
   Customers,
   Employees,
   Suppliers,
+  Sales,
   Items,
   NotFoundPage,
   FormCustomer,
