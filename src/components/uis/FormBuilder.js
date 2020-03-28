@@ -13,19 +13,10 @@ const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
-    console.log({ ...newActor, [name]: value });
   };
-  const [selectedDate, setSelectedDate] = React.useState(
-    actor && actor.id ? new Date(actor.dob) : new Date()
-  );
+
   const handleDatePickerChange = (date, name) => {
-    setSelectedDate(date);
-    console.log(date.toLocaleDateString());
     setNewActor({
-      ...newActor,
-      [name]: date.toLocaleDateString()
-    });
-    console.log({
       ...newActor,
       [name]: date.toLocaleDateString()
     });
@@ -45,7 +36,6 @@ const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
                 return (
                   <DatePicker
                     entry={entry}
-                    selectedDate={selectedDate}
                     handleDatePickerChange={handleDatePickerChange}
                   />
                 );

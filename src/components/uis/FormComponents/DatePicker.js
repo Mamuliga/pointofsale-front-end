@@ -7,12 +7,16 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 
-const DatePicker = ({ entry, selectedDate, handleDatePickerChange }) => {
-  const { label, name } = entry;
+const DatePicker = ({ entry, handleDatePickerChange }) => {
+  const { label, name, value } = entry;
   const handleDateChange = date => {
     console.log(date);
+    setSelectedDate(date);
     handleDatePickerChange(date, name);
   };
+  const [selectedDate, setSelectedDate] = React.useState(
+    value ? new Date(value) : new Date()
+  );
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify='left'>
