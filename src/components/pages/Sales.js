@@ -36,29 +36,29 @@ const Sales = () => {
   };
   const classes = useStyles();
 
+  const searchComponent = (
+    <div className={classes.search}>
+      <div className={classes.searchIcon}>
+        <SearchIcon />
+      </div>
+      <InputBase
+        placeholder='Search…'
+        classes={{
+          root: classes.inputRoot,
+          input: classes.inputInput
+        }}
+        inputProps={{ "aria-label": "search" }}
+      />
+    </div>
+  );
   return (
     <div>
-      <Typography gutterBottom variant="h5" component="h2">
-        Sales
-      </Typography>
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
-          <SearchIcon />
-        </div>
-        <InputBase
-          placeholder="Search…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput
-          }}
-          inputProps={{ "aria-label": "search" }}
-        />
-      </div>
-
       <TableBuilder
         tableData={saleList}
         tableHeaders={getSaleTableHeaders}
         handleEdit={handleEdit}
+        tableTopUIs={searchComponent}
+        title={"Sales"}
       />
     </div>
   );

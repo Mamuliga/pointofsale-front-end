@@ -67,7 +67,7 @@ export default makeStyles(theme => ({
     }
   },
   search: {
-    position: "fixed",
+    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
