@@ -7,12 +7,19 @@ import CustomGender from "./FormComponents/CustomGender";
 import CustomPhone from "./FormComponents/CustomPhone";
 import { Button } from "@material-ui/core";
 import CustomAvatar from "./FormComponents/CustomAvatar";
+import DatePicker from "./FormComponents/DatePicker";
 
 const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
-    console.log({ ...newActor, [name]: value });
+  };
+
+  const handleDatePickerChange = (date, name) => {
+    setNewActor({
+      ...newActor,
+      [name]: date.toLocaleDateString()
+    });
   };
   return (
     <div>
@@ -25,8 +32,14 @@ const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
           </Grid>
           {data.map(entry => {
             switch (entry.type) {
-              case "text":
               case "date":
+                return (
+                  <DatePicker
+                    entry={entry}
+                    handleDatePickerChange={handleDatePickerChange}
+                  />
+                );
+              case "text":
               case "email":
                 return (
                   <CustomTextField
