@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
-import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import TableBuilder from "../uis/TableBuilder.js";
 import { useHistory } from "react-router-dom";
