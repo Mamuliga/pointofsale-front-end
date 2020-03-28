@@ -1,27 +1,44 @@
-import React from "react";
-import mockItems from "../../utilities/mockData/items.json";
-import TableBuilder from "../uis/TableBuilder.js";
-import { getItemTableHeaders } from "../../utilities/helpers/tableHelpers.js";
+import React, { useEffect, useState } from 'react';
+import TableBuilder from '../uis/TableBuilder.js';
+import { useHistory } from 'react-router-dom';
+import { getItemTableHeaders } from '../../utilities/helpers/tableHelpers.js';
+import { getItemList } from '../../http/itemApi';
 
 const Items = () => {
-  const itemRowKey = items => `${items.itemname}`;
-  const getSelectedRows = selectedRows => {
-    console.log("In Customers", selectedRows);
-  };
-  const itemTableContent = () => {
-    return mockItems.map(items =>
-      createItemData(
-        items.id,
-        items.barcode,
-        items.itemname,
-        items.category,
-        items.costprice,
-        items.sellingprice,
-        items.quantity,
-        items.storelocation,
-        items.avatar
-      )
-    );
+  const { location, push } = useHistory();
+  const [itemList, setItemList] = useState([]);
+
+  useEffect(() => {
+    const handleGetItemResp = res => {
+      if (Array.isArray(res.data)) {
+        const displayItemList = res.data.map(item =>
+          createItemData(
+            item.id,
+            item.barcode,
+            item.itemname,
+            item.category,
+            item.costprice,
+            item.sellingprice,
+            item.quantity,
+            item.storelocation,
+            item.avatar
+          )
+        );
+        setItemList(displayItemList);
+      }
+    };
+    const handleGetItemErr = err => {};
+
+    getItemList()
+      .then(handleGetItemResp)
+      .catch(handleGetItemErr);
+  }, []);
+
+  const handleRowClick = item => {
+    const rowClick = () => {
+      push(`${location.pathname}/edit/${item.id}`);
+    };
+    return rowClick;
   };
 
   function createItemData(
@@ -35,7 +52,7 @@ const Items = () => {
     storelocation,
     avatar
   ) {
-    return [
+    return {
       id,
       barcode,
       itemname,
@@ -45,15 +62,14 @@ const Items = () => {
       quantity,
       storelocation,
       avatar
-    ];
+    };
   }
   return (
     <TableBuilder
-      rowKey={itemRowKey}
-      getSelectedRows={getSelectedRows}
-      tableData={itemTableContent()}
+      tableData={itemList}
       tableHeaders={getItemTableHeaders}
-      title={"Items"}
+      onRowClick={handleRowClick}
+      title={'Items'}
     />
   );
 };
