@@ -20,13 +20,13 @@ export const getItemFormData = [
     required: true,
     icon: <ViewListRoundedIcon />
   },
-  {
-    id: 'category',
-    type: 'radio',
-    label: 'Category',
-    name: 'category',
-    required: true
-  },
+  // {
+  //   id: 'category',
+  //   type: 'radio',
+  //   label: 'Category',
+  //   name: 'category',
+  //   required: true
+  // },
   {
     id: 'supplier',
     type: 'text',

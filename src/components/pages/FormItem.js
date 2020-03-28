@@ -15,20 +15,15 @@ const FormItem = () => {
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [item, setItem] = useState({
-    firstName: null,
-    lastName: null,
-    companyName: null,
-    email: null,
-    phoneNo: '',
-    gender: '',
-    address: null,
-    dob: '',
-    description: null,
-    profilePicture: '',
-    defaultDiscount: null,
-    bankAccount: null,
-    regDate: null,
-    recruiter: null
+    barcode: null,
+    itemName: null,
+    category: '',
+    supplier: null,
+    costPrice: '',
+    SellingPrice: '',
+    quantity: '',
+    reorderLevel: '',
+    avatar: ''
   });
 
   useEffect(() => {
