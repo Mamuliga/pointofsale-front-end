@@ -68,6 +68,7 @@ export default makeStyles(theme => ({
   },
   search: {
     position: "relative",
+    textAlign: "left",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
@@ -85,7 +86,7 @@ export default makeStyles(theme => ({
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
-    display: "flex",
+    display: "flex-end",
     alignItems: "center",
     justifyContent: "center"
   },
@@ -104,5 +105,13 @@ export default makeStyles(theme => ({
         width: "20ch"
       }
     }
+  },
+  total: {
+    display: "flex",
+    justifyContent: "flex-end",
+    padding: "4px"
+  },
+  customerName: {
+    textAlign: "right"
   }
 }));
