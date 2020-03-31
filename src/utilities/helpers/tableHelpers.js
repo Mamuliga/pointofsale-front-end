@@ -119,12 +119,6 @@ export const getSaleTableHeaders = [
     numeric: false,
     disablePadding: false,
     label: "Total"
-  },
-  {
-    id: "Update",
-    numeric: false,
-    disablePadding: false,
-    label: "Update"
   }
 ];
 

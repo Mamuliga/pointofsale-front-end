@@ -33,30 +33,37 @@ const Sales = () => {
 
   const handleEdit = sale => {
     const editClick = () => {
-      push(`${location.pathname}/edit/${sale.id}`);
+      push(`${location.pathname}/delete/${sale.id}`);
     };
     return editClick;
   };
   const classes = useStyles();
   const searchComponent = (
-    <div className={classes.search}>
-      <div className={classes.searchIcon}>
-        <SearchIcon />
-      </div>
-      <InputBase
-        placeholder="Search…"
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput
-        }}
-        inputProps={{ "aria-label": "search" }}
+    <div className={classes.searchBar}>
+      <TextField
+        id="outlined-textarea"
+        label="Customer Name"
+        multiline
+        variant="outlined"
       />
-      {/* <Typography className={classes.customerName}> */}
-      {/* <Box> */}
+      <div className={classes.inputsTop}>
+        {/* <div className={classes.searchIcon}> */}
+        <SearchIcon />
+        {/* </div> */}
+        <InputBase
+          placeholder="Search…"
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput
+          }}
+          inputProps={{ "aria-label": "search" }}
+        />
+      </div>
+      <TextField />
       <div className={classes.customerName}>
         <TextField
           id="outlined-textarea"
-          label="Total"
+          label="Customer Name"
           multiline
           variant="outlined"
         />
@@ -67,15 +74,13 @@ const Sales = () => {
   return (
     <div>
       <div>
-        <Grid className={classes.total}>
-          <TableBuilder
-            tableData={saleList}
-            tableHeaders={getSaleTableHeaders}
-            handleEdit={handleEdit}
-            tableTopUIs={searchComponent}
-            title={"Sales"}
-          />
-        </Grid>
+        <TableBuilder
+          tableData={saleList}
+          tableHeaders={getSaleTableHeaders}
+          handleEdit={handleEdit}
+          tableTopUIs={searchComponent}
+          title={"Sales"}
+        />
       </div>
 
       <Grid className={classes.total}>
@@ -87,7 +92,7 @@ const Sales = () => {
         />
       </Grid>
 
-      <Grid className={classes.total}>
+      <Grid className={classes.cash}>
         <TextField
           id="outlined-textarea"
           label="Cash"
@@ -95,7 +100,7 @@ const Sales = () => {
           variant="outlined"
         />
       </Grid>
-      <Grid className={classes.total}>
+      <Grid className={classes.balance}>
         <TextField
           id="outlined-textarea"
           label="Balance"

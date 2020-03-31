@@ -1,4 +1,4 @@
-import { fade, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { SIDE_BAR_WIDTH, TOP_MENU_MAX_HEIGHT } from "../utilities/constants";
 
 export default makeStyles(theme => ({
@@ -66,23 +66,15 @@ export default makeStyles(theme => ({
       margin: theme.spacing(1)
     }
   },
-  search: {
+  inputsTop: {
     position: "relative",
     textAlign: "left",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
-    },
-    marginLeft: 0,
+    display: "flex",
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto"
-    }
+    justifyContent: "space-between"
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(1, 2),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -109,9 +101,26 @@ export default makeStyles(theme => ({
   total: {
     display: "flex",
     justifyContent: "flex-end",
-    padding: "4px"
+    padding: "4px",
+    paddingTop: theme.spacing(1)
+  },
+  cash: {
+    display: "flex",
+    justifyContent: "flex-end",
+    padding: "4px",
+    paddingTop: theme.spacing(1)
+  },
+  balance: {
+    display: "flex",
+    justifyContent: "flex-end",
+    padding: "4px",
+    paddingTop: theme.spacing(1)
   },
   customerName: {
     textAlign: "right"
+  },
+  searchBar: {
+    display: "flex",
+    justifyContent: "flex-end"
   }
 }));
