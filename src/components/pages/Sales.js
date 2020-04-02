@@ -10,16 +10,7 @@ import TextField from "@material-ui/core/TextField";
 
 const Sales = () => {
   const { location, push } = useHistory();
-  const [saleList, setSaleList] = useState([
-    {
-      id: 1,
-      itemName: "sup1",
-      price: "sup1last",
-      quantity: "1234567891",
-      disc: "male",
-      total: "Description1"
-    }
-  ]);
+  const [saleList, setSaleList] = useState([]);
 
   useEffect(() => {
     getSaleList()
@@ -37,6 +28,20 @@ const Sales = () => {
       });
   }, []);
 
+  const handleSearchSubmit = e => {
+    e.preventDefault();
+    setSaleList([
+      {
+        id: 1,
+        itemName: "sup1",
+        price: "sup1last",
+        quantity: "1234567891",
+        disc: "male",
+        total: "Description1"
+      }
+    ]);
+  };
+
   const handleDelete = sale => {
     const deleteClick = () => {
       // push(`${location.pathname}/delete/${sale.id}`);
@@ -46,20 +51,22 @@ const Sales = () => {
   const classes = useStyles();
   const searchComponent = (
     <div className={classes.inputsTop}>
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
-          <SearchIcon />
+      <form onSubmit={handleSearchSubmit}>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            autoFocus
+            placeholder='Search…'
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput
+            }}
+            inputProps={{ "aria-label": "search" }}
+          />
         </div>
-        <InputBase
-          autoFocus
-          placeholder='Search…'
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput
-          }}
-          inputProps={{ "aria-label": "search" }}
-        />
-      </div>
+      </form>
       <div className={classes.customerName}>
         <TextField
           id='outlined-textarea'
