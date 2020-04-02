@@ -35,7 +35,7 @@ const Sales = () => {
         id: 1,
         itemName: "sup1",
         price: "sup1last",
-        quantity: "1234567891",
+        quantity: "1",
         disc: "male",
         total: "Description1"
       }
@@ -45,6 +45,7 @@ const Sales = () => {
   const handleDelete = sale => {
     const deleteClick = () => {
       // push(`${location.pathname}/delete/${sale.id}`);
+      setSaleList([]);
     };
     return deleteClick;
   };
