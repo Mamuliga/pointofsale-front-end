@@ -70,6 +70,7 @@ const Sales = () => {
           handleEdit={handleEdit}
           tableTopUis={searchComponent}
           title={"Sales"}
+          hidePagination
         />
       </div>
       <div>

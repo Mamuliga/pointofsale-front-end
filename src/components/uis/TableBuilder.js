@@ -142,7 +142,8 @@ export default function TableBuilder({
   tableHeaders: headers,
   title,
   handleEdit,
-  tableTopUis
+  tableTopUis,
+  hidePagination
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -205,15 +206,17 @@ export default function TableBuilder({
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component='div'
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        {!hidePagination && (
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component='div'
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        )}
       </Paper>
     </div>
   );
