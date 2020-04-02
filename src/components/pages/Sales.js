@@ -7,7 +7,7 @@ import { getSaleList } from "../../http/saleApi";
 import { getSaleTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 import useStyles from "../../styles/useStyles.js";
 import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
+// import Grid from "@material-ui/core/Grid";
 // import Typography from "@material-ui/core/Typography";
 // import Box from "@material-ui/core/Box";
 
@@ -39,17 +39,11 @@ const Sales = () => {
   };
   const classes = useStyles();
   const searchComponent = (
-    <div className={classes.searchBar}>
-      <TextField
-        id="outlined-textarea"
-        label="Customer Name"
-        multiline
-        variant="outlined"
-      />
-      <div className={classes.inputsTop}>
-        {/* <div className={classes.searchIcon}> */}
-        <SearchIcon />
-        {/* </div> */}
+    <div className={classes.inputsTop}>
+      <div className={classes.search}>
+        <div className={classes.searchIcon}>
+          <SearchIcon />
+        </div>
         <InputBase
           placeholder="Search…"
           classes={{
@@ -59,7 +53,6 @@ const Sales = () => {
           inputProps={{ "aria-label": "search" }}
         />
       </div>
-      <TextField />
       <div className={classes.customerName}>
         <TextField
           id="outlined-textarea"
@@ -78,36 +71,37 @@ const Sales = () => {
           tableData={saleList}
           tableHeaders={getSaleTableHeaders}
           handleEdit={handleEdit}
-          tableTopUIs={searchComponent}
+          searchUis={searchComponent}
           title={"Sales"}
         />
       </div>
+      <div>
+        <div className={classes.total}>
+          <TextField
+            id="outlined-textarea"
+            label="Total"
+            multiline
+            variant="outlined"
+          />
+        </div>
 
-      <Grid className={classes.total}>
-        <TextField
-          id="outlined-textarea"
-          label="Total"
-          multiline
-          variant="outlined"
-        />
-      </Grid>
-
-      <Grid className={classes.cash}>
-        <TextField
-          id="outlined-textarea"
-          label="Cash"
-          multiline
-          variant="outlined"
-        />
-      </Grid>
-      <Grid className={classes.balance}>
-        <TextField
-          id="outlined-textarea"
-          label="Balance"
-          multiline
-          variant="outlined"
-        />
-      </Grid>
+        <div className={classes.cash}>
+          <TextField
+            id="outlined-textarea"
+            label="Cash"
+            multiline
+            variant="outlined"
+          />
+        </div>
+        <div className={classes.balance}>
+          <TextField
+            id="outlined-textarea"
+            label="Balance"
+            multiline
+            variant="outlined"
+          />
+        </div>
+      </div>
     </div>
   );
 };

@@ -142,7 +142,7 @@ export default function TableBuilder({
   tableHeaders: headers,
   title,
   handleEdit,
-  tableTopUIs
+  searchUis
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -172,7 +172,7 @@ export default function TableBuilder({
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar headers={headers} title={title} />
-        {tableTopUIs}
+        {searchUis}
         <TableContainer>
           <Table className={classes.table} size={"medium"}>
             <EnhancedTableHead

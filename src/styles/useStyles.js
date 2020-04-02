@@ -74,13 +74,15 @@ export default makeStyles(theme => ({
     justifyContent: "space-between"
   },
   searchIcon: {
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(0, 2),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
-    display: "flex-end",
+    // display: "flex",
+    textAlign: "left",
     alignItems: "center",
-    justifyContent: "center"
+    paddingTop: theme.spacing(0.6)
+    // justifyContent: "center"
   },
   inputRoot: {
     color: "inherit"
@@ -97,6 +99,15 @@ export default makeStyles(theme => ({
         width: "20ch"
       }
     }
+  },
+  search: {
+    border: "1px solid Gainsboro",
+    borderRadius: "5em",
+    width: "250px",
+    height: "40px",
+    display: "center",
+    paddingRight: theme.spacing(2),
+    marginLeft: "30px"
   },
   total: {
     display: "flex",
@@ -118,9 +129,5 @@ export default makeStyles(theme => ({
   },
   customerName: {
     textAlign: "right"
-  },
-  searchBar: {
-    display: "flex",
-    justifyContent: "flex-end"
   }
 }));
