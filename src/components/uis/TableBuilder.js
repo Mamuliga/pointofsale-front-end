@@ -6,6 +6,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -105,7 +106,7 @@ const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   return (
     <Toolbar className={classes.root}>
-      <Typography className={classes.title} variant="h6" id="tableTitle">
+      <Typography className={classes.title} variant='h6' id='tableTitle'>
         {props.title}
       </Typography>
     </Toolbar>
@@ -146,13 +147,23 @@ export default function TableBuilder({
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("outstanding");
-  const [page] = useState(0);
-  const [rowsPerPage] = useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   const emptyRows =
@@ -181,7 +192,7 @@ export default function TableBuilder({
                       {Object.values(row).map((cell, index) => {
                         return <TableCell key={index}>{cell}</TableCell>;
                       })}
-                      <TableCell key={"edit"} align="right">
+                      <TableCell key={"edit"} align='right'>
                         <EditIcon onClick={handleEdit(row)} />
                       </TableCell>
                     </TableRow>
@@ -195,6 +206,15 @@ export default function TableBuilder({
             </TableBody>
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component='div'
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
       </Paper>
     </div>
   );
