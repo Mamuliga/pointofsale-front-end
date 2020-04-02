@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import TableBuilder from "../uis/TableBuilder.js";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { getSaleList } from "../../http/saleApi";
 import { getSaleTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 import useStyles from "../../styles/useStyles.js";
 import TextField from "@material-ui/core/TextField";
-// import Grid from "@material-ui/core/Grid";
-// import Typography from "@material-ui/core/Typography";
-// import Box from "@material-ui/core/Box";
 
 const Sales = () => {
-  const { location, push } = useHistory();
+  // const { location, push } = useHistory();
   const [saleList, setSaleList] = useState([]);
 
   useEffect(() => {
@@ -31,28 +28,45 @@ const Sales = () => {
       });
   }, []);
 
-  const handleEdit = sale => {
-    const editClick = () => {
-      push(`${location.pathname}/delete/${sale.id}`);
+  const handleSearchSubmit = e => {
+    e.preventDefault();
+    setSaleList([
+      {
+        id: 1,
+        itemName: "sup1",
+        price: "sup1last",
+        quantity: "1234567891",
+        disc: "male",
+        total: "Description1"
+      }
+    ]);
+  };
+
+  const handleDelete = sale => {
+    const deleteClick = () => {
+      // push(`${location.pathname}/delete/${sale.id}`);
     };
-    return editClick;
+    return deleteClick;
   };
   const classes = useStyles();
   const searchComponent = (
     <div className={classes.inputsTop}>
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
-          <SearchIcon />
+      <form onSubmit={handleSearchSubmit}>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            autoFocus
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput
+            }}
+            inputProps={{ "aria-label": "search" }}
+          />
         </div>
-        <InputBase
-          placeholder="Search…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput
-          }}
-          inputProps={{ "aria-label": "search" }}
-        />
-      </div>
+      </form>
       <div className={classes.customerName}>
         <TextField
           id="outlined-textarea"
@@ -70,9 +84,10 @@ const Sales = () => {
         <TableBuilder
           tableData={saleList}
           tableHeaders={getSaleTableHeaders}
-          handleEdit={handleEdit}
-          searchUis={searchComponent}
+          handleDelete={handleDelete}
+          tableTopUis={searchComponent}
           title={"Sales"}
+          hidePagination
         />
       </div>
       <div>

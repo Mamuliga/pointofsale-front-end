@@ -13,6 +13,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -142,7 +143,9 @@ export default function TableBuilder({
   tableHeaders: headers,
   title,
   handleEdit,
-  searchUis
+  handleDelete,
+  tableTopUis,
+  hidePagination
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -172,7 +175,7 @@ export default function TableBuilder({
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar headers={headers} title={title} />
-        {searchUis}
+        {tableTopUis}
         <TableContainer>
           <Table className={classes.table} size={"medium"}>
             <EnhancedTableHead
@@ -191,9 +194,7 @@ export default function TableBuilder({
                       {Object.values(row).map((cell, index) => {
                         return <TableCell key={index}>{cell}</TableCell>;
                       })}
-                      <TableCell key={"edit"} align="right">
-                        <EditIcon onClick={handleEdit(row)} />
-                      </TableCell>
+                      {getTableRightAlignIcons(row, handleEdit, handleDelete)}
                     </TableRow>
                   );
                 })}
@@ -205,16 +206,32 @@ export default function TableBuilder({
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        {!hidePagination && (
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        )}
       </Paper>
     </div>
+  );
+}
+
+function getTableRightAlignIcons(row, handleEdit, handledelete) {
+  let rightAlignIcon = "";
+  if (handleEdit) {
+    rightAlignIcon = <EditIcon onClick={handleEdit(row)} />;
+  } else if (handledelete) {
+    rightAlignIcon = <DeleteIcon onClick={handledelete(row)} />;
+  }
+  return (
+    <TableCell key={"edit"} align="right">
+      {rightAlignIcon}
+    </TableCell>
   );
 }
