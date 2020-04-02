@@ -10,7 +10,16 @@ import TextField from "@material-ui/core/TextField";
 
 const Sales = () => {
   const { location, push } = useHistory();
-  const [saleList, setSaleList] = useState([]);
+  const [saleList, setSaleList] = useState([
+    {
+      id: 1,
+      itemName: "sup1",
+      price: "sup1last",
+      quantity: "1234567891",
+      disc: "male",
+      total: "Description1"
+    }
+  ]);
 
   useEffect(() => {
     getSaleList()
@@ -28,11 +37,11 @@ const Sales = () => {
       });
   }, []);
 
-  const handleEdit = sale => {
-    const editClick = () => {
-      push(`${location.pathname}/delete/${sale.id}`);
+  const handleDelete = sale => {
+    const deleteClick = () => {
+      // push(`${location.pathname}/delete/${sale.id}`);
     };
-    return editClick;
+    return deleteClick;
   };
   const classes = useStyles();
   const searchComponent = (
@@ -67,7 +76,7 @@ const Sales = () => {
         <TableBuilder
           tableData={saleList}
           tableHeaders={getSaleTableHeaders}
-          handleEdit={handleEdit}
+          handleDelete={handleDelete}
           tableTopUis={searchComponent}
           title={"Sales"}
           hidePagination

@@ -13,6 +13,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -142,6 +143,7 @@ export default function TableBuilder({
   tableHeaders: headers,
   title,
   handleEdit,
+  handleDelete,
   tableTopUis,
   hidePagination
 }) {
@@ -192,9 +194,7 @@ export default function TableBuilder({
                       {Object.values(row).map((cell, index) => {
                         return <TableCell key={index}>{cell}</TableCell>;
                       })}
-                      <TableCell key={"edit"} align='right'>
-                        <EditIcon onClick={handleEdit(row)} />
-                      </TableCell>
+                      {getTableRightAlignIcons(row, handleEdit, handleDelete)}
                     </TableRow>
                   );
                 })}
@@ -219,5 +219,19 @@ export default function TableBuilder({
         )}
       </Paper>
     </div>
+  );
+}
+
+function getTableRightAlignIcons(row, handleEdit, handledelete) {
+  let rightAlignIcon = "";
+  if (handleEdit) {
+    rightAlignIcon = <EditIcon onClick={handleEdit(row)} />;
+  } else if (handledelete) {
+    rightAlignIcon = <DeleteIcon onClick={handledelete(row)} />;
+  }
+  return (
+    <TableCell key={"edit"} align='right'>
+      {rightAlignIcon}
+    </TableCell>
   );
 }
