@@ -51,6 +51,7 @@ const Sales = () => {
           <SearchIcon />
         </div>
         <InputBase
+          autoFocus
           placeholder='Search…'
           classes={{
             root: classes.inputRoot,
