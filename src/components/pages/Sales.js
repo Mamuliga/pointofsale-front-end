@@ -68,7 +68,7 @@ const Sales = () => {
           tableData={saleList}
           tableHeaders={getSaleTableHeaders}
           handleEdit={handleEdit}
-          searchUis={searchComponent}
+          tableTopUis={searchComponent}
           title={"Sales"}
         />
       </div>
