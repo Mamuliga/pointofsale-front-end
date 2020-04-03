@@ -1,6 +1,8 @@
 import React from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import CalendarViewDayRoundedIcon from '@material-ui/icons/CalendarViewDayRounded';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import Filter1Icon from '@material-ui/icons/Filter1';
 import ViewListRoundedIcon from '@material-ui/icons/ViewListRounded';
 
 export const getItemFormData = [
@@ -40,26 +42,23 @@ export const getItemFormData = [
     name: 'costprice',
     type: 'number',
     label: 'Cost Price',
-    required: true
+    required: true,
+    icon: <MonetizationOnIcon />
   },
   {
     id: 'sellingprice',
     type: 'number',
     label: 'Selling Price',
     name: 'sellingprice',
-    required: true
+    required: true,
+    icon: <MonetizationOnIcon />
   },
   {
     id: 'quantity',
     name: 'quantity',
     type: 'number',
-    label: 'Quantity'
-  },
-  {
-    id: 'reorderlevel',
-    name: 'reorderlevel',
-    type: 'number',
-    label: 'Reorder Level'
+    label: 'Quantity',
+    icon: <Filter1Icon />
   },
   {
     id: 'avatar',
@@ -68,5 +67,11 @@ export const getItemFormData = [
     label: 'Avatar',
     src: '',
     alt: 'avatar'
+  },
+  {
+    id: 'reorderlevel',
+    name: 'reorderlevel',
+    type: 'number',
+    label: 'Reorder Level'
   }
 ];

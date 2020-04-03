@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import FormBuilder from "../uis/FormBuilder";
-import { getCustomerFormData } from "../../utilities/helpers/formHelpers/customerForm";
+import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+// import FormBuilder from "../uis/FormBuilder";
+import PeopleForm from '../uis/PeopleForm';
+import { getCustomerFormData } from '../../utilities/helpers/formHelpers/customerForm';
 import {
   updateCustomerById,
   getCustomerById,
   createCustomer,
   deleteCustomer
-} from "../../http/customerApi";
-import { PAGE_ROUTES } from "../../services/routeService";
+} from '../../http/customerApi';
+import { PAGE_ROUTES } from '../../services/routeService';
 
 const FormCustomer = () => {
   const { id } = useParams();
@@ -19,12 +20,12 @@ const FormCustomer = () => {
     lastName: null,
     companyName: null,
     email: null,
-    phoneNo: "0771234567",
-    gender: "male",
+    phoneNo: '0771234567',
+    gender: 'male',
     address: null,
-    dob: "95-01-02",
+    dob: '95-01-02',
     description: null,
-    profilePicture: "hh",
+    profilePicture: 'hh',
     defaultDiscount: null,
     bankAccount: null,
     regDate: null,
@@ -54,7 +55,7 @@ const FormCustomer = () => {
     const createNewCustomer = () => {
       createCustomer(newCustomer)
         .then(() => {
-          alert("New Customer created");
+          alert('New Customer created');
           push(PAGE_ROUTES.customers);
         })
         .catch(err => {
@@ -81,7 +82,7 @@ const FormCustomer = () => {
   const handleDelete = () => {
     deleteCustomer(customer.id)
       .then(() => {
-        alert("Succuessfully deleted");
+        alert('Succuessfully deleted');
         push(PAGE_ROUTES.customers);
       })
       .catch(err => {
@@ -91,8 +92,8 @@ const FormCustomer = () => {
   if (customer.id) {
     return (
       <div>
-        <FormBuilder
-          title={"Edit Customer"}
+        <PeopleForm
+          title={'Edit Customer'}
           data={dataWithValue}
           onClick={handleFormSubmit}
           actor={customer}
@@ -102,8 +103,8 @@ const FormCustomer = () => {
     );
   } else {
     return (
-      <FormBuilder
-        title={"Create new Customer"}
+      <PeopleForm
+        title={'Create new Customer'}
         data={getCustomerFormData}
         onClick={handleCreateNewCustomer}
         actor={customer}

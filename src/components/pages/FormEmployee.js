@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import FormBuilder from "../uis/FormBuilder";
-import { getEmployeeFormData } from "../../utilities/helpers/formHelpers/employeeForm";
+import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import FormBuilder from '../uis/FormBuilder';
+import PeopleForm from '../uis/PeopleForm';
+import { getEmployeeFormData } from '../../utilities/helpers/formHelpers/employeeForm';
 import {
   updateEmployeeById,
   getEmployeeById,
   createEmployee,
   deleteEmployee
-} from "../../http/employeeApi";
-import { PAGE_ROUTES } from "../../services/routeService";
+} from '../../http/employeeApi';
+import { PAGE_ROUTES } from '../../services/routeService';
 
 const FormEmployee = () => {
   const { id } = useParams();
@@ -19,12 +20,12 @@ const FormEmployee = () => {
     lastName: null,
     companyName: null,
     email: null,
-    phoneNo: "0771234567",
-    gender: "male",
+    phoneNo: '0771234567',
+    gender: 'male',
     address: null,
-    dob: "95-01-02",
+    dob: '95-01-02',
     description: null,
-    profilePicture: "hh",
+    profilePicture: 'hh',
     defaultDiscount: null,
     bankAccount: null,
     regDate: null,
@@ -54,7 +55,7 @@ const FormEmployee = () => {
     const createNewEmployee = () => {
       createEmployee(newEmployee)
         .then(() => {
-          alert("New Employee created");
+          alert('New Employee created');
           push(PAGE_ROUTES.employees);
         })
         .catch(err => {
@@ -81,7 +82,7 @@ const FormEmployee = () => {
   const handleDelete = () => {
     deleteEmployee(employee.id)
       .then(() => {
-        alert("Succuessfully deleted");
+        alert('Succuessfully deleted');
         push(PAGE_ROUTES.employees);
       })
       .catch(err => {
@@ -92,8 +93,8 @@ const FormEmployee = () => {
     return (
       <div>
         {console.log(employee)}
-        <FormBuilder
-          title={"Edit Employee"}
+        <PeopleForm
+          title={'Edit Employee'}
           data={dataWithValue}
           onClick={handleFormSubmit}
           actor={employee}
@@ -103,8 +104,8 @@ const FormEmployee = () => {
     );
   } else {
     return (
-      <FormBuilder
-        title={"Create new Employee"}
+      <PeopleForm
+        title={'Create new Employee'}
         data={getEmployeeFormData}
         onClick={handleCreateNewEmployee}
         actor={employee}

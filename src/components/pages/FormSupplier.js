@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import FormBuilder from "../uis/FormBuilder";
-import { getSupplierFormData } from "../../utilities/helpers/formHelpers/supplierForm";
+import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+// import FormBuilder from "../uis/FormBuilder";
+import PeopleForm from '../uis/PeopleForm';
+import { getSupplierFormData } from '../../utilities/helpers/formHelpers/supplierForm';
 import {
   updateSupplierById,
   getSupplierById,
   createSupplier,
   deleteSupplier
-} from "../../http/supplierApi";
-import { PAGE_ROUTES } from "../../services/routeService";
+} from '../../http/supplierApi';
+import { PAGE_ROUTES } from '../../services/routeService';
 
 const FormSupplier = () => {
   const { id } = useParams();
@@ -19,12 +20,12 @@ const FormSupplier = () => {
     lastName: null,
     companyName: null,
     email: null,
-    phoneNo: "0771234567",
-    gender: "male",
+    phoneNo: '0771234567',
+    gender: 'male',
     address: null,
-    dob: "95-01-02",
+    dob: '95-01-02',
     description: null,
-    profilePicture: "hh",
+    profilePicture: 'hh',
     defaultDiscount: null,
     bankAccount: null,
     regDate: null,
@@ -54,7 +55,7 @@ const FormSupplier = () => {
     const createNewSupplier = () => {
       createSupplier(newSupplier)
         .then(() => {
-          alert("New Supplier created");
+          alert('New Supplier created');
           push(PAGE_ROUTES.suppliers);
         })
         .catch(err => {
@@ -81,7 +82,7 @@ const FormSupplier = () => {
   const handleDelete = () => {
     deleteSupplier(supplier.id)
       .then(() => {
-        alert("Succuessfully deleted");
+        alert('Succuessfully deleted');
         push(PAGE_ROUTES.suppliers);
       })
       .catch(err => {
@@ -92,8 +93,8 @@ const FormSupplier = () => {
     return (
       <div>
         {console.log(supplier)}
-        <FormBuilder
-          title={"Edit Supplier"}
+        <PeopleForm
+          title={'Edit Supplier'}
           data={dataWithValue}
           onClick={handleFormSubmit}
           actor={supplier}
@@ -103,8 +104,8 @@ const FormSupplier = () => {
     );
   } else {
     return (
-      <FormBuilder
-        title={"Create new Supplier"}
+      <PeopleForm
+        title={'Create new Supplier'}
         data={getSupplierFormData}
         onClick={handleCreateNewSupplier}
         actor={supplier}

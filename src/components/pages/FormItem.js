@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import FormBuilder from '../uis/FormBuilder';
+// import FormBuilder from '../uis/FormBuilder';
+import PeopleForm from '../uis/PeopleForm';
 import { getItemFormData } from '../../utilities/helpers/formHelpers/itemForm';
 import {
   updateItemById,
@@ -86,7 +87,7 @@ const FormItem = () => {
   if (item.id) {
     return (
       <div>
-        <FormBuilder
+        <PeopleForm
           title={'Edit Item'}
           data={dataWithValue}
           onClick={handleFormSubmit}
@@ -97,7 +98,7 @@ const FormItem = () => {
     );
   } else {
     return (
-      <FormBuilder
+      <PeopleForm
         title={'Create new Item'}
         data={getItemFormData}
         onClick={handleCreateNewItem}
