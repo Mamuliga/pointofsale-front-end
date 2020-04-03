@@ -14,7 +14,8 @@ const ProtectedRoute = props => {
   ) : props.isAuthenticated ? (
     <Route {...props} />
   ) : (
-    <Redirect to={PAGE_ROUTES.login} />
+    <Route {...props} />
+    // <Redirect to={PAGE_ROUTES.login} />
   );
 };
 

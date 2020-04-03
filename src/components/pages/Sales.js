@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import TableBuilder from "../uis/TableBuilder.js";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { getSaleList } from "../../http/saleApi";
 import { getSaleTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 import useStyles from "../../styles/useStyles.js";
 import TextField from "@material-ui/core/TextField";
 
 const Sales = () => {
-  const { location, push } = useHistory();
+  // const { location, push } = useHistory();
   const [saleList, setSaleList] = useState([]);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const Sales = () => {
           </div>
           <InputBase
             autoFocus
-            placeholder='Search…'
+            placeholder="Search…"
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput
@@ -70,10 +70,10 @@ const Sales = () => {
       </form>
       <div className={classes.customerName}>
         <TextField
-          id='outlined-textarea'
-          label='Customer Name'
+          id="outlined-textarea"
+          label="Customer Name"
           multiline
-          variant='outlined'
+          variant="outlined"
         />
       </div>
     </div>
@@ -94,27 +94,27 @@ const Sales = () => {
       <div>
         <div className={classes.total}>
           <TextField
-            id='outlined-textarea'
-            label='Total'
+            id="outlined-textarea"
+            label="Total"
             multiline
-            variant='outlined'
+            variant="outlined"
           />
         </div>
 
         <div className={classes.cash}>
           <TextField
-            id='outlined-textarea'
-            label='Cash'
+            id="outlined-textarea"
+            label="Cash"
             multiline
-            variant='outlined'
+            variant="outlined"
           />
         </div>
         <div className={classes.balance}>
           <TextField
-            id='outlined-textarea'
-            label='Balance'
+            id="outlined-textarea"
+            label="Balance"
             multiline
-            variant='outlined'
+            variant="outlined"
           />
         </div>
       </div>
