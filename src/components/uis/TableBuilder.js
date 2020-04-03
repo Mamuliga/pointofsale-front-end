@@ -107,7 +107,7 @@ const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   return (
     <Toolbar className={classes.root}>
-      <Typography className={classes.title} variant="h6" id="tableTitle">
+      <Typography className={classes.title} variant='h6' id='tableTitle'>
         {props.title}
       </Typography>
     </Toolbar>
@@ -145,7 +145,8 @@ export default function TableBuilder({
   handleEdit,
   handleDelete,
   tableTopUis,
-  hidePagination
+  hidePagination,
+  editableRowIndexes = []
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -192,7 +193,7 @@ export default function TableBuilder({
                   return (
                     <TableRow hover tabIndex={-1} key={row.id}>
                       {Object.values(row).map((cell, index) => {
-                        return <TableCell key={index}>{cell}</TableCell>;
+                        return getTableCell(index, cell, editableRowIndexes);
                       })}
                       {getTableRightAlignIcons(row, handleEdit, handleDelete)}
                     </TableRow>
@@ -209,7 +210,7 @@ export default function TableBuilder({
         {!hidePagination && (
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
-            component="div"
+            component='div'
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
@@ -222,6 +223,17 @@ export default function TableBuilder({
   );
 }
 
+function getTableCell(index, cell, editableRowIndexes) {
+  if (editableRowIndexes.includes(index)) {
+    return (
+      <TableCell key={index}>
+        <input type='text' value={cell} />{" "}
+      </TableCell>
+    );
+  }
+  return <TableCell key={index}>{cell}</TableCell>;
+}
+
 function getTableRightAlignIcons(row, handleEdit, handledelete) {
   let rightAlignIcon = "";
   if (handleEdit) {
@@ -230,7 +242,7 @@ function getTableRightAlignIcons(row, handleEdit, handledelete) {
     rightAlignIcon = <DeleteIcon onClick={handledelete(row)} />;
   }
   return (
-    <TableCell key={"edit"} align="right">
+    <TableCell key={"edit"} align='right'>
       {rightAlignIcon}
     </TableCell>
   );
