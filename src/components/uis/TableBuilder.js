@@ -147,7 +147,8 @@ export default function TableBuilder({
   handleDelete,
   tableTopUis,
   hidePagination,
-  editableRowIndexes = []
+  editableRowIndexes = [],
+  autoFocusCell
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -194,7 +195,12 @@ export default function TableBuilder({
                   return (
                     <TableRow hover tabIndex={-1} key={row.id}>
                       {Object.values(row).map((cell, index) => {
-                        return getTableCell(index, cell, editableRowIndexes);
+                        return getTableCell(
+                          index,
+                          cell,
+                          editableRowIndexes,
+                          autoFocusCell
+                        );
                       })}
                       {getTableRightAlignIcons(row, handleEdit, handleDelete)}
                     </TableRow>
@@ -224,11 +230,15 @@ export default function TableBuilder({
   );
 }
 
-function getTableCell(index, cell, editableRowIndexes) {
+function getTableCell(index, cell, editableRowIndexes, autoFocusCell) {
   if (editableRowIndexes.includes(index)) {
     return (
       <TableCell key={index}>
-        <InputBase autoFocus type='text' value={cell} />
+        <InputBase
+          autoFocus={autoFocusCell === index}
+          type='text'
+          value={cell}
+        />
       </TableCell>
     );
   }

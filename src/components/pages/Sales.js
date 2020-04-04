@@ -68,7 +68,7 @@ const Sales = () => {
           </div>
           <InputBase
             autoFocus
-            placeholder="Search…"
+            placeholder='Search…'
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput
@@ -79,10 +79,10 @@ const Sales = () => {
       </form>
       <div className={classes.customerName}>
         <TextField
-          id="outlined-textarea"
-          label="Customer Name"
+          id='outlined-textarea'
+          label='Customer Name'
           multiline
-          variant="outlined"
+          variant='outlined'
         />
       </div>
     </div>
@@ -99,32 +99,33 @@ const Sales = () => {
           title={"Sales"}
           hidePagination
           editableRowIndexes={[2, 3, 4]}
+          autoFocusCell={4}
         />
       </div>
       <div>
         <div className={classes.total}>
           <TextField
-            id="outlined-textarea"
-            label="Total"
+            id='outlined-textarea'
+            label='Total'
             multiline
-            variant="outlined"
+            variant='outlined'
           />
         </div>
 
         <div className={classes.cash}>
           <TextField
-            id="outlined-textarea"
-            label="Cash"
+            id='outlined-textarea'
+            label='Cash'
             multiline
-            variant="outlined"
+            variant='outlined'
           />
         </div>
         <div className={classes.balance}>
           <TextField
-            id="outlined-textarea"
-            label="Balance"
+            id='outlined-textarea'
+            label='Balance'
             multiline
-            variant="outlined"
+            variant='outlined'
           />
         </div>
       </div>
