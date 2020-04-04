@@ -228,12 +228,7 @@ function getTableCell(index, cell, editableRowIndexes) {
   if (editableRowIndexes.includes(index)) {
     return (
       <TableCell key={index}>
-        <InputBase
-          autoFocus
-          type='text'
-          value={cell}
-          // inputProps={{ "aria-label": "naked" }}
-        />{" "}
+        <InputBase autoFocus type='text' value={cell} />
       </TableCell>
     );
   }
