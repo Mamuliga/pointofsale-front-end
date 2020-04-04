@@ -15,8 +15,8 @@ const Sales = () => {
       id: 1,
       itemName: "sup1",
       price: "sup1last",
-      quantity: "1",
       disc: "male",
+      quantity: "1",
       total: "Description1"
     }
   ]);
@@ -26,8 +26,8 @@ const Sales = () => {
       .then(res => {
         console.log(res);
         const displaySaleList = res.data.map(
-          ({ id, ItemName, Price, Quantity, Disc, Total, Update }) => {
-            return { id, ItemName, Price, Quantity, Disc, Total, Update };
+          ({ id, ItemName, Price, Disc, Quantity, Total }) => {
+            return { id, ItemName, Price, Disc, Quantity, Total };
           }
         );
         setSaleList(displaySaleList);
@@ -44,8 +44,8 @@ const Sales = () => {
         id: 1,
         itemName: "sup1",
         price: "sup1last",
-        quantity: "1",
         disc: "male",
+        quantity: "1",
         total: "Description1"
       }
     ]);
@@ -68,7 +68,7 @@ const Sales = () => {
           </div>
           <InputBase
             autoFocus
-            placeholder='Search…'
+            placeholder="Search…"
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput
@@ -79,10 +79,10 @@ const Sales = () => {
       </form>
       <div className={classes.customerName}>
         <TextField
-          id='outlined-textarea'
-          label='Customer Name'
+          id="outlined-textarea"
+          label="Customer Name"
           multiline
-          variant='outlined'
+          variant="outlined"
         />
       </div>
     </div>
@@ -104,27 +104,27 @@ const Sales = () => {
       <div>
         <div className={classes.total}>
           <TextField
-            id='outlined-textarea'
-            label='Total'
+            id="outlined-textarea"
+            label="Total"
             multiline
-            variant='outlined'
+            variant="outlined"
           />
         </div>
 
         <div className={classes.cash}>
           <TextField
-            id='outlined-textarea'
-            label='Cash'
+            id="outlined-textarea"
+            label="Cash"
             multiline
-            variant='outlined'
+            variant="outlined"
           />
         </div>
         <div className={classes.balance}>
           <TextField
-            id='outlined-textarea'
-            label='Balance'
+            id="outlined-textarea"
+            label="Balance"
             multiline
-            variant='outlined'
+            variant="outlined"
           />
         </div>
       </div>
