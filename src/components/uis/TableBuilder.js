@@ -108,7 +108,7 @@ const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   return (
     <Toolbar className={classes.root}>
-      <Typography className={classes.title} variant="h6" id="tableTitle">
+      <Typography className={classes.title} variant='h6' id='tableTitle'>
         {props.title}
       </Typography>
     </Toolbar>
@@ -147,7 +147,7 @@ export default function TableBuilder({
   handleDelete,
   tableTopUis,
   hidePagination,
-  editableRowIndexes
+  editableRowIndexes = []
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -211,7 +211,7 @@ export default function TableBuilder({
         {!hidePagination && (
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
-            component="div"
+            component='div'
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
@@ -230,7 +230,7 @@ function getTableCell(index, cell, editableRowIndexes) {
       <TableCell key={index}>
         <InputBase
           autoFocus
-          type="text"
+          type='text'
           value={cell}
           // inputProps={{ "aria-label": "naked" }}
         />{" "}
@@ -248,7 +248,7 @@ function getTableRightAlignIcons(row, handleEdit, handledelete) {
     rightAlignIcon = <DeleteIcon onClick={handledelete(row)} />;
   }
   return (
-    <TableCell key={"edit"} align="right">
+    <TableCell key={"edit"} align='right'>
       {rightAlignIcon}
     </TableCell>
   );
