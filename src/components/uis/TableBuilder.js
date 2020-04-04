@@ -12,9 +12,7 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import InputBase from "@material-ui/core/InputBase";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -144,11 +142,9 @@ export default function TableBuilder({
   tableHeaders: headers,
   title,
   handleEdit,
-  handleDelete,
   tableTopUis,
   hidePagination,
-  editableRowIndexes = [],
-  autoFocusCell
+  tableRows
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -189,23 +185,21 @@ export default function TableBuilder({
               headers={headers}
             />
             <TableBody>
-              {stableSort(rows, getSorting(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(row => {
-                  return (
-                    <TableRow hover tabIndex={-1} key={row.id}>
-                      {Object.values(row).map((cell, index) => {
-                        return getTableCell(
-                          index,
-                          cell,
-                          editableRowIndexes,
-                          autoFocusCell
-                        );
-                      })}
-                      {getTableRightAlignIcons(row, handleEdit, handleDelete)}
-                    </TableRow>
-                  );
-                })}
+              {tableRows ||
+                stableSort(rows, getSorting(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(row => {
+                    return (
+                      <TableRow hover tabIndex={-1} key={row.id}>
+                        {Object.values(row).map((cell, index) => {
+                          return <TableCell key={index}>{cell}</TableCell>;
+                        })}
+                        <TableCell key={"edit"} align='right'>
+                          <EditIcon onClick={handleEdit(row)} />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
@@ -227,34 +221,5 @@ export default function TableBuilder({
         )}
       </Paper>
     </div>
-  );
-}
-
-function getTableCell(index, cell, editableRowIndexes, autoFocusCell) {
-  if (editableRowIndexes.includes(index)) {
-    return (
-      <TableCell key={index}>
-        <InputBase
-          autoFocus={autoFocusCell === index}
-          type='text'
-          value={cell}
-        />
-      </TableCell>
-    );
-  }
-  return <TableCell key={index}>{cell}</TableCell>;
-}
-
-function getTableRightAlignIcons(row, handleEdit, handledelete) {
-  let rightAlignIcon = "";
-  if (handleEdit) {
-    rightAlignIcon = <EditIcon onClick={handleEdit(row)} />;
-  } else if (handledelete) {
-    rightAlignIcon = <DeleteIcon onClick={handledelete(row)} />;
-  }
-  return (
-    <TableCell key={"edit"} align='right'>
-      {rightAlignIcon}
-    </TableCell>
   );
 }

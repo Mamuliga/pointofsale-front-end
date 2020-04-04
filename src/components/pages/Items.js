@@ -5,6 +5,7 @@ import { getItemTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 
 const Items = () => {
   const itemRowKey = items => `${items.itemname}`;
+  const handleEdit = () => {};
   const getSelectedRows = selectedRows => {
     console.log("In Customers", selectedRows);
   };
@@ -54,6 +55,7 @@ const Items = () => {
       tableData={itemTableContent()}
       tableHeaders={getItemTableHeaders}
       title={"Items"}
+      handleEdit={handleEdit}
     />
   );
 };
