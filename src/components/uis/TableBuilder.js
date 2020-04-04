@@ -147,7 +147,7 @@ export default function TableBuilder({
   handleDelete,
   tableTopUis,
   hidePagination,
-  editableRowIndexes = []
+  editableRowIndexes
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
