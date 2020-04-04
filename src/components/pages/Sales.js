@@ -10,16 +10,7 @@ import TextField from "@material-ui/core/TextField";
 
 const Sales = () => {
   // const { location, push } = useHistory();
-  const [saleList, setSaleList] = useState([
-    {
-      id: 1,
-      itemName: "sup1",
-      price: "sup1last",
-      disc: "male",
-      quantity: "1",
-      total: "Description1"
-    }
-  ]);
+  const [saleList, setSaleList] = useState([]);
 
   useEffect(() => {
     getSaleList()
