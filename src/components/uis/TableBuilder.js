@@ -12,7 +12,8 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import InputBase from "@material-ui/core/InputBase";
+// import InputBase from "@material-ui/core/InputBase";
+import TextField from "@material-ui/core/TextField";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -108,7 +109,7 @@ const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   return (
     <Toolbar className={classes.root}>
-      <Typography className={classes.title} variant='h6' id='tableTitle'>
+      <Typography className={classes.title} variant="h6" id="tableTitle">
         {props.title}
       </Typography>
     </Toolbar>
@@ -211,7 +212,7 @@ export default function TableBuilder({
         {!hidePagination && (
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
-            component='div'
+            component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
@@ -228,12 +229,14 @@ function getTableCell(index, cell, editableRowIndexes) {
   if (editableRowIndexes.includes(index)) {
     return (
       <TableCell key={index}>
-        <InputBase
+        <TextField id="filled-basic" label="Filled" variant="filled" />
+
+        {/* <InputBase
           autoFocus
           type='text'
           value={cell}
           // inputProps={{ "aria-label": "naked" }}
-        />{" "}
+        />{" "} */}
       </TableCell>
     );
   }
@@ -248,7 +251,7 @@ function getTableRightAlignIcons(row, handleEdit, handledelete) {
     rightAlignIcon = <DeleteIcon onClick={handledelete(row)} />;
   }
   return (
-    <TableCell key={"edit"} align='right'>
+    <TableCell key={"edit"} align="right">
       {rightAlignIcon}
     </TableCell>
   );

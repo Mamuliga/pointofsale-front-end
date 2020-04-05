@@ -101,9 +101,9 @@ export default makeStyles(theme => ({
     }
   },
   search: {
-    border: "1px solid Gainsboro",
-    borderRadius: "5em",
-    width: "250px",
+    // border: "1px solid Gainsboro",
+    // borderRadius: "5em",
+    width: "100%",
     height: "40px",
     display: "center",
     paddingRight: theme.spacing(2),
@@ -129,5 +129,8 @@ export default makeStyles(theme => ({
   },
   customerName: {
     textAlign: "right"
+  },
+  button: {
+    textAlign: "left"
   }
 }));

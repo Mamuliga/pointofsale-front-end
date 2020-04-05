@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
+// import InputBase from "@material-ui/core/InputBase";
 import TableBuilder from "../uis/TableBuilder.js";
 // import { useHistory } from "react-router-dom";
 import { getSaleList } from "../../http/saleApi";
 import { getSaleTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 import useStyles from "../../styles/useStyles.js";
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const Sales = () => {
   // const { location, push } = useHistory();
@@ -66,7 +67,7 @@ const Sales = () => {
           <div className={classes.searchIcon}>
             <SearchIcon />
           </div>
-          <InputBase
+          <TextField
             autoFocus
             placeholder="Search…"
             classes={{
@@ -128,6 +129,9 @@ const Sales = () => {
           />
         </div>
       </div>
+      <Button className={classes.button} variant="contained" color="primary">
+        Submit
+      </Button>
     </div>
   );
 };
