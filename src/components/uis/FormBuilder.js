@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormGroup, Box } from '@material-ui/core';
+import { FormGroup } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import CustomTextField from './FormComponents/CustomTextField';
@@ -7,12 +7,19 @@ import CustomGender from './FormComponents/CustomGender';
 import CustomPhone from './FormComponents/CustomPhone';
 import { Button } from '@material-ui/core';
 import CustomAvatar from './FormComponents/CustomAvatar';
+import DatePicker from './FormComponents/DatePicker';
 
 const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
-    console.log({ ...newActor, [name]: value });
+  };
+
+  const handleDatePickerChange = (date, name) => {
+    setNewActor({
+      ...newActor,
+      [name]: date.toLocaleDateString(),
+    });
   };
   return (
     <div>
@@ -20,15 +27,21 @@ const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
         <div>
           <Grid>
             <Typography variant="h6" noWrap>
-              <Box ineHeight={2} m={1}>
-                {title}
-              </Box>
+              {/* <Box ineHeight={2} m={1}> */}
+              {title}
+              {/* </Box> */}
             </Typography>
           </Grid>
-          {data.map(entry => {
+          {data.map((entry) => {
             switch (entry.type) {
-              case 'text':
               case 'date':
+                return (
+                  <DatePicker
+                    entry={entry}
+                    handleDatePickerChange={handleDatePickerChange}
+                  />
+                );
+              case 'text':
               case 'email':
                 return (
                   <CustomTextField
