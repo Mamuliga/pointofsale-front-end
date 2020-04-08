@@ -7,7 +7,8 @@ import { AUTH_LOCAL_STORAGE } from "./utilities/constants";
 import TopMenu from "./components/uis/TopMenu";
 import {
   showTopMenuForRoute,
-  showSideMenuForRoute
+  showSideMenuForRoute,
+  PAGE_ROUTES
 } from "./services/routeService";
 import SideMenuRoutes from "./routes/SideMenuRoutes";
 import { getUserList } from "./http/usersApi";
@@ -27,13 +28,19 @@ function App(props) {
 
   useEffect(loadPersistentAuthData, []);
   return (
-    <div className="App">
+    <div className='App'>
       {showTopMenuForRoute(pathname) && (
         <TopMenu selectedKey={pathname} onLogoutPress={props.onLogoutPress} />
       )}
       <div>
         {showSideMenuForRoute(pathname) && <SideMenuRoutes />}
-        <div className={classes.mainRouteView}>
+        <div
+          className={
+            pathname === PAGE_ROUTES.sales
+              ? classes.mainRouteViewRightSidebar
+              : classes.mainRouteViewLeftSidebar
+          }
+        >
           <Routes {...props} />
         </div>
       </div>

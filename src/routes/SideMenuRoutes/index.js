@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch } from "react-router-dom";
+import { Switch, useLocation } from "react-router-dom";
 import { Drawer, Divider, List } from "@material-ui/core";
 import {
   Customers,
@@ -14,10 +14,17 @@ import useStyles from "../../styles/useStyles";
 
 const SideMenuRoutes = props => {
   const classes = useStyles();
+  const { pathname } = useLocation();
+  const getSidePane = route => {
+    if (route === PAGE_ROUTES.sales) {
+      return "Right";
+    }
+    return "Left";
+  };
   return (
     <Drawer
-      variant="persistent"
-      anchor="Right"
+      variant='persistent'
+      anchor={getSidePane(pathname)}
       open
       classes={{ paper: classes.drawerPaper }}
     >

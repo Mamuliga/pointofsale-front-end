@@ -35,9 +35,14 @@ export default makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3)
   },
-  mainRouteView: {
+  mainRouteViewLeftSidebar: {
     maxWidth: `calc(100% - ${SIDE_BAR_WIDTH}px)`,
     marginLeft: SIDE_BAR_WIDTH,
+    marginTop: TOP_MENU_MAX_HEIGHT
+  },
+  mainRouteViewRightSidebar: {
+    maxWidth: `calc(100% - ${SIDE_BAR_WIDTH}px)`,
+    marginRight: SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT
   },
   navButton: {
