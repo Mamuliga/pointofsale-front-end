@@ -85,7 +85,8 @@ export default makeStyles(theme => ({
     // justifyContent: "center"
   },
   inputRoot: {
-    color: "inherit"
+    color: "inherit",
+    width: "100%"
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -100,14 +101,28 @@ export default makeStyles(theme => ({
       }
     }
   },
+  searchTab: {
+    border: 0,
+    margin: 0,
+    // width: "700px",
+    display: "inline-flex",
+    padding: 0,
+    marginLeft: "50px",
+    position: "relative",
+    minWidth: 0,
+    flexDirection: "column",
+    verticalAlign: "top"
+    // minWidth: 0,
+    // position: "relative",
+    // width: "700px",
+    // height: "40px",
+    // display: "center",
+    // paddingRight: theme.spacing(2),
+    // marginLeft: "30px"
+  },
   search: {
-    // border: "1px solid Gainsboro",
-    // borderRadius: "5em",
-    width: "100%",
-    height: "40px",
-    display: "center",
-    paddingRight: theme.spacing(2),
-    marginLeft: "30px"
+    marginLeft: "50px",
+    width: "1000px"
   },
   total: {
     display: "flex",
