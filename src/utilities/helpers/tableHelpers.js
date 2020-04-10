@@ -1,141 +1,170 @@
 const getEditColumn = () => ({
-  id: "edit",
+  id: 'edit',
   numeric: false,
   disablePadding: false,
-  label: ""
+  label: '',
 });
 
 export const getCustomerTableHeaders = [
   {
-    id: "id",
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: "Customer Id"
+    label: 'Customer Id',
   },
   {
-    id: "firstName",
+    id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: "First Name"
+    label: 'First Name',
   },
-  { id: "lastName", numeric: false, disablePadding: false, label: "Last Name" },
-  { id: "email", numeric: false, disablePadding: false, label: "Email" },
+  { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
+  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
   {
-    id: "gender",
+    id: 'gender',
     numeric: false,
     disablePadding: false,
-    label: "Gender"
+    label: 'Gender',
   },
   {
-    id: "bankAccount",
+    id: 'bankAccount',
     numeric: false,
     disablePadding: false,
-    label: "Acc no"
+    label: 'Acc no',
   },
-  getEditColumn()
+  getEditColumn(),
 ];
 
 export const getEmployeeTableHeaders = [
   {
-    id: "id",
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: "Employee Id"
+    label: 'Employee Id',
   },
   {
-    id: "firstName",
+    id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: "First Name"
+    label: 'First Name',
   },
-  { id: "lastName", numeric: false, disablePadding: false, label: "Last Name" },
-  { id: "email", numeric: false, disablePadding: false, label: "Email" },
+  { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
+  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
   {
-    id: "gender",
+    id: 'gender',
     numeric: false,
     disablePadding: false,
-    label: "Gender"
+    label: 'Gender',
   },
   {
-    id: "bankAccount",
+    id: 'bankAccount',
     numeric: false,
     disablePadding: false,
-    label: "Acc no"
-  }
+    label: 'Acc no',
+  },
 ];
 
 export const getSupplierTableHeaders = [
   {
-    id: "id",
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: "Supplier Id"
+    label: 'Supplier Id',
   },
   {
-    id: "firstName",
+    id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: "First Name"
+    label: 'First Name',
   },
-  { id: "lastName", numeric: false, disablePadding: false, label: "Last Name" },
-  { id: "email", numeric: false, disablePadding: false, label: "Email" },
+  { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
+  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
   {
-    id: "gender",
+    id: 'gender',
     numeric: false,
     disablePadding: false,
-    label: "Gender"
+    label: 'Gender',
   },
   {
-    id: "bankAccount",
+    id: 'bankAccount',
     numeric: false,
     disablePadding: false,
-    label: "Acc no"
-  }
+    label: 'Acc no',
+  },
 ];
 
 export const getItemTableHeaders = [
   {
-    id: "itemid",
+    id: 'itemid',
     numeric: true,
     disablePadding: false,
-    label: "Item Id"
+    label: 'Item Id',
   },
-  { id: "barcode", numeric: true, disablePadding: false, label: "Bar Code" },
-  { id: "itemname", numeric: true, disablePadding: false, label: "Item Name" },
+  { id: 'barcode', numeric: true, disablePadding: false, label: 'Bar Code' },
+  { id: 'itemname', numeric: true, disablePadding: false, label: 'Item Name' },
   {
-    id: "category",
+    id: 'category',
     numeric: true,
     disablePadding: false,
-    label: "Category"
-  },
-  {
-    id: "costprice",
-    numeric: true,
-    disablePadding: false,
-    label: "Cost Price"
+    label: 'Category',
   },
   {
-    id: "sellingprice",
+    id: 'costprice',
     numeric: true,
     disablePadding: false,
-    label: "Selling Price"
+    label: 'Cost Price',
   },
   {
-    id: "quantity",
+    id: 'sellingprice',
     numeric: true,
     disablePadding: false,
-    label: "Quantity"
+    label: 'Selling Price',
   },
   {
-    id: "storelocation",
+    id: 'quantity',
     numeric: true,
     disablePadding: false,
-    label: "Store Location"
+    label: 'Quantity',
   },
   {
-    id: "avatar",
+    id: 'storelocation',
     numeric: true,
     disablePadding: false,
-    label: "Avatar"
-  }
+    label: 'Store Location',
+  },
+  {
+    id: 'avatar',
+    numeric: true,
+    disablePadding: false,
+    label: 'Avatar',
+  },
+];
+export const getCashupTableHeaders = [
+  {
+    id: 'id',
+    numeric: false,
+    disablePadding: false,
+    label: 'Cashup Id',
+  },
+  {
+    id: 'firstName',
+    numeric: false,
+    disablePadding: false,
+    label: 'First Name',
+  },
+  { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
+  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
+  {
+    id: 'gender',
+    numeric: false,
+    disablePadding: false,
+    label: 'Gender',
+  },
+  {
+    id: 'bankAccount',
+    numeric: false,
+    disablePadding: false,
+    label: 'Acc no',
+  },
+  getEditColumn(),
 ];

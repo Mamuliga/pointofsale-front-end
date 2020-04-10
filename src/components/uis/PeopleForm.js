@@ -10,17 +10,25 @@ import Box from '@material-ui/core/Box';
 import CustomAvatar from './FormComponents/CustomAvatar';
 import CreateIcon from '@material-ui/icons/Create';
 import { makeStyles } from '@material-ui/core/styles';
+import DatePicker from './FormComponents/DatePicker';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   margin: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   textField: {
-    width: '40ch'
-  }
+    width: '40ch',
+  },
 }));
 
-const PeopleForm = ({ title, data, onClick, actor, handleDelete }) => {
+const PeopleForm = ({
+  title,
+  data,
+  onClick,
+  actor,
+  handleDelete,
+  handleDatePickerChange,
+}) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
@@ -41,16 +49,22 @@ const PeopleForm = ({ title, data, onClick, actor, handleDelete }) => {
                 </Box>
               </Typography>
             </Grid>
-            {data.map(entry => {
+            {data.map((entry) => {
               switch (entry.type) {
                 case 'text':
-                case 'date':
                 case 'email':
                   return (
                     <CustomTextField
                       entry={entry}
                       key={entry.label}
                       getValue={getValue}
+                    />
+                  );
+                case 'date':
+                  return (
+                    <DatePicker
+                      entry={entry}
+                      handleDatePickerChange={handleDatePickerChange}
                     />
                   );
                 case 'radio':

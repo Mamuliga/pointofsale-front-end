@@ -6,9 +6,11 @@ import NotFoundPage from './NotFoundPage';
 import FormCustomer from './FormCustomer';
 import FormEmployee from './FormEmployee';
 import FormSupplier from './FormSupplier';
+import FormCashup from './FormCashup';
 import FormItem from './FormItem';
 import Employees from './Employees';
 import Suppliers from './Suppliers';
+import Cashups from './Cashups';
 
 export {
   Dashboard,
@@ -17,9 +19,11 @@ export {
   Employees,
   Suppliers,
   Items,
+  Cashups,
   NotFoundPage,
   FormCustomer,
   FormEmployee,
   FormSupplier,
-  FormItem
+  FormItem,
+  FormCashup,
 };

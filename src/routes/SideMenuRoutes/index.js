@@ -6,13 +6,14 @@ import {
   Employees,
   Suppliers,
   Dashboard,
-  Items
+  Items,
+  Cashups,
 } from '../../components/pages/sideMenu';
 import ProtectedRoute from '../ProtectedRoute';
 import { PAGE_ROUTES } from '../../services/routeService';
 import useStyles from '../../styles/useStyles';
 
-const SideMenuRoutes = props => {
+const SideMenuRoutes = (props) => {
   const classes = useStyles();
   return (
     <Drawer
@@ -40,6 +41,7 @@ const SideMenuRoutes = props => {
               path={PAGE_ROUTES.employees}
               component={Employees}
             />
+            <ProtectedRoute path={PAGE_ROUTES.cashups} component={Cashups} />
 
             <ProtectedRoute path={PAGE_ROUTES.items} component={Items} />
 
