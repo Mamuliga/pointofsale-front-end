@@ -4,11 +4,21 @@ import { Dashboard, Login, Customers, NotFoundPage } from '../components/pages';
 import ProtectedRoute from './ProtectedRoute';
 import { PAGE_ROUTES } from '../services/routeService';
 import {
+  Dashboard,
+  Login,
+  Customers,
+  Items,
+  NotFoundPage,
+} from '../components/pages';
+import ProtectedRoute from './ProtectedRoute';
+import { PAGE_ROUTES } from '../services/routeService';
+import {
   customerRoutes,
   employeeRoutes,
   supplierRoutes,
   itemRoutes,
   cashupRoutes,
+  saleRoutes,
 } from './routeHelper';
 
 const Routes = (props) => (
@@ -60,8 +70,18 @@ const Routes = (props) => (
         key={route.path}
       />
     ))}
+    {saleRoutes.map((route) => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
 
-    <ProtectedRoute exact path={PAGE_ROUTES.sales} component={Customers} />
+    <ProtectedRoute exact path={PAGE_ROUTES.customers} component={Customers} />
+
+    <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
   </Switch>
 );

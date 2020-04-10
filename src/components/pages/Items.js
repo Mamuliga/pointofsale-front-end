@@ -5,40 +5,25 @@ import { getItemTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getItemList } from '../../http/itemApi';
 
 const Items = () => {
-  const { location, push } = useHistory();
-  const [itemList, setItemList] = useState([]);
-
-  useEffect(() => {
-    const handleGetItemResp = res => {
-      if (Array.isArray(res.data)) {
-        const displayItemList = res.data.map(item =>
-          createItemData(
-            item.id,
-            item.barcode,
-            item.itemname,
-            item.category,
-            item.costprice,
-            item.sellingprice,
-            item.quantity,
-            item.storelocation,
-            item.avatar
-          )
-        );
-        setItemList(displayItemList);
-      }
-    };
-    const handleGetItemErr = err => {};
-
-    getItemList()
-      .then(handleGetItemResp)
-      .catch(handleGetItemErr);
-  }, []);
-
-  const handleRowClick = item => {
-    const rowClick = () => {
-      push(`${location.pathname}/edit/${item.id}`);
-    };
-    return rowClick;
+  const itemRowKey = (items) => `${items.itemname}`;
+  const handleEdit = () => {};
+  const getSelectedRows = (selectedRows) => {
+    console.log('In Customers', selectedRows);
+  };
+  const itemTableContent = () => {
+    return mockItems.map((items) =>
+      createItemData(
+        items.id,
+        items.barcode,
+        items.itemname,
+        items.category,
+        items.costprice,
+        items.sellingprice,
+        items.quantity,
+        items.storelocation,
+        items.avatar
+      )
+    );
   };
 
   function createItemData(
@@ -61,15 +46,15 @@ const Items = () => {
       sellingprice,
       quantity,
       storelocation,
-      avatar
+      avatar,
     };
   }
   return (
     <TableBuilder
       tableData={itemList}
       tableHeaders={getItemTableHeaders}
-      onRowClick={handleRowClick}
       title={'Items'}
+      handleEdit={handleEdit}
     />
   );
 };

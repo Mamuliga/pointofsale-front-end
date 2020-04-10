@@ -1159,6 +1159,7 @@
 
 "@material-ui/lab@^4.0.0-alpha.45":
 <<<<<<< HEAD
+<<<<<<< HEAD
   version "4.0.0-alpha.47"
   resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.47.tgz#757a336e4c2496f700a392ff41e25a7d460a387b"
   integrity sha512-+WC3O0M/769D3nO9Rqupusc+lob7tQMe5/DnOjAhZ0bpXlJbhZb7N84WkEk4JgQLj6ydP8e9Jhqd1lG+mGj+xw==
@@ -1167,6 +1168,11 @@
   resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.46.tgz#453546d58d3a0064263c198dedb6a1c54d24d1a4"
   integrity sha512-JGgZmj1UNP8bbYNAGvndipjXRK3x2+9mFBzbX7MyCj+WpfnJbeqTmJK2No9MXvPj/EZJ1piaKif46FdDc4U93A==
 >>>>>>> c4c9118ddf7b9a3f9e0f8ba4890ef1d9268f7344
+=======
+  version "4.0.0-alpha.46"
+  resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.46.tgz#453546d58d3a0064263c198dedb6a1c54d24d1a4"
+  integrity sha512-JGgZmj1UNP8bbYNAGvndipjXRK3x2+9mFBzbX7MyCj+WpfnJbeqTmJK2No9MXvPj/EZJ1piaKif46FdDc4U93A==
+>>>>>>> 5faa07ccefcd6310db5c525609da9979b1b5b300
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/utils" "^4.9.6"
@@ -1174,6 +1180,7 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 "@material-ui/pickers@^3.2.10":
@@ -1189,6 +1196,8 @@
     rifm "^0.7.0"
 
 >>>>>>> c4c9118ddf7b9a3f9e0f8ba4890ef1d9268f7344
+=======
+>>>>>>> 5faa07ccefcd6310db5c525609da9979b1b5b300
 "@material-ui/styles@^4.9.0":
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.9.0.tgz#10c31859f6868cfa9d3adf6b6c3e32c9d676bc76"
@@ -8963,6 +8972,7 @@ rgba-regex@^1.0.0:
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 rifm@^0.7.0:
   version "0.7.0"
@@ -8972,6 +8982,8 @@ rifm@^0.7.0:
     "@babel/runtime" "^7.3.1"
 
 >>>>>>> c4c9118ddf7b9a3f9e0f8ba4890ef1d9268f7344
+=======
+>>>>>>> 5faa07ccefcd6310db5c525609da9979b1b5b300
 rimraf@2, rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.3:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"

@@ -10,6 +10,7 @@ import {
   FormItem,
   Cashups,
   FormCashup,
+  Sales,
   PrintCashup,
 } from '../components/pages';
 
@@ -86,4 +87,11 @@ export const cashupRoutes = [
   //   path: PAGE_ROUTES.printCashup,
   //   component: PrintCashup,
   // },
+];
+
+export const saleRoutes = [
+  {
+    path: PAGE_ROUTES.sales,
+    component: Sales,
+  },
 ];

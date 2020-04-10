@@ -93,6 +93,35 @@ export const getSupplierTableHeaders = [
   },
 ];
 
+export const getSaleTableHeaders = [
+  {
+    id: "id",
+    numeric: false,
+    disablePadding: false,
+    label: "Sale Id"
+  },
+  {
+    id: "ItemName",
+    numeric: false,
+    disablePadding: false,
+    label: "Item Name"
+  },
+  { id: "Price", numeric: false, disablePadding: false, label: "Price" },
+  {
+    id: "Disc",
+    numeric: false,
+    disablePadding: false,
+    label: "Disc"
+  },
+  { id: "Quantity", numeric: false, disablePadding: false, label: "Quantity" },
+  {
+    id: "Total",
+    numeric: false,
+    disablePadding: false,
+    label: "Total"
+  }
+];
+
 export const getItemTableHeaders = [
   {
     id: 'itemid',

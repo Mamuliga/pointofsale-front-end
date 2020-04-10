@@ -106,7 +106,7 @@ const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   return (
     <Toolbar className={classes.root}>
-      <Typography className={classes.title} variant='h6' id='tableTitle'>
+      <Typography className={classes.title} variant="h6" id="tableTitle">
         {props.title}
       </Typography>
     </Toolbar>
@@ -121,9 +121,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     marginBottom: theme.spacing(2)
   },
-  table: {
-    minWidth: 750
-  },
+  table: {},
   visuallyHidden: {
     border: 0,
     clip: "rect(0 0 0 0)",
@@ -141,7 +139,10 @@ export default function TableBuilder({
   tableData: rows,
   tableHeaders: headers,
   title,
-  handleEdit
+  handleEdit,
+  tableTopUis,
+  hidePagination,
+  tableRows
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -171,6 +172,7 @@ export default function TableBuilder({
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar headers={headers} title={title} />
+        {tableTopUis}
         <TableContainer>
           <Table className={classes.table} size={"medium"}>
             <EnhancedTableHead
@@ -181,20 +183,21 @@ export default function TableBuilder({
               headers={headers}
             />
             <TableBody>
-              {stableSort(rows, getSorting(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(row => {
-                  return (
-                    <TableRow hover tabIndex={-1} key={row.id}>
-                      {Object.values(row).map((cell, index) => {
-                        return <TableCell key={index}>{cell}</TableCell>;
-                      })}
-                      <TableCell key={"edit"} align='right'>
-                        <EditIcon onClick={handleEdit(row)} />
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+              {tableRows ||
+                stableSort(rows, getSorting(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(row => {
+                    return (
+                      <TableRow hover tabIndex={-1} key={row.id}>
+                        {Object.values(row).map((cell, index) => {
+                          return <TableCell key={index}>{cell}</TableCell>;
+                        })}
+                        <TableCell key={"edit"} align="right">
+                          <EditIcon onClick={handleEdit(row)} />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
@@ -203,15 +206,17 @@ export default function TableBuilder({
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component='div'
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        {!hidePagination && (
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        )}
       </Paper>
     </div>
   );
