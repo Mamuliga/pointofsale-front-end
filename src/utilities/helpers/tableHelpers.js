@@ -125,49 +125,26 @@ export const getSaleTableHeaders = [
 export const getItemTableHeaders = [
   {
     id: 'itemid',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Item Id',
   },
-  { id: 'barcode', numeric: true, disablePadding: false, label: 'Bar Code' },
-  { id: 'itemname', numeric: true, disablePadding: false, label: 'Item Name' },
+  { id: 'barcode', numeric: false, disablePadding: false, label: 'Bar Code' },
+  { id: 'itemname', numeric: false, disablePadding: false, label: 'Item Name' },
   {
     id: 'category',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Category',
   },
   {
-    id: 'costprice',
-    numeric: true,
+    id: 'reorderLevel',
+    numeric: false,
     disablePadding: false,
-    label: 'Cost Price',
-  },
-  {
-    id: 'sellingprice',
-    numeric: true,
-    disablePadding: false,
-    label: 'Selling Price',
-  },
-  {
-    id: 'quantity',
-    numeric: true,
-    disablePadding: false,
-    label: 'Quantity',
-  },
-  {
-    id: 'storelocation',
-    numeric: true,
-    disablePadding: false,
-    label: 'Store Location',
-  },
-  {
-    id: 'avatar',
-    numeric: true,
-    disablePadding: false,
-    label: 'Avatar',
+    label: 'Reorder level',
   },
 ];
+
 export const getCashupTableHeaders = [
   {
     id: 'refNo',

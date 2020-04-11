@@ -4,12 +4,11 @@ import {
   Dashboard,
   Login,
   Customers,
-  Items,
   NotFoundPage,
+  Items,
 } from '../components/pages';
 import ProtectedRoute from './ProtectedRoute';
 import { PAGE_ROUTES } from '../services/routeService';
-
 import {
   customerRoutes,
   employeeRoutes,
