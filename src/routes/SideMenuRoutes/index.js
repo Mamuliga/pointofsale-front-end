@@ -5,7 +5,7 @@ import {
   Customers,
   Employees,
   Suppliers,
-  // Sales,
+  Sales,
   Dashboard
 } from "../../components/pages/sideMenu";
 import ProtectedRoute from "../ProtectedRoute";
@@ -41,7 +41,7 @@ const SideMenuRoutes = props => {
               path={PAGE_ROUTES.suppliers}
               component={Suppliers}
             />
-            {/* <ProtectedRoute path={PAGE_ROUTES.sales} component={Sales} /> */}
+            <ProtectedRoute path={PAGE_ROUTES.sales} component={Sales} />
             <ProtectedRoute
               path={PAGE_ROUTES.employees}
               component={Employees}
