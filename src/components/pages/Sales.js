@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
-// import InputBase from "@material-ui/core/InputBase";
 import TableBuilder from "../uis/TableBuilder.js";
 // import { useHistory } from "react-router-dom";
 import { getSaleList } from "../../http/saleApi";
@@ -64,13 +63,13 @@ const Sales = () => {
           if (editableRowIndexes.includes(index)) {
             return (
               <TableCell key={index}>
-                <TextField id="outlined-basic" label="" variant="outlined" />
+                <TextField id='outlined-basic' label='' variant='outlined' />
               </TableCell>
             );
           }
           return <TableCell key={index}>{cell}</TableCell>;
         })}
-        <TableCell key={"delete"} align="right">
+        <TableCell key={"delete"} align='right'>
           <DeleteIcon onClick={handleDelete(row)} />
         </TableCell>
       </TableRow>
@@ -87,7 +86,7 @@ const Sales = () => {
           <div className={classes.search}>
             <TextField
               autoFocus
-              placeholder="Search…"
+              placeholder='Search…'
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput
@@ -99,10 +98,10 @@ const Sales = () => {
       </form>
       <div className={classes.customerName}>
         <TextField
-          id="outlined-textarea"
-          label="Customer Name"
+          id='outlined-textarea'
+          label='Customer Name'
           multiline
-          variant="outlined"
+          variant='outlined'
         />
       </div>
     </div>
@@ -122,31 +121,31 @@ const Sales = () => {
       <div>
         <div className={classes.total}>
           <TextField
-            id="outlined-textarea"
-            label="Total"
+            id='outlined-textarea'
+            label='Total'
             multiline
-            variant="outlined"
+            variant='outlined'
           />
         </div>
 
         <div className={classes.cash}>
           <TextField
-            id="outlined-textarea"
-            label="Cash"
+            id='outlined-textarea'
+            label='Cash'
             multiline
-            variant="outlined"
+            variant='outlined'
           />
         </div>
         <div className={classes.balance}>
           <TextField
-            id="outlined-textarea"
-            label="Balance"
+            id='outlined-textarea'
+            label='Balance'
             multiline
-            variant="outlined"
+            variant='outlined'
           />
         </div>
       </div>
-      <Button className={classes.button} variant="contained" color="primary">
+      <Button className={classes.button} variant='contained' color='primary'>
         Submit
       </Button>
     </div>
