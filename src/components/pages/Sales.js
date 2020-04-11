@@ -96,14 +96,6 @@ const Sales = () => {
           </div>
         </div>
       </form>
-      <div className={classes.customerName}>
-        <TextField
-          id='outlined-textarea'
-          label='Customer Name'
-          multiline
-          variant='outlined'
-        />
-      </div>
     </div>
   );
 
@@ -117,33 +109,6 @@ const Sales = () => {
           hidePagination
           tableRows={tableRows}
         />
-      </div>
-      <div>
-        <div className={classes.total}>
-          <TextField
-            id='outlined-textarea'
-            label='Total'
-            multiline
-            variant='outlined'
-          />
-        </div>
-
-        <div className={classes.cash}>
-          <TextField
-            id='outlined-textarea'
-            label='Cash'
-            multiline
-            variant='outlined'
-          />
-        </div>
-        <div className={classes.balance}>
-          <TextField
-            id='outlined-textarea'
-            label='Balance'
-            multiline
-            variant='outlined'
-          />
-        </div>
       </div>
       <Button className={classes.button} variant='contained' color='primary'>
         Submit
