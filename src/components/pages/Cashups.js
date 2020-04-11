@@ -5,11 +5,19 @@ import { getCashupTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getCashupList } from '../../http/cashupApi';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import { Grid, FormControl } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'inline',
+    margin: theme.spacing(1),
+  },
+  margin: theme.spacing(2),
+}));
 
 const Cashups = () => {
   const { location, push } = useHistory();
@@ -38,10 +46,25 @@ const Cashups = () => {
     return editClick;
   };
 
-  return (
-    <FormControl>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify="left">
+  const classes = useStyles();
+
+  const dateComponent = (
+    <div>
+      <MuiPickersUtilsProvider container utils={DateFnsUtils}>
+        <p className={classes.root}>To :</p>
+        <Grid className={classes.root}>
+          <KeyboardDatePicker
+            margin="medium"
+            id="date-picker-dialog"
+            format="MM/dd/yyyy"
+            // name={}
+            // label={label}
+            // value={selectedDate}
+            // onChange={handleDateChange}
+          />
+        </Grid>
+        <p className={classes.root}>From :</p>
+        <Grid className={classes.root}>
           <KeyboardDatePicker
             margin="medium"
             id="date-picker-dialog"
@@ -53,13 +76,17 @@ const Cashups = () => {
           />
         </Grid>
       </MuiPickersUtilsProvider>
-      <TableBuilder
-        tableData={cashupList}
-        tableHeaders={getCashupTableHeaders}
-        handleEdit={handleEdit}
-        title={'Cashups'}
-      />
-    </FormControl>
+    </div>
+  );
+
+  return (
+    <TableBuilder
+      tableData={cashupList}
+      tableHeaders={getCashupTableHeaders}
+      handleEdit={handleEdit}
+      title={'Cashups'}
+      tableTopUis={dateComponent}
+    />
   );
 };
 

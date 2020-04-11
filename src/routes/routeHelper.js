@@ -11,7 +11,7 @@ import {
   Cashups,
   FormCashup,
   Sales,
-  PrintCashup,
+  // PrintCashup,
 } from '../components/pages';
 
 export const customerRoutes = [

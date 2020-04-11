@@ -1,8 +1,5 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import { Dashboard, Login, Customers, NotFoundPage } from '../components/pages';
-import ProtectedRoute from './ProtectedRoute';
-import { PAGE_ROUTES } from '../services/routeService';
 import {
   Dashboard,
   Login,
@@ -12,6 +9,7 @@ import {
 } from '../components/pages';
 import ProtectedRoute from './ProtectedRoute';
 import { PAGE_ROUTES } from '../services/routeService';
+
 import {
   customerRoutes,
   employeeRoutes,

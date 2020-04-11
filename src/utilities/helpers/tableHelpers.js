@@ -95,31 +95,31 @@ export const getSupplierTableHeaders = [
 
 export const getSaleTableHeaders = [
   {
-    id: "id",
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: "Sale Id"
+    label: 'Sale Id',
   },
   {
-    id: "ItemName",
+    id: 'ItemName',
     numeric: false,
     disablePadding: false,
-    label: "Item Name"
+    label: 'Item Name',
   },
-  { id: "Price", numeric: false, disablePadding: false, label: "Price" },
+  { id: 'Price', numeric: false, disablePadding: false, label: 'Price' },
   {
-    id: "Disc",
+    id: 'Disc',
     numeric: false,
     disablePadding: false,
-    label: "Disc"
+    label: 'Disc',
   },
-  { id: "Quantity", numeric: false, disablePadding: false, label: "Quantity" },
+  { id: 'Quantity', numeric: false, disablePadding: false, label: 'Quantity' },
   {
-    id: "Total",
+    id: 'Total',
     numeric: false,
     disablePadding: false,
-    label: "Total"
-  }
+    label: 'Total',
+  },
 ];
 
 export const getItemTableHeaders = [
@@ -170,30 +170,35 @@ export const getItemTableHeaders = [
 ];
 export const getCashupTableHeaders = [
   {
-    id: 'id',
+    id: 'refNo',
     numeric: false,
     disablePadding: false,
-    label: 'Cashup Id',
+    label: 'Ref. No.',
   },
   {
-    id: 'firstName',
+    id: 'date',
     numeric: false,
     disablePadding: false,
-    label: 'First Name',
-  },
-  { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
-  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
-  {
-    id: 'gender',
-    numeric: false,
-    disablePadding: false,
-    label: 'Gender',
+    label: 'Date',
   },
   {
-    id: 'bankAccount',
+    id: 'description',
     numeric: false,
     disablePadding: false,
-    label: 'Acc no',
+    label: 'Description',
   },
+  { id: 'credit', numeric: true, disablePadding: false, label: 'Credit' },
+  {
+    id: 'debit',
+    numeric: true,
+    disablePadding: false,
+    label: 'Debit',
+  },
+  // {
+  //   id: 'bankAccount',
+  //   numeric: false,
+  //   disablePadding: false,
+  //   label: 'Acc no',
+  // },
   getEditColumn(),
 ];
