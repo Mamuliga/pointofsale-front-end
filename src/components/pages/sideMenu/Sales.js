@@ -8,36 +8,31 @@ const Sale = props => {
     <Fragment>
       <div>
         <div className={classes.customerName}>
-          <TextField
-            id='outlined-textarea'
-            label='Customer Name'
-            multiline
-            variant='outlined'
-          />
+          <TextField id="standard-basic" label="Customer Name" />
         </div>
         <div className={classes.total}>
           <TextField
-            id='outlined-textarea'
-            label='Total'
+            id="outlined-textarea"
+            label="Total"
             multiline
-            variant='outlined'
+            variant="outlined"
           />
         </div>
 
         <div className={classes.cash}>
           <TextField
-            id='outlined-textarea'
-            label='Cash'
+            id="outlined-textarea"
+            label="Cash"
             multiline
-            variant='outlined'
+            variant="outlined"
           />
         </div>
         <div className={classes.balance}>
           <TextField
-            id='outlined-textarea'
-            label='Balance'
+            id="outlined-textarea"
+            label="Balance"
             multiline
-            variant='outlined'
+            variant="outlined"
           />
         </div>
       </div>

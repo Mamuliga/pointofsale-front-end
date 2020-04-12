@@ -127,7 +127,7 @@ export default makeStyles(theme => ({
   },
   search: {
     marginLeft: "50px",
-    width: "1000px"
+    width: "1200px"
   },
   total: {
     display: "flex",
@@ -148,7 +148,8 @@ export default makeStyles(theme => ({
     paddingTop: theme.spacing(1)
   },
   customerName: {
-    textAlign: "right"
+    textAlign: "right",
+    marginBottom: theme.spacing(45)
   },
   button: {
     textAlign: "left"
