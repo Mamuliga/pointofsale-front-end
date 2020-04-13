@@ -9,7 +9,6 @@ import TextField from "@material-ui/core/TextField";
 import TableRow from "@material-ui/core/TableRow";
 import { TableCell } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Button from "@material-ui/core/Button";
 
 const Sales = () => {
   // const { location, push } = useHistory();
@@ -63,13 +62,13 @@ const Sales = () => {
           if (editableRowIndexes.includes(index)) {
             return (
               <TableCell key={index}>
-                <TextField id='outlined-basic' label='' variant='outlined' />
+                <TextField id="outlined-basic" label="" variant="outlined" />
               </TableCell>
             );
           }
           return <TableCell key={index}>{cell}</TableCell>;
         })}
-        <TableCell key={"delete"} align='right'>
+        <TableCell key={"delete"} align="right">
           <DeleteIcon onClick={handleDelete(row)} />
         </TableCell>
       </TableRow>
@@ -86,7 +85,7 @@ const Sales = () => {
           <div className={classes.search}>
             <TextField
               autoFocus
-              placeholder='Search…'
+              placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput
@@ -110,9 +109,6 @@ const Sales = () => {
           tableRows={tableRows}
         />
       </div>
-      <Button className={classes.button} variant='contained' color='primary'>
-        Submit
-      </Button>
     </div>
   );
 };

@@ -149,9 +149,14 @@ export default makeStyles(theme => ({
   },
   customerName: {
     textAlign: "right",
-    marginBottom: theme.spacing(45)
+    marginBottom: theme.spacing(22)
+  },
+  saleId: {
+    textAlign: "right"
   },
   button: {
-    textAlign: "left"
+    textAlign: "left",
+    width: "100%",
+    marginBottom: theme.spacing(1)
   }
 }));
