@@ -11,20 +11,37 @@ import {
 import ProtectedRoute from "../ProtectedRoute";
 import { PAGE_ROUTES } from "../../services/routeService";
 import useStyles from "../../styles/useStyles";
-
 const SideMenuRoutes = props => {
   const classes = useStyles();
   const { pathname } = useLocation();
-  const getSidePane = route => {
-    if (route === PAGE_ROUTES.sales) {
+  const getSidePane = () => {
+    if (pathname === PAGE_ROUTES.sales) {
       return "Right";
     }
     return "Left";
   };
+  const footerBar = () => {
+    if (pathname === PAGE_ROUTES.sales) {
+      return (
+        <div className={classes.copyrightLabel} hidden>
+          <p>Emerald IT</p>
+          <p>Point of sale Solution</p>
+          <p>&copy; All right reserved</p>
+        </div>
+      );
+    }
+    return (
+      <div className={classes.copyrightLabel}>
+        <p>Emerald IT</p>
+        <p>Point of sale Solution</p>
+        <p>&copy; All right reserved</p>
+      </div>
+    );
+  };
   return (
     <Drawer
       variant="persistent"
-      anchor={getSidePane(pathname)}
+      anchor={getSidePane()}
       open
       classes={{ paper: classes.drawerPaper }}
     >
@@ -51,11 +68,7 @@ const SideMenuRoutes = props => {
             <ProtectedRoute component={Dashboard} authRequired />
           </Switch>
         </List>
-        <div className={classes.copyrightLabel}>
-          <p>Emerald IT</p>
-          <p>Point of sale Solution</p>
-          <p>&copy; All right reserved</p>
-        </div>
+        {footerBar()}
       </div>
     </Drawer>
   );
