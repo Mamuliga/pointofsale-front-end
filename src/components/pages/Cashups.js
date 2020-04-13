@@ -14,9 +14,8 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'inline',
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
   },
-  margin: theme.spacing(2),
 }));
 
 const Cashups = () => {
@@ -34,8 +33,8 @@ const Cashups = () => {
         setCashupList(displayCashupList);
       }
     };
-    const handleGetCashupErr = (err) => {};
 
+    const handleGetCashupErr = (err) => {};
     getCashupList().then(handleGetCashupResp).catch(handleGetCashupErr);
   }, []);
 
@@ -46,36 +45,44 @@ const Cashups = () => {
     return editClick;
   };
 
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date('2014-08-18T21:11:54')
+  );
+  console.log(selectedDate, setSelectedDate);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   const classes = useStyles();
 
   const dateComponent = (
     <div>
-      <MuiPickersUtilsProvider container utils={DateFnsUtils}>
-        <p className={classes.root}>To :</p>
-        <Grid className={classes.root}>
+      <Grid item>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <p className={classes.root}>To :</p>
           <KeyboardDatePicker
             margin="medium"
             id="date-picker-dialog"
-            format="MM/dd/yyyy"
-            // name={}
+            // name={name}
             // label={label}
-            // value={selectedDate}
-            // onChange={handleDateChange}
+            format="  MM  / dd  / yyyy  "
+            value={selectedDate}
+            onChange={handleDateChange}
           />
-        </Grid>
-        <p className={classes.root}>From :</p>
-        <Grid className={classes.root}>
+        </MuiPickersUtilsProvider>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <p className={classes.root}>From :</p>
           <KeyboardDatePicker
             margin="medium"
             id="date-picker-dialog"
-            format="MM/dd/yyyy"
-            // name={}
+            // name={name}
             // label={label}
-            // value={selectedDate}
-            // onChange={handleDateChange}
+            format="  MM  / dd  / yyyy  "
+            value={selectedDate}
+            onChange={handleDateChange}
           />
-        </Grid>
-      </MuiPickersUtilsProvider>
+        </MuiPickersUtilsProvider>
+      </Grid>
     </div>
   );
 

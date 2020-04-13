@@ -4,24 +4,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Grid from '@material-ui/core/Grid';
 
 // TODO: Need to move Global Styles
 // and make it much simpler
-const useStyles = makeStyles(theme => ({
-  margin: {
-    margin: theme.spacing(1)
-  },
-  textField: {
-    width: '40ch'
-  },
+const useStyles = makeStyles((theme) => ({
   root: {
     '&:hover': {
       backgroundColor: 'transparent',
       display: 'flex',
-      flexWrap: 'wrap'
-    }
+      flexWrap: 'wrap',
+    },
   },
   icon: {
     borderRadius: '50%',
@@ -34,15 +28,15 @@ const useStyles = makeStyles(theme => ({
       'linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))',
     '$root.Mui-focusVisible &': {
       outline: '2px auto rgba(19,124,189,.6)',
-      outlineOffset: 2
+      outlineOffset: 2,
     },
     'input:hover ~ &': {
-      backgroundColor: '#ebf1f5'
+      backgroundColor: '#ebf1f5',
     },
     'input:disabled ~ &': {
       boxShadow: 'none',
-      background: 'rgba(206,217,224,.5)'
-    }
+      background: 'rgba(206,217,224,.5)',
+    },
   },
   checkedIcon: {
     backgroundColor: '#137cbd',
@@ -53,12 +47,12 @@ const useStyles = makeStyles(theme => ({
       width: 16,
       height: 16,
       backgroundImage: 'radial-gradient(#fff,#fff 28%,transparent 32%)',
-      content: '""'
+      content: '""',
     },
     'input:hover ~ &': {
-      backgroundColor: '#106ba3'
-    }
-  }
+      backgroundColor: '#106ba3',
+    },
+  },
 }));
 
 function StyledRadio(props) {
@@ -79,9 +73,7 @@ function StyledRadio(props) {
 const CustomGender = ({ entry, getValue }) => {
   const { value, name } = entry;
   const [newValue, setNewValue] = useState(value);
-  const classes = useStyles();
-
-  const handleChange = e => {
+  const handleChange = (e) => {
     console.log(e.target.value);
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
@@ -89,10 +81,7 @@ const CustomGender = ({ entry, getValue }) => {
     }
   };
   return (
-    <FormControl
-      component="fieldset"
-      className={clsx(classes.margin, classes.textField)}
-    >
+    <Grid item xs={6}>
       <FormLabel component="legend">Gender</FormLabel>
       <RadioGroup
         row
@@ -109,7 +98,7 @@ const CustomGender = ({ entry, getValue }) => {
           label="Female"
         />
       </RadioGroup>
-    </FormControl>
+    </Grid>
   );
 };
 

@@ -16,60 +16,60 @@ export const getCustomerFormData = [
     label: 'First Name',
     name: 'firstName',
     required: true,
-    icon: <PersonIcon />
+    icon: <PersonIcon />,
   },
   {
     id: 'lastName',
     type: 'text',
     label: 'Last Name',
     name: 'lastName',
-    required: true,
-    icon: <PersonIcon />
+    required: false,
+    icon: <PersonIcon />,
   },
   {
     id: 'companyName',
     type: 'text',
     label: 'Company Name',
     name: 'companyName',
-    required: true,
-    icon: <BusinessIcon />
+    required: false,
+    icon: <BusinessIcon />,
   },
   {
     id: 'email',
     type: 'email',
     label: 'Email',
     name: 'email',
-    required: true,
-    icon: <EmailIcon />
+    required: false,
+    icon: <EmailIcon />,
   },
   {
     id: 'phoneNo',
     name: 'phoneNo',
     type: 'number',
     label: 'Mobile Number',
-    required: true,
-    icon: <PhoneIphoneIcon />
+    required: false,
+    icon: <PhoneIphoneIcon />,
   },
   {
     id: 'address',
     type: 'text',
     label: 'Address',
     name: 'address',
-    required: true,
-    icon: <HomeIcon />
+    required: false,
+    icon: <HomeIcon />,
   },
   {
     id: 'gender',
     name: 'gender',
     type: 'radio',
-    label: 'gender'
+    label: 'gender',
   },
   {
     id: 'dob',
     name: 'dob',
     type: 'date',
     label: 'Date of Birth',
-    icon: <TodayIcon />
+    icon: <TodayIcon />,
   },
 
   {
@@ -77,40 +77,16 @@ export const getCustomerFormData = [
     type: 'text',
     label: 'Default Discount',
     name: 'defaultDiscount',
-    required: true,
-    icon: <LocalOfferIcon />
+    required: false,
+    icon: <LocalOfferIcon />,
   },
   {
     id: 'bankAccount',
     type: 'text',
     label: 'Bank Account',
     name: 'bankAccount',
-    required: true,
-    icon: <MonetizationOnIcon />
-  },
-  {
-    id: 'regDate',
-    type: 'text',
-    label: 'Reg Date',
-    name: 'regDate',
-    required: true,
-    icon: <TodayIcon />
-  },
-  {
-    id: 'recruiter',
-    type: 'text',
-    label: 'Recruiter',
-    name: 'recruiter',
-    required: true,
-    icon: <RecentActorsIcon />
-  },
-  {
-    id: 'profilePicture',
-    name: 'profilePicture',
-    type: 'avatar',
-    label: 'avatar',
-    src: '',
-    alt: 'profile pic'
+    required: false,
+    icon: <MonetizationOnIcon />,
   },
   {
     id: 'description',
@@ -119,6 +95,22 @@ export const getCustomerFormData = [
     name: 'description',
     multiline: true,
     rows: 4,
-    required: true
-  }
+    required: false,
+  },
+  {
+    id: 'recruiter',
+    type: 'text',
+    label: 'Recruiter',
+    name: 'recruiter',
+    required: false,
+    icon: <RecentActorsIcon />,
+  },
+  {
+    id: 'profilePicture',
+    name: 'profilePicture',
+    type: 'avatar',
+    label: 'avatar',
+    src: '',
+    alt: 'profile pic',
+  },
 ];

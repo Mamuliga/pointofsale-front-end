@@ -1,116 +1,39 @@
 import React from 'react';
-import PersonIcon from '@material-ui/icons/Person';
-import EmailIcon from '@material-ui/icons/Email';
-import HomeIcon from '@material-ui/icons/Home';
 import BusinessIcon from '@material-ui/icons/Business';
 import TodayIcon from '@material-ui/icons/Today';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 
 export const getCashupFormData = [
   {
-    id: 'firstName',
+    id: 'refNumber',
     type: 'text',
-    label: 'First Name',
-    name: 'firstName',
+    label: 'Ref. No',
+    name: 'refNumber',
     required: true,
-    icon: <PersonIcon />,
   },
   {
-    id: 'lastName',
-    type: 'text',
-    label: 'Last Name',
-    name: 'lastName',
+    id: 'date',
+    type: 'date',
+    label: 'Date',
+    name: 'date',
     required: true,
-    icon: <PersonIcon />,
+    icon: <TodayIcon />,
   },
   {
-    id: 'companyName',
-    type: 'text',
-    label: 'Company Name',
-    name: 'companyName',
+    id: 'payment',
+    type: 'dropDown',
+    label: 'Payment',
+    name: 'payment',
     required: true,
     icon: <BusinessIcon />,
   },
   {
-    id: 'email',
-    type: 'email',
-    label: 'Email',
-    name: 'email',
-    required: true,
-    icon: <EmailIcon />,
-  },
-  {
-    id: 'phoneNo',
-    name: 'phoneNo',
+    id: 'amount',
+    name: 'amount',
     type: 'number',
-    label: 'Mobile Number',
-    required: true,
-    icon: <PhoneIphoneIcon />,
-  },
-  {
-    id: 'address',
-    type: 'text',
-    label: 'Address',
-    name: 'address',
-    required: true,
-    icon: <HomeIcon />,
-  },
-  {
-    id: 'gender',
-    name: 'gender',
-    type: 'radio',
-    label: 'gender',
-  },
-  {
-    id: 'dob',
-    name: 'dob',
-    type: 'date',
-    label: 'Date of Birth',
-    icon: <TodayIcon />,
-  },
-
-  {
-    id: 'defaultDiscount',
-    type: 'text',
-    label: 'Default Discount',
-    name: 'defaultDiscount',
-    required: true,
-    icon: <LocalOfferIcon />,
-  },
-  {
-    id: 'bankAccount',
-    type: 'text',
-    label: 'Bank Account',
-    name: 'bankAccount',
+    label: 'Amount',
     required: true,
     icon: <MonetizationOnIcon />,
-  },
-  {
-    id: 'regDate',
-    type: 'text',
-    label: 'Reg Date',
-    name: 'regDate',
-    required: true,
-    icon: <TodayIcon />,
-  },
-  {
-    id: 'recruiter',
-    type: 'text',
-    label: 'Recruiter',
-    name: 'recruiter',
-    required: true,
-    icon: <RecentActorsIcon />,
-  },
-  {
-    id: 'profilePicture',
-    name: 'profilePicture',
-    type: 'avatar',
-    label: 'avatar',
-    src: '',
-    alt: 'profile pic',
   },
   {
     id: 'description',

@@ -91,15 +91,13 @@ const FormCashup = () => {
   };
   if (cashup.id) {
     return (
-      <div>
-        <PeopleForm
-          title={'Edit cashup'}
-          data={dataWithValue}
-          onClick={handleFormSubmit}
-          actor={cashup}
-          handleDelete={handleDelete}
-        />
-      </div>
+      <PeopleForm
+        title={'Edit cashup'}
+        data={dataWithValue}
+        onClick={handleFormSubmit}
+        actor={cashup}
+        handleDelete={handleDelete}
+      />
     );
   } else {
     return (

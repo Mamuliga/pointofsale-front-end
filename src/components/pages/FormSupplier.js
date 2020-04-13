@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-// import FormBuilder from "../uis/FormBuilder";
 import PeopleForm from '../uis/PeopleForm';
 import { getSupplierFormData } from '../../utilities/helpers/formHelpers/supplierForm';
 import {
   updateSupplierById,
   getSupplierById,
   createSupplier,
-  deleteSupplier
+  deleteSupplier,
 } from '../../http/supplierApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 
@@ -29,16 +28,16 @@ const FormSupplier = () => {
     defaultDiscount: null,
     bankAccount: null,
     regDate: null,
-    recruiter: null
+    recruiter: null,
   });
 
   useEffect(() => {
-    getSupplierById(id).then(res => {
+    getSupplierById(id).then((res) => {
       const dataArray = [];
       const data = getSupplierFormData;
       const newSupplier = res.data;
-      Object.keys(res.data).forEach(id => {
-        data.forEach(entry => {
+      Object.keys(res.data).forEach((id) => {
+        data.forEach((entry) => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newSupplier[`${id}`] });
           }
@@ -51,28 +50,28 @@ const FormSupplier = () => {
     });
   }, [supplier.id, id]);
 
-  const handleCreateNewSupplier = newSupplier => {
+  const handleCreateNewSupplier = (newSupplier) => {
     const createNewSupplier = () => {
       createSupplier(newSupplier)
         .then(() => {
           alert('New Supplier created');
           push(PAGE_ROUTES.suppliers);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     };
     return createNewSupplier;
   };
 
-  const handleFormSubmit = updatedSupplier => {
+  const handleFormSubmit = (updatedSupplier) => {
     const formSubmit = () => {
       updateSupplierById(updatedSupplier.id, updatedSupplier)
-        .then(res => {
+        .then((res) => {
           console.log(res.data);
           push(PAGE_ROUTES.suppliers);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     };
@@ -85,22 +84,19 @@ const FormSupplier = () => {
         alert('Succuessfully deleted');
         push(PAGE_ROUTES.suppliers);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
   if (supplier.id) {
     return (
-      <div>
-        {console.log(supplier)}
-        <PeopleForm
-          title={'Edit Supplier'}
-          data={dataWithValue}
-          onClick={handleFormSubmit}
-          actor={supplier}
-          handleDelete={handleDelete}
-        />
-      </div>
+      <PeopleForm
+        title={'Edit Supplier'}
+        data={dataWithValue}
+        onClick={handleFormSubmit}
+        actor={supplier}
+        handleDelete={handleDelete}
+      />
     );
   } else {
     return (

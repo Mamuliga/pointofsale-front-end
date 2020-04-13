@@ -7,7 +7,7 @@ import {
   updateCustomerById,
   getCustomerById,
   createCustomer,
-  deleteCustomer
+  deleteCustomer,
 } from '../../http/customerApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 
@@ -29,16 +29,16 @@ const FormCustomer = () => {
     defaultDiscount: null,
     bankAccount: null,
     regDate: null,
-    recruiter: null
+    recruiter: null,
   });
 
   useEffect(() => {
-    getCustomerById(id).then(res => {
+    getCustomerById(id).then((res) => {
       const dataArray = [];
       const data = getCustomerFormData;
       const newCustomer = res.data;
-      Object.keys(res.data).forEach(id => {
-        data.forEach(entry => {
+      Object.keys(res.data).forEach((id) => {
+        data.forEach((entry) => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newCustomer[`${id}`] });
           }
@@ -51,28 +51,28 @@ const FormCustomer = () => {
     });
   }, [customer.id, id]);
 
-  const handleCreateNewCustomer = newCustomer => {
+  const handleCreateNewCustomer = (newCustomer) => {
     const createNewCustomer = () => {
       createCustomer(newCustomer)
         .then(() => {
           alert('New Customer created');
           push(PAGE_ROUTES.customers);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     };
     return createNewCustomer;
   };
 
-  const handleFormSubmit = updatedCustomer => {
+  const handleFormSubmit = (updatedCustomer) => {
     const formSubmit = () => {
       updateCustomerById(updatedCustomer.id, updatedCustomer)
-        .then(res => {
+        .then((res) => {
           console.log(res.data);
           push(PAGE_ROUTES.customers);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     };
@@ -85,21 +85,19 @@ const FormCustomer = () => {
         alert('Succuessfully deleted');
         push(PAGE_ROUTES.customers);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
   if (customer.id) {
     return (
-      <div>
-        <PeopleForm
-          title={'Edit Customer'}
-          data={dataWithValue}
-          onClick={handleFormSubmit}
-          actor={customer}
-          handleDelete={handleDelete}
-        />
-      </div>
+      <PeopleForm
+        title={'Edit Customer'}
+        data={dataWithValue}
+        onClick={handleFormSubmit}
+        actor={customer}
+        handleDelete={handleDelete}
+      />
     );
   } else {
     return (

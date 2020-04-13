@@ -91,16 +91,13 @@ const FormEmployee = () => {
   };
   if (employee.id) {
     return (
-      <div>
-        {console.log(employee)}
-        <PeopleForm
-          title={'Edit Employee'}
-          data={dataWithValue}
-          onClick={handleFormSubmit}
-          actor={employee}
-          handleDelete={handleDelete}
-        />
-      </div>
+      <PeopleForm
+        title={'Edit Employee'}
+        data={dataWithValue}
+        onClick={handleFormSubmit}
+        actor={employee}
+        handleDelete={handleDelete}
+      />
     );
   } else {
     return (

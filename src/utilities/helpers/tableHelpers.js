@@ -171,11 +171,5 @@ export const getCashupTableHeaders = [
     disablePadding: false,
     label: 'Debit',
   },
-  // {
-  //   id: 'bankAccount',
-  //   numeric: false,
-  //   disablePadding: false,
-  //   label: 'Acc no',
-  // },
   getEditColumn(),
 ];

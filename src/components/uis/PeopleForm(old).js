@@ -1,27 +1,23 @@
 import React, { useState } from 'react';
+import { FormGroup, Container } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import CustomTextField from './FormComponents/CustomTextField';
 import CustomGender from './FormComponents/CustomGender';
 import CustomPhone from './FormComponents/CustomPhone';
-import { Button, Container } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CustomAvatar from './FormComponents/CustomAvatar';
 import CreateIcon from '@material-ui/icons/Create';
 import { makeStyles } from '@material-ui/core/styles';
 import DatePicker from './FormComponents/DatePicker';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import DropDown from './FormComponents/DropDown';
 
 const useStyles = makeStyles((theme) => ({
-  form: {
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(2, 0),
-  },
   margin: {
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(2),
+  },
+  textField: {
+    width: '40ch',
   },
 }));
 
@@ -38,21 +34,21 @@ const PeopleForm = ({
     setNewActor({ ...newActor, [name]: value });
     console.log({ ...newActor, [name]: value });
   };
-
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="md">
-      <CssBaseline />
-      <Typography component="h1" variant="h5">
-        <Box lineHeight={2}>
-          <CreateIcon className={classes.margin} />
-          {title}
-        </Box>
-      </Typography>
-      <div className={classes.paper}>
-        <form className={classes.form}>
-          <Grid container spacing={3}>
+    <div>
+      <div className={FormGroup.root}>
+        <div>
+          <Container maxWidth="md">
+            <Grid>
+              <Typography variant="h5" noWrap>
+                <Box lineHeight={2} m={1}>
+                  <CreateIcon className={classes.margin} />
+                  {title}
+                </Box>
+              </Typography>
+            </Grid>
             {data.map((entry) => {
               switch (entry.type) {
                 case 'text':
@@ -91,37 +87,30 @@ const PeopleForm = ({
                   return <CustomAvatar key={entry.label} entry={entry} />;
                 default:
                   return null;
-                case 'dropDown':
-                  return (
-                    <DropDown
-                      entry={entry}
-                      key={entry.label}
-                      getValue={getValue}
-                    />
-                  );
               }
             })}
-          </Grid>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={onClick(newActor)}
-            className={classes.submit}
-          >
-            Submit
-          </Button>
-          {newActor.id && (
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
-          )}
-        </form>
+            <div className={classes.textField}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={onClick(newActor)}
+              >
+                Submit
+              </Button>
+              {newActor.id && (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleDelete}
+                >
+                  Delete
+                </Button>
+              )}
+            </div>
+          </Container>
+        </div>
       </div>
-    </Container>
+    </div>
   );
 };
 
