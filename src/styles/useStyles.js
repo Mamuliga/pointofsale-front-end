@@ -123,37 +123,47 @@ export default makeStyles(theme => ({
     width: "100%"
   },
   total: {
+    textAlign: "left",
     display: "flex",
     justifyContent: "flex-end",
     padding: "4px",
+    flexDirection: "column",
     paddingTop: theme.spacing(1)
   },
   cash: {
     display: "flex",
     justifyContent: "flex-end",
     padding: "4px",
+    flexDirection: "column",
     paddingTop: theme.spacing(1)
   },
   balance: {
     display: "flex",
     justifyContent: "flex-end",
     padding: "4px",
+    flexDirection: "column",
     paddingTop: theme.spacing(1)
   },
   customerName: {
-    textAlign: "right",
-    marginBottom: theme.spacing(10)
+    marginBottom: theme.spacing(38),
+    paddingTop: theme.spacing(1),
+    padding: "4px",
+    display: "flex",
+    flexDirection: "column"
   },
   saleId: {
-    textAlign: "right"
+    paddingTop: theme.spacing(1),
+    padding: "4px",
+    display: "flex",
+    flexDirection: "column"
   },
   button: {
-    textAlign: "left",
     width: "100%",
     marginBottom: theme.spacing(1)
   },
   barcode: {
     width: "100%",
-    margin: "auto"
+    margin: "auto",
+    textAlign: "center"
   }
 }));
