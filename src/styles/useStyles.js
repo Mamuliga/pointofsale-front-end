@@ -1,5 +1,9 @@
 import { makeStyles } from "@material-ui/core";
-import { SIDE_BAR_WIDTH, TOP_MENU_MAX_HEIGHT } from "../utilities/constants";
+import {
+  LEFT_SIDE_BAR_WIDTH,
+  TOP_MENU_MAX_HEIGHT,
+  RIGHT_SIDE_BAR_WIDTH
+} from "../utilities/constants";
 
 export default makeStyles(theme => ({
   root: {
@@ -7,14 +11,14 @@ export default makeStyles(theme => ({
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
-      width: SIDE_BAR_WIDTH,
+      width: LEFT_SIDE_BAR_WIDTH,
       flexShrink: 0,
       zIndex: "1 !important"
     }
   },
   appBar: {
     [theme.breakpoints.up("sm")]: {
-      marginLeft: SIDE_BAR_WIDTH,
+      marginLeft: LEFT_SIDE_BAR_WIDTH,
       zIndex: 20000
     }
   },
@@ -28,21 +32,24 @@ export default makeStyles(theme => ({
     }
   },
   toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: SIDE_BAR_WIDTH
+  drawerPaperLeft: {
+    width: LEFT_SIDE_BAR_WIDTH
+  },
+  drawerPaperRight: {
+    width: RIGHT_SIDE_BAR_WIDTH
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3)
   },
   mainRouteViewLeftSidebar: {
-    maxWidth: `calc(100% - ${SIDE_BAR_WIDTH}px)`,
-    marginLeft: SIDE_BAR_WIDTH,
+    maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH}px)`,
+    marginLeft: LEFT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT
   },
   mainRouteViewRightSidebar: {
-    maxWidth: `calc(100% - ${SIDE_BAR_WIDTH}px)`,
-    marginRight: SIDE_BAR_WIDTH,
+    maxWidth: `calc(100% - ${RIGHT_SIDE_BAR_WIDTH}px)`,
+    marginRight: RIGHT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT
   },
   navButton: {

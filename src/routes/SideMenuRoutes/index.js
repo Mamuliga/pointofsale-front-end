@@ -14,12 +14,7 @@ import useStyles from "../../styles/useStyles";
 const SideMenuRoutes = props => {
   const classes = useStyles();
   const { pathname } = useLocation();
-  const getSidePane = () => {
-    if (pathname === PAGE_ROUTES.sales) {
-      return "Right";
-    }
-    return "Left";
-  };
+  const isLeftSidePane = () => pathname === PAGE_ROUTES.sales;
   const footerBar = () => {
     if (pathname === PAGE_ROUTES.sales) {
       return (
@@ -40,10 +35,15 @@ const SideMenuRoutes = props => {
   };
   return (
     <Drawer
-      variant="persistent"
-      anchor={getSidePane()}
+      variant='persistent'
+      anchor={isLeftSidePane() ? "Right" : "Left"}
       open
-      classes={{ paper: classes.drawerPaper }}
+      classes={{
+        paper:
+          classes[
+            `${isLeftSidePane() ? "drawerPaperRight" : "drawerPaperLeft"}`
+          ]
+      }}
     >
       <div className={classes.sideMenuContainer}>
         <Divider />
