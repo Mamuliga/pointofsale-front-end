@@ -9,6 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import TableRow from "@material-ui/core/TableRow";
 import { TableCell } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Barcode from "react-barcode";
 
 const Sales = () => {
   // const { location, push } = useHistory();
@@ -108,6 +109,9 @@ const Sales = () => {
           hidePagination
           tableRows={tableRows}
         />
+      </div>
+      <div className={classes.barcode}>
+        <Barcode value='0000000000001' />
       </div>
     </div>
   );

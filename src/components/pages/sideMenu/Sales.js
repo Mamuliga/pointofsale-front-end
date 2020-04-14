@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import TextField from "@material-ui/core/TextField";
 import useStyles from "../../../styles/useStyles";
 import Button from "@material-ui/core/Button";
-import Barcode from "react-barcode";
 
 const Sale = props => {
   const classes = useStyles();
@@ -58,9 +57,6 @@ const Sale = props => {
           >
             Discard
           </Button>
-        </div>
-        <div className={classes.barcode}>
-          <Barcode value='0000000000001' />
         </div>
       </div>
       {/* <Divider /> */}
