@@ -59,8 +59,6 @@ const Sale = props => {
           </Button>
         </div>
       </div>
-      {/* <Divider /> */}
-      {/* <ListItemIcon>Sales ui</ListItemIcon> */}
     </Fragment>
   );
 };
