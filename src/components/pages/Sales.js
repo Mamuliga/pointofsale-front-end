@@ -62,13 +62,13 @@ const Sales = () => {
           if (editableRowIndexes.includes(index)) {
             return (
               <TableCell key={index}>
-                <TextField id="outlined-basic" label="" variant="outlined" />
+                <TextField id='outlined-basic' label='' variant='outlined' />
               </TableCell>
             );
           }
           return <TableCell key={index}>{cell}</TableCell>;
         })}
-        <TableCell key={"delete"} align="right">
+        <TableCell key={"delete"} align='right'>
           <DeleteIcon onClick={handleDelete(row)} />
         </TableCell>
       </TableRow>
@@ -77,18 +77,18 @@ const Sales = () => {
 
   const searchComponent = (
     <div className={classes.inputsTop}>
-      <form onSubmit={handleSearchSubmit}>
+      <form onSubmit={handleSearchSubmit} className={classes.searchForm}>
         <div className={classes.searchTab}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <div className={classes.search}>
+          <div className={classes.searchField}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
             <TextField
               autoFocus
-              placeholder="Search…"
+              placeholder='Search…'
               classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
+                root: classes.searchInputRoot,
+                input: classes.searchInput
               }}
               inputProps={{ "aria-label": "search" }}
             />

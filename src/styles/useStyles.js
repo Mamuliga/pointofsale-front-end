@@ -86,23 +86,16 @@ export default makeStyles(theme => ({
     justifyContent: "space-between"
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
     height: "100%",
-    position: "absolute",
     pointerEvents: "none",
-    // display: "flex",
-    textAlign: "left",
-    alignItems: "center",
     paddingTop: theme.spacing(0.6)
-    // justifyContent: "center"
   },
-  inputRoot: {
+  searchInputRoot: {
     color: "inherit",
     width: "100%"
   },
-  inputInput: {
+  searchInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -115,26 +108,19 @@ export default makeStyles(theme => ({
   },
   searchTab: {
     border: 0,
-    margin: 0,
-    // width: "700px",
-    display: "inline-flex",
+    width: "80%",
+    margin: "auto",
     padding: 0,
-    marginLeft: "50px",
     position: "relative",
     minWidth: 0,
-    flexDirection: "column",
     verticalAlign: "top"
-    // minWidth: 0,
-    // position: "relative",
-    // width: "700px",
-    // height: "40px",
-    // display: "center",
-    // paddingRight: theme.spacing(2),
-    // marginLeft: "30px"
   },
-  search: {
-    marginLeft: "50px",
-    width: "1200px"
+  searchField: {
+    display: "inline-flex",
+    width: "100%"
+  },
+  searchForm: {
+    width: "100%"
   },
   total: {
     display: "flex",
