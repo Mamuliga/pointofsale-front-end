@@ -11,38 +11,19 @@ import {
 import ProtectedRoute from "../ProtectedRoute";
 import { PAGE_ROUTES } from "../../services/routeService";
 import useStyles from "../../styles/useStyles";
+import FooterLabel from "./FooterLabel";
 const SideMenuRoutes = props => {
   const classes = useStyles();
   const { pathname } = useLocation();
-  const isLeftSidePane = () => pathname === PAGE_ROUTES.sales;
-  const footerBar = () => {
-    if (pathname === PAGE_ROUTES.sales) {
-      return (
-        <div className={classes.copyrightLabel} hidden>
-          <p>Emerald IT</p>
-          <p>Point of sale Solution</p>
-          <p>&copy; All right reserved</p>
-        </div>
-      );
-    }
-    return (
-      <div className={classes.copyrightLabel}>
-        <p>Emerald IT</p>
-        <p>Point of sale Solution</p>
-        <p>&copy; All right reserved</p>
-      </div>
-    );
-  };
+  const isSalesPage = pathname === PAGE_ROUTES.sales;
   return (
     <Drawer
       variant='persistent'
-      anchor={isLeftSidePane() ? "Right" : "Left"}
+      anchor={isSalesPage ? "Right" : "Left"}
       open
       classes={{
         paper:
-          classes[
-            `${isLeftSidePane() ? "drawerPaperRight" : "drawerPaperLeft"}`
-          ]
+          classes[`${isSalesPage ? "drawerPaperRight" : "drawerPaperLeft"}`]
       }}
     >
       <div className={classes.sideMenuContainer}>
@@ -53,7 +34,6 @@ const SideMenuRoutes = props => {
               path={PAGE_ROUTES.customers}
               component={Customers}
             />
-
             <ProtectedRoute
               path={PAGE_ROUTES.suppliers}
               component={Suppliers}
@@ -63,12 +43,11 @@ const SideMenuRoutes = props => {
               path={PAGE_ROUTES.employees}
               component={Employees}
             />
-
             <ProtectedRoute path={PAGE_ROUTES.home} component={Dashboard} />
             <ProtectedRoute component={Dashboard} authRequired />
           </Switch>
         </List>
-        {footerBar()}
+        <FooterLabel hidden={isSalesPage} />
       </div>
     </Drawer>
   );
