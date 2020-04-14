@@ -45,12 +45,17 @@ const Cashups = () => {
     return editClick;
   };
 
-  const [selectedDate, setSelectedDate] = React.useState(
+  const [selectedDateTo, setSelectedDateTo] = React.useState(
     new Date('2014-08-18T21:11:54')
   );
-  console.log(selectedDate, setSelectedDate);
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const handleDateChangeTo = (date) => {
+    setSelectedDateTo(date);
+  };
+  const [selectedDateFrom, setSelectedDateFrom] = React.useState(
+    new Date('2014-08-18T21:11:54')
+  );
+  const handleDateChangeFrom = (date) => {
+    setSelectedDateFrom(date);
   };
 
   const classes = useStyles();
@@ -63,11 +68,9 @@ const Cashups = () => {
           <KeyboardDatePicker
             margin="medium"
             id="date-picker-dialog"
-            // name={name}
-            // label={label}
             format="  MM  / dd  / yyyy  "
-            value={selectedDate}
-            onChange={handleDateChange}
+            value={selectedDateTo}
+            onChange={handleDateChangeTo}
           />
         </MuiPickersUtilsProvider>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -75,11 +78,9 @@ const Cashups = () => {
           <KeyboardDatePicker
             margin="medium"
             id="date-picker-dialog"
-            // name={name}
-            // label={label}
             format="  MM  / dd  / yyyy  "
-            value={selectedDate}
-            onChange={handleDateChange}
+            value={selectedDateFrom}
+            onChange={handleDateChangeFrom}
           />
         </MuiPickersUtilsProvider>
       </Grid>
