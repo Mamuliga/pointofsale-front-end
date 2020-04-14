@@ -149,7 +149,7 @@ export default makeStyles(theme => ({
   },
   customerName: {
     textAlign: "right",
-    marginBottom: theme.spacing(38)
+    marginBottom: theme.spacing(10)
   },
   saleId: {
     textAlign: "right"
@@ -158,5 +158,8 @@ export default makeStyles(theme => ({
     textAlign: "left",
     width: "100%",
     marginBottom: theme.spacing(1)
+  },
+  barcode: {
+    width: "10px"
   }
 }));
