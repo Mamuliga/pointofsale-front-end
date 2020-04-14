@@ -160,6 +160,7 @@ export default makeStyles(theme => ({
     marginBottom: theme.spacing(1)
   },
   barcode: {
-    width: "10px"
+    width: "100%",
+    margin: "auto"
   }
 }));

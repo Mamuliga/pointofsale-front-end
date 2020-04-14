@@ -11,41 +11,41 @@ const Sale = props => {
     <Fragment>
       <div>
         <div className={classes.saleId}>
-          <TextField id="standard-basic" label="Sale Id" />
+          <TextField id='standard-basic' label='Sale Id' />
         </div>
         <div className={classes.customerName}>
-          <TextField id="standard-basic" label="Customer Name" />
+          <TextField id='standard-basic' label='Customer Name' />
         </div>
         <div className={classes.total}>
           <TextField
-            id="outlined-textarea"
-            label="Total"
+            id='outlined-textarea'
+            label='Total'
             multiline
-            variant="outlined"
+            variant='outlined'
           />
         </div>
 
         <div className={classes.cash}>
           <TextField
-            id="outlined-textarea"
-            label="Cash"
+            id='outlined-textarea'
+            label='Cash'
             multiline
-            variant="outlined"
+            variant='outlined'
           />
         </div>
         <div className={classes.balance}>
           <TextField
-            id="outlined-textarea"
-            label="Balance"
+            id='outlined-textarea'
+            label='Balance'
             multiline
-            variant="outlined"
+            variant='outlined'
           />
         </div>
         <div>
           <Button
             className={classes.button}
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
           >
             Submit
           </Button>
@@ -53,14 +53,14 @@ const Sale = props => {
         <div>
           <Button
             className={classes.button}
-            variant="contained"
-            color="secondary"
+            variant='contained'
+            color='secondary'
           >
             Discard
           </Button>
         </div>
         <div className={classes.barcode}>
-          <Barcode value="hi" />
+          <Barcode value='0000000000001' />
         </div>
       </div>
       {/* <Divider /> */}
