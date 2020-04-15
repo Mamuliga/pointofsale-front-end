@@ -5,20 +5,15 @@ import { getCashupTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getCashupList } from '../../http/cashupApi';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import { Grid, makeStyles } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'inline',
-    margin: theme.spacing(2),
-  },
-}));
+import useStyles from '../../styles/useStyles';
 
 const Cashups = () => {
+  const classes = useStyles();
   const { location, push } = useHistory();
   const [cashupList, setCashupList] = useState([]);
 
@@ -58,13 +53,11 @@ const Cashups = () => {
     setSelectedDateFrom(date);
   };
 
-  const classes = useStyles();
-
   const dateComponent = (
     <div>
       <Grid item>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <p className={classes.root}>To :</p>
+          <p className={classes.cashupDateAlign}>To :</p>
           <KeyboardDatePicker
             margin="medium"
             id="date-picker-dialog"
@@ -74,7 +67,7 @@ const Cashups = () => {
           />
         </MuiPickersUtilsProvider>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <p className={classes.root}>From :</p>
+          <p className={classes.cashupDateAlign}>From :</p>
           <KeyboardDatePicker
             margin="medium"
             id="date-picker-dialog"

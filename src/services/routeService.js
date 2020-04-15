@@ -10,7 +10,6 @@ export const PAGE_ROUTES = {
   cashups: '/cashups',
   newCustomer: '/customers/new',
   newCashup: '/cashups/new',
-  // printCashup: '/cashups/print',
   editCustomer: '/customers/edit/:id',
   editCashup: '/cashups/edit/:id',
   employees: '/employees',

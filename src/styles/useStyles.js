@@ -1,122 +1,121 @@
-import { makeStyles } from "@material-ui/core";
-import { SIDE_BAR_WIDTH, TOP_MENU_MAX_HEIGHT } from "../utilities/constants";
+import { makeStyles } from '@material-ui/core';
+import { SIDE_BAR_WIDTH, TOP_MENU_MAX_HEIGHT } from '../utilities/constants';
 
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: 'flex',
   },
   drawer: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       width: SIDE_BAR_WIDTH,
       flexShrink: 0,
-      zIndex: "1 !important"
-    }
+      zIndex: '1 !important',
+    },
   },
   appBar: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       marginLeft: SIDE_BAR_WIDTH,
-      zIndex: 20000
-    }
+      zIndex: 20000,
+    },
   },
   sideMenuContainer: {
-    marginTop: TOP_MENU_MAX_HEIGHT
+    marginTop: TOP_MENU_MAX_HEIGHT,
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    width: SIDE_BAR_WIDTH
+    width: SIDE_BAR_WIDTH,
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
   },
   mainRouteViewLeftSidebar: {
     maxWidth: `calc(100% - ${SIDE_BAR_WIDTH}px)`,
     marginLeft: SIDE_BAR_WIDTH,
-    marginTop: TOP_MENU_MAX_HEIGHT
+    marginTop: TOP_MENU_MAX_HEIGHT,
   },
   mainRouteViewRightSidebar: {
     maxWidth: `calc(100% - ${SIDE_BAR_WIDTH}px)`,
     marginRight: SIDE_BAR_WIDTH,
-    marginTop: TOP_MENU_MAX_HEIGHT
+    marginTop: TOP_MENU_MAX_HEIGHT,
   },
   navButton: {
     marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   innerButton: {
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
   },
   leftMenubar: {
-    display: "flex",
-    flex: 1
+    display: 'flex',
+    flex: 1,
   },
   copyrightLabel: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     backgroundColor: theme.palette.primary.dark,
-    textAlign: "center",
-    width: "100%",
+    textAlign: 'center',
+    width: '100%',
     color: theme.palette.grey[100],
-    lineHeight: 0.2
+    lineHeight: 0.2,
   },
-  customAvatarRoot: {
-    display: "flex",
-    "& > *": {
-      margin: theme.spacing(1)
-    }
+  customAvatarStyles: {
+    margin: theme.spacing(1),
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
   inputsTop: {
-    position: "relative",
-    textAlign: "left",
-    display: "flex",
-    width: "100%",
-    justifyContent: "space-between"
+    position: 'relative',
+    textAlign: 'left',
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'space-between',
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    // display: "flex",
-    textAlign: "left",
-    alignItems: "center",
-    paddingTop: theme.spacing(0.6)
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    textAlign: 'left',
+    alignItems: 'center',
+    paddingTop: theme.spacing(0.6),
     // justifyContent: "center"
+    // display: "flex",
   },
   inputRoot: {
-    color: "inherit",
-    width: "100%"
+    color: 'inherit',
+    width: '100%',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch"
-      }
-    }
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
   },
   searchTab: {
     border: 0,
     margin: 0,
     // width: "700px",
-    display: "inline-flex",
+    display: 'inline-flex',
     padding: 0,
-    marginLeft: "50px",
-    position: "relative",
+    marginLeft: '50px',
+    position: 'relative',
     minWidth: 0,
-    flexDirection: "column",
-    verticalAlign: "top"
+    flexDirection: 'column',
+    verticalAlign: 'top',
     // minWidth: 0,
     // position: "relative",
     // width: "700px",
@@ -126,31 +125,52 @@ export default makeStyles(theme => ({
     // marginLeft: "30px"
   },
   search: {
-    marginLeft: "50px",
-    width: "1000px"
+    marginLeft: '50px',
+    width: '1000px',
   },
   total: {
-    display: "flex",
-    justifyContent: "flex-end",
-    padding: "4px",
-    paddingTop: theme.spacing(1)
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: '4px',
+    paddingTop: theme.spacing(1),
   },
   cash: {
-    display: "flex",
-    justifyContent: "flex-end",
-    padding: "4px",
-    paddingTop: theme.spacing(1)
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: '4px',
+    paddingTop: theme.spacing(1),
   },
   balance: {
-    display: "flex",
-    justifyContent: "flex-end",
-    padding: "4px",
-    paddingTop: theme.spacing(1)
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: '4px',
+    paddingTop: theme.spacing(1),
   },
   customerName: {
-    textAlign: "right"
+    textAlign: 'right',
   },
   button: {
-    textAlign: "left"
-  }
+    textAlign: 'left',
+  },
+  cashupDateAlign: {
+    display: 'inline',
+    margin: theme.spacing(2),
+  },
+  ErrorDisplayRoot: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+  // peopleFormStyles: {
+  //   form: {
+  //     marginTop: theme.spacing(3),
+  //   },
+  //   submit: {
+  //     margin: theme.spacing(2, 0),
+  //   },
+  //   margin: {
+  //     marginRight: theme.spacing(1),
+  //   },
+  // },
 }));

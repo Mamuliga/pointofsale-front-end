@@ -11,7 +11,6 @@ import {
   Cashups,
   FormCashup,
   Sales,
-  // PrintCashup,
 } from '../components/pages';
 
 export const customerRoutes = [
@@ -83,10 +82,6 @@ export const cashupRoutes = [
     path: PAGE_ROUTES.editCashup,
     component: FormCashup,
   },
-  // {
-  //   path: PAGE_ROUTES.printCashup,
-  //   component: PrintCashup,
-  // },
 ];
 
 export const saleRoutes = [

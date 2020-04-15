@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-// import FormBuilder from "../uis/FormBuilder";
 import PeopleForm from '../uis/PeopleForm';
 import { getCustomerFormData } from '../../utilities/helpers/formHelpers/customerForm';
 import {
