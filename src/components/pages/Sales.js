@@ -58,18 +58,18 @@ const Sales = () => {
 
   const tableRows = saleList.map(row => {
     return (
-      <TableRow hover tabIndex={-1} key={row.id}>
+      <TableRow hover key={row.id}>
         {Object.values(row).map((cell, index) => {
           if (editableRowIndexes.includes(index)) {
             return (
               <TableCell key={index}>
-                <TextField id="outlined-basic" label="" />
+                <TextField id='outlined-basic' label='' />
               </TableCell>
             );
           }
           return <TableCell key={index}>{cell}</TableCell>;
         })}
-        <TableCell key={"delete"} align="right">
+        <TableCell key={"delete"} align='right'>
           <DeleteIcon onClick={handleDelete(row)} />
         </TableCell>
       </TableRow>
@@ -86,7 +86,7 @@ const Sales = () => {
             </div>
             <TextField
               autoFocus
-              placeholder="Search…"
+              placeholder='Search…'
               classes={{
                 root: classes.searchInputRoot,
                 input: classes.searchInput
@@ -111,7 +111,7 @@ const Sales = () => {
         />
       </div>
       <div className={classes.barcode}>
-        <Barcode value="0000000000001" />
+        <Barcode value='0000000000001' />
       </div>
     </div>
   );
