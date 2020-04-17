@@ -45,8 +45,6 @@ const Sales = () => {
     ]);
   };
 
-  const editableRowIndexes = [2, 3, 4];
-
   const handleDelete = sale => {
     const deleteClick = () => {
       // push(`${location.pathname}/delete/${sale.id}`);
@@ -55,7 +53,7 @@ const Sales = () => {
     return deleteClick;
   };
   const classes = useStyles();
-
+  const editableRowIndexes = [2, 3, 4];
   const tableRows = saleList.map(row => {
     return (
       <TableRow hover key={row.id}>
@@ -63,7 +61,11 @@ const Sales = () => {
           if (editableRowIndexes.includes(index)) {
             return (
               <TableCell key={index}>
-                <TextField id='outlined-basic' label='' />
+                <TextField
+                  id='outlined-basic'
+                  label=''
+                  autoFocus={index === 4}
+                />
               </TableCell>
             );
           }
