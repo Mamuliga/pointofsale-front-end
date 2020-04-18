@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
-// import InputBase from "@material-ui/core/InputBase";
 import TableBuilder from "../uis/TableBuilder.js";
 // import { useHistory } from "react-router-dom";
 import { getSaleList } from "../../http/saleApi";
@@ -10,7 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import TableRow from "@material-ui/core/TableRow";
 import { TableCell } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Button from "@material-ui/core/Button";
+import Barcode from "react-barcode";
 
 const Sales = () => {
   // const { location, push } = useHistory();
@@ -46,8 +45,6 @@ const Sales = () => {
     ]);
   };
 
-  const editableRowIndexes = [2, 3, 4];
-
   const handleDelete = sale => {
     const deleteClick = () => {
       // push(`${location.pathname}/delete/${sale.id}`);
@@ -56,21 +53,25 @@ const Sales = () => {
     return deleteClick;
   };
   const classes = useStyles();
-
+  const editableRowIndexes = [2, 3, 4];
   const tableRows = saleList.map(row => {
     return (
-      <TableRow hover tabIndex={-1} key={row.id}>
+      <TableRow hover key={row.id}>
         {Object.values(row).map((cell, index) => {
           if (editableRowIndexes.includes(index)) {
             return (
               <TableCell key={index}>
-                <TextField id="outlined-basic" label="" variant="outlined" />
+                <TextField
+                  id='outlined-basic'
+                  label=''
+                  autoFocus={index === 4}
+                />
               </TableCell>
             );
           }
           return <TableCell key={index}>{cell}</TableCell>;
         })}
-        <TableCell key={"delete"} align="right">
+        <TableCell key={"delete"} align='right'>
           <DeleteIcon onClick={handleDelete(row)} />
         </TableCell>
       </TableRow>
@@ -79,32 +80,24 @@ const Sales = () => {
 
   const searchComponent = (
     <div className={classes.inputsTop}>
-      <form onSubmit={handleSearchSubmit}>
+      <form onSubmit={handleSearchSubmit} className={classes.searchForm}>
         <div className={classes.searchTab}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <div className={classes.search}>
+          <div className={classes.searchField}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
             <TextField
               autoFocus
-              placeholder="Search…"
+              placeholder='Search…'
               classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
+                root: classes.searchInputRoot,
+                input: classes.searchInput
               }}
               inputProps={{ "aria-label": "search" }}
             />
           </div>
         </div>
       </form>
-      <div className={classes.customerName}>
-        <TextField
-          id="outlined-textarea"
-          label="Customer Name"
-          multiline
-          variant="outlined"
-        />
-      </div>
     </div>
   );
 
@@ -119,36 +112,9 @@ const Sales = () => {
           tableRows={tableRows}
         />
       </div>
-      <div>
-        <div className={classes.total}>
-          <TextField
-            id="outlined-textarea"
-            label="Total"
-            multiline
-            variant="outlined"
-          />
-        </div>
-
-        <div className={classes.cash}>
-          <TextField
-            id="outlined-textarea"
-            label="Cash"
-            multiline
-            variant="outlined"
-          />
-        </div>
-        <div className={classes.balance}>
-          <TextField
-            id="outlined-textarea"
-            label="Balance"
-            multiline
-            variant="outlined"
-          />
-        </div>
+      <div className={classes.barcode}>
+        <Barcode value='0000000000001' />
       </div>
-      <Button className={classes.button} variant="contained" color="primary">
-        Submit
-      </Button>
     </div>
   );
 };

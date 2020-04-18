@@ -1,5 +1,9 @@
 import { makeStyles } from '@material-ui/core';
-import { SIDE_BAR_WIDTH, TOP_MENU_MAX_HEIGHT } from '../utilities/constants';
+import {
+  LEFT_SIDE_BAR_WIDTH,
+  TOP_MENU_MAX_HEIGHT,
+  RIGHT_SIDE_BAR_WIDTH,
+} from '../utilities/constants';
 
 export default makeStyles((theme) => ({
   root: {
@@ -7,14 +11,14 @@ export default makeStyles((theme) => ({
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
-      width: SIDE_BAR_WIDTH,
+      width: LEFT_SIDE_BAR_WIDTH,
       flexShrink: 0,
       zIndex: '1 !important',
     },
   },
   appBar: {
     [theme.breakpoints.up('sm')]: {
-      marginLeft: SIDE_BAR_WIDTH,
+      marginLeft: LEFT_SIDE_BAR_WIDTH,
       zIndex: 20000,
     },
   },
@@ -28,21 +32,24 @@ export default makeStyles((theme) => ({
     },
   },
   toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: SIDE_BAR_WIDTH,
+  drawerPaperLeft: {
+    width: LEFT_SIDE_BAR_WIDTH,
+  },
+  drawerPaperRight: {
+    width: RIGHT_SIDE_BAR_WIDTH,
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
   },
   mainRouteViewLeftSidebar: {
-    maxWidth: `calc(100% - ${SIDE_BAR_WIDTH}px)`,
-    marginLeft: SIDE_BAR_WIDTH,
+    maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH}px)`,
+    marginLeft: LEFT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT,
   },
   mainRouteViewRightSidebar: {
-    maxWidth: `calc(100% - ${SIDE_BAR_WIDTH}px)`,
-    marginRight: SIDE_BAR_WIDTH,
+    maxWidth: `calc(100% - ${RIGHT_SIDE_BAR_WIDTH}px)`,
+    marginRight: RIGHT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT,
   },
   navButton: {
@@ -78,23 +85,16 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
     height: '100%',
-    position: 'absolute',
     pointerEvents: 'none',
-    textAlign: 'left',
-    alignItems: 'center',
     paddingTop: theme.spacing(0.6),
-    // justifyContent: "center"
-    // display: "flex",
   },
-  inputRoot: {
+  searchInputRoot: {
     color: 'inherit',
     width: '100%',
   },
-  inputInput: {
+  searchInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -107,70 +107,62 @@ export default makeStyles((theme) => ({
   },
   searchTab: {
     border: 0,
-    margin: 0,
-    // width: "700px",
-    display: 'inline-flex',
+    width: '80%',
+    margin: 'auto',
     padding: 0,
-    marginLeft: '50px',
     position: 'relative',
     minWidth: 0,
-    flexDirection: 'column',
     verticalAlign: 'top',
-    // minWidth: 0,
-    // position: "relative",
-    // width: "700px",
-    // height: "40px",
-    // display: "center",
-    // paddingRight: theme.spacing(2),
-    // marginLeft: "30px"
   },
-  search: {
-    marginLeft: '50px',
-    width: '1000px',
+  searchField: {
+    display: 'inline-flex',
+    width: '100%',
+  },
+  searchForm: {
+    width: '100%',
   },
   total: {
+    textAlign: 'left',
     display: 'flex',
     justifyContent: 'flex-end',
     padding: '4px',
+    flexDirection: 'column',
     paddingTop: theme.spacing(1),
   },
   cash: {
     display: 'flex',
     justifyContent: 'flex-end',
     padding: '4px',
+    flexDirection: 'column',
     paddingTop: theme.spacing(1),
   },
   balance: {
     display: 'flex',
     justifyContent: 'flex-end',
     padding: '4px',
+    flexDirection: 'column',
     paddingTop: theme.spacing(1),
   },
   customerName: {
-    textAlign: 'right',
+    marginBottom: theme.spacing(38),
+    paddingTop: theme.spacing(1),
+    padding: '4px',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  saleId: {
+    paddingTop: theme.spacing(1),
+    padding: '4px',
+    display: 'flex',
+    flexDirection: 'column',
   },
   button: {
-    textAlign: 'left',
-  },
-  cashupDateAlign: {
-    display: 'inline',
-    margin: theme.spacing(2),
-  },
-  ErrorDisplayRoot: {
     width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
+    marginBottom: theme.spacing(1),
   },
-  // peopleFormStyles: {
-  //   form: {
-  //     marginTop: theme.spacing(3),
-  //   },
-  //   submit: {
-  //     margin: theme.spacing(2, 0),
-  //   },
-  //   margin: {
-  //     marginRight: theme.spacing(1),
-  //   },
-  // },
+  barcode: {
+    width: '100%',
+    margin: 'auto',
+    textAlign: 'center',
+  },
 }));

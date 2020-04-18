@@ -5,6 +5,7 @@ import {
   Customers,
   Employees,
   Suppliers,
+  Sales,
   Dashboard,
   Items,
   Cashups,
@@ -12,10 +13,11 @@ import {
 import ProtectedRoute from '../ProtectedRoute';
 import { PAGE_ROUTES } from '../../services/routeService';
 import useStyles from '../../styles/useStyles';
-
+import FooterLabel from './FooterLabel';
 const SideMenuRoutes = (props) => {
   const classes = useStyles();
   const { pathname } = useLocation();
+  const isSalesPage = pathname === PAGE_ROUTES.sales;
   const getSidePane = (route) => {
     if (route === PAGE_ROUTES.sales) {
       return 'Right';
@@ -27,7 +29,10 @@ const SideMenuRoutes = (props) => {
       variant="persistent"
       anchor={getSidePane(pathname)}
       open
-      classes={{ paper: classes.drawerPaper }}
+      classes={{
+        paper:
+          classes[`${isSalesPage ? 'drawerPaperRight' : 'drawerPaperLeft'}`],
+      }}
     >
       <div className={classes.sideMenuContainer}>
         <Divider />
@@ -37,12 +42,11 @@ const SideMenuRoutes = (props) => {
               path={PAGE_ROUTES.customers}
               component={Customers}
             />
-
             <ProtectedRoute
               path={PAGE_ROUTES.suppliers}
               component={Suppliers}
             />
-            {/* <ProtectedRoute path={PAGE_ROUTES.sales} component={Sales} /> */}
+            <ProtectedRoute path={PAGE_ROUTES.sales} component={Sales} />
             <ProtectedRoute
               path={PAGE_ROUTES.employees}
               component={Employees}
@@ -55,11 +59,7 @@ const SideMenuRoutes = (props) => {
             <ProtectedRoute component={Dashboard} authRequired />
           </Switch>
         </List>
-        <div className={classes.copyrightLabel}>
-          <p>Emerald IT</p>
-          <p>Point of sale Solution</p>
-          <p>&copy; All right reserved</p>
-        </div>
+        <FooterLabel hidden={isSalesPage} />
       </div>
     </Drawer>
   );
