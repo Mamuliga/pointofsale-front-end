@@ -1,23 +1,31 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, useLocation } from 'react-router-dom';
 import { Drawer, Divider, List } from '@material-ui/core';
 import {
   Customers,
   Employees,
   Suppliers,
   Dashboard,
-  Items
+  Items,
+  Cashups,
 } from '../../components/pages/sideMenu';
 import ProtectedRoute from '../ProtectedRoute';
 import { PAGE_ROUTES } from '../../services/routeService';
 import useStyles from '../../styles/useStyles';
 
-const SideMenuRoutes = props => {
+const SideMenuRoutes = (props) => {
   const classes = useStyles();
+  const { pathname } = useLocation();
+  const getSidePane = (route) => {
+    if (route === PAGE_ROUTES.sales) {
+      return 'Right';
+    }
+    return 'Left';
+  };
   return (
     <Drawer
       variant="persistent"
-      anchor="left"
+      anchor={getSidePane(pathname)}
       open
       classes={{ paper: classes.drawerPaper }}
     >
@@ -34,12 +42,12 @@ const SideMenuRoutes = props => {
               path={PAGE_ROUTES.suppliers}
               component={Suppliers}
             />
-            <ProtectedRoute path={PAGE_ROUTES.sales} component={Customers} />
-
+            {/* <ProtectedRoute path={PAGE_ROUTES.sales} component={Sales} /> */}
             <ProtectedRoute
               path={PAGE_ROUTES.employees}
               component={Employees}
             />
+            <ProtectedRoute path={PAGE_ROUTES.cashups} component={Cashups} />
 
             <ProtectedRoute path={PAGE_ROUTES.items} component={Items} />
 

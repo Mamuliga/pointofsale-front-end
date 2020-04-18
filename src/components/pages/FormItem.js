@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import FormBuilder from '../uis/FormBuilder';
+import PeopleForm from '../uis/PeopleForm';
 import { getItemFormData } from '../../utilities/helpers/formHelpers/itemForm';
 import {
   updateItemById,
   getItemById,
   createItem,
-  deleteItem
+  deleteItem,
 } from '../../http/itemApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 
@@ -23,16 +23,16 @@ const FormItem = () => {
     SellingPrice: '',
     quantity: '',
     reorderLevel: '',
-    avatar: ''
+    avatar: '',
   });
 
   useEffect(() => {
-    getItemById(id).then(res => {
+    getItemById(id).then((res) => {
       const dataArray = [];
       const data = getItemFormData;
       const newItem = res.data;
-      Object.keys(res.data).forEach(id => {
-        data.forEach(entry => {
+      Object.keys(res.data).forEach((id) => {
+        data.forEach((entry) => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newItem[`${id}`] });
           }
@@ -45,28 +45,28 @@ const FormItem = () => {
     });
   }, [item.id, id]);
 
-  const handleCreateNewItem = newItem => {
+  const handleCreateNewItem = (newItem) => {
     const createNewItem = () => {
       createItem(newItem)
         .then(() => {
           alert('New Item created');
           push(PAGE_ROUTES.items);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     };
     return createNewItem;
   };
 
-  const handleFormSubmit = updatedItem => {
+  const handleFormSubmit = (updatedItem) => {
     const formSubmit = () => {
       updateItemById(updatedItem.id, updatedItem)
-        .then(res => {
+        .then((res) => {
           console.log(res.data);
           push(PAGE_ROUTES.items);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     };
@@ -79,25 +79,23 @@ const FormItem = () => {
         alert('Succuessfully deleted');
         push(PAGE_ROUTES.items);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
   if (item.id) {
     return (
-      <div>
-        <FormBuilder
-          title={'Edit Item'}
-          data={dataWithValue}
-          onClick={handleFormSubmit}
-          actor={item}
-          handleDelete={handleDelete}
-        />
-      </div>
+      <PeopleForm
+        title={'Edit Item'}
+        data={dataWithValue}
+        onClick={handleFormSubmit}
+        actor={item}
+        handleDelete={handleDelete}
+      />
     );
   } else {
     return (
-      <FormBuilder
+      <PeopleForm
         title={'Create new Item'}
         data={getItemFormData}
         onClick={handleCreateNewItem}

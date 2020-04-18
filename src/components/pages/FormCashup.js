@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import PeopleForm from '../uis/PeopleForm';
-import { getEmployeeFormData } from '../../utilities/helpers/formHelpers/employeeForm';
+import { getCashupFormData } from '../../utilities/helpers/formHelpers/cashupForm';
 import {
-  updateEmployeeById,
-  getEmployeeById,
-  createEmployee,
-  deleteEmployee,
-} from '../../http/employeeApi';
+  updateCashupById,
+  getCashupById,
+  createCashup,
+  deleteCashup,
+} from '../../http/cashupApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 
-const FormEmployee = () => {
+const FormCashup = () => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
-  const [employee, setEmployee] = useState({
+  const [cashup, setCashup] = useState({
     firstName: null,
     lastName: null,
     companyName: null,
@@ -32,44 +32,44 @@ const FormEmployee = () => {
   });
 
   useEffect(() => {
-    getEmployeeById(id).then((res) => {
+    getCashupById(id).then((res) => {
       const dataArray = [];
-      const data = getEmployeeFormData;
-      const newEmployee = res.data;
+      const data = getCashupFormData;
+      const newCashup = res.data;
       Object.keys(res.data).forEach((id) => {
         data.forEach((entry) => {
           if (id === entry.id) {
-            dataArray.push({ ...entry, value: newEmployee[`${id}`] });
+            dataArray.push({ ...entry, value: newCashup[`${id}`] });
           }
           return null;
         });
       });
 
-      setEmployee(newEmployee);
+      setCashup(newCashup);
       setDataWithValue([...dataArray]);
     });
-  }, [employee.id, id]);
+  }, [cashup.id, id]);
 
-  const handleCreateNewEmployee = (newEmployee) => {
-    const createNewEmployee = () => {
-      createEmployee(newEmployee)
+  const handleCreateNewCashup = (newCashup) => {
+    const createNewCashup = () => {
+      createCashup(newCashup)
         .then(() => {
-          alert('New Employee created');
-          push(PAGE_ROUTES.employees);
+          alert('New Cashup created');
+          push(PAGE_ROUTES.cashups);
         })
         .catch((err) => {
           console.log(err);
         });
     };
-    return createNewEmployee;
+    return createNewCashup;
   };
 
-  const handleFormSubmit = (updatedEmployee) => {
+  const handleFormSubmit = (updatedCashup) => {
     const formSubmit = () => {
-      updateEmployeeById(updatedEmployee.id, updatedEmployee)
+      updateCashupById(updatedCashup.id, updatedCashup)
         .then((res) => {
           console.log(res.data);
-          push(PAGE_ROUTES.employees);
+          push(PAGE_ROUTES.cashups);
         })
         .catch((err) => {
           console.log(err);
@@ -79,35 +79,35 @@ const FormEmployee = () => {
   };
 
   const handleDelete = () => {
-    deleteEmployee(employee.id)
+    deleteCashup(cashup.id)
       .then(() => {
         alert('Succuessfully deleted');
-        push(PAGE_ROUTES.employees);
+        push(PAGE_ROUTES.cashups);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  if (employee.id) {
+  if (cashup.id) {
     return (
       <PeopleForm
-        title={'Edit Employee'}
+        title={'Edit cashup'}
         data={dataWithValue}
         onClick={handleFormSubmit}
-        actor={employee}
+        actor={cashup}
         handleDelete={handleDelete}
       />
     );
   } else {
     return (
       <PeopleForm
-        title={'Create new Employee'}
-        data={getEmployeeFormData}
-        onClick={handleCreateNewEmployee}
-        actor={employee}
+        title={'Create new Cashup'}
+        data={getCashupFormData}
+        onClick={handleCreateNewCashup}
+        actor={cashup}
       />
     );
   }
 };
 
-export default FormEmployee;
+export default FormCashup;
