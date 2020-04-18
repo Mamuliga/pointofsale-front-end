@@ -1,4 +1,4 @@
 export default {
-  apiUrl: "https://eit-pos-api.herokuapp.com/api/",
-  ...process.env
+  apiUrl: 'http://eit-pos-api.herokuapp.com/api/',
+  ...process.env,
 };
