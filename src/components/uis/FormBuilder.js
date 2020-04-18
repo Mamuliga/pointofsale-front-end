@@ -1,33 +1,48 @@
-import React, { useState } from "react";
-import { FormGroup } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import CustomTextField from "./FormComponents/CustomTextField";
-import CustomGender from "./FormComponents/CustomGender";
-import CustomPhone from "./FormComponents/CustomPhone";
-import { Button } from "@material-ui/core";
-import CustomAvatar from "./FormComponents/CustomAvatar";
+import React, { useState } from 'react';
+import { FormGroup } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import CustomTextField from './FormComponents/CustomTextField';
+import CustomGender from './FormComponents/CustomGender';
+import CustomPhone from './FormComponents/CustomPhone';
+import { Button } from '@material-ui/core';
+import CustomAvatar from './FormComponents/CustomAvatar';
+import DatePicker from './FormComponents/DatePicker';
 
 const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
-    console.log({ ...newActor, [name]: value });
+  };
+
+  const handleDatePickerChange = (date, name) => {
+    setNewActor({
+      ...newActor,
+      [name]: date.toLocaleDateString(),
+    });
   };
   return (
     <div>
       <div className={FormGroup.root}>
         <div>
           <Grid>
-            <Typography variant='h6' noWrap>
+            <Typography variant="h6" noWrap>
+              {/* <Box ineHeight={2} m={1}> */}
               {title}
+              {/* </Box> */}
             </Typography>
           </Grid>
-          {data.map(entry => {
+          {data.map((entry) => {
             switch (entry.type) {
-              case "text":
-              case "date":
-              case "email":
+              case 'date':
+                return (
+                  <DatePicker
+                    entry={entry}
+                    handleDatePickerChange={handleDatePickerChange}
+                  />
+                );
+              case 'text':
+              case 'email':
                 return (
                   <CustomTextField
                     entry={entry}
@@ -35,7 +50,7 @@ const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
                     getValue={getValue}
                   />
                 );
-              case "radio":
+              case 'radio':
                 return (
                   <CustomGender
                     entry={entry}
@@ -43,7 +58,7 @@ const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
                     getValue={getValue}
                   />
                 );
-              case "number":
+              case 'number':
                 return (
                   <CustomPhone
                     entry={entry}
@@ -51,23 +66,23 @@ const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
                     getValue={getValue}
                   />
                 );
-              case "avatar":
+              case 'avatar':
                 return <CustomAvatar key={entry.label} entry={entry} />;
               default:
                 return null;
             }
           })}
           <Button
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             onClick={onClick(newActor)}
           >
             Submit
           </Button>
           {newActor.id && (
             <Button
-              variant='contained'
-              color='secondary'
+              variant="contained"
+              color="secondary"
               onClick={handleDelete}
             >
               Delete

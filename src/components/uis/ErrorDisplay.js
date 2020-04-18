@@ -1,26 +1,17 @@
-import React from "react";
-import { Snackbar } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    "& > * + *": {
-      marginTop: theme.spacing(2)
-    }
-  }
-}));
+import React from 'react';
+import { Snackbar } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import useStyles from '../../styles/useStyles';
 
 const ErrorDisplay = ({ errorMessage, handleClose }) => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div className={classes.errorDisplayRoot}>
       <Snackbar open={!!errorMessage} onClose={handleClose}>
         <Alert
           elevation={6}
-          variant='filled'
-          severity='error'
+          variant="filled"
+          severity="error"
           onClose={handleClose}
         >
           {errorMessage}

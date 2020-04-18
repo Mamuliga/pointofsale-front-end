@@ -1,11 +1,11 @@
-import React from "react";
-import FormBuilder from "../uis/FormBuilder";
-import { getCustomerFormData } from "../../utilities/helpers/formHelpers/customerForm";
+import React from 'react';
+import PeopleForm from '../uis/PeopleForm';
+import { getCustomerFormData } from '../../utilities/helpers/formHelpers/customerForm';
 
 const Dashboard = () => {
   return (
-    <FormBuilder
-      title={"Customer Details"}
+    <PeopleForm
+      title={'Customer Details'}
       data={getCustomerFormData}
       onClick={() => {}}
     />

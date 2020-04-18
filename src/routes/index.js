@@ -1,22 +1,24 @@
-import React from "react";
-import { Switch } from "react-router-dom";
+import React from 'react';
+import { Switch } from 'react-router-dom';
 import {
   Dashboard,
   Login,
   Customers,
+  NotFoundPage,
   Items,
-  NotFoundPage
-} from "../components/pages";
-import ProtectedRoute from "./ProtectedRoute";
-import { PAGE_ROUTES } from "../services/routeService";
+} from '../components/pages';
+import ProtectedRoute from './ProtectedRoute';
+import { PAGE_ROUTES } from '../services/routeService';
 import {
   customerRoutes,
   employeeRoutes,
   supplierRoutes,
-  saleRoutes
-} from "./routeHelper";
+  itemRoutes,
+  cashupRoutes,
+  saleRoutes,
+} from './routeHelper';
 
-const Routes = props => (
+const Routes = (props) => (
   <Switch>
     <ProtectedRoute exact path={PAGE_ROUTES.home} component={Dashboard} />
     <ProtectedRoute
@@ -25,7 +27,7 @@ const Routes = props => (
       component={Login}
       authRequired={false}
     />
-    {customerRoutes.map(route => (
+    {customerRoutes.map((route) => (
       <ProtectedRoute
         exact
         path={route.path}
@@ -33,7 +35,7 @@ const Routes = props => (
         key={route.path}
       />
     ))}
-    {employeeRoutes.map(route => (
+    {employeeRoutes.map((route) => (
       <ProtectedRoute
         exact
         path={route.path}
@@ -41,7 +43,7 @@ const Routes = props => (
         key={route.path}
       />
     ))}
-    {supplierRoutes.map(route => (
+    {supplierRoutes.map((route) => (
       <ProtectedRoute
         exact
         path={route.path}
@@ -49,7 +51,23 @@ const Routes = props => (
         key={route.path}
       />
     ))}
-    {saleRoutes.map(route => (
+    {itemRoutes.map((route) => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
+    {cashupRoutes.map((route) => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
+    {saleRoutes.map((route) => (
       <ProtectedRoute
         exact
         path={route.path}

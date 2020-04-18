@@ -1,7 +1,7 @@
-import http from "./http";
+import http from './http';
 
 export async function getCustomerList() {
-  return await http.get("/customers", { limit: 20 });
+  return await http.get('/customers', { limit: 20 });
 }
 
 export async function getCustomerById(id) {
@@ -13,9 +13,9 @@ export async function updateCustomerById(id, body) {
 }
 
 export async function createCustomer(body) {
-  return await http.post("./customers", body);
+  return await http.post('./customers', body);
 }
 
 export async function deleteCustomer(id) {
-  return await http.deleteById("./customers", id);
+  return await http.deleteById('./customers', id);
 }
