@@ -9,7 +9,7 @@ const Sale = props => {
   return (
     <Fragment>
       <div>
-        <div className={classes.saleId}>
+        <div className={classes.Id}>
           <TextField id="standard-basic" label="Sale Id" />
         </div>
         <div className={classes.customerName}>

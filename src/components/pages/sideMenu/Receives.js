@@ -3,13 +3,13 @@ import TextField from "@material-ui/core/TextField";
 import useStyles from "../../../styles/useStyles";
 import Button from "@material-ui/core/Button";
 
-const Receive = props => {
+const Receives = props => {
   const classes = useStyles();
 
   return (
     <Fragment>
       <div>
-        <div className={classes.receiveId}>
+        <div className={classes.Id}>
           <TextField id="standard-basic" label="Receive Id" />
         </div>
         <div className={classes.customerName}>
@@ -48,4 +48,4 @@ const Receive = props => {
   );
 };
 
-export default Receive;
+export default Receives;

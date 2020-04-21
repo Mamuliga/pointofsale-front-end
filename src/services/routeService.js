@@ -19,6 +19,7 @@ export const PAGE_ROUTES = {
   newSupplier: "/suppliers/new",
   editSupplier: "/suppliers/edit/:id",
   sales: "/sales",
+  receives: "/sales",
   items: "/items",
   newItem: "/items/new",
   editItem: "/items/edit/:id"
