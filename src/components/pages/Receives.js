@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import TableBuilder from "../uis/TableBuilder.js";
 // import { useHistory } from "react-router-dom";
-import { getSaleList } from "../../http/saleApi";
-import { getSaleTableHeaders } from "../../utilities/helpers/tableHelpers.js";
+import { getReceiveList } from "../../http/receiveApi";
+import { getReceiveTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 import useStyles from "../../styles/useStyles.js";
 import TextField from "@material-ui/core/TextField";
 import TableRow from "@material-ui/core/TableRow";
@@ -11,20 +11,20 @@ import { TableCell } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Barcode from "react-barcode";
 
-const Sales = () => {
+const Receives = () => {
   // const { location, push } = useHistory();
-  const [saleList, setSaleList] = useState([]);
+  const [ReceiveList, setReceiveList] = useState([]);
 
   useEffect(() => {
-    getSaleList()
+    getReceiveList()
       .then(res => {
         console.log(res);
-        const displaySaleList = res.data.map(
+        const displayReceiveList = res.data.map(
           ({ id, ItemName, Price, Disc, Quantity, Total }) => {
             return { id, ItemName, Price, Disc, Quantity, Total };
           }
         );
-        setSaleList(displaySaleList);
+        setReceiveList(displayReceiveList);
       })
       .catch(err => {
         console.log(err);
@@ -33,7 +33,7 @@ const Sales = () => {
 
   const handleSearchSubmit = e => {
     e.preventDefault();
-    setSaleList([
+    setReceiveList([
       {
         id: 1,
         itemName: "sup1",
@@ -45,16 +45,16 @@ const Sales = () => {
     ]);
   };
 
-  const handleDelete = sale => {
+  const handleDelete = receive => {
     const deleteClick = () => {
-      // push(`${location.pathname}/delete/${sale.id}`);
-      setSaleList([]);
+      // push(`${location.pathname}/delete/${receive.id}`);
+      setReceiveList([]);
     };
     return deleteClick;
   };
   const classes = useStyles();
   const editableRowIndexes = [2, 3, 4];
-  const tableRows = saleList.map(row => {
+  const tableRows = ReceiveList.map(row => {
     return (
       <TableRow hover key={row.id}>
         {Object.values(row).map((cell, index) => {
@@ -105,8 +105,8 @@ const Sales = () => {
     <div>
       <div>
         <TableBuilder
-          tableData={saleList}
-          tableHeaders={getSaleTableHeaders}
+          tableData={ReceiveList}
+          tableHeaders={getReceiveTableHeaders}
           tableTopUis={searchComponent}
           hidePagination
           tableRows={tableRows}
@@ -119,4 +119,4 @@ const Sales = () => {
   );
 };
 
-export default Sales;
+export default Receives;
