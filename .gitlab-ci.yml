@@ -1,10 +1,12 @@
 image: node:10.16.3 # can be upgraded, depending on your node version used
-
+variables:
+  PUBLIC_URL: "/eit-pos-frontend" # slash is important
 pages:
   stage: deploy
   script:
     - npm install
     - npm run build
+    - cp public/index.html public/404.html
     - rm -rf public
     - mv build public
   artifacts:
