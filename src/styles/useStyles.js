@@ -19,7 +19,7 @@ export default makeStyles(theme => ({
   appBar: {
     [theme.breakpoints.up("sm")]: {
       marginLeft: LEFT_SIDE_BAR_WIDTH,
-      zIndex: 20000
+      zIndex: "20000 !important"
     }
   },
   sideMenuContainer: {
