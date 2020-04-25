@@ -44,12 +44,10 @@ export default makeStyles(theme => ({
   },
   mainRouteViewLeftSidebar: {
     maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH}px)`,
-    // marginLeft: LEFT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT
   },
   mainRouteViewRightSidebar: {
     maxWidth: `calc(100% - ${RIGHT_SIDE_BAR_WIDTH}px)`,
-    // marginRight: RIGHT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT
   },
   navButton: {
