@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import TableBuilder from "../uis/TableBuilder.js";
-// import { useHistory } from "react-router-dom";
 import { getSaleList } from "../../http/saleApi";
 import { getSaleTableHeaders } from "../../utilities/helpers/tableHelpers.js";
 import useStyles from "../../styles/useStyles.js";
@@ -12,7 +11,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Barcode from "react-barcode";
 
 const Sales = () => {
-  // const { location, push } = useHistory();
   const [saleList, setSaleList] = useState([]);
 
   useEffect(() => {
@@ -47,7 +45,6 @@ const Sales = () => {
 
   const handleDelete = sale => {
     const deleteClick = () => {
-      // push(`${location.pathname}/delete/${sale.id}`);
       setSaleList([]);
     };
     return deleteClick;
@@ -62,8 +59,8 @@ const Sales = () => {
             return (
               <TableCell key={index}>
                 <TextField
-                  id='outlined-basic'
-                  label=''
+                  id="outlined-basic"
+                  label=""
                   autoFocus={index === 4}
                 />
               </TableCell>
@@ -71,7 +68,7 @@ const Sales = () => {
           }
           return <TableCell key={index}>{cell}</TableCell>;
         })}
-        <TableCell key={"delete"} align='right'>
+        <TableCell key={"delete"} align="right">
           <DeleteIcon onClick={handleDelete(row)} />
         </TableCell>
       </TableRow>
@@ -88,7 +85,7 @@ const Sales = () => {
             </div>
             <TextField
               autoFocus
-              placeholder='Search…'
+              placeholder="Search…"
               classes={{
                 root: classes.searchInputRoot,
                 input: classes.searchInput
@@ -113,7 +110,7 @@ const Sales = () => {
         />
       </div>
       <div className={classes.barcode}>
-        <Barcode value='0000000000001' />
+        <Barcode value="0000000000001" />
       </div>
     </div>
   );
