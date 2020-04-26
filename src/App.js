@@ -17,6 +17,7 @@ import useStyles from "./styles/useStyles";
 function App(props) {
   const { pathname } = useLocation();
   const classes = useStyles();
+  const isRightSideBar = pathname === PAGE_ROUTES.sales || PAGE_ROUTES.receives;
 
   const loadPersistentAuthData = () => {
     getUserList()
@@ -36,7 +37,7 @@ function App(props) {
         {showSideMenuForRoute(pathname) && <SideMenuRoutes />}
         <div
           className={
-            pathname === PAGE_ROUTES.sales
+            isRightSideBar
               ? classes.mainRouteViewRightSidebar
               : classes.mainRouteViewLeftSidebar
           }
