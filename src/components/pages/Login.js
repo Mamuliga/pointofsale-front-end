@@ -28,6 +28,12 @@ import {
 import ErrorDisplay from '../uis/ErrorDisplay';
 
 const useStyles = makeStyles(theme => ({
+  loginFormFieldIcon: {
+    width: '10%'
+  },
+  loginFormField: {
+    width: '80%'
+  },
   root: {
     display: 'flex',
     flexWrap: 'wrap'
@@ -61,7 +67,7 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120
+    width: '100%'
   },
   progress: {
     display: 'flex',
@@ -181,10 +187,10 @@ const Login = props => {
                 className={classes.input}
                 alignItems='flex-end'
               >
-                <Grid item>
+                <Grid item className={classes.loginFormFieldIcon}>
                   <PersonOutlineRoundedIcon />
                 </Grid>
-                <Grid item>
+                <Grid item className={classes.loginFormField}>
                   <FormControl className={classes.formControl}>
                     <InputLabel id='login-dropdown'>Username</InputLabel>
                     <Select
@@ -192,11 +198,6 @@ const Login = props => {
                       id='login-dropdown'
                       value={employee}
                       onChange={handleChange}
-                      fullWidth
-                      inputProps={{
-                        name: 'select an employee',
-                        id: 'age-native-simple'
-                      }}
                     >
                       {allEmployees.map(employee => (
                         <MenuItem value={employee}>
@@ -214,10 +215,10 @@ const Login = props => {
                 className={classes.input}
                 alignItems='flex-end'
               >
-                <Grid item>
+                <Grid item className={classes.loginFormFieldIcon}>
                   <LockOpenIcon />
                 </Grid>
-                <Grid item>
+                <Grid item className={classes.loginFormField}>
                   <TextField
                     className={classes.text}
                     id='input-with-icon-grid'
@@ -237,10 +238,10 @@ const Login = props => {
                   className={classes.input}
                   alignItems='flex-end'
                 >
-                  <Grid item>
+                  <Grid item className={classes.loginFormFieldIcon}>
                     <LockOpenIcon />
                   </Grid>
-                  <Grid item>
+                  <Grid item className={classes.loginFormField}>
                     <TextField
                       className={classes.text}
                       id='input-with-icon-grid'
