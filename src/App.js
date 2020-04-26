@@ -27,6 +27,11 @@ function App(props) {
   };
 
   useEffect(loadPersistentAuthData, []);
+  let sideBar = classes.mainRouteViewLeftSidebar;
+  if (pathname === PAGE_ROUTES.sales || pathname === PAGE_ROUTES.receives) {
+    sideBar = classes.mainRouteViewRightSidebar;
+  }
+
   return (
     <div className='App'>
       {showTopMenuForRoute(pathname) && (
@@ -34,13 +39,7 @@ function App(props) {
       )}
       <div>
         {showSideMenuForRoute(pathname) && <SideMenuRoutes />}
-        <div
-          className={
-            pathname === PAGE_ROUTES.sales
-              ? classes.mainRouteViewRightSidebar
-              : classes.mainRouteViewLeftSidebar
-          }
-        >
+        <div className={sideBar}>
           <Routes {...props} />
         </div>
       </div>
