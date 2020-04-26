@@ -17,7 +17,6 @@ import useStyles from "./styles/useStyles";
 function App(props) {
   const { pathname } = useLocation();
   const classes = useStyles();
-  const isRightSideBar = pathname === PAGE_ROUTES.sales || PAGE_ROUTES.receives;
 
   const loadPersistentAuthData = () => {
     getUserList()
@@ -28,6 +27,11 @@ function App(props) {
   };
 
   useEffect(loadPersistentAuthData, []);
+  let sideBar = classes.mainRouteViewLeftSidebar;
+  if (pathname === PAGE_ROUTES.sales || pathname === PAGE_ROUTES.receives) {
+    sideBar = classes.mainRouteViewRightSidebar;
+  }
+
   return (
     <div className='App'>
       {showTopMenuForRoute(pathname) && (
@@ -35,13 +39,7 @@ function App(props) {
       )}
       <div>
         {showSideMenuForRoute(pathname) && <SideMenuRoutes />}
-        <div
-          className={
-            isRightSideBar
-              ? classes.mainRouteViewRightSidebar
-              : classes.mainRouteViewLeftSidebar
-          }
-        >
+        <div className={sideBar}>
           <Routes {...props} />
         </div>
       </div>
