@@ -12,7 +12,6 @@ import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
@@ -26,55 +25,7 @@ import {
   CircularProgress
 } from '@material-ui/core';
 import ErrorDisplay from '../uis/ErrorDisplay';
-
-const useStyles = makeStyles(theme => ({
-  loginFormFieldIcon: {
-    width: '10%'
-  },
-  loginFormField: {
-    width: '80%'
-  },
-  loginRoot: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  loginPaper: {
-    width: theme.spacing(50),
-    height: theme.spacing(20)
-  },
-  loginPaperForConfirmPwd: {
-    width: theme.spacing(50),
-    height: theme.spacing(30)
-  },
-  loginSubmit: {
-    width: theme.spacing(40),
-    display: 'flex'
-  },
-  loginGridField: {
-    padding: theme.spacing(2)
-  },
-  loginputField: {
-    width: theme.spacing(36)
-  },
-  loginForgetPassword: {
-    width: theme.spacing(80)
-  },
-  '& > *': {
-    margin: theme.spacing(10),
-    width: theme.spacing(80),
-    height: theme.spacing(70)
-  },
-  loginFormControl: {
-    margin: theme.spacing(1),
-    width: '100%'
-  },
-  loginProgress: {
-    display: 'flex',
-    '& > * + *': {
-      marginLeft: theme.spacing(2)
-    }
-  }
-}));
+import useStyles from '../../styles/useStyles';
 
 const Login = props => {
   const classes = useStyles();
@@ -234,7 +185,7 @@ const Login = props => {
                 <Grid
                   container
                   spacing={2}
-                  className={classes.input}
+                  className={classes.loginGridField}
                   alignItems='flex-end'
                 >
                   <Grid item className={classes.loginFormFieldIcon}>
