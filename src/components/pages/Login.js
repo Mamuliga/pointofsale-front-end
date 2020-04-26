@@ -34,30 +34,29 @@ const useStyles = makeStyles(theme => ({
   loginFormField: {
     width: '80%'
   },
-  root: {
+  loginRoot: {
     display: 'flex',
     flexWrap: 'wrap'
   },
-  paper: {
+  loginPaper: {
     width: theme.spacing(50),
     height: theme.spacing(20)
   },
-  paperForConfirmPwd: {
+  loginPaperForConfirmPwd: {
     width: theme.spacing(50),
     height: theme.spacing(30)
   },
-
-  button: {
+  loginSubmit: {
     width: theme.spacing(40),
     display: 'flex'
   },
-  input: {
+  loginGridField: {
     padding: theme.spacing(2)
   },
-  text: {
+  loginputField: {
     width: theme.spacing(36)
   },
-  forget: {
+  loginForgetPassword: {
     width: theme.spacing(80)
   },
   '& > *': {
@@ -65,11 +64,11 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(80),
     height: theme.spacing(70)
   },
-  formControl: {
+  loginFormControl: {
     margin: theme.spacing(1),
     width: '100%'
   },
-  progress: {
+  loginProgress: {
     display: 'flex',
     '& > * + *': {
       marginLeft: theme.spacing(2)
@@ -157,8 +156,8 @@ const Login = props => {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.main} maxWidth='sm'>
-        <div className={classes.paper}>
-          <Paper className={classes.root}>
+        <div className={classes.loginPaper}>
+          <Paper className={classes.loginRoot}>
             <Paper elevation={2} />
             <Box
               fontFamily='Monospace'
@@ -177,21 +176,21 @@ const Login = props => {
             <div
               className={
                 employee.isFirstTimeLogin
-                  ? classes.paperForConfirmPwd
-                  : classes.paper
+                  ? classes.loginPaperForConfirmPwd
+                  : classes.loginPaper
               }
             >
               <Grid
                 container
                 spacing={2}
-                className={classes.input}
+                className={classes.loginGridField}
                 alignItems='flex-end'
               >
                 <Grid item className={classes.loginFormFieldIcon}>
                   <PersonOutlineRoundedIcon />
                 </Grid>
                 <Grid item className={classes.loginFormField}>
-                  <FormControl className={classes.formControl}>
+                  <FormControl className={classes.loginFormControl}>
                     <InputLabel id='login-dropdown'>Username</InputLabel>
                     <Select
                       labelId='login-dropdown'
@@ -212,7 +211,7 @@ const Login = props => {
               <Grid
                 container
                 spacing={2}
-                className={classes.input}
+                className={classes.loginGridField}
                 alignItems='flex-end'
               >
                 <Grid item className={classes.loginFormFieldIcon}>
@@ -220,7 +219,7 @@ const Login = props => {
                 </Grid>
                 <Grid item className={classes.loginFormField}>
                   <TextField
-                    className={classes.text}
+                    className={classes.loginputField}
                     id='input-with-icon-grid'
                     xs={3}
                     label='password'
@@ -243,7 +242,7 @@ const Login = props => {
                   </Grid>
                   <Grid item className={classes.loginFormField}>
                     <TextField
-                      className={classes.text}
+                      className={classes.loginputField}
                       id='input-with-icon-grid'
                       xs={3}
                       label='password'
@@ -264,7 +263,7 @@ const Login = props => {
               justifyContent='center'
             >
               <Button
-                className={classes.button}
+                className={classes.loginSubmit}
                 variant='contained'
                 xs={12}
                 disabled={loading}
@@ -273,7 +272,7 @@ const Login = props => {
                 disableElevation
               >
                 {loading ? (
-                  <div className={classes.progress}>
+                  <div className={classes.loginProgress}>
                     <CircularProgress />
                   </div>
                 ) : (
@@ -282,7 +281,7 @@ const Login = props => {
               </Button>
             </Box>
             <Box
-              className={classes.forget}
+              className={classes.loginForgetPassword}
               display='flex'
               height={50}
               alignItems='left'
