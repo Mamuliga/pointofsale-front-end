@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-import SearchIcon from "@material-ui/icons/Search";
-import TableBuilder from "../uis/TableBuilder.js";
+import React, { useEffect, useState } from 'react';
+import SearchIcon from '@material-ui/icons/Search';
+import TableBuilder from '../uis/TableBuilder.js';
 // import { useHistory } from "react-router-dom";
-import { getReceiveList } from "../../http/receiveApi";
-import { getReceiveTableHeaders } from "../../utilities/helpers/tableHelpers.js";
-import useStyles from "../../styles/useStyles.js";
-import TextField from "@material-ui/core/TextField";
-import TableRow from "@material-ui/core/TableRow";
-import { TableCell } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Barcode from "react-barcode";
+import { getReceiveList } from '../../http/receiveApi';
+import { getReceiveTableHeaders } from '../../utilities/helpers/tableHelpers.js';
+import useStyles from '../../styles/useStyles.js';
+import TextField from '@material-ui/core/TextField';
+import TableRow from '@material-ui/core/TableRow';
+import { TableCell } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const Receives = () => {
   // const { location, push } = useHistory();
@@ -36,11 +35,11 @@ const Receives = () => {
     setReceiveList([
       {
         id: 1,
-        itemName: "sup1",
-        price: "sup1last",
-        disc: "male",
-        quantity: "1",
-        total: "Description1"
+        itemName: 'sup1',
+        price: 'sup1last',
+        disc: 'male',
+        quantity: '1',
+        total: 'Description1'
       }
     ]);
   };
@@ -62,8 +61,8 @@ const Receives = () => {
             return (
               <TableCell key={index}>
                 <TextField
-                  id="outlined-basic"
-                  label=""
+                  id='outlined-basic'
+                  label=''
                   autoFocus={index === 4}
                 />
               </TableCell>
@@ -71,7 +70,7 @@ const Receives = () => {
           }
           return <TableCell key={index}>{cell}</TableCell>;
         })}
-        <TableCell key={"delete"} align="right">
+        <TableCell key={'delete'} align='right'>
           <DeleteIcon onClick={handleDelete(row)} />
         </TableCell>
       </TableRow>
@@ -88,12 +87,12 @@ const Receives = () => {
             </div>
             <TextField
               autoFocus
-              placeholder="Search…"
+              placeholder='Search…'
               classes={{
                 root: classes.searchInputRoot,
                 input: classes.searchInput
               }}
-              inputProps={{ "aria-label": "search" }}
+              inputProps={{ 'aria-label': 'search' }}
             />
           </div>
         </div>
@@ -111,9 +110,6 @@ const Receives = () => {
           hidePagination
           tableRows={tableRows}
         />
-      </div>
-      <div className={classes.barcode}>
-        <Barcode value="0000000000001" />
       </div>
     </div>
   );

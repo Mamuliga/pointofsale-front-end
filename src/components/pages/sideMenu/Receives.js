@@ -1,7 +1,8 @@
-import React, { Fragment } from "react";
-import TextField from "@material-ui/core/TextField";
-import useStyles from "../../../styles/useStyles";
-import Button from "@material-ui/core/Button";
+import React, { Fragment } from 'react';
+import TextField from '@material-ui/core/TextField';
+import useStyles from '../../../styles/useStyles';
+import Button from '@material-ui/core/Button';
+import Barcode from 'react-barcode';
 
 const Receives = props => {
   const classes = useStyles();
@@ -10,26 +11,26 @@ const Receives = props => {
     <Fragment>
       <div>
         <div className={classes.Id}>
-          <TextField id="standard-basic" label="Receive Id" />
+          <TextField id='standard-basic' label='Receive Id' />
         </div>
         <div className={classes.customerName}>
-          <TextField id="standard-basic" label="Customer Name" />
+          <TextField id='standard-basic' label='Customer Name' />
         </div>
         <div className={classes.total}>
-          <TextField id="outlined-textarea" label="Total" />
+          <TextField id='outlined-textarea' label='Total' />
         </div>
 
         <div className={classes.cash}>
-          <TextField id="outlined-textarea" label="Cash" />
+          <TextField id='outlined-textarea' label='Cash' />
         </div>
         <div className={classes.balance}>
-          <TextField id="outlined-textarea" label="Balance" />
+          <TextField id='outlined-textarea' label='Balance' />
         </div>
         <div>
           <Button
             className={classes.button}
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
           >
             Submit
           </Button>
@@ -37,11 +38,14 @@ const Receives = props => {
         <div>
           <Button
             className={classes.button}
-            variant="contained"
-            color="secondary"
+            variant='contained'
+            color='secondary'
           >
             Discard
           </Button>
+          <div className={classes.barcode}>
+            <Barcode value='0000000000001' />
+          </div>
         </div>
       </div>
     </Fragment>
