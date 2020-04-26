@@ -1,75 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-import { logo } from "../../assets/images";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { logo } from '../../assets/images';
 import {
   authenticate,
   setLoginErrorFalse
-} from "../../store/actions/authActions";
-import Button from "@material-ui/core/Button";
-import PersonOutlineRoundedIcon from "@material-ui/icons/PersonOutlineRounded";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { getEmployeeList } from "../../http/employeeApi";
+} from '../../store/actions/authActions';
+import Button from '@material-ui/core/Button';
+import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { getEmployeeList } from '../../http/employeeApi';
 import {
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   CircularProgress
-} from "@material-ui/core";
-import ErrorDisplay from "../uis/ErrorDisplay";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  paper: {
-    width: theme.spacing(50),
-    height: theme.spacing(20)
-  },
-  paperForConfirmPwd: {
-    width: theme.spacing(50),
-    height: theme.spacing(30)
-  },
-
-  button: {
-    width: theme.spacing(40),
-    display: "flex"
-  },
-  input: {
-    padding: theme.spacing(2)
-  },
-  text: {
-    width: theme.spacing(36)
-  },
-  forget: {
-    width: theme.spacing(80)
-  },
-  "& > *": {
-    margin: theme.spacing(10),
-    width: theme.spacing(80),
-    height: theme.spacing(70)
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120
-  },
-  progress: {
-    display: "flex",
-    "& > * + *": {
-      marginLeft: theme.spacing(2)
-    }
-  }
-}));
+} from '@material-ui/core';
+import ErrorDisplay from '../uis/ErrorDisplay';
+import useStyles from '../../styles/useStyles';
+import CustomPassword from '../uis/FormComponents/Password';
 
 const Login = props => {
   const classes = useStyles();
@@ -81,14 +36,13 @@ const Login = props => {
     setLoginErrorFalse
   } = props;
 
-  const [password, setPwd] = useState("");
-  const [confirmPwd, setConfirmPwd] = useState("");
-  const [allEmployees, setAllEmployess] = useState(["Admin"]);
+  const [password, setPwd] = useState('');
+  const [confirmPwd, setConfirmPwd] = useState('');
+  const [allEmployees, setAllEmployess] = useState(['Admin']);
   const [employee, setEmployee] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleEmployeeResp = resp => {
-    console.log(resp.data);
     if (resp) {
       if (Array.isArray(resp.data)) {
         setAllEmployess(resp.data.filter(emp => emp.canLogIn));
@@ -106,7 +60,7 @@ const Login = props => {
   }, []);
 
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     setErrorMessage(null);
@@ -127,15 +81,15 @@ const Login = props => {
           if (password === confirmPwd) {
             return true;
           }
-          setErrorMessage("Password mismatch");
+          setErrorMessage('Password mismatch');
           return false;
         }
-        setErrorMessage("Password mismatch");
+        setErrorMessage('Password mismatch');
         return false;
       }
       return true;
     }
-    setErrorMessage("Please enter username and password");
+    setErrorMessage('Please enter username and password');
     return false;
   };
 
@@ -152,8 +106,8 @@ const Login = props => {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.main} maxWidth='sm'>
-        <div className={classes.paper}>
-          <Paper className={classes.root}>
+        <div className={classes.loginPaper}>
+          <Paper className={classes.loginRoot}>
             <Paper elevation={2} />
             <Box
               fontFamily='Monospace'
@@ -172,21 +126,21 @@ const Login = props => {
             <div
               className={
                 employee.isFirstTimeLogin
-                  ? classes.paperForConfirmPwd
-                  : classes.paper
+                  ? classes.loginPaperForConfirmPwd
+                  : classes.loginPaper
               }
             >
               <Grid
                 container
                 spacing={2}
-                className={classes.input}
+                className={classes.loginGridField}
                 alignItems='flex-end'
               >
-                <Grid item>
+                <Grid item className={classes.loginFormFieldIcon}>
                   <PersonOutlineRoundedIcon />
                 </Grid>
-                <Grid item>
-                  <FormControl className={classes.formControl}>
+                <Grid item className={classes.loginFormField}>
+                  <FormControl className={classes.loginFormControl}>
                     <InputLabel id='login-dropdown'>Username</InputLabel>
                     <Select
                       labelId='login-dropdown'
@@ -196,7 +150,7 @@ const Login = props => {
                     >
                       {allEmployees.map(employee => (
                         <MenuItem value={employee}>
-                          {" "}
+                          {' '}
                           {employee.firstName}
                         </MenuItem>
                       ))}
@@ -204,51 +158,12 @@ const Login = props => {
                   </FormControl>
                 </Grid>
               </Grid>
-              <Grid
-                container
-                spacing={2}
-                className={classes.input}
-                alignItems='flex-end'
-              >
-                <Grid item>
-                  <LockOpenIcon />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    className={classes.text}
-                    id='input-with-icon-grid'
-                    xs={3}
-                    label='password'
-                    type='password'
-                    name='password'
-                    onChange={handlePwd}
-                    value={password}
-                  />
-                </Grid>
-              </Grid>
+              <CustomPassword onChange={handlePwd} value={password} />
               {employee.isFirstTimeLogin && (
-                <Grid
-                  container
-                  spacing={2}
-                  className={classes.input}
-                  alignItems='flex-end'
-                >
-                  <Grid item>
-                    <LockOpenIcon />
-                  </Grid>
-                  <Grid item>
-                    <TextField
-                      className={classes.text}
-                      id='input-with-icon-grid'
-                      xs={3}
-                      label='password'
-                      type='password'
-                      name='password'
-                      onChange={handleConfirmPwd}
-                      value={confirmPwd}
-                    />
-                  </Grid>
-                </Grid>
+                <CustomPassword
+                  onChange={handleConfirmPwd}
+                  value={confirmPwd}
+                />
               )}
             </div>
             <Box
@@ -259,7 +174,7 @@ const Login = props => {
               justifyContent='center'
             >
               <Button
-                className={classes.button}
+                className={classes.loginSubmit}
                 variant='contained'
                 xs={12}
                 disabled={loading}
@@ -268,16 +183,16 @@ const Login = props => {
                 disableElevation
               >
                 {loading ? (
-                  <div className={classes.progress}>
+                  <div className={classes.loginProgress}>
                     <CircularProgress />
                   </div>
                 ) : (
-                  "Login"
+                  'Login'
                 )}
               </Button>
             </Box>
             <Box
-              className={classes.forget}
+              className={classes.loginForgetPassword}
               display='flex'
               height={50}
               alignItems='left'
