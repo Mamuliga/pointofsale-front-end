@@ -29,7 +29,7 @@ const SideMenuRoutes = props => {
   };
   return (
     <Drawer
-      variant="persistent"
+      variant='persistent'
       anchor={getSidePane(pathname)}
       open
       classes={{
@@ -37,8 +37,8 @@ const SideMenuRoutes = props => {
           classes[
             `${
               isSalesPage || isReceivesPage
-                ? "drawerPaperRight"
-                : "drawerPaperLeft"
+                ? "drawerPaperLeft"
+                : "drawerPaperRight"
             }`
           ]
       }}

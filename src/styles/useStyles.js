@@ -32,10 +32,10 @@ export default makeStyles(theme => ({
     }
   },
   toolbar: theme.mixins.toolbar,
-  drawerPaperLeft: {
+  drawerPaperRight: {
     width: LEFT_SIDE_BAR_WIDTH
   },
-  drawerPaperRight: {
+  drawerPaperLeft: {
     width: RIGHT_SIDE_BAR_WIDTH
   },
   content: {
