@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-import { logo } from "../../assets/images";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import { logo } from '../../assets/images';
 import {
   authenticate,
   setLoginErrorFalse
-} from "../../store/actions/authActions";
-import Button from "@material-ui/core/Button";
-import PersonOutlineRoundedIcon from "@material-ui/icons/PersonOutlineRounded";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { getEmployeeList } from "../../http/employeeApi";
+} from '../../store/actions/authActions';
+import Button from '@material-ui/core/Button';
+import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { getEmployeeList } from '../../http/employeeApi';
 import {
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   CircularProgress
-} from "@material-ui/core";
-import ErrorDisplay from "../uis/ErrorDisplay";
+} from '@material-ui/core';
+import ErrorDisplay from '../uis/ErrorDisplay';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   paper: {
     width: theme.spacing(50),
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 
   button: {
     width: theme.spacing(40),
-    display: "flex"
+    display: 'flex'
   },
   input: {
     padding: theme.spacing(2)
@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   forget: {
     width: theme.spacing(80)
   },
-  "& > *": {
+  '& > *': {
     margin: theme.spacing(10),
     width: theme.spacing(80),
     height: theme.spacing(70)
@@ -64,8 +64,8 @@ const useStyles = makeStyles(theme => ({
     minWidth: 120
   },
   progress: {
-    display: "flex",
-    "& > * + *": {
+    display: 'flex',
+    '& > * + *': {
       marginLeft: theme.spacing(2)
     }
   }
@@ -81,9 +81,9 @@ const Login = props => {
     setLoginErrorFalse
   } = props;
 
-  const [password, setPwd] = useState("");
-  const [confirmPwd, setConfirmPwd] = useState("");
-  const [allEmployees, setAllEmployess] = useState(["Admin"]);
+  const [password, setPwd] = useState('');
+  const [confirmPwd, setConfirmPwd] = useState('');
+  const [allEmployees, setAllEmployess] = useState(['Admin']);
   const [employee, setEmployee] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -106,7 +106,7 @@ const Login = props => {
   }, []);
 
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     setErrorMessage(null);
@@ -127,15 +127,15 @@ const Login = props => {
           if (password === confirmPwd) {
             return true;
           }
-          setErrorMessage("Password mismatch");
+          setErrorMessage('Password mismatch');
           return false;
         }
-        setErrorMessage("Password mismatch");
+        setErrorMessage('Password mismatch');
         return false;
       }
       return true;
     }
-    setErrorMessage("Please enter username and password");
+    setErrorMessage('Please enter username and password');
     return false;
   };
 
@@ -193,10 +193,15 @@ const Login = props => {
                       id='login-dropdown'
                       value={employee}
                       onChange={handleChange}
+                      fullWidth
+                      inputProps={{
+                        name: 'select an employee',
+                        id: 'age-native-simple'
+                      }}
                     >
                       {allEmployees.map(employee => (
                         <MenuItem value={employee}>
-                          {" "}
+                          {' '}
                           {employee.firstName}
                         </MenuItem>
                       ))}
@@ -272,7 +277,7 @@ const Login = props => {
                     <CircularProgress />
                   </div>
                 ) : (
-                  "Login"
+                  'Login'
                 )}
               </Button>
             </Box>
