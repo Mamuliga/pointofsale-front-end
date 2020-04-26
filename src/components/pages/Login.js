@@ -88,7 +88,6 @@ const Login = props => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleEmployeeResp = resp => {
-    console.log(resp.data);
     if (resp) {
       if (Array.isArray(resp.data)) {
         setAllEmployess(resp.data.filter(emp => emp.canLogIn));
