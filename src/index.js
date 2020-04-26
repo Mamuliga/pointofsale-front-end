@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import configureStore from "./store";
 import "./assets/fontello/css/fontello.css";
 import "./assets/fontello/css/animation.css";
@@ -10,9 +10,9 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <Provider store={configureStore()}>
-    <Router>
+    <HashRouter>
       <App />
-    </Router>
+    </HashRouter>
   </Provider>,
   document.getElementById("root")
 );
