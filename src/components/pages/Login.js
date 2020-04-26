@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import TextField from '@material-ui/core/TextField';
 import { logo } from '../../assets/images';
 import {
   authenticate,
@@ -9,7 +8,6 @@ import {
 } from '../../store/actions/authActions';
 import Button from '@material-ui/core/Button';
 import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -26,6 +24,7 @@ import {
 } from '@material-ui/core';
 import ErrorDisplay from '../uis/ErrorDisplay';
 import useStyles from '../../styles/useStyles';
+import CustomPassword from '../uis/FormComponents/Password';
 
 const Login = props => {
   const classes = useStyles();
@@ -159,51 +158,12 @@ const Login = props => {
                   </FormControl>
                 </Grid>
               </Grid>
-              <Grid
-                container
-                spacing={2}
-                className={classes.loginGridField}
-                alignItems='flex-end'
-              >
-                <Grid item className={classes.loginFormFieldIcon}>
-                  <LockOpenIcon />
-                </Grid>
-                <Grid item className={classes.loginFormField}>
-                  <TextField
-                    className={classes.loginputField}
-                    id='input-with-icon-grid'
-                    xs={3}
-                    label='password'
-                    type='password'
-                    name='password'
-                    onChange={handlePwd}
-                    value={password}
-                  />
-                </Grid>
-              </Grid>
+              <CustomPassword onChange={handlePwd} value={password} />
               {employee.isFirstTimeLogin && (
-                <Grid
-                  container
-                  spacing={2}
-                  className={classes.loginGridField}
-                  alignItems='flex-end'
-                >
-                  <Grid item className={classes.loginFormFieldIcon}>
-                    <LockOpenIcon />
-                  </Grid>
-                  <Grid item className={classes.loginFormField}>
-                    <TextField
-                      className={classes.loginputField}
-                      id='input-with-icon-grid'
-                      xs={3}
-                      label='password'
-                      type='password'
-                      name='password'
-                      onChange={handleConfirmPwd}
-                      value={confirmPwd}
-                    />
-                  </Grid>
-                </Grid>
+                <CustomPassword
+                  onChange={handleConfirmPwd}
+                  value={confirmPwd}
+                />
               )}
             </div>
             <Box
