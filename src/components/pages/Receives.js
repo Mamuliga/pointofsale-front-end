@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import TableBuilder from '../uis/TableBuilder.js';
-// import { useHistory } from "react-router-dom";
 import { getReceiveList } from '../../http/receiveApi';
 import { getReceiveTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import useStyles from '../../styles/useStyles.js';
@@ -11,7 +10,6 @@ import { TableCell } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const Receives = () => {
-  // const { location, push } = useHistory();
   const [ReceiveList, setReceiveList] = useState([]);
 
   useEffect(() => {
@@ -46,7 +44,6 @@ const Receives = () => {
 
   const handleDelete = receive => {
     const deleteClick = () => {
-      // push(`${location.pathname}/delete/${receive.id}`);
       setReceiveList([]);
     };
     return deleteClick;
