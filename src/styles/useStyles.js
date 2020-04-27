@@ -144,7 +144,7 @@ export default makeStyles(theme => ({
     paddingTop: theme.spacing(1)
   },
   customerName: {
-    marginBottom: theme.spacing(38),
+    marginBottom: theme.spacing(20),
     paddingTop: theme.spacing(1),
     padding: '4px',
     display: 'flex',
