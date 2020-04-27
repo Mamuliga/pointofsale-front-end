@@ -164,5 +164,53 @@ export default makeStyles(theme => ({
     width: '100%',
     margin: 'auto',
     textAlign: 'center'
+  },
+  /*Login styles */
+  loginFormFieldIcon: {
+    width: '10%'
+  },
+  loginFormField: {
+    width: '80%'
+  },
+  loginRoot: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  loginPaper: {
+    width: theme.spacing(50),
+    height: theme.spacing(20)
+  },
+  loginPaperForConfirmPwd: {
+    width: theme.spacing(50),
+    height: theme.spacing(30)
+  },
+  loginSubmit: {
+    width: theme.spacing(40),
+    display: 'flex'
+  },
+  loginGridField: {
+    padding: theme.spacing(2)
+  },
+  loginputField: {
+    width: theme.spacing(36)
+  },
+  loginForgetPassword: {
+    width: theme.spacing(80)
+  },
+  '& > *': {
+    margin: theme.spacing(10),
+    width: theme.spacing(80),
+    height: theme.spacing(70)
+  },
+  loginFormControl: {
+    margin: theme.spacing(1),
+    width: '100%'
+  },
+  loginProgress: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2)
+    }
   }
+  /*Login styles end*/
 }));
