@@ -11,20 +11,20 @@ const Sale = props => {
     <Fragment>
       <div>
         <div className={classes.Id}>
-          <TextField id='standard-basic' label='Sale Id' />
+          <TextField id='sale-id' label='Sale Id' />
         </div>
         <div className={classes.customerName}>
-          <TextField id='standard-basic' label='Customer Name' />
+          <TextField id='sale-customer-name' label='Customer Name' />
         </div>
         <div className={classes.total}>
-          <TextField id='outlined-textarea' label='Total' />
+          <TextField id='sale-total-inputs' label='Total' />
         </div>
 
         <div className={classes.cash}>
-          <TextField id='outlined-textarea' label='Cash' />
+          <TextField id='sale-cash-inputs' label='Cash' />
         </div>
         <div className={classes.balance}>
-          <TextField id='outlined-textarea' label='Balance' />
+          <TextField id='sale-balance-inputs' label='Balance' />
         </div>
         <div>
           <Button

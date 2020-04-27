@@ -11,20 +11,20 @@ const Receives = props => {
     <Fragment>
       <div>
         <div className={classes.Id}>
-          <TextField id='standard-basic' label='Receive Id' />
+          <TextField id='receive-id' label='Receive Id' />
         </div>
         <div className={classes.customerName}>
-          <TextField id='standard-basic' label='Customer Name' />
+          <TextField id='receive-customer-name' label='Customer Name' />
         </div>
         <div className={classes.total}>
-          <TextField id='outlined-textarea' label='Total' />
+          <TextField id='receive-total-inputs' label='Total' />
         </div>
 
         <div className={classes.cash}>
-          <TextField id='outlined-textarea' label='Cash' />
+          <TextField id='receive-cash-inputs' label='Cash' />
         </div>
         <div className={classes.balance}>
-          <TextField id='outlined-textarea' label='Balance' />
+          <TextField id='receive-balance-inputs' label='Balance' />
         </div>
         <div>
           <Button
