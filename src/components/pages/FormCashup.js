@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import PeopleForm from '../uis/PeopleForm';
+import FormBuilder from '../uis/FormBuilder';
 import { getCashupFormData } from '../../utilities/helpers/formHelpers/cashupForm';
 import {
   updateCashupById,
@@ -90,7 +90,7 @@ const FormCashup = () => {
   };
   if (cashup.id) {
     return (
-      <PeopleForm
+      <FormBuilder
         title={'Edit cashup'}
         data={dataWithValue}
         onClick={handleFormSubmit}
@@ -100,7 +100,7 @@ const FormCashup = () => {
     );
   } else {
     return (
-      <PeopleForm
+      <FormBuilder
         title={'Create new Cashup'}
         data={getCashupFormData}
         onClick={handleCreateNewCashup}
