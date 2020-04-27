@@ -1,23 +1,21 @@
 import React from 'react';
 import BusinessIcon from '@material-ui/icons/Business';
-import TodayIcon from '@material-ui/icons/Today';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 export const getCashupFormData = [
+  {
+    id: 'cashBook',
+    type: 'number',
+    label: 'Cash Book',
+    name: 'cashBook',
+    required: true,
+  },
   {
     id: 'refNumber',
     type: 'text',
     label: 'Ref. No',
     name: 'refNumber',
     required: true,
-  },
-  {
-    id: 'date',
-    type: 'date',
-    label: 'Date',
-    name: 'date',
-    required: true,
-    icon: <TodayIcon />,
   },
   {
     id: 'payment',

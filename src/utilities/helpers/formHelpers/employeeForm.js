@@ -2,8 +2,6 @@ import React from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import HomeIcon from '@material-ui/icons/Home';
-import BusinessIcon from '@material-ui/icons/Business';
-import TodayIcon from '@material-ui/icons/Today';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
@@ -16,7 +14,7 @@ export const getEmployeeFormData = [
     label: 'First Name',
     name: 'firstName',
     required: true,
-    icon: <PersonIcon />
+    icon: <PersonIcon />,
   },
   {
     id: 'lastName',
@@ -24,23 +22,16 @@ export const getEmployeeFormData = [
     label: 'Last Name',
     name: 'lastName',
     required: true,
-    icon: <PersonIcon />
+    icon: <PersonIcon />,
   },
-  {
-    id: 'companyName',
-    type: 'text',
-    label: 'Company Name',
-    name: 'companyName',
-    required: true,
-    icon: <BusinessIcon />
-  },
+
   {
     id: 'email',
     type: 'email',
     label: 'Email',
     name: 'email',
     required: true,
-    icon: <EmailIcon />
+    icon: <EmailIcon />,
   },
   {
     id: 'phoneNo',
@@ -48,7 +39,13 @@ export const getEmployeeFormData = [
     type: 'number',
     label: 'Mobile Number',
     required: true,
-    icon: <PhoneIphoneIcon />
+    icon: <PhoneIphoneIcon />,
+  },
+  {
+    id: 'gender',
+    name: 'gender',
+    type: 'radio',
+    label: 'gender',
   },
   {
     id: 'address',
@@ -56,20 +53,7 @@ export const getEmployeeFormData = [
     label: 'Address',
     name: 'address',
     required: true,
-    icon: <HomeIcon />
-  },
-  {
-    id: 'gender',
-    name: 'gender',
-    type: 'radio',
-    label: 'gender'
-  },
-  {
-    id: 'dob',
-    name: 'dob',
-    type: 'date',
-    label: 'Date of Birth',
-    icon: <TodayIcon />
+    icon: <HomeIcon />,
   },
 
   {
@@ -78,7 +62,7 @@ export const getEmployeeFormData = [
     label: 'Default Discount',
     name: 'defaultDiscount',
     required: true,
-    icon: <LocalOfferIcon />
+    icon: <LocalOfferIcon />,
   },
   {
     id: 'bankAccount',
@@ -86,31 +70,16 @@ export const getEmployeeFormData = [
     label: 'Bank Account',
     name: 'bankAccount',
     required: true,
-    icon: <MonetizationOnIcon />
+    icon: <MonetizationOnIcon />,
   },
-  {
-    id: 'regDate',
-    type: 'text',
-    label: 'Reg Date',
-    name: 'regDate',
-    required: true,
-    icon: <TodayIcon />
-  },
+
   {
     id: 'recruiter',
     type: 'text',
     label: 'Recruiter',
     name: 'recruiter',
     required: true,
-    icon: <RecentActorsIcon />
-  },
-  {
-    id: 'profilePicture',
-    name: 'profilePicture',
-    type: 'avatar',
-    label: 'avatar',
-    src: '',
-    alt: 'profile pic'
+    icon: <RecentActorsIcon />,
   },
   {
     id: 'description',
@@ -119,6 +88,6 @@ export const getEmployeeFormData = [
     name: 'description',
     multiline: true,
     rows: 4,
-    required: true
-  }
+    required: true,
+  },
 ];
