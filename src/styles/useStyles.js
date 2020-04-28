@@ -2,66 +2,66 @@ import { makeStyles } from '@material-ui/core';
 import {
   LEFT_SIDE_BAR_WIDTH,
   TOP_MENU_MAX_HEIGHT,
-  RIGHT_SIDE_BAR_WIDTH
+  RIGHT_SIDE_BAR_WIDTH,
 } from '../utilities/constants';
 
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: LEFT_SIDE_BAR_WIDTH,
       flexShrink: 0,
-      zIndex: '1 !important'
-    }
+      zIndex: '1 !important',
+    },
   },
   appBar: {
     [theme.breakpoints.up('sm')]: {
       marginLeft: LEFT_SIDE_BAR_WIDTH,
-      zIndex: '20000 !important'
-    }
+      zIndex: '20000 !important',
+    },
   },
   sideMenuContainer: {
-    marginTop: TOP_MENU_MAX_HEIGHT
+    marginTop: TOP_MENU_MAX_HEIGHT,
   },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   toolbar: theme.mixins.toolbar,
   drawerPaperRight: {
-    width: LEFT_SIDE_BAR_WIDTH
+    width: LEFT_SIDE_BAR_WIDTH,
   },
   drawerPaperLeft: {
-    width: RIGHT_SIDE_BAR_WIDTH
+    width: RIGHT_SIDE_BAR_WIDTH,
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
   },
   mainRouteViewLeftSidebar: {
     maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH}px)`,
     marginLeft: LEFT_SIDE_BAR_WIDTH,
-    marginTop: TOP_MENU_MAX_HEIGHT
+    marginTop: TOP_MENU_MAX_HEIGHT,
   },
   mainRouteViewRightSidebar: {
     maxWidth: `calc(100% - ${RIGHT_SIDE_BAR_WIDTH}px)`,
     marginRight: RIGHT_SIDE_BAR_WIDTH,
-    marginTop: TOP_MENU_MAX_HEIGHT
+    marginTop: TOP_MENU_MAX_HEIGHT,
   },
   navButton: {
     marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   innerButton: {
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
   },
   leftMenubar: {
     display: 'flex',
-    flex: 1
+    flex: 1,
   },
   copyrightLabel: {
     position: 'absolute',
@@ -70,28 +70,28 @@ export default makeStyles(theme => ({
     textAlign: 'center',
     width: '100%',
     color: theme.palette.grey[100],
-    lineHeight: 0.2
+    lineHeight: 0.2,
   },
   customAvatarStyles: {
     margin: theme.spacing(1),
     width: theme.spacing(10),
-    height: theme.spacing(10)
+    height: theme.spacing(10),
   },
   inputsTop: {
     position: 'relative',
     textAlign: 'left',
     display: 'flex',
     width: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   searchIcon: {
     height: '100%',
     pointerEvents: 'none',
-    paddingTop: theme.spacing(0.6)
+    paddingTop: theme.spacing(0.6),
   },
   searchInputRoot: {
     color: 'inherit',
-    width: '100%'
+    width: '100%',
   },
   searchInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -101,9 +101,9 @@ export default makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
-        width: '20ch'
-      }
-    }
+        width: '20ch',
+      },
+    },
   },
   searchTab: {
     border: 0,
@@ -112,14 +112,14 @@ export default makeStyles(theme => ({
     padding: 0,
     position: 'relative',
     minWidth: 0,
-    verticalAlign: 'top'
+    verticalAlign: 'top',
   },
   searchField: {
     display: 'inline-flex',
-    width: '100%'
+    width: '100%',
   },
   searchForm: {
-    width: '100%'
+    width: '100%',
   },
   total: {
     textAlign: 'left',
@@ -127,90 +127,100 @@ export default makeStyles(theme => ({
     justifyContent: 'flex-end',
     padding: '4px',
     flexDirection: 'column',
-    paddingTop: theme.spacing(1)
+    paddingTop: theme.spacing(1),
   },
   cash: {
     display: 'flex',
     justifyContent: 'flex-end',
     padding: '4px',
     flexDirection: 'column',
-    paddingTop: theme.spacing(1)
+    paddingTop: theme.spacing(1),
   },
   balance: {
     display: 'flex',
     justifyContent: 'flex-end',
     padding: '4px',
     flexDirection: 'column',
-    paddingTop: theme.spacing(1)
+    paddingTop: theme.spacing(1),
   },
   customerName: {
     marginBottom: theme.spacing(20),
     paddingTop: theme.spacing(1),
     padding: '4px',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   Id: {
     paddingTop: theme.spacing(1),
     padding: '4px',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   button: {
     width: '100%',
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   barcode: {
     width: '100%',
     margin: 'auto',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   /*Login styles */
   loginFormFieldIcon: {
-    width: '10%'
+    width: '10%',
   },
   loginFormField: {
-    width: '80%'
+    width: '80%',
   },
   loginRoot: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   loginPaper: {
     width: theme.spacing(50),
-    height: theme.spacing(20)
+    height: theme.spacing(20),
   },
   loginPaperForConfirmPwd: {
     width: theme.spacing(50),
-    height: theme.spacing(30)
+    height: theme.spacing(30),
   },
   loginSubmit: {
     width: theme.spacing(40),
-    display: 'flex'
+    display: 'flex',
   },
   loginGridField: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   loginputField: {
-    width: theme.spacing(36)
+    width: theme.spacing(36),
   },
   loginForgetPassword: {
-    width: theme.spacing(80)
+    width: theme.spacing(80),
   },
   '& > *': {
     margin: theme.spacing(10),
     width: theme.spacing(80),
-    height: theme.spacing(70)
+    height: theme.spacing(70),
   },
   loginFormControl: {
     margin: theme.spacing(1),
-    width: '100%'
+    width: '100%',
   },
   loginProgress: {
     display: 'flex',
     '& > * + *': {
-      marginLeft: theme.spacing(2)
-    }
-  }
+      marginLeft: theme.spacing(2),
+    },
+  },
   /*Login styles end*/
+  /* Form builder styles*/
+  formbuilderForm: {
+    marginTop: theme.spacing(3),
+  },
+  formbuilderSubmit: {
+    margin: theme.spacing(2, 0),
+  },
+  formbuilderMargin: {
+    marginRight: theme.spacing(1),
+  },
 }));

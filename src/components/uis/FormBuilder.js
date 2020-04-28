@@ -8,22 +8,10 @@ import { Button, Container } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CustomAvatar from './FormComponents/CustomAvatar';
 import CreateIcon from '@material-ui/icons/Create';
-import { makeStyles } from '@material-ui/core/styles';
 import DatePicker from './FormComponents/DatePicker';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import DropDown from './FormComponents/DropDown';
-
-const useStyles = makeStyles((theme) => ({
-  form: {
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(2, 0),
-  },
-  margin: {
-    marginRight: theme.spacing(1),
-  },
-}));
+import useStyles from '../../styles/useStyles';
 
 const FormBuilder = ({
   title,
@@ -46,12 +34,12 @@ const FormBuilder = ({
       <CssBaseline />
       <Typography component='h1' variant='h5'>
         <Box lineHeight={2}>
-          <CreateIcon className={classes.margin} />
+          <CreateIcon className={classes.formbuilderMargin} />
           {title}
         </Box>
       </Typography>
-      <div className={classes.paper}>
-        <form className={classes.form}>
+      <div>
+        <form className={classes.formbuilderForm}>
           <Grid container spacing={3}>
             {data.map((entry) => {
               switch (entry.type) {
@@ -106,7 +94,7 @@ const FormBuilder = ({
             variant='contained'
             color='primary'
             onClick={onClick(newActor)}
-            className={classes.submit}
+            className={classes.formbuilderSubmit}
           >
             Submit
           </Button>
