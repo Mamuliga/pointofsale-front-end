@@ -1,94 +1,115 @@
-import React, { useState } from "react";
-import { FormGroup } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import CustomTextField from "./FormComponents/CustomTextField";
-import CustomGender from "./FormComponents/CustomGender";
-import CustomPhone from "./FormComponents/CustomPhone";
-import { Button } from "@material-ui/core";
-import CustomAvatar from "./FormComponents/CustomAvatar";
-import DatePicker from "./FormComponents/DatePicker";
+import React, { useState } from 'react';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import CustomTextField from './FormComponents/CustomTextField';
+import CustomGender from './FormComponents/CustomGender';
+import CustomPhone from './FormComponents/CustomPhone';
+import { Button, Container } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import CustomAvatar from './FormComponents/CustomAvatar';
+import CreateIcon from '@material-ui/icons/Create';
+import DatePicker from './FormComponents/DatePicker';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import DropDown from './FormComponents/DropDown';
+import useStyles from '../../styles/useStyles';
 
-const FormBuilder = ({ title, data, onClick, actor, handleDelete }) => {
+const FormBuilder = ({
+  title,
+  data,
+  onClick,
+  actor,
+  handleDelete,
+  handleDatePickerChange,
+}) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
+    console.log({ ...newActor, [name]: value });
   };
 
-  const handleDatePickerChange = (date, name) => {
-    setNewActor({
-      ...newActor,
-      [name]: date.toLocaleDateString()
-    });
-  };
+  const classes = useStyles();
+
   return (
-    <div>
-      <div className={FormGroup.root}>
-        <div>
-          <Grid>
-            <Typography variant="h6" noWrap>
-              {title}
-            </Typography>
+    <Container component='main' maxWidth='md'>
+      <CssBaseline />
+      <Typography component='h1' variant='h5'>
+        <Box lineHeight={2}>
+          <CreateIcon className={classes.formbuilderMargin} />
+          {title}
+        </Box>
+      </Typography>
+      <div>
+        <form className={classes.formbuilderForm}>
+          <Grid container spacing={3}>
+            {data.map((entry) => {
+              switch (entry.type) {
+                case 'text':
+                case 'email':
+                  return (
+                    <CustomTextField
+                      entry={entry}
+                      key={entry.label}
+                      getValue={getValue}
+                    />
+                  );
+                case 'date':
+                  return (
+                    <DatePicker
+                      entry={entry}
+                      handleDatePickerChange={handleDatePickerChange}
+                    />
+                  );
+                case 'radio':
+                  return (
+                    <CustomGender
+                      entry={entry}
+                      key={entry.label}
+                      getValue={getValue}
+                    />
+                  );
+                case 'number':
+                  return (
+                    <CustomPhone
+                      entry={entry}
+                      key={entry.label}
+                      getValue={getValue}
+                    />
+                  );
+                case 'avatar':
+                  return <CustomAvatar key={entry.label} entry={entry} />;
+                default:
+                  return null;
+                case 'dropDown':
+                  return (
+                    <DropDown
+                      entry={entry}
+                      key={entry.label}
+                      getValue={getValue}
+                    />
+                  );
+              }
+            })}
           </Grid>
-          {data.map(entry => {
-            switch (entry.type) {
-              case "date":
-                return (
-                  <DatePicker
-                    entry={entry}
-                    handleDatePickerChange={handleDatePickerChange}
-                  />
-                );
-              case "text":
-              case "email":
-                return (
-                  <CustomTextField
-                    entry={entry}
-                    key={entry.label}
-                    getValue={getValue}
-                  />
-                );
-              case "radio":
-                return (
-                  <CustomGender
-                    entry={entry}
-                    key={entry.label}
-                    getValue={getValue}
-                  />
-                );
-              case "number":
-                return (
-                  <CustomPhone
-                    entry={entry}
-                    key={entry.label}
-                    getValue={getValue}
-                  />
-                );
-              case "avatar":
-                return <CustomAvatar key={entry.label} entry={entry} />;
-              default:
-                return null;
-            }
-          })}
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             onClick={onClick(newActor)}
+            className={classes.formbuilderSubmit}
           >
             Submit
           </Button>
           {newActor.id && (
             <Button
-              variant="contained"
-              color="secondary"
+              variant='contained'
+              color='secondary'
               onClick={handleDelete}
             >
               Delete
             </Button>
           )}
-        </div>
+        </form>
       </div>
-    </div>
+    </Container>
   );
 };
 

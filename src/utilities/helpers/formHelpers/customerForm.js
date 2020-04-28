@@ -2,8 +2,6 @@ import React from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import HomeIcon from '@material-ui/icons/Home';
-import BusinessIcon from '@material-ui/icons/Business';
-import TodayIcon from '@material-ui/icons/Today';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
@@ -26,14 +24,7 @@ export const getCustomerFormData = [
     required: false,
     icon: <PersonIcon />,
   },
-  {
-    id: 'companyName',
-    type: 'text',
-    label: 'Company Name',
-    name: 'companyName',
-    required: false,
-    icon: <BusinessIcon />,
-  },
+
   {
     id: 'email',
     type: 'email',
@@ -51,25 +42,18 @@ export const getCustomerFormData = [
     icon: <PhoneIphoneIcon />,
   },
   {
-    id: 'address',
-    type: 'text',
-    label: 'Address',
-    name: 'address',
-    required: false,
-    icon: <HomeIcon />,
-  },
-  {
     id: 'gender',
     name: 'gender',
     type: 'radio',
     label: 'gender',
   },
   {
-    id: 'dob',
-    name: 'dob',
-    type: 'date',
-    label: 'Date of Birth',
-    icon: <TodayIcon />,
+    id: 'address',
+    type: 'text',
+    label: 'Address',
+    name: 'address',
+    required: false,
+    icon: <HomeIcon />,
   },
 
   {
@@ -89,15 +73,6 @@ export const getCustomerFormData = [
     icon: <MonetizationOnIcon />,
   },
   {
-    id: 'description',
-    type: 'text',
-    label: 'Description',
-    name: 'description',
-    multiline: true,
-    rows: 4,
-    required: false,
-  },
-  {
     id: 'recruiter',
     type: 'text',
     label: 'Recruiter',
@@ -106,11 +81,12 @@ export const getCustomerFormData = [
     icon: <RecentActorsIcon />,
   },
   {
-    id: 'profilePicture',
-    name: 'profilePicture',
-    type: 'avatar',
-    label: 'avatar',
-    src: '',
-    alt: 'profile pic',
+    id: 'description',
+    type: 'text',
+    label: 'Description',
+    name: 'description',
+    multiline: true,
+    rows: 4,
+    required: false,
   },
 ];

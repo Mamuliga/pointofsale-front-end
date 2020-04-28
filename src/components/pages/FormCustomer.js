@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import PeopleForm from '../uis/PeopleForm';
+import FormBuilder from '../uis/FormBuilder';
 import { getCustomerFormData } from '../../utilities/helpers/formHelpers/customerForm';
 import {
   updateCustomerById,
@@ -90,7 +90,7 @@ const FormCustomer = () => {
   };
   if (customer.id) {
     return (
-      <PeopleForm
+      <FormBuilder
         title={'Edit Customer'}
         data={dataWithValue}
         onClick={handleFormSubmit}
@@ -100,7 +100,7 @@ const FormCustomer = () => {
     );
   } else {
     return (
-      <PeopleForm
+      <FormBuilder
         title={'Create new Customer'}
         data={getCustomerFormData}
         onClick={handleCreateNewCustomer}
