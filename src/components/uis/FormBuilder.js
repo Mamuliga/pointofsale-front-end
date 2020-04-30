@@ -17,11 +17,11 @@ const FormBuilder = ({
   title,
   data,
   onClick,
-  actor,
+  actor = {},
   handleDelete,
-  handleDatePickerChange,
+  handleDatePickerChange
 }) => {
-  const [newActor, setNewActor] = useState({ ...actor });
+  const [newActor, setNewActor] = useState(actor);
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
     console.log({ ...newActor, [name]: value });
@@ -41,7 +41,7 @@ const FormBuilder = ({
       <div>
         <form className={classes.formbuilderForm}>
           <Grid container spacing={3}>
-            {data.map((entry) => {
+            {data.map(entry => {
               switch (entry.type) {
                 case 'text':
                 case 'email':
@@ -93,12 +93,12 @@ const FormBuilder = ({
           <Button
             variant='contained'
             color='primary'
-            onClick={onClick(newActor)}
+            onClick={onClick(actor.id, newActor)}
             className={classes.formbuilderSubmit}
           >
             Submit
           </Button>
-          {newActor.id && (
+          {actor.id && (
             <Button
               variant='contained'
               color='secondary'
