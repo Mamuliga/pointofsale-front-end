@@ -3,10 +3,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import CustomTextField from './FormComponents/CustomTextField';
 import CustomGender from './FormComponents/CustomGender';
-import CustomPhone from './FormComponents/CustomPhone';
 import { Button, Container } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import CustomAvatar from './FormComponents/CustomAvatar';
 import CreateIcon from '@material-ui/icons/Create';
 import DatePicker from './FormComponents/DatePicker';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -45,6 +43,7 @@ const FormBuilder = ({
               switch (entry.type) {
                 case 'text':
                 case 'email':
+                case 'tel':
                   return (
                     <CustomTextField
                       entry={entry}
@@ -67,18 +66,6 @@ const FormBuilder = ({
                       getValue={getValue}
                     />
                   );
-                case 'number':
-                  return (
-                    <CustomPhone
-                      entry={entry}
-                      key={entry.label}
-                      getValue={getValue}
-                    />
-                  );
-                case 'avatar':
-                  return <CustomAvatar key={entry.label} entry={entry} />;
-                default:
-                  return null;
                 case 'dropDown':
                   return (
                     <DropDown
@@ -87,6 +74,8 @@ const FormBuilder = ({
                       getValue={getValue}
                     />
                   );
+                default:
+                  return null;
               }
             })}
           </Grid>

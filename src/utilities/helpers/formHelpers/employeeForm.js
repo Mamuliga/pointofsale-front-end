@@ -36,7 +36,7 @@ export const getEmployeeFormData = [
   {
     id: 'phoneNo',
     name: 'phoneNo',
-    type: 'number',
+    type: 'tel',
     label: 'Mobile Number',
     required: true,
     icon: <PhoneIphoneIcon />
