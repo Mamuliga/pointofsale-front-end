@@ -15,6 +15,7 @@ async function request({ method, url, body, params }) {
       Authorization: authDetails ? authDetails.token : null
     }
   });
+
   if (env.NODE_ENV === 'development') console.log('API REQUEST', respond);
   return respond;
 }

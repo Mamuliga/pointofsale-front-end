@@ -2,15 +2,18 @@ import {
   SIMPLE_ACTION,
   POST_REQUEST,
   PUT_REQUEST,
-  DELETE_REQUEST
-} from "./actionTypes";
-import { get, post, put, deleteReq } from "../../http";
+  DELETE_REQUEST,
+  DATA_FETCHING
+} from './actionTypes';
+import * as RequestMethods from '../../http/http';
+
+const { get, put, post, delete: deleteReq } = RequestMethods;
 
 export function simpleAction() {
   return async dispatch => {
-    let payload = "SOMETHING";
+    let payload = 'SOMETHING';
     try {
-      payload = await get("https://jsonplaceholder.typicode.com/todos/1");
+      payload = await get('https://jsonplaceholder.typicode.com/todos/1');
       console.log(payload);
     } catch (error) {
       payload = error;
@@ -21,11 +24,11 @@ export function simpleAction() {
 
 export function postRequest() {
   return async dispatch => {
-    let payload = "SOMETHING";
+    let payload = 'SOMETHING';
     try {
-      payload = await post("https://jsonplaceholder.typicode.com/posts", {
-        title: "foo",
-        body: "bar",
+      payload = await post('https://jsonplaceholder.typicode.com/posts', {
+        title: 'foo',
+        body: 'bar',
         userId: 1
       });
       console.log(payload);
@@ -38,12 +41,12 @@ export function postRequest() {
 
 export function putRequest() {
   return async dispatch => {
-    let payload = "SOMETHING";
+    let payload = 'SOMETHING';
     try {
-      payload = await put("https://jsonplaceholder.typicode.com/posts/1", {
+      payload = await put('https://jsonplaceholder.typicode.com/posts/1', {
         id: 1,
-        title: "foo",
-        body: "bar",
+        title: 'foo',
+        body: 'bar',
         userId: 1
       });
       console.log(payload);
@@ -56,9 +59,9 @@ export function putRequest() {
 
 export function deleteRequest() {
   return async dispatch => {
-    let payload = "SOMETHING";
+    let payload = 'SOMETHING';
     try {
-      payload = await deleteReq("https://jsonplaceholder.typicode.com/posts/1");
+      payload = await deleteReq('https://jsonplaceholder.typicode.com/posts/1');
       console.log(payload);
     } catch (error) {
       payload = error;
@@ -66,3 +69,9 @@ export function deleteRequest() {
     dispatch({ type: DELETE_REQUEST, payload: payload });
   };
 }
+
+export const fetchApi = isFetching => dispatch =>
+  dispatch({
+    type: DATA_FETCHING,
+    payload: isFetching
+  });
