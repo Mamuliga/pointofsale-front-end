@@ -19,7 +19,6 @@ const FormEmployee = ({ fetchApi }) => {
   const [employee, setEmployee] = useState({});
 
   useEffect(() => {
-    fetchApi(true);
     const handleGetSuccuess = res => {
       fetchApi(false);
       const dataArray = [];
@@ -39,20 +38,24 @@ const FormEmployee = ({ fetchApi }) => {
     const handleGetErr = err => {
       fetchApi(false);
     };
-    getEmployeeById(id)
-      .then(handleGetSuccuess)
-      .catch(handleGetErr);
+    if (id) {
+      fetchApi(true);
+      getEmployeeById(id)
+        .then(handleGetSuccuess)
+        .catch(handleGetErr);
+    }
   }, [employee.id, fetchApi, id]);
 
   const handleCreateNewEmployee = newEmployee => {
     const handleCreateSuccuess = () => {
-      alert('New Employee created');
+      fetchApi(false);
       push(PAGE_ROUTES.employees);
     };
     const handleCreateErr = err => {
-      console.log(err);
+      fetchApi(false);
     };
     const createNewEmployee = () => {
+      fetchApi(true);
       createEmployee(newEmployee)
         .then(handleCreateSuccuess)
         .catch(handleCreateErr);
@@ -62,10 +65,14 @@ const FormEmployee = ({ fetchApi }) => {
 
   const handleFormSubmit = (updatedEmployee, id) => {
     const handleUpdateSuccuess = res => {
+      fetchApi(false);
       push(PAGE_ROUTES.employees);
     };
-    const handleUpdateErr = err => {};
+    const handleUpdateErr = err => {
+      fetchApi(false);
+    };
     const formSubmit = () => {
+      fetchApi(true);
       updateEmployeeById(id, updatedEmployee)
         .then(handleUpdateSuccuess)
         .catch(handleUpdateErr);
@@ -75,12 +82,13 @@ const FormEmployee = ({ fetchApi }) => {
 
   const handleDelete = () => {
     const handleDeleteSuccuess = () => {
-      alert('Succuessfully deleted');
+      fetchApi(false);
       push(PAGE_ROUTES.employees);
     };
     const handleDeleteError = err => {
-      console.log(err);
+      fetchApi(false);
     };
+    fetchApi(true);
     deleteEmployee(employee.id)
       .then(handleDeleteSuccuess)
       .catch(handleDeleteError);
