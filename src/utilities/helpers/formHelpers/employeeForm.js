@@ -30,7 +30,7 @@ export const getEmployeeFormData = [
     type: 'email',
     label: 'Email',
     name: 'email',
-    required: true,
+    required: false,
     icon: <EmailIcon />
   },
   {
@@ -38,7 +38,7 @@ export const getEmployeeFormData = [
     name: 'phoneNo',
     type: 'tel',
     label: 'Mobile Number',
-    required: true,
+    required: false,
     icon: <PhoneIphoneIcon />
   },
   {
@@ -52,7 +52,7 @@ export const getEmployeeFormData = [
     type: 'text',
     label: 'Address',
     name: 'address',
-    required: true,
+    required: false,
     icon: <HomeIcon />
   },
 
@@ -61,7 +61,7 @@ export const getEmployeeFormData = [
     type: 'text',
     label: 'Default Discount',
     name: 'defaultDiscount',
-    required: true,
+    required: false,
     icon: <LocalOfferIcon />
   },
   {
@@ -69,7 +69,7 @@ export const getEmployeeFormData = [
     type: 'text',
     label: 'Bank Account',
     name: 'bankAccount',
-    required: true,
+    required: false,
     icon: <MonetizationOnIcon />
   },
 
@@ -78,7 +78,7 @@ export const getEmployeeFormData = [
     type: 'text',
     label: 'Recruiter',
     name: 'recruiter',
-    required: true,
+    required: false,
     icon: <RecentActorsIcon />
   },
   {
@@ -88,6 +88,6 @@ export const getEmployeeFormData = [
     name: 'description',
     multiline: true,
     rows: 4,
-    required: true
+    required: false
   }
 ];

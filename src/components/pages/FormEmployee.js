@@ -105,12 +105,13 @@ const FormEmployee = ({ fetchApi }) => {
       />
     );
   } else {
+    const actor = { ...employee, gender: 'male' };
     return (
       <FormBuilder
         title={'Create new Employee'}
         data={getEmployeeFormData}
         onClick={handleCreateNewEmployee}
-        actor={employee}
+        actor={actor}
       />
     );
   }
