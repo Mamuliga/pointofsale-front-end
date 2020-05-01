@@ -71,7 +71,8 @@ const FormEmployee = ({ fetchApi }) => {
     const handleUpdateErr = err => {
       fetchApi(false);
     };
-    const formSubmit = () => {
+    const formSubmit = e => {
+      e.preventDefault();
       fetchApi(true);
       updateEmployeeById(id, updatedEmployee)
         .then(handleUpdateSuccuess)

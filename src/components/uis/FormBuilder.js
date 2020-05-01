@@ -91,6 +91,7 @@ const FormBuilder = ({
             })}
           </Grid>
           <Button
+            type='submit'
             variant='contained'
             color='primary'
             onClick={onClick(newActor, actor.id)}
