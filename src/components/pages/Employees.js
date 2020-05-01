@@ -52,8 +52,8 @@ const mapStateToProps = ({ global }) => {
   return { ...global };
 };
 
-const mapDispatchToProps = {
+const mapActionToProps = {
   fetchApi
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Employees);
+export default connect(mapStateToProps, mapActionToProps)(Employees);

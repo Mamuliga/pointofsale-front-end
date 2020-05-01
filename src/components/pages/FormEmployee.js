@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import FormBuilder from '../uis/FormBuilder';
 import { getEmployeeFormData } from '../../utilities/helpers/formHelpers/employeeForm';
@@ -9,71 +10,80 @@ import {
   deleteEmployee
 } from '../../http/employeeApi';
 import { PAGE_ROUTES } from '../../services/routeService';
+import { fetchApi } from '../../store/actions/globalAction';
 
-const FormEmployee = () => {
+const FormEmployee = ({ fetchApi }) => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [employee, setEmployee] = useState({});
 
   useEffect(() => {
-    getEmployeeById(id)
-      .then(res => {
-        const dataArray = [];
-        const data = getEmployeeFormData;
-        const newEmployee = res.data;
-        Object.keys(res.data).forEach(id => {
-          data.forEach(entry => {
-            if (id === entry.id) {
-              dataArray.push({ ...entry, value: newEmployee[`${id}`] });
-            }
-            return null;
-          });
+    fetchApi(true);
+    const handleGetSuccuess = res => {
+      fetchApi(false);
+      const dataArray = [];
+      const data = getEmployeeFormData;
+      const newEmployee = res.data;
+      Object.keys(res.data).forEach(id => {
+        data.forEach(entry => {
+          if (id === entry.id) {
+            dataArray.push({ ...entry, value: newEmployee[`${id}`] });
+          }
+          return null;
         });
-
-        setEmployee(newEmployee);
-        setDataWithValue([...dataArray]);
-      })
-      .catch(err => {});
-  }, [employee.id, id]);
+      });
+      setEmployee(newEmployee);
+      setDataWithValue([...dataArray]);
+    };
+    const handleGetErr = err => {
+      fetchApi(false);
+    };
+    getEmployeeById(id)
+      .then(handleGetSuccuess)
+      .catch(handleGetErr);
+  }, [employee.id, fetchApi, id]);
 
   const handleCreateNewEmployee = newEmployee => {
+    const handleCreateSuccuess = () => {
+      alert('New Employee created');
+      push(PAGE_ROUTES.employees);
+    };
+    const handleCreateErr = err => {
+      console.log(err);
+    };
     const createNewEmployee = () => {
       createEmployee(newEmployee)
-        .then(() => {
-          alert('New Employee created');
-          push(PAGE_ROUTES.employees);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+        .then(handleCreateSuccuess)
+        .catch(handleCreateErr);
     };
     return createNewEmployee;
   };
 
   const handleFormSubmit = (id, updatedEmployee) => {
+    const handleUpdateEmployeeSuccuess = res => {
+      push(PAGE_ROUTES.employees);
+    };
+    const handleCreateEmployeeErr = err => {};
     const formSubmit = () => {
       updateEmployeeById(id, updatedEmployee)
-        .then(res => {
-          console.log(res.data);
-          push(PAGE_ROUTES.employees);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+        .then(handleUpdateEmployeeSuccuess)
+        .catch(handleCreateEmployeeErr);
     };
     return formSubmit;
   };
 
+  const handleDeleteSuccuess = () => {
+    alert('Succuessfully deleted');
+    push(PAGE_ROUTES.employees);
+  };
+  const handleDeleteError = err => {
+    console.log(err);
+  };
   const handleDelete = () => {
     deleteEmployee(employee.id)
-      .then(() => {
-        alert('Succuessfully deleted');
-        push(PAGE_ROUTES.employees);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(handleDeleteSuccuess)
+      .catch(handleDeleteError);
   };
   if (employee.id) {
     return (
@@ -97,4 +107,12 @@ const FormEmployee = () => {
   }
 };
 
-export default FormEmployee;
+const mapStateToProps = ({ global }) => {
+  return { ...global };
+};
+
+const mapActionToProps = {
+  fetchApi
+};
+
+export default connect(mapStateToProps, mapActionToProps)(FormEmployee);
