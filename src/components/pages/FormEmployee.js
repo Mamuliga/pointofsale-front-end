@@ -51,9 +51,9 @@ const FormEmployee = () => {
     return createNewEmployee;
   };
 
-  const handleFormSubmit = updatedEmployee => {
+  const handleFormSubmit = (id, updatedEmployee) => {
     const formSubmit = () => {
-      updateEmployeeById(updatedEmployee.id, updatedEmployee)
+      updateEmployeeById(id, updatedEmployee)
         .then(res => {
           console.log(res.data);
           push(PAGE_ROUTES.employees);
