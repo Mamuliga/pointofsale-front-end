@@ -60,27 +60,27 @@ const FormEmployee = ({ fetchApi }) => {
     return createNewEmployee;
   };
 
-  const handleFormSubmit = (id, updatedEmployee) => {
-    const handleUpdateEmployeeSuccuess = res => {
+  const handleFormSubmit = (updatedEmployee, id) => {
+    const handleUpdateSuccuess = res => {
       push(PAGE_ROUTES.employees);
     };
-    const handleCreateEmployeeErr = err => {};
+    const handleUpdateErr = err => {};
     const formSubmit = () => {
       updateEmployeeById(id, updatedEmployee)
-        .then(handleUpdateEmployeeSuccuess)
-        .catch(handleCreateEmployeeErr);
+        .then(handleUpdateSuccuess)
+        .catch(handleUpdateErr);
     };
     return formSubmit;
   };
 
-  const handleDeleteSuccuess = () => {
-    alert('Succuessfully deleted');
-    push(PAGE_ROUTES.employees);
-  };
-  const handleDeleteError = err => {
-    console.log(err);
-  };
   const handleDelete = () => {
+    const handleDeleteSuccuess = () => {
+      alert('Succuessfully deleted');
+      push(PAGE_ROUTES.employees);
+    };
+    const handleDeleteError = err => {
+      console.log(err);
+    };
     deleteEmployee(employee.id)
       .then(handleDeleteSuccuess)
       .catch(handleDeleteError);

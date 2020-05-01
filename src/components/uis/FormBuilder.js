@@ -93,7 +93,7 @@ const FormBuilder = ({
           <Button
             variant='contained'
             color='primary'
-            onClick={onClick(actor.id, newActor)}
+            onClick={onClick(newActor, actor.id)}
             className={classes.formbuilderSubmit}
           >
             Submit

@@ -49,7 +49,7 @@ const FormCustomer = () => {
     return createNewCustomer;
   };
 
-  const handleFormSubmit = (id, updatedCustomer) => {
+  const handleFormSubmit = (updatedCustomer, id) => {
     const formSubmit = () => {
       updateCustomerById(id, updatedCustomer)
         .then(res => {

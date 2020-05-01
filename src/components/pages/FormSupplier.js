@@ -48,7 +48,7 @@ const FormSupplier = () => {
     return createNewSupplier;
   };
 
-  const handleFormSubmit = (id, updatedSupplier) => {
+  const handleFormSubmit = (updatedSupplier, id) => {
     const formSubmit = () => {
       updateSupplierById(id, updatedSupplier)
         .then(res => {
