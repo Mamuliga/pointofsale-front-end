@@ -10,6 +10,7 @@ import DatePicker from './FormComponents/DatePicker';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import DropDown from './FormComponents/DropDown';
 import useStyles from '../../styles/useStyles';
+import ConfirmationPopup from './ConfirmationPopup';
 
 const FormBuilder = ({
   title,
@@ -20,9 +21,18 @@ const FormBuilder = ({
   handleDatePickerChange
 }) => {
   const [newActor, setNewActor] = useState(actor);
+  const [openConfirm, setOpenConfirmation] = React.useState(false);
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
     console.log({ ...newActor, [name]: value });
+  };
+
+  const handleOpenConfirmation = () => {
+    setOpenConfirmation(true);
+  };
+
+  const handleCloseConfiramtion = () => {
+    setOpenConfirmation(false);
   };
 
   const classes = useStyles();
@@ -92,15 +102,29 @@ const FormBuilder = ({
             <Button
               variant='contained'
               color='secondary'
-              onClick={handleDelete}
+              onClick={handleOpenConfirmation}
             >
               Delete
             </Button>
           )}
         </form>
       </div>
+      {openConfirm && (
+        <ConfirmationPopup
+          open={openConfirm}
+          close={handleCloseConfiramtion}
+          handleAgree={handleDelete}
+          id='deletePopup'
+          header='Confirm Delete'
+          content={`Are you sure want to delete the ${actor.firstName} ${actor.lastName}`}
+        />
+      )}
     </Container>
   );
 };
 
 export default FormBuilder;
+// TODO
+// Handle delete pop up
+// Handle errors
+// Handle form input structure
