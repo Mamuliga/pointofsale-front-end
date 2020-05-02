@@ -13,7 +13,9 @@ const CustomTextField = ({ entry, getValue }) => {
     value,
     multiline,
     rows,
-    id
+    id,
+    helperText,
+    error
   } = entry;
   const [newValue, setNewValue] = useState(value);
 
@@ -38,6 +40,8 @@ const CustomTextField = ({ entry, getValue }) => {
         multiline={multiline}
         rows={rows}
         onChange={handleChange}
+        error={error}
+        helperText={error && helperText}
         variant='outlined'
         InputProps={{
           startAdornment: (

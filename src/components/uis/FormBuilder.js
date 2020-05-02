@@ -11,6 +11,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import DropDown from './FormComponents/DropDown';
 import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
+import {
+  validateEmail,
+  validateRequiredFields
+} from '../../utilities/helpers/formHelpers/formBuilderhelpers.js/validations';
 
 const FormBuilder = ({
   title,
@@ -21,10 +25,29 @@ const FormBuilder = ({
   handleDatePickerChange
 }) => {
   const [newActor, setNewActor] = useState(actor);
+  const [dataFields, setDataFields] = useState(data);
   const [openConfirm, setOpenConfirmation] = React.useState(false);
   const getValue = ({ target: { value, name } }) => {
     setNewActor({ ...newActor, [name]: value });
     console.log({ ...newActor, [name]: value });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const dataFiledsWithErrors = [];
+    dataFields.forEach(field => {
+      const newActorField = newActor[`${field.id}`];
+      if (field.type === 'email') {
+        validateEmail(field, newActorField, dataFiledsWithErrors);
+      } else {
+        validateRequiredFields(field, newActorField, dataFiledsWithErrors);
+      }
+    });
+    setDataFields(dataFiledsWithErrors);
+    const errors = dataFiledsWithErrors.filter(dataField => dataField.error);
+    if (!errors.length) {
+      onClick(newActor, actor.id);
+    }
   };
 
   const handleOpenConfirmation = () => {
@@ -49,7 +72,7 @@ const FormBuilder = ({
       <div>
         <form className={classes.formbuilderForm}>
           <Grid container spacing={3}>
-            {data.map(entry => {
+            {dataFields.map(entry => {
               switch (entry.type) {
                 case 'text':
                 case 'email':
@@ -93,7 +116,7 @@ const FormBuilder = ({
             type='submit'
             variant='contained'
             color='primary'
-            onClick={onClick(newActor, actor.id)}
+            onClick={handleSubmit}
             className={classes.formbuilderSubmit}
           >
             Submit
@@ -124,6 +147,7 @@ const FormBuilder = ({
 };
 
 export default FormBuilder;
+
 // TODO
 // Handle errorsplogin
 // Handle form input structure

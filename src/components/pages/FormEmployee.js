@@ -17,7 +17,6 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [employee, setEmployee] = useState({});
-
   useEffect(() => {
     const handleGetSuccuess = res => {
       fetchApi(false);
@@ -57,14 +56,10 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
       fetchApi(false);
       setFetchApiErr('Unable to create employee');
     };
-    const createNewEmployee = e => {
-      e.preventDefault();
-      fetchApi(true);
-      createEmployee(newEmployee)
-        .then(handleCreateSuccuess)
-        .catch(handleCreateErr);
-    };
-    return createNewEmployee;
+    fetchApi(true);
+    createEmployee(newEmployee)
+      .then(handleCreateSuccuess)
+      .catch(handleCreateErr);
   };
 
   const handleFormSubmit = (updatedEmployee, id) => {
