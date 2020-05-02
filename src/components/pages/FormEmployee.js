@@ -44,7 +44,7 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
         .then(handleGetSuccuess)
         .catch(handleGetErr);
     }
-  }, [employee.id, fetchApi, id, setFetchApiErr]);
+  }, [fetchApi, id, setFetchApiErr]);
 
   const handleCreateNewEmployee = newEmployee => {
     const handleCreateSuccuess = res => {
@@ -71,14 +71,12 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
       fetchApi(false);
       setFetchApiErr('Unable to update employee details');
     };
-    const formSubmit = e => {
-      e.preventDefault();
-      fetchApi(true);
-      updateEmployeeById(id, updatedEmployee)
-        .then(handleUpdateSuccuess)
-        .catch(handleUpdateErr);
-    };
-    return formSubmit;
+    updatedEmployee.id = undefined;
+    updatedEmployee.roleInPOS = undefined;
+    fetchApi(true);
+    updateEmployeeById(id, updatedEmployee)
+      .then(handleUpdateSuccuess)
+      .catch(handleUpdateErr);
   };
 
   const handleDelete = () => {
@@ -95,17 +93,25 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
       .then(handleDeleteSuccuess)
       .catch(handleDeleteError);
   };
-  if (employee.id) {
-    return (
-      <FormBuilder
-        title={'Edit Employee'}
-        data={dataWithValue}
-        onClick={handleFormSubmit}
-        actor={employee}
-        handleDelete={handleDelete}
-      />
-    );
-  } else {
+  if (employee.id && dataWithValue.length) {
+    const editingEmployee = { ...employee };
+    dataWithValue.forEach(field => {
+      editingEmployee[`${field.id}`] = field.value;
+    });
+    console.log(editingEmployee);
+    if (editingEmployee) {
+      return (
+        <FormBuilder
+          title={'Edit Employee'}
+          data={dataWithValue}
+          onClick={handleFormSubmit}
+          actor={editingEmployee}
+          handleDelete={handleDelete}
+        />
+      );
+    }
+    return null;
+  } else if (!id) {
     const actor = { ...employee, gender: 'male' };
     return (
       <FormBuilder
@@ -116,6 +122,7 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
       />
     );
   }
+  return null;
 };
 
 const mapStateToProps = ({ global }) => {

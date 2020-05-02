@@ -18,24 +18,26 @@ import {
 
 const FormBuilder = ({
   title,
-  data,
+  data = [],
   onClick,
   actor = {},
   handleDelete,
   handleDatePickerChange
 }) => {
-  const [newActor, setNewActor] = useState(actor);
-  const [dataFields, setDataFields] = useState(data);
+  const [newActor, setNewActor] = useState({ ...actor });
+  const [dataFields, setDataFields] = useState();
   const [openConfirm, setOpenConfirmation] = React.useState(false);
   const getValue = ({ target: { value, name } }) => {
+    console.log(name);
     setNewActor({ ...newActor, [name]: value });
     console.log({ ...newActor, [name]: value });
   };
 
   const handleSubmit = e => {
+    console.log(newActor);
     e.preventDefault();
     const dataFiledsWithErrors = [];
-    dataFields.forEach(field => {
+    data.forEach(field => {
       const newActorField = newActor[`${field.id}`];
       if (field.type === 'email') {
         validateEmail(field, newActorField, dataFiledsWithErrors);
@@ -59,7 +61,10 @@ const FormBuilder = ({
   };
 
   const classes = useStyles();
-
+  let fields = data;
+  if (dataFields) {
+    fields = dataFields;
+  }
   return (
     <Container component='main' maxWidth='md'>
       <CssBaseline />
@@ -72,7 +77,7 @@ const FormBuilder = ({
       <div>
         <form className={classes.formbuilderForm}>
           <Grid container spacing={3}>
-            {dataFields.map(entry => {
+            {fields.map(entry => {
               switch (entry.type) {
                 case 'text':
                 case 'email':
