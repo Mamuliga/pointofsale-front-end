@@ -125,6 +125,5 @@ const FormBuilder = ({
 
 export default FormBuilder;
 // TODO
-// Handle delete pop up
-// Handle errors
+// Handle errorsplogin
 // Handle form input structure

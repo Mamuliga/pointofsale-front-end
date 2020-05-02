@@ -3,7 +3,8 @@ import {
   POST_REQUEST,
   PUT_REQUEST,
   DELETE_REQUEST,
-  DATA_FETCHING
+  DATA_FETCHING,
+  DATA_FETCHING_ERR
 } from './actionTypes';
 import * as RequestMethods from '../../http/http';
 
@@ -74,4 +75,10 @@ export const fetchApi = isFetching => dispatch =>
   dispatch({
     type: DATA_FETCHING,
     payload: isFetching
+  });
+
+export const setFetchApiErr = errorMessage => dispatch =>
+  dispatch({
+    type: DATA_FETCHING_ERR,
+    payload: errorMessage
   });

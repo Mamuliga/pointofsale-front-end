@@ -4,9 +4,9 @@ import TableBuilder from '../uis/TableBuilder.js';
 import { useHistory } from 'react-router-dom';
 import { getEmployeeTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getEmployeeList } from '../../http/employeeApi';
-import { fetchApi } from '../../store/actions/globalAction.js';
+import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
 
-const Employees = ({ fetchApi }) => {
+const Employees = ({ fetchApi, setFetchApiErr }) => {
   const { location, push } = useHistory();
   const [employeeList, setEmployeeList] = useState([]);
 
@@ -23,13 +23,15 @@ const Employees = ({ fetchApi }) => {
       }
     };
     const handleGetEmployeeErr = err => {
+      setFetchApiErr('Unable to get employees');
       fetchApi(false);
     };
+
     fetchApi(true);
     getEmployeeList()
       .then(handleGetEmployeeResp)
       .catch(handleGetEmployeeErr);
-  }, [fetchApi]);
+  }, [fetchApi, setFetchApiErr]);
 
   const handleEdit = employee => {
     const editClick = () => {
@@ -53,7 +55,8 @@ const mapStateToProps = ({ global }) => {
 };
 
 const mapActionToProps = {
-  fetchApi
+  fetchApi,
+  setFetchApiErr
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Employees);

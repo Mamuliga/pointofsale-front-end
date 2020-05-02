@@ -10,9 +10,9 @@ import {
   deleteEmployee
 } from '../../http/employeeApi';
 import { PAGE_ROUTES } from '../../services/routeService';
-import { fetchApi } from '../../store/actions/globalAction';
+import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction';
 
-const FormEmployee = ({ fetchApi }) => {
+const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
@@ -37,6 +37,7 @@ const FormEmployee = ({ fetchApi }) => {
     };
     const handleGetErr = err => {
       fetchApi(false);
+      setFetchApiErr('Unable to get the employee details');
     };
     if (id) {
       fetchApi(true);
@@ -44,17 +45,20 @@ const FormEmployee = ({ fetchApi }) => {
         .then(handleGetSuccuess)
         .catch(handleGetErr);
     }
-  }, [employee.id, fetchApi, id]);
+  }, [employee.id, fetchApi, id, setFetchApiErr]);
 
   const handleCreateNewEmployee = newEmployee => {
-    const handleCreateSuccuess = () => {
+    const handleCreateSuccuess = res => {
       fetchApi(false);
       push(PAGE_ROUTES.employees);
     };
     const handleCreateErr = err => {
+      console.log(err);
       fetchApi(false);
+      setFetchApiErr('Unable to create employee');
     };
-    const createNewEmployee = () => {
+    const createNewEmployee = e => {
+      e.preventDefault();
       fetchApi(true);
       createEmployee(newEmployee)
         .then(handleCreateSuccuess)
@@ -70,6 +74,7 @@ const FormEmployee = ({ fetchApi }) => {
     };
     const handleUpdateErr = err => {
       fetchApi(false);
+      setFetchApiErr('Unable to update employee details');
     };
     const formSubmit = e => {
       e.preventDefault();
@@ -88,6 +93,7 @@ const FormEmployee = ({ fetchApi }) => {
     };
     const handleDeleteError = err => {
       fetchApi(false);
+      setFetchApiErr('Unable to delete employee');
     };
     fetchApi(true);
     deleteEmployee(employee.id)
@@ -122,7 +128,8 @@ const mapStateToProps = ({ global }) => {
 };
 
 const mapActionToProps = {
-  fetchApi
+  fetchApi,
+  setFetchApiErr
 };
 
 export default connect(mapStateToProps, mapActionToProps)(FormEmployee);
