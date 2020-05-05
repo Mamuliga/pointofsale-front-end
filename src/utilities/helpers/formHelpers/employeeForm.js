@@ -14,7 +14,7 @@ export const getEmployeeFormData = [
     label: 'First Name',
     name: 'firstName',
     required: true,
-    icon: <PersonIcon />
+    icon: <PersonIcon />,
   },
   {
     id: 'lastName',
@@ -22,16 +22,15 @@ export const getEmployeeFormData = [
     label: 'Last Name',
     name: 'lastName',
     required: true,
-    icon: <PersonIcon />
+    icon: <PersonIcon />,
   },
-
   {
     id: 'email',
     type: 'email',
     label: 'Email',
     name: 'email',
     required: false,
-    icon: <EmailIcon />
+    icon: <EmailIcon />,
   },
   {
     id: 'phoneNo',
@@ -39,13 +38,13 @@ export const getEmployeeFormData = [
     type: 'tel',
     label: 'Mobile Number',
     required: false,
-    icon: <PhoneIphoneIcon />
+    icon: <PhoneIphoneIcon />,
   },
   {
     id: 'gender',
     name: 'gender',
     type: 'radio',
-    label: 'gender'
+    label: 'gender',
   },
   {
     id: 'address',
@@ -53,16 +52,15 @@ export const getEmployeeFormData = [
     label: 'Address',
     name: 'address',
     required: false,
-    icon: <HomeIcon />
+    icon: <HomeIcon />,
   },
-
   {
     id: 'defaultDiscount',
     type: 'text',
     label: 'Default Discount',
     name: 'defaultDiscount',
     required: false,
-    icon: <LocalOfferIcon />
+    icon: <LocalOfferIcon />,
   },
   {
     id: 'bankAccount',
@@ -70,16 +68,15 @@ export const getEmployeeFormData = [
     label: 'Bank Account',
     name: 'bankAccount',
     required: false,
-    icon: <MonetizationOnIcon />
+    icon: <MonetizationOnIcon />,
   },
-
   {
     id: 'recruiter',
     type: 'text',
     label: 'Recruiter',
     name: 'recruiter',
     required: false,
-    icon: <RecentActorsIcon />
+    icon: <RecentActorsIcon />,
   },
   {
     id: 'description',
@@ -88,6 +85,6 @@ export const getEmployeeFormData = [
     name: 'description',
     multiline: true,
     rows: 4,
-    required: false
-  }
+    required: false,
+  },
 ];
