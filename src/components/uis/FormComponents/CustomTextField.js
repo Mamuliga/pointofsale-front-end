@@ -4,10 +4,22 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 const CustomTextField = ({ entry, getValue }) => {
-  const { label, name, icon, type, required, value, multiline, rows } = entry;
+  const {
+    label,
+    name,
+    icon,
+    type,
+    required,
+    value,
+    multiline,
+    rows,
+    id,
+    helperText,
+    error
+  } = entry;
   const [newValue, setNewValue] = useState(value);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     console.log(e.target.value);
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
@@ -18,7 +30,7 @@ const CustomTextField = ({ entry, getValue }) => {
     <Grid item xs={6}>
       <TextField
         fullWidth
-        id={name}
+        id={id}
         label={label}
         placeholder={label}
         name={name}
@@ -28,11 +40,13 @@ const CustomTextField = ({ entry, getValue }) => {
         multiline={multiline}
         rows={rows}
         onChange={handleChange}
-        variant="outlined"
+        error={error}
+        helperText={error && helperText}
+        variant='outlined'
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">{icon}</InputAdornment>
-          ),
+            <InputAdornment position='start'>{icon}</InputAdornment>
+          )
         }}
       />
     </Grid>
