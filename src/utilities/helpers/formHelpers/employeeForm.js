@@ -14,7 +14,7 @@ export const getEmployeeFormData = [
     label: 'First Name',
     name: 'firstName',
     required: true,
-    icon: <PersonIcon />,
+    icon: <PersonIcon />
   },
   {
     id: 'lastName',
@@ -22,7 +22,7 @@ export const getEmployeeFormData = [
     label: 'Last Name',
     name: 'lastName',
     required: true,
-    icon: <PersonIcon />,
+    icon: <PersonIcon />
   },
 
   {
@@ -30,30 +30,30 @@ export const getEmployeeFormData = [
     type: 'email',
     label: 'Email',
     name: 'email',
-    required: true,
-    icon: <EmailIcon />,
+    required: false,
+    icon: <EmailIcon />
   },
   {
     id: 'phoneNo',
     name: 'phoneNo',
-    type: 'number',
+    type: 'tel',
     label: 'Mobile Number',
-    required: true,
-    icon: <PhoneIphoneIcon />,
+    required: false,
+    icon: <PhoneIphoneIcon />
   },
   {
     id: 'gender',
     name: 'gender',
     type: 'radio',
-    label: 'gender',
+    label: 'gender'
   },
   {
     id: 'address',
     type: 'text',
     label: 'Address',
     name: 'address',
-    required: true,
-    icon: <HomeIcon />,
+    required: false,
+    icon: <HomeIcon />
   },
 
   {
@@ -61,16 +61,16 @@ export const getEmployeeFormData = [
     type: 'text',
     label: 'Default Discount',
     name: 'defaultDiscount',
-    required: true,
-    icon: <LocalOfferIcon />,
+    required: false,
+    icon: <LocalOfferIcon />
   },
   {
     id: 'bankAccount',
     type: 'text',
     label: 'Bank Account',
     name: 'bankAccount',
-    required: true,
-    icon: <MonetizationOnIcon />,
+    required: false,
+    icon: <MonetizationOnIcon />
   },
 
   {
@@ -78,8 +78,8 @@ export const getEmployeeFormData = [
     type: 'text',
     label: 'Recruiter',
     name: 'recruiter',
-    required: true,
-    icon: <RecentActorsIcon />,
+    required: false,
+    icon: <RecentActorsIcon />
   },
   {
     id: 'description',
@@ -88,6 +88,6 @@ export const getEmployeeFormData = [
     name: 'description',
     multiline: true,
     rows: 4,
-    required: true,
-  },
+    required: false
+  }
 ];

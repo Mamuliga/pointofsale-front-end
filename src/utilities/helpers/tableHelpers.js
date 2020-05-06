@@ -1,204 +1,209 @@
 const getEditColumn = () => ({
-  id: "edit",
+  id: 'edit',
   numeric: false,
   disablePadding: false,
-  label: ""
+  label: ''
 });
 
 export const getCustomerTableHeaders = [
   {
-    id: "id",
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: "Customer Id"
+    label: 'Customer Id'
   },
   {
-    id: "firstName",
+    id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: "First Name"
+    label: 'First Name'
   },
-  { id: "lastName", numeric: false, disablePadding: false, label: "Last Name" },
-  { id: "email", numeric: false, disablePadding: false, label: "Email" },
+  { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
+  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
   {
-    id: "gender",
+    id: 'gender',
     numeric: false,
     disablePadding: false,
-    label: "Gender"
+    label: 'Gender'
   },
   {
-    id: "bankAccount",
+    id: 'bankAccount',
     numeric: false,
     disablePadding: false,
-    label: "Acc no"
+    label: 'Acc no'
   },
   getEditColumn()
 ];
 
 export const getEmployeeTableHeaders = [
   {
-    id: "id",
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: "Employee Id"
+    label: 'Employee Id'
   },
   {
-    id: "firstName",
+    id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: "First Name"
+    label: 'First Name'
   },
-  { id: "lastName", numeric: false, disablePadding: false, label: "Last Name" },
-  { id: "email", numeric: false, disablePadding: false, label: "Email" },
+  { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
   {
-    id: "gender",
+    id: 'phoneNo',
     numeric: false,
     disablePadding: false,
-    label: "Gender"
+    label: 'Phone Number'
   },
   {
-    id: "bankAccount",
+    id: 'gender',
     numeric: false,
     disablePadding: false,
-    label: "Acc no"
+    label: 'Gender'
+  },
+  {
+    id: 'bankAccount',
+    numeric: false,
+    disablePadding: false,
+    label: 'Acc no'
   }
 ];
 
 export const getSupplierTableHeaders = [
   {
-    id: "id",
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: "Supplier Id"
+    label: 'Supplier Id'
   },
   {
-    id: "firstName",
+    id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: "First Name"
+    label: 'First Name'
   },
-  { id: "lastName", numeric: false, disablePadding: false, label: "Last Name" },
-  { id: "email", numeric: false, disablePadding: false, label: "Email" },
+  { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
+  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
   {
-    id: "gender",
+    id: 'gender',
     numeric: false,
     disablePadding: false,
-    label: "Gender"
+    label: 'Gender'
   },
   {
-    id: "bankAccount",
+    id: 'bankAccount',
     numeric: false,
     disablePadding: false,
-    label: "Acc no"
+    label: 'Acc no'
   }
 ];
 
 export const getSaleTableHeaders = [
   {
-    id: "id",
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: "Sale Id"
+    label: 'Sale Id'
   },
   {
-    id: "ItemName",
+    id: 'ItemName',
     numeric: false,
     disablePadding: false,
-    label: "Item Name"
+    label: 'Item Name'
   },
-  { id: "Price", numeric: false, disablePadding: false, label: "Price" },
+  { id: 'Price', numeric: false, disablePadding: false, label: 'Price' },
   {
-    id: "Disc",
+    id: 'Disc',
     numeric: false,
     disablePadding: false,
-    label: "Disc"
+    label: 'Disc'
   },
-  { id: "Quantity", numeric: false, disablePadding: false, label: "Quantity" },
+  { id: 'Quantity', numeric: false, disablePadding: false, label: 'Quantity' },
   {
-    id: "Total",
+    id: 'Total',
     numeric: false,
     disablePadding: false,
-    label: "Total"
+    label: 'Total'
   }
 ];
 
 export const getReceiveTableHeaders = [
   {
-    id: "id",
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: "Receive Id"
+    label: 'Receive Id'
   },
   {
-    id: "ItemName",
+    id: 'ItemName',
     numeric: false,
     disablePadding: false,
-    label: "Item Name"
+    label: 'Item Name'
   },
-  { id: "Price", numeric: false, disablePadding: false, label: "Price" },
+  { id: 'Price', numeric: false, disablePadding: false, label: 'Price' },
   {
-    id: "Disc",
+    id: 'Disc',
     numeric: false,
     disablePadding: false,
-    label: "Disc"
+    label: 'Disc'
   },
-  { id: "Quantity", numeric: false, disablePadding: false, label: "Quantity" },
+  { id: 'Quantity', numeric: false, disablePadding: false, label: 'Quantity' },
   {
-    id: "Total",
+    id: 'Total',
     numeric: false,
     disablePadding: false,
-    label: "Total"
+    label: 'Total'
   }
 ];
 
 export const getItemTableHeaders = [
   {
-    id: "itemid",
+    id: 'itemid',
     numeric: false,
     disablePadding: false,
-    label: "Item Id"
+    label: 'Item Id'
   },
-  { id: "barcode", numeric: false, disablePadding: false, label: "Bar Code" },
-  { id: "itemname", numeric: false, disablePadding: false, label: "Item Name" },
+  { id: 'barcode', numeric: false, disablePadding: false, label: 'Bar Code' },
+  { id: 'itemname', numeric: false, disablePadding: false, label: 'Item Name' },
   {
-    id: "category",
+    id: 'category',
     numeric: false,
     disablePadding: false,
-    label: "Category"
+    label: 'Category'
   },
   {
-    id: "reorderLevel",
+    id: 'reorderLevel',
     numeric: false,
     disablePadding: false,
-    label: "Reorder level"
+    label: 'Reorder level'
   }
 ];
 
 export const getCashupTableHeaders = [
   {
-    id: "refNo",
+    id: 'refNo',
     numeric: false,
     disablePadding: false,
-    label: "Ref. No."
+    label: 'Ref. No.'
   },
   {
-    id: "date",
+    id: 'date',
     numeric: false,
     disablePadding: false,
-    label: "Date"
+    label: 'Date'
   },
   {
-    id: "description",
+    id: 'description',
     numeric: false,
     disablePadding: false,
-    label: "Description"
+    label: 'Description'
   },
-  { id: "credit", numeric: true, disablePadding: false, label: "Credit" },
+  { id: 'credit', numeric: true, disablePadding: false, label: 'Credit' },
   {
-    id: "debit",
+    id: 'debit',
     numeric: true,
     disablePadding: false,
-    label: "Debit"
+    label: 'Debit'
   },
   getEditColumn()
 ];

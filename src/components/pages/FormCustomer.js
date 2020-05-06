@@ -6,7 +6,7 @@ import {
   updateCustomerById,
   getCustomerById,
   createCustomer,
-  deleteCustomer,
+  deleteCustomer
 } from '../../http/customerApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 
@@ -14,30 +14,15 @@ const FormCustomer = () => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
-  const [customer, setCustomer] = useState({
-    firstName: null,
-    lastName: null,
-    companyName: null,
-    email: null,
-    phoneNo: '0771234567',
-    gender: 'male',
-    address: null,
-    dob: '95-01-02',
-    description: null,
-    profilePicture: 'hh',
-    defaultDiscount: null,
-    bankAccount: null,
-    regDate: null,
-    recruiter: null,
-  });
+  const [customer, setCustomer] = useState({});
 
   useEffect(() => {
-    getCustomerById(id).then((res) => {
+    getCustomerById(id).then(res => {
       const dataArray = [];
       const data = getCustomerFormData;
       const newCustomer = res.data;
-      Object.keys(res.data).forEach((id) => {
-        data.forEach((entry) => {
+      Object.keys(res.data).forEach(id => {
+        data.forEach(entry => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newCustomer[`${id}`] });
           }
@@ -50,28 +35,28 @@ const FormCustomer = () => {
     });
   }, [customer.id, id]);
 
-  const handleCreateNewCustomer = (newCustomer) => {
+  const handleCreateNewCustomer = newCustomer => {
     const createNewCustomer = () => {
       createCustomer(newCustomer)
         .then(() => {
           alert('New Customer created');
           push(PAGE_ROUTES.customers);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     };
     return createNewCustomer;
   };
 
-  const handleFormSubmit = (updatedCustomer) => {
+  const handleFormSubmit = (updatedCustomer, id) => {
     const formSubmit = () => {
-      updateCustomerById(updatedCustomer.id, updatedCustomer)
-        .then((res) => {
+      updateCustomerById(id, updatedCustomer)
+        .then(res => {
           console.log(res.data);
           push(PAGE_ROUTES.customers);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     };
@@ -84,7 +69,7 @@ const FormCustomer = () => {
         alert('Succuessfully deleted');
         push(PAGE_ROUTES.customers);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };

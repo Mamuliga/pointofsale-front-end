@@ -5,8 +5,8 @@ import {
   LOAD_AUTH_DATA,
   SET_ERROR_NOTIFICATION,
   SET_LOGIN_ERROR_FALSE
-} from "../actions/actionTypes";
-import { AUTH_LOCAL_STORAGE } from "../../utilities/constants";
+} from '../actions/actionTypes';
+import { AUTH_LOCAL_STORAGE } from '../../utilities/constants';
 
 const INITIAL_STATE = {
   loading: false,
@@ -26,14 +26,14 @@ export default (state = INITIAL_STATE, action) => {
       newState.loading = !!action.payload;
       break;
     case SET_ERROR_NOTIFICATION:
-      newState.loginError = "Invalid Credentials";
+      newState.loginError = 'Invalid Credentials';
       break;
     case SET_LOGIN_ERROR_FALSE:
       newState.loginError = false;
       break;
     case AUTHENTICATION:
       newState.isAuthenticated = true;
-      newState.token = action.payload;
+      newState.authDetails = action.payload;
       break;
     case LOGOUT:
       newState.isAuthenticated = false;
