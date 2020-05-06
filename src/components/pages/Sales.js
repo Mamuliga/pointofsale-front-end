@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import TableRow from '@material-ui/core/TableRow';
 import { TableCell } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { itemSearch } from '../../http/itemApi.js';
 
 const Sales = () => {
   const [saleList, setSaleList] = useState([]);
@@ -47,6 +48,19 @@ const Sales = () => {
       setSaleList([]);
     };
     return deleteClick;
+  };
+
+  const handleItemSearchChange = e => {
+    const handleItemSearchSuccuess = resp => {
+      console.log(resp);
+    };
+
+    const handleItemSearchErr = err => {
+      console.log(err);
+    };
+    itemSearch('item5')
+      .then(handleItemSearchSuccuess)
+      .catch(handleItemSearchErr);
   };
   const classes = useStyles();
   const editableRowIndexes = [2, 3, 4];
@@ -90,6 +104,7 @@ const Sales = () => {
                 input: classes.searchInput
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={handleItemSearchChange}
             />
           </div>
         </div>
