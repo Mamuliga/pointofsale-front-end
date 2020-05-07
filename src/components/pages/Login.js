@@ -25,6 +25,7 @@ import {
 import ErrorDisplay from '../uis/ErrorDisplay';
 import useStyles from '../../styles/useStyles';
 import CustomPassword from '../uis/FormComponents/Password';
+import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction';
 
 const Login = props => {
   const classes = useStyles();
@@ -33,7 +34,9 @@ const Login = props => {
     onLoginClick,
     isAuthenticated,
     loginError,
-    setLoginErrorFalse
+    setLoginErrorFalse,
+    fetchApi,
+    setFetchApiErr
   } = props;
 
   const [password, setPwd] = useState('');
@@ -42,22 +45,25 @@ const Login = props => {
   const [employee, setEmployee] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleEmployeeResp = resp => {
-    if (resp) {
-      if (Array.isArray(resp.data)) {
-        setAllEmployess(resp.data.filter(emp => emp.canLogIn));
-      }
-    }
-  };
-  const handlegetEmployeeErr = err => {
-    console.log(err);
-  };
-
   useEffect(() => {
+    const handleEmployeeResp = resp => {
+      fetchApi(false);
+      if (resp) {
+        if (Array.isArray(resp.data)) {
+          setAllEmployess(resp.data.filter(emp => emp.canLogIn));
+        }
+      }
+    };
+    const handlegetEmployeeErr = err => {
+      fetchApi(false);
+      setFetchApiErr('Unable to get login user names');
+    };
+
+    fetchApi(true);
     getEmployeeList()
       .then(handleEmployeeResp)
       .catch(handlegetEmployeeErr);
-  }, []);
+  }, [fetchApi, setFetchApiErr]);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -219,7 +225,9 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapActionToProps = {
   onLoginClick: authenticate,
-  setLoginErrorFalse
+  setLoginErrorFalse,
+  setFetchApiErr,
+  fetchApi
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Login);

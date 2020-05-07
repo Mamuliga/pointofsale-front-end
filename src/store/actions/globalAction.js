@@ -6,7 +6,9 @@ import {
   DATA_FETCHING,
   DATA_FETCHING_ERR,
 } from './actionTypes';
-import { get, post, put, deleteReq } from '../../http';
+import * as RequestMethods from '../../http/http';
+
+const { get, put, post, delete: deleteReq } = RequestMethods;
 
 export function simpleAction() {
   return async (dispatch) => {
@@ -68,6 +70,7 @@ export function deleteRequest() {
     dispatch({ type: DELETE_REQUEST, payload: payload });
   };
 }
+
 export const fetchApi = (isFetching) => (dispatch) =>
   dispatch({
     type: DATA_FETCHING,

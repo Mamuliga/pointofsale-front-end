@@ -8,7 +8,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
+  KeyboardDatePicker
 } from '@material-ui/pickers';
 import useStyles from '../../styles/useStyles';
 
@@ -18,7 +18,7 @@ const Cashups = () => {
   const [cashupList, setCashupList] = useState([]);
 
   useEffect(() => {
-    const handleGetCashupResp = (res) => {
+    const handleGetCashupResp = res => {
       if (Array.isArray(res.data)) {
         const displayCashupList = res.data.map(
           ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
@@ -29,11 +29,13 @@ const Cashups = () => {
       }
     };
 
-    const handleGetCashupErr = (err) => {};
-    getCashupList().then(handleGetCashupResp).catch(handleGetCashupErr);
+    const handleGetCashupErr = err => {};
+    getCashupList()
+      .then(handleGetCashupResp)
+      .catch(handleGetCashupErr);
   }, []);
 
-  const handleEdit = (cashup) => {
+  const handleEdit = cashup => {
     const editClick = () => {
       push(`${location.pathname}/edit/${cashup.id}`);
     };
@@ -43,13 +45,13 @@ const Cashups = () => {
   const [selectedDateTo, setSelectedDateTo] = React.useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeTo = (date) => {
+  const handleDateChangeTo = date => {
     setSelectedDateTo(date);
   };
   const [selectedDateFrom, setSelectedDateFrom] = React.useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeFrom = (date) => {
+  const handleDateChangeFrom = date => {
     setSelectedDateFrom(date);
   };
 
@@ -59,9 +61,10 @@ const Cashups = () => {
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <p className={classes.cashupDateAlign}>To :</p>
           <KeyboardDatePicker
-            margin="medium"
-            id="date-picker-dialog"
-            format="  MM  / dd  / yyyy  "
+            autoFocus
+            margin='medium'
+            id='date-picker-dialog'
+            format='  MM  / dd  / yyyy  '
             value={selectedDateTo}
             onChange={handleDateChangeTo}
           />
@@ -69,9 +72,9 @@ const Cashups = () => {
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <p className={classes.cashupDateAlign}>From :</p>
           <KeyboardDatePicker
-            margin="medium"
-            id="date-picker-dialog"
-            format="  MM  / dd  / yyyy  "
+            margin='medium'
+            id='date-picker-dialog'
+            format='  MM  / dd  / yyyy  '
             value={selectedDateFrom}
             onChange={handleDateChangeFrom}
           />

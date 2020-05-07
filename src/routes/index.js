@@ -1,14 +1,14 @@
-import React from "react";
-import { Switch } from "react-router-dom";
+import React from 'react';
+import { Switch } from 'react-router-dom';
 import {
   Dashboard,
   Login,
   Customers,
   NotFoundPage,
   Items
-} from "../components/pages";
-import ProtectedRoute from "./ProtectedRoute";
-import { PAGE_ROUTES } from "../services/routeService";
+} from '../components/pages';
+import ProtectedRoute from './ProtectedRoute';
+import { PAGE_ROUTES } from '../services/routeService';
 import {
   customerRoutes,
   employeeRoutes,
@@ -17,7 +17,7 @@ import {
   cashupRoutes,
   saleRoutes,
   receiveRoutes
-} from "./routeHelper";
+} from './routeHelper';
 
 const Routes = props => (
   <Switch>
@@ -34,6 +34,7 @@ const Routes = props => (
         path={route.path}
         component={route.component}
         key={route.path}
+        isAuthenticated={null}
       />
     ))}
     {employeeRoutes.map(route => (

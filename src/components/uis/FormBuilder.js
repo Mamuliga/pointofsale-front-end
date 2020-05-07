@@ -3,32 +3,68 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import CustomTextField from './FormComponents/CustomTextField';
 import CustomGender from './FormComponents/CustomGender';
-import CustomPhone from './FormComponents/CustomPhone';
 import { Button, Container } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import CustomAvatar from './FormComponents/CustomAvatar';
 import CreateIcon from '@material-ui/icons/Create';
 import DatePicker from './FormComponents/DatePicker';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import DropDown from './FormComponents/DropDown';
 import useStyles from '../../styles/useStyles';
+import ConfirmationPopup from './ConfirmationPopup';
+import {
+  validateEmail,
+  validateRequiredFields
+} from '../../utilities/helpers/formHelpers/formBuilderhelpers.js/validations';
 
 const FormBuilder = ({
   title,
-  data,
+  data = [],
   onClick,
-  actor,
+  actor = {},
   handleDelete,
-  handleDatePickerChange,
+  handleDatePickerChange
 }) => {
   const [newActor, setNewActor] = useState({ ...actor });
+  const [dataFields, setDataFields] = useState();
+  const [openConfirm, setOpenConfirmation] = React.useState(false);
   const getValue = ({ target: { value, name } }) => {
+    console.log(name);
     setNewActor({ ...newActor, [name]: value });
     console.log({ ...newActor, [name]: value });
   };
 
-  const classes = useStyles();
+  const handleSubmit = e => {
+    console.log(newActor);
+    e.preventDefault();
+    const dataFiledsWithErrors = [];
+    data.forEach(field => {
+      const newActorField = newActor[`${field.id}`];
+      if (field.type === 'email') {
+        validateEmail(field, newActorField, dataFiledsWithErrors);
+      } else {
+        validateRequiredFields(field, newActorField, dataFiledsWithErrors);
+      }
+    });
+    setDataFields(dataFiledsWithErrors);
+    const errors = dataFiledsWithErrors.filter(dataField => dataField.error);
+    if (!errors.length) {
+      onClick(newActor, actor.id);
+    }
+  };
 
+  const handleOpenConfirmation = () => {
+    setOpenConfirmation(true);
+  };
+
+  const handleCloseConfiramtion = () => {
+    setOpenConfirmation(false);
+  };
+
+  const classes = useStyles();
+  let fields = data;
+  if (dataFields) {
+    fields = dataFields;
+  }
   return (
     <Container component='main' maxWidth='md'>
       <CssBaseline />
@@ -41,10 +77,11 @@ const FormBuilder = ({
       <div>
         <form className={classes.formbuilderForm}>
           <Grid container spacing={3}>
-            {data.map((entry) => {
+            {fields.map(entry => {
               switch (entry.type) {
                 case 'text':
                 case 'email':
+                case 'tel':
                   return (
                     <CustomTextField
                       entry={entry}
@@ -67,18 +104,6 @@ const FormBuilder = ({
                       getValue={getValue}
                     />
                   );
-                case 'number':
-                  return (
-                    <CustomPhone
-                      entry={entry}
-                      key={entry.label}
-                      getValue={getValue}
-                    />
-                  );
-                case 'avatar':
-                  return <CustomAvatar key={entry.label} entry={entry} />;
-                default:
-                  return null;
                 case 'dropDown':
                   return (
                     <DropDown
@@ -87,30 +112,47 @@ const FormBuilder = ({
                       getValue={getValue}
                     />
                   );
+                default:
+                  return null;
               }
             })}
           </Grid>
           <Button
+            type='submit'
             variant='contained'
             color='primary'
-            onClick={onClick(newActor)}
+            onClick={handleSubmit}
             className={classes.formbuilderSubmit}
           >
             Submit
           </Button>
-          {newActor.id && (
+          {actor.id && (
             <Button
               variant='contained'
               color='secondary'
-              onClick={handleDelete}
+              onClick={handleOpenConfirmation}
             >
               Delete
             </Button>
           )}
         </form>
       </div>
+      {openConfirm && (
+        <ConfirmationPopup
+          open={openConfirm}
+          close={handleCloseConfiramtion}
+          handleAgree={handleDelete}
+          id='deletePopup'
+          header='Confirm Delete'
+          content={`Are you sure want to delete the ${actor.firstName} ${actor.lastName}`}
+        />
+      )}
     </Container>
   );
 };
 
 export default FormBuilder;
+
+// TODO
+// Handle errorsplogin
+// Handle form input structure
