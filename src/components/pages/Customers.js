@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
-import TableBuilder from "../uis/TableBuilder.js";
-import { useHistory } from "react-router-dom";
-import { getCustomerTableHeaders } from "../../utilities/helpers/tableHelpers.js";
-import { getCustomerList } from "../../http/customerApi";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import TableBuilder from '../uis/TableBuilder.js';
+import { useHistory } from 'react-router-dom';
+import { getCustomerTableHeaders } from '../../utilities/helpers/tableHelpers.js';
+import { getCustomerList } from '../../http/customerApi';
+import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
 
-const Customers = () => {
+const Customers = ({ fetchApi, setFetchApiErr }) => {
   const { location, push } = useHistory();
   const [customerList, setCustomerList] = useState([]);
 
   useEffect(() => {
-    const handleGetCustomerResp = res => {
+    const handleGetCustomerResp = (res) => {
+      fetchApi(false);
       if (Array.isArray(res.data)) {
         const displayCustomerList = res.data.map(
           ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
@@ -19,14 +22,16 @@ const Customers = () => {
         setCustomerList(displayCustomerList);
       }
     };
-    const handleGetCustomerErr = err => {};
+    const handleGetCustomerErr = (err) => {
+      setFetchApiErr('Unable to get customers');
+      fetchApi(false);
+    };
 
-    getCustomerList()
-      .then(handleGetCustomerResp)
-      .catch(handleGetCustomerErr);
-  }, []);
+    fetchApi(true);
+    getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
+  }, [fetchApi, setFetchApiErr]);
 
-  const handleEdit = customer => {
+  const handleEdit = (customer) => {
     const editClick = () => {
       push(`${location.pathname}/edit/${customer.id}`);
     };
@@ -38,9 +43,18 @@ const Customers = () => {
       tableData={customerList}
       tableHeaders={getCustomerTableHeaders}
       handleEdit={handleEdit}
-      title={"Customers"}
+      title={'Customers'}
     />
   );
 };
 
-export default Customers;
+const mapStateToProps = ({ global }) => {
+  return { ...global };
+};
+
+const mapActionToProps = {
+  fetchApi,
+  setFetchApiErr,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Customers);
