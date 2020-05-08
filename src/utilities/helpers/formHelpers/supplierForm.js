@@ -29,7 +29,7 @@ export const getSupplierFormData = [
     type: 'email',
     label: 'Email',
     name: 'email',
-    required: true,
+    required: false,
     icon: <EmailIcon />,
   },
   {
@@ -37,7 +37,7 @@ export const getSupplierFormData = [
     name: 'phoneNo',
     type: 'number',
     label: 'Mobile Number',
-    required: true,
+    required: false,
     icon: <PhoneIphoneIcon />,
   },
   {
@@ -51,7 +51,7 @@ export const getSupplierFormData = [
     type: 'text',
     label: 'Address',
     name: 'address',
-    required: true,
+    required: false,
     icon: <HomeIcon />,
   },
   {
@@ -59,7 +59,7 @@ export const getSupplierFormData = [
     type: 'text',
     label: 'Default Discount',
     name: 'defaultDiscount',
-    required: true,
+    required: false,
     icon: <LocalOfferIcon />,
   },
   {
@@ -67,7 +67,7 @@ export const getSupplierFormData = [
     type: 'text',
     label: 'Bank Account',
     name: 'bankAccount',
-    required: true,
+    required: false,
     icon: <MonetizationOnIcon />,
   },
   {
@@ -75,7 +75,7 @@ export const getSupplierFormData = [
     type: 'text',
     label: 'Recruiter',
     name: 'recruiter',
-    required: true,
+    required: false,
     icon: <RecentActorsIcon />,
   },
   {
@@ -85,6 +85,6 @@ export const getSupplierFormData = [
     name: 'description',
     multiline: true,
     rows: 4,
-    required: true,
+    required: false,
   },
 ];
