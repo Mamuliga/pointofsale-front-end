@@ -49,28 +49,27 @@ const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
     const handleCreateSuccuess = (res) => {
       fetchApi(false);
 
-          push(PAGE_ROUTES.suppliers);
-        };
-        const handleCreateErr = (err) => {
-          console.log(err);
-          fetchApi(false);
-          setFetchApiErr('Unable to create supplier');
-        };
-        fetchApi(true);
-        createCustomer(newSupplier)
-          .then(handleCreateSuccuess)
-          .catch(handleCreateErr);
-      };
+      push(PAGE_ROUTES.suppliers);
     };
-   
+    const handleCreateErr = (err) => {
+      console.log(err);
+      fetchApi(false);
+      setFetchApiErr('Unable to create supplier');
+    };
+    fetchApi(true);
+    createSupplier(newSupplier)
+      .then(handleCreateSuccuess)
+      .catch(handleCreateErr);
+  };
+
   const handleFormSubmit = (updatedSupplier, id) => {
     const handleUpdateSuccuess = (res) => {
       fetchApi(false);
-      push(PAGE_ROUTES.customers);
+      push(PAGE_ROUTES.suppliers);
     };
     const handleUpdateErr = (err) => {
       fetchApi(false);
-      setFetchApiErr('Unable to update customer details');
+      setFetchApiErr('Unable to update supplier details');
     };
     updatedSupplier.id = undefined;
     updatedSupplier.roleInPOS = undefined;
@@ -87,34 +86,34 @@ const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
     };
     const handleDeleteError = (err) => {
       fetchApi(false);
-      setFetchApiErr('Unable to delete customer');
+      setFetchApiErr('Unable to delete supplier');
     };
     fetchApi(true);
     deleteSupplier(supplier.id)
-    .then(handleDeleteSuccuess)
-    .catch(handleDeleteError);
-};
+      .then(handleDeleteSuccuess)
+      .catch(handleDeleteError);
+  };
 
-if (supplier.id && dataWithValue.length) {
-  const editingCustomer = { ...supplier };
-  dataWithValue.forEach((field) => {
-    editingSupplier[`${field.id}`] = field.value;
-  });
-  console.log(editingSupplier);
-  if (editingSupplier) {
-    return (
-      <FormBuilder
-        title={'Edit Supplier'}
-        data={dataWithValue}
-        onClick={handleFormSubmit}
-        actor={editingSupplier}
-        handleDelete={handleDelete}
-      />
-    );
-  }
-  return null;
-} else if (!id) {
-  const actor = { ...supplier, gender: 'male' };
+  if (supplier.id && dataWithValue.length) {
+    const editingSupplier = { ...supplier };
+    dataWithValue.forEach((field) => {
+      editingSupplier[`${field.id}`] = field.value;
+    });
+    console.log(editingSupplier);
+    if (editingSupplier) {
+      return (
+        <FormBuilder
+          title={'Edit Supplier'}
+          data={dataWithValue}
+          onClick={handleFormSubmit}
+          actor={editingSupplier}
+          handleDelete={handleDelete}
+        />
+      );
+    }
+    return null;
+  } else if (!id) {
+    const actor = { ...supplier, gender: 'male' };
     return (
       <FormBuilder
         title={'Create new Supplier'}
