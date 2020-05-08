@@ -113,7 +113,7 @@ const FormItem = ({ fetchApi, setFetchApiErr }) => {
     }
     return null;
   } else if (!id) {
-    const actor = { ...item, gender: 'male' };
+    const actor = { ...item };
     return (
       <FormBuilder
         title={'Create new Item'}
