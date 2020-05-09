@@ -6,9 +6,10 @@ import { getSaleTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import useStyles from '../../styles/useStyles.js';
 import TextField from '@material-ui/core/TextField';
 import TableRow from '@material-ui/core/TableRow';
-import { TableCell } from '@material-ui/core';
+import { TableCell, CircularProgress } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { itemSearch } from '../../http/itemApi.js';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const Sales = () => {
   const [saleList, setSaleList] = useState([]);
@@ -88,30 +89,48 @@ const Sales = () => {
     );
   });
 
+  const options = [{ name: 'mar' }, { name: 'masar' }];
+
   const searchComponent = (
     <div className={classes.inputsTop}>
       <form onSubmit={handleSearchSubmit} className={classes.searchForm}>
         <div className={classes.searchTab}>
-          <div className={classes.searchField}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <TextField
-              autoFocus
-              placeholder='Search…'
-              classes={{
-                root: classes.searchInputRoot,
-                input: classes.searchInput
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={handleItemSearchChange}
-            />
-          </div>
+          <Autocomplete
+            id='sales-item-search-'
+            getOptionSelected={(option, value) => option.name === value.name}
+            getOptionLabel={option => option.name}
+            options={options}
+            onHighlightChange={(event, selectedOpt, reason) => {
+              console.log(event);
+              console.log(selectedOpt);
+              console.log(reason);
+            }}
+            loading
+            renderInput={params => (
+              <TextField
+                autoFocus
+                {...params}
+                label='Enter an Item Code, Item Name or Item Id'
+                variant='outlined'
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment: <SearchIcon />,
+                  endAdornment: (
+                    <React.Fragment>
+                      {/* loading */ true ? (
+                        <CircularProgress color='inherit' size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </React.Fragment>
+                  )
+                }}
+              />
+            )}
+          />
         </div>
       </form>
     </div>
   );
-
   return (
     <div>
       <div>
