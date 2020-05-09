@@ -14,21 +14,11 @@ import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
 
 const Sales = ({ fetchApi, setFetchApiErr }) => {
   // TODO set correct values for value Arr
-  const valueArr = [
-    ['asd', [0, 1], 'asd', 'asdsd', [0, 4]],
-    [
-      [1, 0],
-      [1, 1],
-      [1, 2],
-      [1, 3],
-      [1, 4]
-    ]
-  ];
   const [cart, setCart] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState({});
-  const [valueArray, setValueArray] = useState(valueArr);
+  const [valueArray, setValueArray] = useState([['', '', '', '', '']]);
 
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
@@ -50,15 +40,19 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
   }, [fetchApi, searchWord, setFetchApiErr]);
 
   const handleSearchSubmit = (e, value) => {
+    e.preventDefault();
     if (value) {
       const { item, id, salesPrice } = value;
-      e.preventDefault();
       console.log(e.target.value);
       console.log(value);
+      setValueArray([...valueArray, ['', '', '', '', '']]);
+      valueArray[cart.length][0] = id;
+      valueArray[cart.length][1] = item.itemName;
       valueArray[cart.length][2] = salesPrice;
       valueArray[cart.length][3] = item.description;
       valueArray[cart.length][4] = 1;
       setCart([
+        ...cart,
         {
           id,
           itemName: item.itemName,
@@ -67,8 +61,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
           quantity: '1',
           total: 'Description1',
           cartIndex: cart.length
-        },
-        ...cart
+        }
       ]);
     }
   };
@@ -90,31 +83,33 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
   const editableRowFieldNames = ['', '', 'salesPrice', 'quantity', 'discount'];
   const tableRows = cart.map((row, rowIndex) => {
     return (
-      <TableRow hover key={row.id}>
-        {Object.values(row).map((cell, index) => {
-          if (editableRowIndexes.includes(index)) {
+      <TableRow hover key={rowIndex}>
+        {Object.values(row).map((cell, columnIndex) => {
+          if (editableRowIndexes.includes(columnIndex)) {
             valueArray[rowIndex][5] =
               valueArray[rowIndex][4] * valueArray[rowIndex][2];
             const handleTextInputChange = ({ target: { name, value } }) => {
-              valueArray[rowIndex][index] = value;
+              valueArray[rowIndex][columnIndex] = value;
               setValueArray([...valueArray]);
               console.log(valueArray);
             };
             return (
-              <TableCell key={index}>
+              <TableCell key={columnIndex}>
                 <TextField
                   id='outlined-basic'
-                  name={editableRowFieldNames[index]}
+                  name={editableRowFieldNames[columnIndex]}
                   label=''
-                  autoFocus={index === 4}
-                  value={valueArray[rowIndex][index]}
+                  autoFocus={columnIndex === 4}
+                  value={valueArray[rowIndex][columnIndex]}
                   onChange={handleTextInputChange}
                 />
               </TableCell>
             );
           }
           return (
-            <TableCell key={index}>{valueArray[rowIndex][index]}</TableCell>
+            <TableCell key={columnIndex}>
+              {valueArray[rowIndex][columnIndex]}
+            </TableCell>
           );
         })}
         <TableCell key={'delete'} align='right'>
