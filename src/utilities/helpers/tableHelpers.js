@@ -103,7 +103,7 @@ export const getSaleTableHeaders = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Sale Id'
+    label: 'Item Id'
   },
   {
     id: 'ItemName',

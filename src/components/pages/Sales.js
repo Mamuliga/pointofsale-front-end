@@ -47,7 +47,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       console.log(e.target.value);
       console.log(value);
       setValueArray([...valueArray, ['', '', '', '', '']]);
-      valueArray[rowIndex][0] = id;
+      valueArray[rowIndex][0] = item.id;
       valueArray[rowIndex][1] = item.itemName;
       valueArray[rowIndex][2] = salesPrice;
       valueArray[rowIndex][3] = 1;
@@ -119,7 +119,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       <div className={classes.searchTab}>
         <Autocomplete
           id='sales-item-search'
-          getOptionLabel={option => option.item.itemName}
+          getOptionLabel={option => `${option.item.id}-${option.item.itemName}`}
           options={suggestions}
           onChange={handleSearchSubmit}
           onHighlightChange={(_event, selectedOpt) => {
