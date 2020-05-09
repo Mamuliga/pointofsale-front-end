@@ -43,16 +43,16 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
     e.preventDefault();
     if (value) {
       const { item, id, salesPrice } = value;
+      const rowIndex = cart.length;
       console.log(e.target.value);
       console.log(value);
       setValueArray([...valueArray, ['', '', '', '', '']]);
-      valueArray[cart.length][0] = id;
-      valueArray[cart.length][1] = item.itemName;
-      valueArray[cart.length][2] = salesPrice;
-      valueArray[cart.length][3] = item.description;
-      valueArray[cart.length][4] = 1;
+      valueArray[rowIndex][0] = id;
+      valueArray[rowIndex][1] = item.itemName;
+      valueArray[rowIndex][2] = salesPrice;
+      valueArray[rowIndex][3] = item.description;
+      valueArray[rowIndex][4] = 1;
       setCart([
-        ...cart,
         {
           id,
           itemName: item.itemName,
@@ -61,19 +61,19 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
           quantity: '1',
           total: 'Description1',
           cartIndex: cart.length
-        }
+        },
+        ...cart
       ]);
     }
   };
 
   const handleDelete = rowIndex => {
     const deleteClick = () => {
-      cart.forEach((item, index) => {
+      cart.forEach((_item, index) => {
         if (rowIndex === index) {
-          cart.splice(index, 1);
+          setCart([...cart.splice(rowIndex, 1)]);
         }
       });
-      setCart([...cart]);
     };
     return deleteClick;
   };
@@ -85,9 +85,9 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
     return (
       <TableRow hover key={rowIndex}>
         {Object.values(row).map((cell, columnIndex) => {
+          valueArray[rowIndex][5] =
+            valueArray[rowIndex][4] * valueArray[rowIndex][2];
           if (editableRowIndexes.includes(columnIndex)) {
-            valueArray[rowIndex][5] =
-              valueArray[rowIndex][4] * valueArray[rowIndex][2];
             const handleTextInputChange = ({ target: { name, value } }) => {
               valueArray[rowIndex][columnIndex] = value;
               setValueArray([...valueArray]);
@@ -126,7 +126,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
     <div className={classes.inputsTop}>
       <div className={classes.searchTab}>
         <Autocomplete
-          id='sales-item-search-'
+          id='sales-item-search'
           getOptionLabel={option => option.item.itemName}
           options={suggestions}
           onChange={handleSearchSubmit}
