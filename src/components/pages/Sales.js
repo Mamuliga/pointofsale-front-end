@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import TableBuilder from '../uis/TableBuilder.js';
-import { getSaleList } from '../../http/saleApi';
 import { getSaleTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import useStyles from '../../styles/useStyles.js';
 import TextField from '@material-ui/core/TextField';
@@ -13,22 +12,24 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const Sales = () => {
   const [saleList, setSaleList] = useState([]);
+  const [searchWord, setSearchWord] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    getSaleList()
-      .then(res => {
-        console.log(res);
-        const displaySaleList = res.data.map(
-          ({ id, ItemName, Price, Disc, Quantity, Total }) => {
-            return { id, ItemName, Price, Disc, Quantity, Total };
-          }
-        );
-        setSaleList(displaySaleList);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+    const handleItemSearchSuccuess = resp => {
+      console.log(resp);
+      if (Array.isArray(resp.data)) {
+        setSuggestions(resp.data);
+      }
+    };
+
+    const handleItemSearchErr = err => {
+      console.log(err);
+    };
+    itemSearch(searchWord)
+      .then(handleItemSearchSuccuess)
+      .catch(handleItemSearchErr);
+  }, [searchWord]);
 
   const handleSearchSubmit = e => {
     e.preventDefault();
@@ -51,18 +52,6 @@ const Sales = () => {
     return deleteClick;
   };
 
-  const handleItemSearchChange = e => {
-    const handleItemSearchSuccuess = resp => {
-      console.log(resp);
-    };
-
-    const handleItemSearchErr = err => {
-      console.log(err);
-    };
-    itemSearch('item5')
-      .then(handleItemSearchSuccuess)
-      .catch(handleItemSearchErr);
-  };
   const classes = useStyles();
   const editableRowIndexes = [2, 3, 4];
   const tableRows = saleList.map(row => {
@@ -89,17 +78,17 @@ const Sales = () => {
     );
   });
 
-  const options = [{ name: 'mar' }, { name: 'masar' }];
-
+  const handleSearchChange = e => {
+    setSearchWord(e.target.value);
+  };
   const searchComponent = (
     <div className={classes.inputsTop}>
       <form onSubmit={handleSearchSubmit} className={classes.searchForm}>
         <div className={classes.searchTab}>
           <Autocomplete
             id='sales-item-search-'
-            getOptionSelected={(option, value) => option.name === value.name}
-            getOptionLabel={option => option.name}
-            options={options}
+            getOptionLabel={option => option.item.itemName}
+            options={suggestions}
             onHighlightChange={(event, selectedOpt, reason) => {
               console.log(event);
               console.log(selectedOpt);
@@ -112,6 +101,7 @@ const Sales = () => {
                 {...params}
                 label='Enter an Item Code, Item Name or Item Id'
                 variant='outlined'
+                onChange={handleSearchChange}
                 InputProps={{
                   ...params.InputProps,
                   startAdornment: <SearchIcon />,
