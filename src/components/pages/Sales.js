@@ -49,9 +49,9 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       setValueArray([...valueArray, ['', '', '', '', '']]);
       valueArray[rowIndex][0] = item.id;
       valueArray[rowIndex][1] = item.itemName;
-      valueArray[rowIndex][2] = salesPrice;
+      valueArray[rowIndex][2] = parseFloat(salesPrice).toFixed(2);
       valueArray[rowIndex][3] = 1;
-      valueArray[rowIndex][4] = 0.0;
+      valueArray[rowIndex][4] = parseFloat(0).toFixed(2);
       setCart([
         {
           id,
@@ -77,8 +77,9 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
     return (
       <TableRow hover key={`${rowIndex}+${row.id}`}>
         {Object.values(row).map((cell, columnIndex) => {
-          valueArray[rowIndex][5] =
-            valueArray[rowIndex][3] * valueArray[rowIndex][2];
+          valueArray[rowIndex][5] = parseFloat(
+            valueArray[rowIndex][3] * valueArray[rowIndex][2]
+          ).toFixed(2);
           if (editableRowIndexes.includes(columnIndex)) {
             const handleTextInputChange = ({ target: { name, value } }) => {
               valueArray[rowIndex][columnIndex] = value;
