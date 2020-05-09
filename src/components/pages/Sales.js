@@ -13,10 +13,23 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
 
 const Sales = ({ fetchApi, setFetchApiErr }) => {
+  // TODO set correct values for value Arr
+  const valueArr = [
+    ['asd', [0, 1], 'asd', 'asdsd', [0, 4]],
+    [
+      [1, 0],
+      [1, 1],
+      [1, 2],
+      [1, 3],
+      [1, 4]
+    ]
+  ];
   const [cart, setCart] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState({});
+  const [valueArray, setValueArray] = useState(valueArr);
+
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
       fetchApi(false);
@@ -38,7 +51,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
 
   const handleSearchSubmit = (e, value) => {
     if (value) {
-      const { item, id /* salesPrice */ } = value;
+      const { item, id, salesPrice } = value;
       e.preventDefault();
       console.log(e.target.value);
       console.log(value);
@@ -46,7 +59,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
         {
           id,
           itemName: item.itemName,
-          price: 'sup1last',
+          price: salesPrice,
           disc: 'male',
           quantity: '1',
           total: 'Description1',
@@ -71,17 +84,26 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
 
   const classes = useStyles();
   const editableRowIndexes = [2, 3, 4];
+  const editableRowFieldNames = ['', '', 'salesPrice', 'quantity', 'discount'];
   const tableRows = cart.map((row, rowIndex) => {
     return (
       <TableRow hover key={row.id}>
         {Object.values(row).map((cell, index) => {
           if (editableRowIndexes.includes(index)) {
+            const handleTextInputChange = ({ target: { name, value } }) => {
+              valueArray[rowIndex][index] = value;
+              setValueArray([...valueArray]);
+              console.log(valueArray);
+            };
             return (
               <TableCell key={index}>
                 <TextField
                   id='outlined-basic'
+                  name={editableRowFieldNames[index]}
                   label=''
                   autoFocus={index === 4}
+                  value={valueArray[rowIndex][index]}
+                  onChange={handleTextInputChange}
                 />
               </TableCell>
             );
