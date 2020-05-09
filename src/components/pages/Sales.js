@@ -17,7 +17,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
   const [cart, setCart] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [highlightedOption, setHighlightedOption] = useState({});
+  const [highlightedOption, setHighlightedOption] = useState();
   const [valueArray, setValueArray] = useState([['', '', '', '', '']]);
 
   useEffect(() => {
@@ -40,6 +40,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
   }, [fetchApi, searchWord, setFetchApiErr]);
 
   const handleSearchSubmit = (e, value) => {
+    setHighlightedOption();
     e.preventDefault();
     if (value) {
       const { item, id, salesPrice } = value;
@@ -111,7 +112,6 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       </TableRow>
     );
   });
-  const { id, item, salesPrice, quantity } = highlightedOption;
   const handleSearchChange = e => {
     setSearchWord(e.target.value);
   };
@@ -123,8 +123,8 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
           getOptionLabel={option => option.item.itemName}
           options={suggestions}
           onChange={handleSearchSubmit}
-          onHighlightChange={(event, selectedOpt, reason) => {
-            setHighlightedOption(selectedOpt || {});
+          onHighlightChange={(_event, selectedOpt) => {
+            setHighlightedOption(selectedOpt);
           }}
           loading
           renderInput={params => (
@@ -165,18 +165,15 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
           tableRows={tableRows}
         />
       </div>
-      <div
-        style={{
-          background: 'blue',
-          height: '100px'
-        }}
-      >
-        {console.log(highlightedOption)}
-        <div>{id}</div>
-        <div>{item && item.itemName}</div>
-        <div>{salesPrice}</div>
-        <div>{quantity}</div>
-      </div>
+      {highlightedOption && (
+        <div className={classes.searchItemSuggestionBox}>
+          {console.log(highlightedOption)}
+          <h3>Name : {highlightedOption.item.itemName}</h3>
+          <h3>Price : {highlightedOption.salesPrice}</h3>
+          <h3>Quantity : {highlightedOption.quantity}</h3>
+          <h3>Exp date : {highlightedOption.expDate}</h3>
+        </div>
+      )}
     </div>
   );
 };
