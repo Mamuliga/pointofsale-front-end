@@ -13,7 +13,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
 
 const Sales = ({ fetchApi, setFetchApiErr }) => {
-  const [saleList, setSaleList] = useState([]);
+  const [cart, addToCart] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState({});
@@ -37,30 +37,51 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       .catch(handleItemSearchErr);
   }, [fetchApi, searchWord, setFetchApiErr]);
 
-  const handleSearchSubmit = e => {
-    e.preventDefault();
-    setSaleList([
-      {
-        id: 1,
-        itemName: 'sup1',
-        price: 'sup1last',
-        disc: 'male',
-        quantity: '1',
-        total: 'Description1'
-      }
-    ]);
+  const handleSearchSubmit = (e, value) => {
+    if (value) {
+      const { item /* salesPrice */ } = value;
+      e.preventDefault();
+      console.log(e.target.value);
+      console.log(value);
+      addToCart([
+        {
+          id: 1,
+          itemName: item.itemName,
+          price: 'sup1last',
+          disc: 'male',
+          quantity: '1',
+          total: 'Description1'
+        },
+        ...cart
+      ]);
+    }
   };
 
   const handleDelete = sale => {
     const deleteClick = () => {
-      setSaleList([]);
+      console.log(sale);
+      let newCart = cart;
+      let deleteingItemIndex = -1;
+      if (sale) {
+        cart.forEach((item, index) => {
+          if (item.id === sale.id) {
+            deleteingItemIndex = index;
+          }
+        });
+      }
+      console.log(deleteingItemIndex);
+      console.log(cart);
+      newCart.splice(deleteingItemIndex);
+      addToCart(newCart);
+      //TODO console.log(cart);Do in the useEffect
     };
+
     return deleteClick;
   };
 
   const classes = useStyles();
   const editableRowIndexes = [2, 3, 4];
-  const tableRows = saleList.map(row => {
+  const tableRows = cart.map(row => {
     return (
       <TableRow hover key={row.id}>
         {Object.values(row).map((cell, index) => {
@@ -130,7 +151,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
     <div>
       <div>
         <TableBuilder
-          tableData={saleList}
+          tableData={cart}
           tableHeaders={getSaleTableHeaders}
           tableTopUis={searchComponent}
           hidePagination
