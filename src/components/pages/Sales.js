@@ -55,6 +55,9 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       e.preventDefault();
       console.log(e.target.value);
       console.log(value);
+      valueArray[cart.length][2] = salesPrice;
+      valueArray[cart.length][3] = item.description;
+      valueArray[cart.length][4] = 1;
       setCart([
         {
           id,
@@ -90,6 +93,8 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       <TableRow hover key={row.id}>
         {Object.values(row).map((cell, index) => {
           if (editableRowIndexes.includes(index)) {
+            valueArray[rowIndex][5] =
+              valueArray[rowIndex][4] * valueArray[rowIndex][2];
             const handleTextInputChange = ({ target: { name, value } }) => {
               valueArray[rowIndex][index] = value;
               setValueArray([...valueArray]);
@@ -108,7 +113,9 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
               </TableCell>
             );
           }
-          return <TableCell key={index}>{cell}</TableCell>;
+          return (
+            <TableCell key={index}>{valueArray[rowIndex][index]}</TableCell>
+          );
         })}
         <TableCell key={'delete'} align='right'>
           <DeleteIcon onClick={handleDelete(rowIndex)} />
