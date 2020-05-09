@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
 import TableBuilder from '../uis/TableBuilder.js';
 import { getSaleTableHeaders } from '../../utilities/helpers/tableHelpers.js';
@@ -9,27 +10,31 @@ import { TableCell, CircularProgress } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { itemSearch } from '../../http/itemApi.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
 
-const Sales = () => {
+const Sales = ({ fetchApi, setFetchApiErr }) => {
   const [saleList, setSaleList] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
-      console.log(resp);
+      fetchApi(false);
       if (Array.isArray(resp.data)) {
         setSuggestions(resp.data);
       }
     };
 
     const handleItemSearchErr = err => {
+      fetchApi(false);
+      setFetchApiErr('Unable to search items');
       console.log(err);
     };
+    fetchApi(true);
     itemSearch(searchWord)
       .then(handleItemSearchSuccuess)
       .catch(handleItemSearchErr);
-  }, [searchWord]);
+  }, [fetchApi, searchWord, setFetchApiErr]);
 
   const handleSearchSubmit = e => {
     e.preventDefault();
@@ -83,42 +88,43 @@ const Sales = () => {
   };
   const searchComponent = (
     <div className={classes.inputsTop}>
-      <form onSubmit={handleSearchSubmit} className={classes.searchForm}>
-        <div className={classes.searchTab}>
-          <Autocomplete
-            id='sales-item-search-'
-            getOptionLabel={option => option.item.itemName}
-            options={suggestions}
-            onHighlightChange={(event, selectedOpt, reason) => {
-              console.log(event);
-              console.log(selectedOpt);
-              console.log(reason);
-            }}
-            loading
-            renderInput={params => (
-              <TextField
-                autoFocus
-                {...params}
-                label='Enter an Item Code, Item Name or Item Id'
-                variant='outlined'
-                onChange={handleSearchChange}
-                InputProps={{
-                  ...params.InputProps,
-                  startAdornment: <SearchIcon />,
-                  endAdornment: (
-                    <React.Fragment>
-                      {/* loading */ true ? (
-                        <CircularProgress color='inherit' size={20} />
-                      ) : null}
-                      {params.InputProps.endAdornment}
-                    </React.Fragment>
-                  )
-                }}
-              />
-            )}
-          />
-        </div>
-      </form>
+      <div className={classes.searchTab}>
+        <Autocomplete
+          id='sales-item-search-'
+          getOptionLabel={option => option.item.itemName}
+          options={suggestions}
+          onChange={handleSearchSubmit}
+          onHighlightChange={(event, selectedOpt, reason) => {
+            console.log(event);
+            console.log(selectedOpt);
+            console.log(reason);
+          }}
+          loading
+          renderInput={params => (
+            <TextField
+              autoFocus
+              {...params}
+              label='Enter an Item Code, Item Name or Item Id'
+              variant='outlined'
+              onChange={handleSearchChange}
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: <SearchIcon />,
+                endAdornment: (
+                  <React.Fragment>
+                    {true ? (
+                      // TODO
+                      // Handle a local loading
+                      <CircularProgress color='inherit' size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </React.Fragment>
+                )
+              }}
+            />
+          )}
+        />
+      </div>
     </div>
   );
   return (
@@ -136,4 +142,13 @@ const Sales = () => {
   );
 };
 
-export default Sales;
+const mapStateToProps = ({ ...global }) => {
+  return { ...global };
+};
+
+const mapActionToProps = {
+  fetchApi,
+  setFetchApiErr
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Sales);
