@@ -13,11 +13,10 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
 
 const Sales = ({ fetchApi, setFetchApiErr }) => {
-  const [cart, addToCart] = useState([]);
+  const [cart, setCart] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState({});
-
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
       fetchApi(false);
@@ -39,49 +38,40 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
 
   const handleSearchSubmit = (e, value) => {
     if (value) {
-      const { item /* salesPrice */ } = value;
+      const { item, id /* salesPrice */ } = value;
       e.preventDefault();
       console.log(e.target.value);
       console.log(value);
-      addToCart([
+      setCart([
         {
-          id: 1,
+          id,
           itemName: item.itemName,
           price: 'sup1last',
           disc: 'male',
           quantity: '1',
-          total: 'Description1'
+          total: 'Description1',
+          cartIndex: cart.length
         },
         ...cart
       ]);
     }
   };
 
-  const handleDelete = sale => {
+  const handleDelete = rowIndex => {
     const deleteClick = () => {
-      console.log(sale);
-      let newCart = cart;
-      let deleteingItemIndex = -1;
-      if (sale) {
-        cart.forEach((item, index) => {
-          if (item.id === sale.id) {
-            deleteingItemIndex = index;
-          }
-        });
-      }
-      console.log(deleteingItemIndex);
-      console.log(cart);
-      newCart.splice(deleteingItemIndex);
-      addToCart(newCart);
-      //TODO console.log(cart);Do in the useEffect
+      cart.forEach((item, index) => {
+        if (rowIndex === index) {
+          cart.splice(index, 1);
+        }
+      });
+      setCart([...cart]);
     };
-
     return deleteClick;
   };
 
   const classes = useStyles();
   const editableRowIndexes = [2, 3, 4];
-  const tableRows = cart.map(row => {
+  const tableRows = cart.map((row, rowIndex) => {
     return (
       <TableRow hover key={row.id}>
         {Object.values(row).map((cell, index) => {
@@ -99,7 +89,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
           return <TableCell key={index}>{cell}</TableCell>;
         })}
         <TableCell key={'delete'} align='right'>
-          <DeleteIcon onClick={handleDelete(row)} />
+          <DeleteIcon onClick={handleDelete(rowIndex)} />
         </TableCell>
       </TableRow>
     );
