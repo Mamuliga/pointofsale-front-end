@@ -67,23 +67,15 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
     }
   };
 
-  const handleDelete = rowIndex => {
-    const deleteClick = () => {
-      cart.forEach((_item, index) => {
-        if (rowIndex === index) {
-          setCart([...cart.splice(rowIndex, 1)]);
-        }
-      });
-    };
-    return deleteClick;
-  };
-
   const classes = useStyles();
   const editableRowIndexes = [2, 3, 4];
   const editableRowFieldNames = ['', '', 'salesPrice', 'quantity', 'discount'];
   const tableRows = cart.map((row, rowIndex) => {
+    const deleteClick = () => {
+      setCart([...cart.splice(rowIndex, 1)]);
+    };
     return (
-      <TableRow hover key={rowIndex}>
+      <TableRow hover key={`${rowIndex}+${row.id}`}>
         {Object.values(row).map((cell, columnIndex) => {
           valueArray[rowIndex][5] =
             valueArray[rowIndex][3] * valueArray[rowIndex][2];
@@ -97,7 +89,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
             return (
               <TableCell key={columnIndex}>
                 <TextField
-                  id='outlined-basic'
+                  id={editableRowFieldNames[columnIndex]}
                   name={editableRowFieldNames[columnIndex]}
                   onFocus={handleFocus}
                   autoFocus={columnIndex === 3}
@@ -114,7 +106,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
           );
         })}
         <TableCell key={'delete'} align='right'>
-          <DeleteIcon onClick={handleDelete(rowIndex)} />
+          <DeleteIcon onClick={deleteClick} />
         </TableCell>
       </TableRow>
     );
