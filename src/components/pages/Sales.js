@@ -50,8 +50,8 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       valueArray[rowIndex][0] = id;
       valueArray[rowIndex][1] = item.itemName;
       valueArray[rowIndex][2] = salesPrice;
-      valueArray[rowIndex][3] = item.description;
-      valueArray[rowIndex][4] = 1;
+      valueArray[rowIndex][3] = 1;
+      valueArray[rowIndex][4] = 0.0;
       setCart([
         {
           id,
@@ -86,20 +86,21 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       <TableRow hover key={rowIndex}>
         {Object.values(row).map((cell, columnIndex) => {
           valueArray[rowIndex][5] =
-            valueArray[rowIndex][4] * valueArray[rowIndex][2];
+            valueArray[rowIndex][3] * valueArray[rowIndex][2];
           if (editableRowIndexes.includes(columnIndex)) {
             const handleTextInputChange = ({ target: { name, value } }) => {
               valueArray[rowIndex][columnIndex] = value;
               setValueArray([...valueArray]);
               console.log(valueArray);
             };
+            const handleFocus = event => event.target.select();
             return (
               <TableCell key={columnIndex}>
                 <TextField
                   id='outlined-basic'
                   name={editableRowFieldNames[columnIndex]}
-                  label=''
-                  autoFocus={columnIndex === 4}
+                  onFocus={handleFocus}
+                  autoFocus={columnIndex === 3}
                   value={valueArray[rowIndex][columnIndex]}
                   onChange={handleTextInputChange}
                 />
