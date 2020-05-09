@@ -16,6 +16,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
   const [saleList, setSaleList] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [highlightedOption, setHighlightedOption] = useState({});
 
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
@@ -82,7 +83,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
       </TableRow>
     );
   });
-
+  const { id, item, salesPrice, quantity } = highlightedOption;
   const handleSearchChange = e => {
     setSearchWord(e.target.value);
   };
@@ -95,9 +96,7 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
           options={suggestions}
           onChange={handleSearchSubmit}
           onHighlightChange={(event, selectedOpt, reason) => {
-            console.log(event);
-            console.log(selectedOpt);
-            console.log(reason);
+            setHighlightedOption(selectedOpt || {});
           }}
           loading
           renderInput={params => (
@@ -137,6 +136,18 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
           hidePagination
           tableRows={tableRows}
         />
+      </div>
+      <div
+        style={{
+          background: 'blue',
+          height: '100px'
+        }}
+      >
+        {console.log(highlightedOption)}
+        <div>{id}</div>
+        <div>{item && item.itemName}</div>
+        <div>{salesPrice}</div>
+        <div>{quantity}</div>
       </div>
     </div>
   );
