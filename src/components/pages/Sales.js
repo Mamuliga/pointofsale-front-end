@@ -41,7 +41,6 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
 
   const handleSearchSubmit = (e, value) => {
     setHighlightedOption();
-    e.preventDefault();
     if (value) {
       const { item, id, salesPrice } = value;
       const rowIndex = cart.length;
