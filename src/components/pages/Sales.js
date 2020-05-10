@@ -119,12 +119,13 @@ const Sales = ({ setFetchApiErr }) => {
           onHighlightChange={(_event, selectedOpt) => {
             setHighlightedOption(selectedOpt);
           }}
-          loading
+          loading={fetchItems}
           renderInput={params => (
             <TextField
               autoFocus
               {...params}
               label='Enter an Item Code, Item Name or Item Id'
+              noOptionsText={'No items found'}
               variant='outlined'
               onChange={handleSearchChange}
               InputProps={{
