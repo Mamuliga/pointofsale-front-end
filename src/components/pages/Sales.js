@@ -16,7 +16,9 @@ const Sales = ({ setFetchApiErr }) => {
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
-  const [valueArray, setValueArray] = useState([['', '', '', '', '', '']]);
+  const [valueArray, setValueArray] = useState([
+    ['id', 'itemName', 'salesPrice', 'qty', 'discount', 'total']
+  ]);
   const [fetchItems, setFetchItems] = useState(false);
 
   useEffect(() => {
@@ -45,55 +47,67 @@ const Sales = ({ setFetchApiErr }) => {
         item: { id, itemName },
         salesPrice
       } = value;
-      const rowIndex = valueArray.filter(rows => rows[0]).length;
-      setValueArray([...valueArray, ['', '', '', '', '', '']]);
-      valueArray[rowIndex][0] = id;
-      valueArray[rowIndex][1] = itemName;
-      valueArray[rowIndex][2] = parseFloat(salesPrice).toFixed(2);
-      valueArray[rowIndex][3] = 1;
-      valueArray[rowIndex][4] = parseFloat(0).toFixed(2);
+      const rowIndex = valueArray.filter(rows => rows['id']).length;
+      setValueArray([
+        ...valueArray,
+        ['id', 'itemName', 'salesPrice', 'qty', 'discount', 'total']
+      ]);
+      valueArray[rowIndex]['id'] = id;
+      valueArray[rowIndex]['itemName'] = itemName;
+      valueArray[rowIndex]['salesPrice'] = parseFloat(salesPrice).toFixed(2);
+      valueArray[rowIndex]['qty'] = 1;
+      valueArray[rowIndex]['discount'] = parseFloat(0).toFixed(2);
     }
   };
 
   const classes = useStyles();
-  const editableRowIndexes = [2, 3, 4];
-  const editableRowFieldNames = ['', '', 'salesPrice', 'quantity', 'discount'];
-  const tableRows = valueArray.map((_row, rowIndex) => {
-    if (valueArray[rowIndex][0]) {
+  const editableRowIndexes = ['salesPrice', 'qty', 'discount'];
+  const editableRowFieldNames = [
+    'id',
+    'itemName',
+    'salesPrice',
+    'qty',
+    'discount'
+  ];
+  const tableRows = valueArray.map((row, rowIndex) => {
+    console.log(row);
+    if (valueArray[rowIndex]['id']) {
       const deleteClick = () => {
         valueArray.splice(rowIndex, 1);
-        setValueArray([...valueArray, ['', '', '', '', '', '']]);
+        setValueArray([
+          ...valueArray,
+          ['id', 'itemName', 'salesPrice', 'qty', 'discount', 'total']
+        ]);
       };
       return (
-        <TableRow hover key={`${rowIndex}+${valueArray[rowIndex][0]}`}>
-          {valueArray[rowIndex].map((_cell, columnIndex) => {
-            valueArray[rowIndex][5] = parseFloat(
-              valueArray[rowIndex][3] * valueArray[rowIndex][2]
+        <TableRow hover key={`${rowIndex}+${valueArray[rowIndex]['id']}`}>
+          {valueArray[rowIndex].map(cell => {
+            console.log(cell);
+            valueArray[rowIndex]['total'] = parseFloat(
+              valueArray[rowIndex]['qty'] * valueArray[rowIndex]['salesPrice']
             ).toFixed(2);
-            if (editableRowIndexes.includes(columnIndex)) {
+            if (editableRowIndexes.includes(cell)) {
               const handleTextInputChange = e => {
-                valueArray[rowIndex][columnIndex] = e.target.value;
+                valueArray[rowIndex][cell] = e.target.value;
                 setValueArray([...valueArray]);
                 console.log(valueArray);
               };
               const handleFocus = event => event.target.select();
               return (
-                <TableCell key={columnIndex}>
+                <TableCell key={cell}>
                   <TextField
-                    id={editableRowFieldNames[columnIndex]}
-                    name={editableRowFieldNames[columnIndex]}
+                    id={editableRowFieldNames[cell]}
+                    name={editableRowFieldNames[cell]}
                     onFocus={handleFocus}
-                    autoFocus={columnIndex === 3}
-                    value={valueArray[rowIndex][columnIndex]}
+                    autoFocus={cell === 3}
+                    value={valueArray[rowIndex][cell]}
                     onChange={handleTextInputChange}
                   />
                 </TableCell>
               );
             }
             return (
-              <TableCell key={columnIndex}>
-                {valueArray[rowIndex][columnIndex]}
-              </TableCell>
+              <TableCell key={cell}>{valueArray[rowIndex][cell]}</TableCell>
             );
           })}
           <TableCell key={'delete'} align='right'>
