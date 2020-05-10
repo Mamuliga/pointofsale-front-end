@@ -80,8 +80,10 @@ const Sales = ({ setFetchApiErr }) => {
             ).toFixed(2);
             if (editableRowIndexes.includes(cell)) {
               const handleTextInputChange = e => {
-                rowArray[rowIndex][cell] = e.target.value;
-                setRowArray([...rowArray]);
+                if (e.target.value >= 0) {
+                  rowArray[rowIndex][cell] = e.target.value;
+                  setRowArray([...rowArray]);
+                }
               };
               const handleFocus = event => event.target.select();
               return (
