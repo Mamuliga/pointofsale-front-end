@@ -13,7 +13,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiErr } from '../../store/actions/globalAction.js';
 
 const Sales = ({ setFetchApiErr }) => {
-  // TODO set correct values for value Arr
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
@@ -39,14 +38,17 @@ const Sales = ({ setFetchApiErr }) => {
       .catch(handleItemSearchErr);
   }, [searchWord, setFetchApiErr]);
 
-  const handleSearchSubmit = (e, value) => {
+  const handleSearchSubmit = (_e, value) => {
     setHighlightedOption();
     if (value) {
-      const { item, id, salesPrice } = value;
+      const {
+        item: { id, itemName },
+        salesPrice
+      } = value;
       const rowIndex = valueArray.filter(rows => rows[0]).length;
       setValueArray([...valueArray, ['', '', '', '', '', '']]);
-      valueArray[rowIndex][0] = item.id;
-      valueArray[rowIndex][1] = item.itemName;
+      valueArray[rowIndex][0] = id;
+      valueArray[rowIndex][1] = itemName;
       valueArray[rowIndex][2] = parseFloat(salesPrice).toFixed(2);
       valueArray[rowIndex][3] = 1;
       valueArray[rowIndex][4] = parseFloat(0).toFixed(2);
