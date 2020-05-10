@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import FormBuilder from '../uis/FormBuilder';
 import { getSupplierFormData } from '../../utilities/helpers/formHelpers/supplierForm';
 import {
   updateSupplierById,
   getSupplierById,
   createSupplier,
-  deleteSupplier
+  deleteSupplier,
 } from '../../http/supplierApi';
 import { PAGE_ROUTES } from '../../services/routeService';
+import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction';
 
-const FormSupplier = () => {
+const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [supplier, setSupplier] = useState({});
 
   useEffect(() => {
-    getSupplierById(id).then(res => {
+    const handleGetSuccuess = (res) => {
+      fetchApi(false);
       const dataArray = [];
       const data = getSupplierFormData;
       const newSupplier = res.data;
-      Object.keys(res.data).forEach(id => {
-        data.forEach(entry => {
+      Object.keys(res.data).forEach((id) => {
+        data.forEach((entry) => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newSupplier[`${id}`] });
           }
@@ -31,67 +34,105 @@ const FormSupplier = () => {
       });
       setSupplier(newSupplier);
       setDataWithValue([...dataArray]);
-    });
-  }, [supplier.id, id]);
-
-  const handleCreateNewSupplier = newSupplier => {
-    const createNewSupplier = () => {
-      createSupplier(newSupplier)
-        .then(() => {
-          alert('New Supplier created');
-          push(PAGE_ROUTES.suppliers);
-        })
-        .catch(err => {
-          console.log(err);
-        });
     };
-    return createNewSupplier;
+    const handleGetErr = (err) => {
+      fetchApi(false);
+      setFetchApiErr('Unable to get the supplier details');
+    };
+    if (id) {
+      fetchApi(true);
+      getSupplierById(id).then(handleGetSuccuess).catch(handleGetErr);
+    }
+  }, [fetchApi, id, setFetchApiErr]);
+
+  const handleCreateNewSupplier = (newSupplier) => {
+    const handleCreateSuccuess = (res) => {
+      fetchApi(false);
+
+      push(PAGE_ROUTES.suppliers);
+    };
+    const handleCreateErr = (err) => {
+      console.log(err);
+      fetchApi(false);
+      setFetchApiErr('Unable to create supplier');
+    };
+    fetchApi(true);
+    createSupplier(newSupplier)
+      .then(handleCreateSuccuess)
+      .catch(handleCreateErr);
   };
 
   const handleFormSubmit = (updatedSupplier, id) => {
-    const formSubmit = () => {
-      updateSupplierById(id, updatedSupplier)
-        .then(res => {
-          console.log(res.data);
-          push(PAGE_ROUTES.suppliers);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    const handleUpdateSuccuess = (res) => {
+      fetchApi(false);
+      push(PAGE_ROUTES.suppliers);
     };
-    return formSubmit;
+    const handleUpdateErr = (err) => {
+      fetchApi(false);
+      setFetchApiErr('Unable to update supplier details');
+    };
+    updatedSupplier.id = undefined;
+    updatedSupplier.roleInPOS = undefined;
+    fetchApi(true);
+    updateSupplierById(id, updatedSupplier)
+      .then(handleUpdateSuccuess)
+      .catch(handleUpdateErr);
   };
 
   const handleDelete = () => {
+    const handleDeleteSuccuess = () => {
+      fetchApi(false);
+      push(PAGE_ROUTES.suppliers);
+    };
+    const handleDeleteError = (err) => {
+      fetchApi(false);
+      setFetchApiErr('Unable to delete supplier');
+    };
+    fetchApi(true);
     deleteSupplier(supplier.id)
-      .then(() => {
-        alert('Succuessfully deleted');
-        push(PAGE_ROUTES.suppliers);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(handleDeleteSuccuess)
+      .catch(handleDeleteError);
   };
-  if (supplier.id) {
-    return (
-      <FormBuilder
-        title={'Edit Supplier'}
-        data={dataWithValue}
-        onClick={handleFormSubmit}
-        actor={supplier}
-        handleDelete={handleDelete}
-      />
-    );
-  } else {
+
+  if (supplier.id && dataWithValue.length) {
+    const editingSupplier = { ...supplier };
+    dataWithValue.forEach((field) => {
+      editingSupplier[`${field.id}`] = field.value;
+    });
+    console.log(editingSupplier);
+    if (editingSupplier) {
+      return (
+        <FormBuilder
+          title={'Edit Supplier'}
+          data={dataWithValue}
+          onClick={handleFormSubmit}
+          actor={editingSupplier}
+          handleDelete={handleDelete}
+        />
+      );
+    }
+    return null;
+  } else if (!id) {
+    const actor = { ...supplier, gender: 'male' };
     return (
       <FormBuilder
         title={'Create new Supplier'}
         data={getSupplierFormData}
         onClick={handleCreateNewSupplier}
-        actor={supplier}
+        actor={actor}
       />
     );
   }
+  return null;
 };
 
-export default FormSupplier;
+const mapStateToProps = ({ global }) => {
+  return { ...global };
+};
+
+const mapActionToProps = {
+  fetchApi,
+  setFetchApiErr,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(FormSupplier);

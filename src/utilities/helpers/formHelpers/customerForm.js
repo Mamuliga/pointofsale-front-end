@@ -21,10 +21,9 @@ export const getCustomerFormData = [
     type: 'text',
     label: 'Last Name',
     name: 'lastName',
-    required: false,
+    required: true,
     icon: <PersonIcon />,
   },
-
   {
     id: 'email',
     type: 'email',
@@ -55,7 +54,6 @@ export const getCustomerFormData = [
     required: false,
     icon: <HomeIcon />,
   },
-
   {
     id: 'defaultDiscount',
     type: 'text',

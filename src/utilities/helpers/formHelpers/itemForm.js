@@ -8,8 +8,8 @@ export const getItemFormData = [
     type: 'number',
     label: 'Barcode',
     name: 'barcode',
-    required: true,
-    icon: <CalendarViewDayRoundedIcon />,
+    required: false,
+    icon: <CalendarViewDayRoundedIcon />
   },
   {
     id: 'itemName',
@@ -17,20 +17,20 @@ export const getItemFormData = [
     label: 'Item Name',
     name: 'itemName',
     required: true,
-    icon: <ViewListRoundedIcon />,
+    icon: <ViewListRoundedIcon />
   },
   {
     id: 'category',
     type: 'text',
     label: 'Category',
     name: 'category',
-    required: true,
+    required: true
   },
   {
     id: 'reorderlevel',
     name: 'reorderlevel',
     type: 'number',
-    label: 'Reorder Level',
+    label: 'Reorder Level'
   },
   {
     id: 'description',
@@ -39,6 +39,6 @@ export const getItemFormData = [
     name: 'description',
     multiline: true,
     rows: 4,
-    required: true,
-  },
+    required: true
+  }
 ];

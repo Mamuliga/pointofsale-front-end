@@ -4,14 +4,14 @@ import {
   PUT_REQUEST,
   DELETE_REQUEST,
   DATA_FETCHING,
-  DATA_FETCHING_ERR
+  DATA_FETCHING_ERR,
 } from './actionTypes';
 import * as RequestMethods from '../../http/http';
 
 const { get, put, post, delete: deleteReq } = RequestMethods;
 
 export function simpleAction() {
-  return async dispatch => {
+  return async (dispatch) => {
     let payload = 'SOMETHING';
     try {
       payload = await get('https://jsonplaceholder.typicode.com/todos/1');
@@ -24,13 +24,13 @@ export function simpleAction() {
 }
 
 export function postRequest() {
-  return async dispatch => {
+  return async (dispatch) => {
     let payload = 'SOMETHING';
     try {
       payload = await post('https://jsonplaceholder.typicode.com/posts', {
         title: 'foo',
         body: 'bar',
-        userId: 1
+        userId: 1,
       });
       console.log(payload);
     } catch (error) {
@@ -41,14 +41,14 @@ export function postRequest() {
 }
 
 export function putRequest() {
-  return async dispatch => {
+  return async (dispatch) => {
     let payload = 'SOMETHING';
     try {
       payload = await put('https://jsonplaceholder.typicode.com/posts/1', {
         id: 1,
         title: 'foo',
         body: 'bar',
-        userId: 1
+        userId: 1,
       });
       console.log(payload);
     } catch (error) {
@@ -59,7 +59,7 @@ export function putRequest() {
 }
 
 export function deleteRequest() {
-  return async dispatch => {
+  return async (dispatch) => {
     let payload = 'SOMETHING';
     try {
       payload = await deleteReq('https://jsonplaceholder.typicode.com/posts/1');
@@ -71,14 +71,14 @@ export function deleteRequest() {
   };
 }
 
-export const fetchApi = isFetching => dispatch =>
+export const fetchApi = (isFetching) => (dispatch) =>
   dispatch({
     type: DATA_FETCHING,
-    payload: isFetching
+    payload: isFetching,
   });
 
-export const setFetchApiErr = errorMessage => dispatch =>
+export const setFetchApiErr = (errorMessage) => (dispatch) =>
   dispatch({
     type: DATA_FETCHING_ERR,
-    payload: errorMessage
+    payload: errorMessage,
   });
