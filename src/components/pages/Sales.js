@@ -13,13 +13,21 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiErr } from '../../store/actions/globalAction.js';
 
 const Sales = ({ setFetchApiErr }) => {
+  const columnArray = [
+    'id',
+    'itemName',
+    'salesPrice',
+    'qty',
+    'discount',
+    'total'
+  ];
+  const editableRowIndexes = ['salesPrice', 'qty', 'discount'];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
-  const [valueArray, setValueArray] = useState([
-    ['id', 'itemName', 'salesPrice', 'qty', 'discount', 'total']
-  ]);
+  const [valueArray, setValueArray] = useState([columnArray]);
   const [fetchItems, setFetchItems] = useState(false);
+  const classes = useStyles();
 
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
@@ -48,10 +56,7 @@ const Sales = ({ setFetchApiErr }) => {
         salesPrice
       } = value;
       const rowIndex = valueArray.filter(rows => rows['id']).length;
-      setValueArray([
-        ...valueArray,
-        ['id', 'itemName', 'salesPrice', 'qty', 'discount', 'total']
-      ]);
+      setValueArray([...valueArray, columnArray]);
       valueArray[rowIndex]['id'] = id;
       valueArray[rowIndex]['itemName'] = itemName;
       valueArray[rowIndex]['salesPrice'] = parseFloat(salesPrice).toFixed(2);
@@ -60,29 +65,16 @@ const Sales = ({ setFetchApiErr }) => {
     }
   };
 
-  const classes = useStyles();
-  const editableRowIndexes = ['salesPrice', 'qty', 'discount'];
-  const editableRowFieldNames = [
-    'id',
-    'itemName',
-    'salesPrice',
-    'qty',
-    'discount'
-  ];
   const tableRows = valueArray.map((row, rowIndex) => {
     console.log(row);
     if (valueArray[rowIndex]['id']) {
       const deleteClick = () => {
         valueArray.splice(rowIndex, 1);
-        setValueArray([
-          ...valueArray,
-          ['id', 'itemName', 'salesPrice', 'qty', 'discount', 'total']
-        ]);
+        setValueArray([...valueArray, columnArray]);
       };
       return (
         <TableRow hover key={`${rowIndex}+${valueArray[rowIndex]['id']}`}>
           {valueArray[rowIndex].map(cell => {
-            console.log(cell);
             valueArray[rowIndex]['total'] = parseFloat(
               valueArray[rowIndex]['qty'] * valueArray[rowIndex]['salesPrice']
             ).toFixed(2);
@@ -90,14 +82,13 @@ const Sales = ({ setFetchApiErr }) => {
               const handleTextInputChange = e => {
                 valueArray[rowIndex][cell] = e.target.value;
                 setValueArray([...valueArray]);
-                console.log(valueArray);
               };
               const handleFocus = event => event.target.select();
               return (
                 <TableCell key={cell}>
                   <TextField
-                    id={editableRowFieldNames[cell]}
-                    name={editableRowFieldNames[cell]}
+                    id={columnArray[cell]}
+                    name={columnArray[cell]}
                     onFocus={handleFocus}
                     autoFocus={cell === 3}
                     value={valueArray[rowIndex][cell]}
@@ -118,9 +109,7 @@ const Sales = ({ setFetchApiErr }) => {
     }
     return null;
   });
-  const handleSearchChange = e => {
-    setSearchWord(e.target.value);
-  };
+  const handleSearchChange = e => setSearchWord(e.target.value);
   const searchComponent = (
     <div className={classes.inputsTop}>
       <div className={classes.searchTab}>
