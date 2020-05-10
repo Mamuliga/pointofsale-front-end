@@ -10,34 +10,35 @@ import { TableCell, CircularProgress } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { itemSearch } from '../../http/itemApi.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
+import { setFetchApiErr } from '../../store/actions/globalAction.js';
 
-const Sales = ({ fetchApi, setFetchApiErr }) => {
+const Sales = ({ setFetchApiErr }) => {
   // TODO set correct values for value Arr
   const [cart, setCart] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
   const [valueArray, setValueArray] = useState([['', '', '', '', '']]);
+  const [fetchItems, setFetchItems] = useState(false);
 
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
-      fetchApi(false);
+      setFetchItems(false);
       if (Array.isArray(resp.data)) {
         setSuggestions(resp.data);
       }
     };
 
     const handleItemSearchErr = err => {
-      fetchApi(false);
+      setFetchItems(false);
       setFetchApiErr('Unable to search items');
       console.log(err);
     };
-    fetchApi(true);
+    setFetchItems(true);
     itemSearch(searchWord)
       .then(handleItemSearchSuccuess)
       .catch(handleItemSearchErr);
-  }, [fetchApi, searchWord, setFetchApiErr]);
+  }, [searchWord, setFetchApiErr]);
 
   const handleSearchSubmit = (e, value) => {
     setHighlightedOption();
@@ -139,11 +140,9 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
                 startAdornment: <SearchIcon />,
                 endAdornment: (
                   <React.Fragment>
-                    {true ? (
-                      // TODO
-                      // Handle a local loading
+                    {fetchItems && (
                       <CircularProgress color='inherit' size={20} />
-                    ) : null}
+                    )}
                     {params.InputProps.endAdornment}
                   </React.Fragment>
                 )
@@ -183,7 +182,6 @@ const mapStateToProps = ({ ...global }) => {
 };
 
 const mapActionToProps = {
-  fetchApi,
   setFetchApiErr
 };
 
