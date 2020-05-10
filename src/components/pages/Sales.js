@@ -76,21 +76,37 @@ const Sales = ({ setFetchApiErr }) => {
         <TableRow hover key={`${rowIndex}+${rowArray[rowIndex]['id']}`}>
           {rowArray[rowIndex].map(cell => {
             rowArray[rowIndex]['total'] = parseFloat(
-              rowArray[rowIndex]['qty'] * rowArray[rowIndex]['salesPrice']
+              rowArray[rowIndex]['qty'] * rowArray[rowIndex]['salesPrice'] -
+                rowArray[rowIndex]['discount']
             ).toFixed(2);
             if (editableRowIndexes.includes(cell)) {
-              const handleTextInputChange = e => {
-                if (e.target.value >= 0) {
-                  rowArray[rowIndex][cell] = e.target.value;
+              const handleTextInputChange = event => {
+                const { name, value } = event.target;
+                console.log(name);
+                console.log(value);
+                console.log(columnArray);
+                //TODO Set min validations for discount
+                // const minAmount =
+                //   name === 'discount' && rowArray[rowIndex]['salesPrice'];
+                // console.log(minAmount);
+                if (value >= 0) {
+                  // if (!minAmount) {
+                  //   rowArray[rowIndex][cell] = value;
+                  //   setRowArray([...rowArray]);
+                  // } else if (value <= minAmount) {
+                  rowArray[rowIndex][cell] = value;
                   setRowArray([...rowArray]);
+                  // } else {
+                  // setRowArray([...rowArray]);
+                  // }
                 }
               };
               const handleFocus = event => event.target.select();
               return (
                 <TableCell key={cell}>
                   <TextField
-                    id={columnArray[cell]}
-                    name={columnArray[cell]}
+                    id={cell}
+                    name={cell}
                     onFocus={handleFocus}
                     autoFocus={cell === 'qty'}
                     value={rowArray[rowIndex][cell]}
