@@ -14,11 +14,10 @@ import { setFetchApiErr } from '../../store/actions/globalAction.js';
 
 const Sales = ({ setFetchApiErr }) => {
   // TODO set correct values for value Arr
-  const [cart, setCart] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
-  const [valueArray, setValueArray] = useState([['', '', '', '', '']]);
+  const [valueArray, setValueArray] = useState([['', '', '', '', '', '']]);
   const [fetchItems, setFetchItems] = useState(false);
 
   useEffect(() => {
@@ -44,74 +43,64 @@ const Sales = ({ setFetchApiErr }) => {
     setHighlightedOption();
     if (value) {
       const { item, id, salesPrice } = value;
-      const rowIndex = cart.length;
-      console.log(e.target.value);
-      console.log(value);
-      setValueArray([...valueArray, ['', '', '', '', '']]);
+      const rowIndex = valueArray.filter(rows => rows[0]).length;
+      setValueArray([...valueArray, ['', '', '', '', '', '']]);
       valueArray[rowIndex][0] = item.id;
       valueArray[rowIndex][1] = item.itemName;
       valueArray[rowIndex][2] = parseFloat(salesPrice).toFixed(2);
       valueArray[rowIndex][3] = 1;
       valueArray[rowIndex][4] = parseFloat(0).toFixed(2);
-      setCart([
-        {
-          id,
-          itemName: item.itemName,
-          price: salesPrice,
-          disc: 'male',
-          quantity: '1',
-          total: 'Description1',
-          cartIndex: cart.length
-        },
-        ...cart
-      ]);
     }
   };
 
   const classes = useStyles();
   const editableRowIndexes = [2, 3, 4];
   const editableRowFieldNames = ['', '', 'salesPrice', 'quantity', 'discount'];
-  const tableRows = cart.map((row, rowIndex) => {
-    const deleteClick = () => {
-      setCart([...cart.splice(rowIndex, 1)]);
-    };
-    return (
-      <TableRow hover key={`${rowIndex}+${row.id}`}>
-        {Object.values(row).map((cell, columnIndex) => {
-          valueArray[rowIndex][5] = parseFloat(
-            valueArray[rowIndex][3] * valueArray[rowIndex][2]
-          ).toFixed(2);
-          if (editableRowIndexes.includes(columnIndex)) {
-            const handleTextInputChange = ({ target: { name, value } }) => {
-              valueArray[rowIndex][columnIndex] = value;
-              setValueArray([...valueArray]);
-              console.log(valueArray);
-            };
-            const handleFocus = event => event.target.select();
+  const tableRows = valueArray.map((_row, rowIndex) => {
+    if (valueArray[rowIndex][0]) {
+      const deleteClick = () => {
+        valueArray.splice(rowIndex, 1);
+        setValueArray([...valueArray, ['', '', '', '', '', '']]);
+      };
+      return (
+        <TableRow hover key={`${rowIndex}+${valueArray[rowIndex][0]}`}>
+          {valueArray[rowIndex].map((_cell, columnIndex) => {
+            valueArray[rowIndex][5] = parseFloat(
+              valueArray[rowIndex][3] * valueArray[rowIndex][2]
+            ).toFixed(2);
+            if (editableRowIndexes.includes(columnIndex)) {
+              const handleTextInputChange = e => {
+                valueArray[rowIndex][columnIndex] = e.target.value;
+                setValueArray([...valueArray]);
+                console.log(valueArray);
+              };
+              const handleFocus = event => event.target.select();
+              return (
+                <TableCell key={columnIndex}>
+                  <TextField
+                    id={editableRowFieldNames[columnIndex]}
+                    name={editableRowFieldNames[columnIndex]}
+                    onFocus={handleFocus}
+                    autoFocus={columnIndex === 3}
+                    value={valueArray[rowIndex][columnIndex]}
+                    onChange={handleTextInputChange}
+                  />
+                </TableCell>
+              );
+            }
             return (
               <TableCell key={columnIndex}>
-                <TextField
-                  id={editableRowFieldNames[columnIndex]}
-                  name={editableRowFieldNames[columnIndex]}
-                  onFocus={handleFocus}
-                  autoFocus={columnIndex === 3}
-                  value={valueArray[rowIndex][columnIndex]}
-                  onChange={handleTextInputChange}
-                />
+                {valueArray[rowIndex][columnIndex]}
               </TableCell>
             );
-          }
-          return (
-            <TableCell key={columnIndex}>
-              {valueArray[rowIndex][columnIndex]}
-            </TableCell>
-          );
-        })}
-        <TableCell key={'delete'} align='right'>
-          <DeleteIcon onClick={deleteClick} />
-        </TableCell>
-      </TableRow>
-    );
+          })}
+          <TableCell key={'delete'} align='right'>
+            <DeleteIcon onClick={deleteClick} />
+          </TableCell>
+        </TableRow>
+      );
+    }
+    return null;
   });
   const handleSearchChange = e => {
     setSearchWord(e.target.value);
@@ -157,7 +146,7 @@ const Sales = ({ setFetchApiErr }) => {
     <div>
       <div>
         <TableBuilder
-          tableData={cart}
+          tableData={[]}
           tableHeaders={getSaleTableHeaders}
           tableTopUis={searchComponent}
           hidePagination
