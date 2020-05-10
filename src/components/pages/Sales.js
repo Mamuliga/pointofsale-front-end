@@ -90,7 +90,7 @@ const Sales = ({ setFetchApiErr }) => {
                     id={columnArray[cell]}
                     name={columnArray[cell]}
                     onFocus={handleFocus}
-                    autoFocus={cell === 3}
+                    autoFocus={cell === 'qty'}
                     value={rowArray[rowIndex][cell]}
                     onChange={handleTextInputChange}
                   />
