@@ -199,7 +199,7 @@ const Sales = ({ setFetchApiErr }) => {
           tableHeaders={getSaleTableHeaders}
           tableTopUis={searchComponent}
           hidePagination
-          tableRows={tableRows}
+          tableRows={tableRows.reverse()}
         />
       </div>
     </div>

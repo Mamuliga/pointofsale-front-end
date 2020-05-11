@@ -65,6 +65,12 @@ const FormBuilder = ({
   if (dataFields) {
     fields = dataFields;
   }
+  const getIdentity = () => {
+    if (actor.firstName) {
+      return `${actor.firstName} ${actor.lastName}`;
+    }
+    return actor.itemName;
+  };
   return (
     <Container component='main' maxWidth='md'>
       <CssBaseline />
@@ -144,7 +150,7 @@ const FormBuilder = ({
           handleAgree={handleDelete}
           id='deletePopup'
           header='Confirm Delete'
-          content={`Are you sure want to delete the ${actor.firstName} ${actor.lastName}`}
+          content={`Are you sure want to delete the ${getIdentity()}`}
         />
       )}
     </Container>
