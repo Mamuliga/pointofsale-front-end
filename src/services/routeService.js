@@ -1,28 +1,28 @@
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import PeopleIcon from "@material-ui/icons/People";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import StorageIcon from "@material-ui/icons/Storage";
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import PeopleIcon from '@material-ui/icons/People';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import StorageIcon from '@material-ui/icons/Storage';
 
 export const PAGE_ROUTES = {
-  home: "/dashboard",
-  login: "/login",
-  customers: "/customers",
-  cashups: "/cashups",
-  newCustomer: "/customers/new",
-  newCashup: "/cashups/new",
-  editCustomer: "/customers/edit/:id",
-  editCashup: "/cashups/edit/:id",
-  employees: "/employees",
-  newEmployee: "/employees/new",
-  editEmployee: "/employees/edit/:id",
-  suppliers: "/suppliers",
-  newSupplier: "/suppliers/new",
-  editSupplier: "/suppliers/edit/:id",
-  sales: "/sales",
-  receives: "/receives",
-  items: "/items",
-  newItem: "/items/new",
-  editItem: "/items/edit/:id"
+  home: '/dashboard',
+  login: '/login',
+  customers: '/customers',
+  cashups: '/cashups',
+  newCustomer: '/customers/new',
+  newCashup: '/cashups/new',
+  editCustomer: '/customers/edit/:id',
+  editCashup: '/cashups/edit/:id',
+  employees: '/employees',
+  newEmployee: '/employees/new',
+  editEmployee: '/employees/edit/:id',
+  suppliers: '/suppliers',
+  newSupplier: '/suppliers/new',
+  editSupplier: '/suppliers/edit/:id',
+  sales: '/sales',
+  receives: '/receives',
+  items: '/items',
+  newItem: '/items/new',
+  editItem: '/items/edit/:id'
 };
 
 const TOP_MENU_HIDE_ROUTES = {
@@ -35,51 +35,51 @@ const SIDE_MENU_HIDE_ROUTES = {
 
 export const TOP_MENU_ITEMS = [
   {
-    key: "home",
+    key: 'home',
     path: PAGE_ROUTES.home,
-    title: "Dashboard",
+    title: 'Dashboard',
     icon: DashboardIcon
   },
   {
-    key: "customers",
+    key: 'customers',
     path: PAGE_ROUTES.customers,
-    title: "Customers",
+    title: 'Customers',
     icon: PeopleIcon
   },
   {
-    key: "employees",
+    key: 'employees',
     path: PAGE_ROUTES.employees,
-    title: "Employees",
+    title: 'Employees',
     icon: PeopleIcon
   },
   {
-    key: "suppliers",
+    key: 'suppliers',
     path: PAGE_ROUTES.suppliers,
-    title: "Suppliers",
+    title: 'Suppliers',
     icon: PeopleIcon
   },
   {
-    key: "sales",
+    key: 'sales',
     path: PAGE_ROUTES.sales,
-    title: "Sales",
+    title: 'Sales',
     icon: AttachMoneyIcon
   },
   {
-    key: "receives",
+    key: 'receives',
     path: PAGE_ROUTES.receives,
-    title: "Receives",
+    title: 'Receives',
     icon: AttachMoneyIcon
   },
   {
-    key: "items",
+    key: 'items',
     path: PAGE_ROUTES.items,
-    title: "Items",
+    title: 'Items',
     icon: StorageIcon
   },
   {
-    key: "cashups",
+    key: 'cashups',
     path: PAGE_ROUTES.cashups,
-    title: "Cashups",
+    title: 'Cashups',
     icon: AttachMoneyIcon
   }
 ];
