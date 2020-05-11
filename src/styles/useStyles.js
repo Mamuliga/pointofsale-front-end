@@ -126,6 +126,11 @@ export default makeStyles(theme => ({
   searchForm: {
     width: '100%'
   },
+  searchItemSuggestionBox: {
+    background: theme.palette.grey[400],
+    padding: '10px',
+    width: '100%'
+  },
   total: {
     textAlign: 'left',
     display: 'flex',

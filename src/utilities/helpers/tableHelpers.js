@@ -1,5 +1,5 @@
-const getEditColumn = () => ({
-  id: 'edit',
+const getEmptyColumnForEditOrDelete = id => ({
+  id,
   numeric: false,
   disablePadding: false,
   label: ''
@@ -32,7 +32,7 @@ export const getCustomerTableHeaders = [
     disablePadding: false,
     label: 'Acc no'
   },
-  getEditColumn()
+  getEmptyColumnForEditOrDelete('edit')
 ];
 
 export const getEmployeeTableHeaders = [
@@ -66,7 +66,8 @@ export const getEmployeeTableHeaders = [
     numeric: false,
     disablePadding: false,
     label: 'Acc no'
-  }
+  },
+  getEmptyColumnForEditOrDelete('edit')
 ];
 
 export const getSupplierTableHeaders = [
@@ -95,7 +96,8 @@ export const getSupplierTableHeaders = [
     numeric: false,
     disablePadding: false,
     label: 'Acc no'
-  }
+  },
+  getEmptyColumnForEditOrDelete('edit')
 ];
 
 export const getSaleTableHeaders = [
@@ -103,28 +105,29 @@ export const getSaleTableHeaders = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Sale Id'
+    label: 'Item Id'
   },
   {
-    id: 'ItemName',
+    id: 'itemName',
     numeric: false,
     disablePadding: false,
     label: 'Item Name'
   },
-  { id: 'Price', numeric: false, disablePadding: false, label: 'Price' },
+  { id: 'price', numeric: false, disablePadding: false, label: 'Price' },
+  { id: 'quantity', numeric: false, disablePadding: false, label: 'Quantity' },
   {
-    id: 'Disc',
+    id: 'discount',
     numeric: false,
     disablePadding: false,
-    label: 'Disc'
+    label: 'Discount'
   },
-  { id: 'Quantity', numeric: false, disablePadding: false, label: 'Quantity' },
   {
-    id: 'Total',
+    id: 'total',
     numeric: false,
     disablePadding: false,
     label: 'Total'
-  }
+  },
+  getEmptyColumnForEditOrDelete('delete')
 ];
 
 export const getReceiveTableHeaders = [
@@ -140,20 +143,21 @@ export const getReceiveTableHeaders = [
     disablePadding: false,
     label: 'Item Name'
   },
-  { id: 'Price', numeric: false, disablePadding: false, label: 'Price' },
+  { id: 'price', numeric: false, disablePadding: false, label: 'Price' },
+  { id: 'quantity', numeric: false, disablePadding: false, label: 'Quantity' },
   {
-    id: 'Disc',
+    id: 'discount',
     numeric: false,
     disablePadding: false,
-    label: 'Disc'
+    label: 'Discount'
   },
-  { id: 'Quantity', numeric: false, disablePadding: false, label: 'Quantity' },
   {
-    id: 'Total',
+    id: 'total',
     numeric: false,
     disablePadding: false,
     label: 'Total'
-  }
+  },
+  getEmptyColumnForEditOrDelete('delete')
 ];
 
 export const getItemTableHeaders = [
@@ -176,7 +180,8 @@ export const getItemTableHeaders = [
     numeric: false,
     disablePadding: false,
     label: 'Reorder level'
-  }
+  },
+  getEmptyColumnForEditOrDelete('edit')
 ];
 
 export const getCashupTableHeaders = [
@@ -205,5 +210,5 @@ export const getCashupTableHeaders = [
     disablePadding: false,
     label: 'Debit'
   },
-  getEditColumn()
+  getEmptyColumnForEditOrDelete('edit')
 ];
