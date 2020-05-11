@@ -10,128 +10,167 @@ import { TableCell, CircularProgress } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { itemSearch } from '../../http/itemApi.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
+import { setFetchApiErr } from '../../store/actions/globalAction.js';
 
-const Sales = ({ fetchApi, setFetchApiErr }) => {
-  // TODO set correct values for value Arr
-  const [cart, setCart] = useState([]);
+const Sales = ({ setFetchApiErr }) => {
+  const columnArray = [
+    'id',
+    'itemName',
+    'salesPrice',
+    'qty',
+    'discount',
+    'total'
+  ];
+  const editableRowIndexes = ['salesPrice', 'qty', 'discount'];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
-  const [valueArray, setValueArray] = useState([['', '', '', '', '']]);
+  const [rowArray, setRowArray] = useState([columnArray]);
+  const [fetchItems, setFetchItems] = useState(false);
+  const classes = useStyles();
 
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
-      fetchApi(false);
+      setFetchItems(false);
       if (Array.isArray(resp.data)) {
         setSuggestions(resp.data);
       }
     };
 
     const handleItemSearchErr = err => {
-      fetchApi(false);
+      setFetchItems(false);
       setFetchApiErr('Unable to search items');
       console.log(err);
     };
-    fetchApi(true);
+    setFetchItems(true);
     itemSearch(searchWord)
       .then(handleItemSearchSuccuess)
       .catch(handleItemSearchErr);
-  }, [fetchApi, searchWord, setFetchApiErr]);
+  }, [searchWord, setFetchApiErr]);
 
-  const handleSearchSubmit = (e, value) => {
+  const handleSearchSubmit = (_e, value) => {
     setHighlightedOption();
     if (value) {
-      const { item, id, salesPrice } = value;
-      const rowIndex = cart.length;
-      console.log(e.target.value);
-      console.log(value);
-      setValueArray([...valueArray, ['', '', '', '', '']]);
-      valueArray[rowIndex][0] = item.id;
-      valueArray[rowIndex][1] = item.itemName;
-      valueArray[rowIndex][2] = parseFloat(salesPrice).toFixed(2);
-      valueArray[rowIndex][3] = 1;
-      valueArray[rowIndex][4] = parseFloat(0).toFixed(2);
-      setCart([
-        {
-          id,
-          itemName: item.itemName,
-          price: salesPrice,
-          disc: 'male',
-          quantity: '1',
-          total: 'Description1',
-          cartIndex: cart.length
-        },
-        ...cart
-      ]);
+      const {
+        item: { id, itemName },
+        salesPrice
+      } = value;
+      const rowIndex = rowArray.filter(rows => rows['id']).length;
+      setRowArray([...rowArray, columnArray]);
+      rowArray[rowIndex]['id'] = id;
+      rowArray[rowIndex]['itemName'] = itemName;
+      rowArray[rowIndex]['salesPrice'] = parseFloat(salesPrice).toFixed(2);
+      rowArray[rowIndex]['qty'] = 1;
+      rowArray[rowIndex]['discount'] = parseFloat(0).toFixed(2);
     }
   };
 
-  const classes = useStyles();
-  const editableRowIndexes = [2, 3, 4];
-  const editableRowFieldNames = ['', '', 'salesPrice', 'quantity', 'discount'];
-  const tableRows = cart.map((row, rowIndex) => {
-    const deleteClick = () => {
-      setCart([...cart.splice(rowIndex, 1)]);
-    };
-    return (
-      <TableRow hover key={`${rowIndex}+${row.id}`}>
-        {Object.values(row).map((cell, columnIndex) => {
-          valueArray[rowIndex][5] = parseFloat(
-            valueArray[rowIndex][3] * valueArray[rowIndex][2]
-          ).toFixed(2);
-          if (editableRowIndexes.includes(columnIndex)) {
-            const handleTextInputChange = ({ target: { name, value } }) => {
-              valueArray[rowIndex][columnIndex] = value;
-              setValueArray([...valueArray]);
-              console.log(valueArray);
-            };
-            const handleFocus = event => event.target.select();
-            return (
-              <TableCell key={columnIndex}>
-                <TextField
-                  id={editableRowFieldNames[columnIndex]}
-                  name={editableRowFieldNames[columnIndex]}
-                  onFocus={handleFocus}
-                  autoFocus={columnIndex === 3}
-                  value={valueArray[rowIndex][columnIndex]}
-                  onChange={handleTextInputChange}
-                />
-              </TableCell>
-            );
-          }
-          return (
-            <TableCell key={columnIndex}>
-              {valueArray[rowIndex][columnIndex]}
-            </TableCell>
-          );
-        })}
-        <TableCell key={'delete'} align='right'>
-          <DeleteIcon onClick={deleteClick} />
-        </TableCell>
-      </TableRow>
-    );
+  const tableRows = rowArray.map((row, rowIndex) => {
+    console.log(row);
+    if (rowArray[rowIndex]['id']) {
+      const deleteClick = () => {
+        rowArray.splice(rowIndex, 1);
+        setRowArray([...rowArray, columnArray]);
+      };
+      return (
+        <TableRow hover key={`${rowIndex}+${rowArray[rowIndex]['id']}`}>
+          {rowArray[rowIndex].map(cell => {
+            rowArray[rowIndex]['total'] = parseFloat(
+              rowArray[rowIndex]['qty'] * rowArray[rowIndex]['salesPrice'] -
+                rowArray[rowIndex]['discount']
+            ).toFixed(2);
+            if (editableRowIndexes.includes(cell)) {
+              const handleTextInputChange = event => {
+                const { name, value } = event.target;
+                console.log(name);
+                console.log(value);
+                console.log(columnArray);
+                //TODO Set min validations for discount
+                // const minAmount =
+                //   name === 'discount' && rowArray[rowIndex]['salesPrice'];
+                // console.log(minAmount);
+                if (value >= 0) {
+                  // if (!minAmount) {
+                  //   rowArray[rowIndex][cell] = value;
+                  //   setRowArray([...rowArray]);
+                  // } else if (value <= minAmount) {
+                  rowArray[rowIndex][cell] = value;
+                  setRowArray([...rowArray]);
+                  // } else {
+                  // setRowArray([...rowArray]);
+                  // }
+                }
+              };
+              const handleFocus = event => event.target.select();
+              return (
+                <TableCell key={cell}>
+                  <TextField
+                    id={cell}
+                    name={cell}
+                    onFocus={handleFocus}
+                    autoFocus={cell === 'qty'}
+                    value={rowArray[rowIndex][cell]}
+                    onChange={handleTextInputChange}
+                  />
+                </TableCell>
+              );
+            }
+            return <TableCell key={cell}>{rowArray[rowIndex][cell]}</TableCell>;
+          })}
+          <TableCell key={'delete'} align='right'>
+            <DeleteIcon onClick={deleteClick} />
+          </TableCell>
+        </TableRow>
+      );
+    }
+    return null;
   });
-  const handleSearchChange = e => {
-    setSearchWord(e.target.value);
-  };
+  const handleSearchChange = e => setSearchWord(e.target.value);
   const searchComponent = (
     <div className={classes.inputsTop}>
       <div className={classes.searchTab}>
         <Autocomplete
           id='sales-item-search'
+          renderOption={option => {
+            if (option.detail) {
+              return (
+                <li className={classes.searchItemSuggestionBox}>
+                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
+                    {`Price : ${option.salesPrice}`}
+                  </span>
+                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
+                    {`Available qty : ${option.quantity}`}
+                  </span>
+                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
+                    {`Exp. date : ${option.expDate}`}
+                  </span>
+                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
+                    {`Manu. date : ${option.manuDate}`}
+                  </span>
+                </li>
+              );
+            }
+            return <div>{`${option.item.id}-${option.item.itemName}`}</div>;
+          }}
           getOptionLabel={option => `${option.item.id}-${option.item.itemName}`}
-          options={suggestions}
+          options={
+            highlightedOption
+              ? [...suggestions, { ...highlightedOption, detail: true }]
+              : suggestions
+          }
           onChange={handleSearchSubmit}
           onHighlightChange={(_event, selectedOpt) => {
             setHighlightedOption(selectedOpt);
           }}
-          loading
+          getOptionDisabled={opt => opt.detail}
+          disabledItemsFocusable
+          loading={fetchItems}
           renderInput={params => (
             <TextField
               autoFocus
               {...params}
               label='Enter an Item Code, Item Name or Item Id'
+              noOptionsText={'No items found'}
               variant='outlined'
               onChange={handleSearchChange}
               InputProps={{
@@ -139,11 +178,9 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
                 startAdornment: <SearchIcon />,
                 endAdornment: (
                   <React.Fragment>
-                    {true ? (
-                      // TODO
-                      // Handle a local loading
+                    {fetchItems && (
                       <CircularProgress color='inherit' size={20} />
-                    ) : null}
+                    )}
                     {params.InputProps.endAdornment}
                   </React.Fragment>
                 )
@@ -158,22 +195,13 @@ const Sales = ({ fetchApi, setFetchApiErr }) => {
     <div>
       <div>
         <TableBuilder
-          tableData={cart}
+          tableData={[]}
           tableHeaders={getSaleTableHeaders}
           tableTopUis={searchComponent}
           hidePagination
           tableRows={tableRows}
         />
       </div>
-      {highlightedOption && (
-        <div className={classes.searchItemSuggestionBox}>
-          {console.log(highlightedOption)}
-          <h3>Name : {highlightedOption.item.itemName}</h3>
-          <h3>Price : {highlightedOption.salesPrice}</h3>
-          <h3>Quantity : {highlightedOption.quantity}</h3>
-          <h3>Exp date : {highlightedOption.expDate}</h3>
-        </div>
-      )}
     </div>
   );
 };
@@ -183,7 +211,6 @@ const mapStateToProps = ({ ...global }) => {
 };
 
 const mapActionToProps = {
-  fetchApi,
   setFetchApiErr
 };
 
