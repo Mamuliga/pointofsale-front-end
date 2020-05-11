@@ -131,12 +131,39 @@ const Sales = ({ setFetchApiErr }) => {
       <div className={classes.searchTab}>
         <Autocomplete
           id='sales-item-search'
+          renderOption={option => {
+            if (option.detail) {
+              return (
+                <li className={classes.searchItemSuggestionBox}>
+                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
+                    {`Price : ${option.salesPrice}`}
+                  </span>
+                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
+                    {`Available qty : ${option.quantity}`}
+                  </span>
+                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
+                    {`Exp. date : ${option.expDate}`}
+                  </span>
+                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
+                    {`Manu. date : ${option.manuDate}`}
+                  </span>
+                </li>
+              );
+            }
+            return <div>{`${option.item.id}-${option.item.itemName}`}</div>;
+          }}
           getOptionLabel={option => `${option.item.id}-${option.item.itemName}`}
-          options={suggestions}
+          options={
+            highlightedOption
+              ? [...suggestions, { ...highlightedOption, detail: true }]
+              : suggestions
+          }
           onChange={handleSearchSubmit}
           onHighlightChange={(_event, selectedOpt) => {
             setHighlightedOption(selectedOpt);
           }}
+          getOptionDisabled={opt => opt.detail}
+          disabledItemsFocusable
           loading={fetchItems}
           renderInput={params => (
             <TextField
@@ -175,15 +202,6 @@ const Sales = ({ setFetchApiErr }) => {
           tableRows={tableRows}
         />
       </div>
-      {highlightedOption && (
-        <div className={classes.searchItemSuggestionBox}>
-          {console.log(highlightedOption)}
-          <h3>Name : {highlightedOption.item.itemName}</h3>
-          <h3>Price : {highlightedOption.salesPrice}</h3>
-          <h3>Quantity : {highlightedOption.quantity}</h3>
-          <h3>Exp date : {highlightedOption.expDate}</h3>
-        </div>
-      )}
     </div>
   );
 };
