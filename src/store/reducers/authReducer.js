@@ -34,6 +34,7 @@ export default (state = INITIAL_STATE, action) => {
     case AUTHENTICATION:
       newState.isAuthenticated = true;
       newState.authDetails = action.payload;
+      newState.token = action.payload.token;
       break;
     case LOGOUT:
       newState.isAuthenticated = false;
