@@ -3,7 +3,7 @@ import env from '../config/env';
 import { AUTH_LOCAL_STORAGE } from '../utilities/constants';
 
 async function request({ method, url, body, params }) {
-  const { authDetails } = JSON.parse(localStorage.getItem(AUTH_LOCAL_STORAGE));
+  const { token } = JSON.parse(localStorage.getItem(AUTH_LOCAL_STORAGE));
   const respond = await axios.request({
     baseURL: env.apiUrl,
     timeout: 5000,
@@ -12,7 +12,7 @@ async function request({ method, url, body, params }) {
     data: body,
     params,
     headers: {
-      Authorization: authDetails ? authDetails.token : null
+      Authorization: token
     }
   });
 

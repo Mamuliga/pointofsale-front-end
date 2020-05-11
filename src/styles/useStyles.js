@@ -59,6 +59,11 @@ export default makeStyles(theme => ({
   innerButton: {
     padding: theme.spacing(1)
   },
+  logoutButton: {
+    padding: theme.spacing(1),
+    color: 'inherit',
+    opacity: 0.7
+  },
   leftMenubar: {
     display: 'flex',
     flex: 1

@@ -2,24 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { TOP_MENU_ITEMS } from '../../../services/routeService';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import LogoutIcon from '@material-ui/icons/Lock';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import useStyle from '../../../styles/useStyles';
-import { LinearProgress } from '@material-ui/core';
+import { LinearProgress, Tabs, Tab } from '@material-ui/core';
 
 const TopMenu = props => {
   const { push } = useHistory();
   const classes = useStyle();
-
-  const handleMenuClick = menuItem => {
-    const menuClick = () => {
-      push(menuItem.path);
-    };
-    return menuClick;
-  };
 
   const handleLogoutClick = e => {
     if (typeof props.onLogoutPress === 'function') {
@@ -27,37 +18,39 @@ const TopMenu = props => {
     }
   };
   console.log(props);
-
+  const [value, setValue] = React.useState(0);
   return (
-    <AppBar className={classes.appBar} color='primary'>
-      <Toolbar>
-        <Typography className={classes.leftMenubar}>
-          {TOP_MENU_ITEMS.map(menuItem => (
-            <Typography key={menuItem.key} className={classes.navButton}>
-              <Button
-                className={classes.innerButton}
-                color='inherit'
-                startIcon={<menuItem.icon />}
-                onClick={handleMenuClick(menuItem)}
-              >
-                {menuItem.title}
-              </Button>
-            </Typography>
-          ))}
-        </Typography>
-        <Typography className={classes.navButton}>
-          <Button
-            className={classes.innerButton}
-            color='inherit'
-            startIcon={<ExitToAppIcon />}
-            onClick={handleLogoutClick}
+    <div>
+      <AppBar className={classes.appBar} color='primary'>
+        <div
+          style={{ display: 'inline-flex', justifyContent: 'space-between' }}
+        >
+          <Tabs
+            value={value}
+            onChange={(event, newValue) => {
+              const menuItem = TOP_MENU_ITEMS[newValue];
+              push(menuItem.path);
+              setValue(newValue);
+            }}
           >
-            Logout
-          </Button>
-        </Typography>
-      </Toolbar>
-      {props.isFetching && <LinearProgress color='secondary' />}
-    </AppBar>
+            {TOP_MENU_ITEMS.map(menuItem => (
+              <Tab
+                label={menuItem.title}
+                key={menuItem.key}
+                icon={<menuItem.icon />}
+              />
+            ))}
+          </Tabs>
+          <Button
+            label=''
+            className={classes.logoutButton}
+            onClick={handleLogoutClick}
+            endIcon={<LogoutIcon />}
+          />
+        </div>
+        {props.isFetching && <LinearProgress color='secondary' />}
+      </AppBar>
+    </div>
   );
 };
 
