@@ -9,7 +9,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
+  KeyboardDatePicker
 } from '@material-ui/pickers';
 import useStyles from '../../styles/useStyles';
 import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
@@ -20,7 +20,7 @@ const Cashups = ({ fetchApi, setFetchApiErr }) => {
   const [cashupList, setCashupList] = useState([]);
 
   useEffect(() => {
-    const handleGetCashupResp = (res) => {
+    const handleGetCashupResp = res => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
         const displayCashupList = res.data.map(
@@ -31,16 +31,18 @@ const Cashups = ({ fetchApi, setFetchApiErr }) => {
         setCashupList(displayCashupList);
       }
     };
-    const handleGetCashupErr = (err) => {
+    const handleGetCashupErr = err => {
       setFetchApiErr('Unable to get cashups');
       fetchApi(false);
     };
 
     fetchApi(true);
-    getCashupList().then(handleGetCashupResp).catch(handleGetCashupErr);
+    getCashupList()
+      .then(handleGetCashupResp)
+      .catch(handleGetCashupErr);
   }, [fetchApi, setFetchApiErr]);
 
-  const handleEdit = (cashup) => {
+  const handleEdit = cashup => {
     const editClick = () => {
       push(`${location.pathname}/edit/${cashup.id}`);
     };
@@ -50,13 +52,13 @@ const Cashups = ({ fetchApi, setFetchApiErr }) => {
   const [selectedDateTo, setSelectedDateTo] = React.useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeTo = (date) => {
+  const handleDateChangeTo = date => {
     setSelectedDateTo(date);
   };
   const [selectedDateFrom, setSelectedDateFrom] = React.useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeFrom = (date) => {
+  const handleDateChangeFrom = date => {
     setSelectedDateFrom(date);
   };
 
@@ -95,6 +97,7 @@ const Cashups = ({ fetchApi, setFetchApiErr }) => {
       handleEdit={handleEdit}
       title={'Cashups'}
       tableTopUis={dateComponent}
+      hideEditIcon
     />
   );
 };
@@ -105,7 +108,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr,
+  setFetchApiErr
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Cashups);
