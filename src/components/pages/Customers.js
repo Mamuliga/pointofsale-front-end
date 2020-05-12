@@ -26,7 +26,6 @@ const Customers = ({ fetchApi, setFetchApiErr }) => {
       setFetchApiErr('Unable to get customers');
       fetchApi(false);
     };
-
     fetchApi(true);
     getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
   }, [fetchApi, setFetchApiErr]);

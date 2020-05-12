@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import TableBuilder from '../uis/TableBuilder.js';
 import { useHistory } from 'react-router-dom';
 import { getCashupTableHeaders } from '../../utilities/helpers/tableHelpers.js';
@@ -8,34 +9,38 @@ import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker
+  KeyboardDatePicker,
 } from '@material-ui/pickers';
 import useStyles from '../../styles/useStyles';
+import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
 
-const Cashups = () => {
+const Cashups = ({ fetchApi, setFetchApiErr }) => {
   const classes = useStyles();
   const { location, push } = useHistory();
   const [cashupList, setCashupList] = useState([]);
 
   useEffect(() => {
-    const handleGetCashupResp = res => {
+    const handleGetCashupResp = (res) => {
+      fetchApi(false);
       if (Array.isArray(res.data)) {
         const displayCashupList = res.data.map(
-          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
-            return { id, firstName, lastName, phoneNo, gender, bankAccount };
+          ({ id, refNo, type, amount, description }) => {
+            return { id, date: '2020/05/11', refNo, type, amount, description };
           }
         );
         setCashupList(displayCashupList);
       }
     };
+    const handleGetCashupErr = (err) => {
+      setFetchApiErr('Unable to get cashups');
+      fetchApi(false);
+    };
 
-    const handleGetCashupErr = err => {};
-    getCashupList()
-      .then(handleGetCashupResp)
-      .catch(handleGetCashupErr);
-  }, []);
+    fetchApi(true);
+    getCashupList().then(handleGetCashupResp).catch(handleGetCashupErr);
+  }, [fetchApi, setFetchApiErr]);
 
-  const handleEdit = cashup => {
+  const handleEdit = (cashup) => {
     const editClick = () => {
       push(`${location.pathname}/edit/${cashup.id}`);
     };
@@ -45,13 +50,13 @@ const Cashups = () => {
   const [selectedDateTo, setSelectedDateTo] = React.useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeTo = date => {
+  const handleDateChangeTo = (date) => {
     setSelectedDateTo(date);
   };
   const [selectedDateFrom, setSelectedDateFrom] = React.useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeFrom = date => {
+  const handleDateChangeFrom = (date) => {
     setSelectedDateFrom(date);
   };
 
@@ -94,4 +99,13 @@ const Cashups = () => {
   );
 };
 
-export default Cashups;
+const mapStateToProps = ({ global }) => {
+  return { ...global };
+};
+
+const mapActionToProps = {
+  fetchApi,
+  setFetchApiErr,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Cashups);

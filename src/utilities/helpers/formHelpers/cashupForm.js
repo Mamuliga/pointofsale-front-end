@@ -4,24 +4,17 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 export const getCashupFormData = [
   {
-    id: 'cashBook',
-    type: 'number',
-    label: 'Cash Book',
-    name: 'cashBook',
-    required: true,
-  },
-  {
-    id: 'refNumber',
+    id: 'refNo',
     type: 'text',
     label: 'Ref. No',
-    name: 'refNumber',
+    name: 'refNo',
     required: true,
   },
   {
-    id: 'payment',
+    id: 'type',
     type: 'dropDown',
     label: 'Payment',
-    name: 'payment',
+    name: 'type',
     required: true,
     icon: <BusinessIcon />,
   },
