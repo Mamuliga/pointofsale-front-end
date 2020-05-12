@@ -61,8 +61,8 @@ const Cashbooks = ({ fetchApi, setFetchApiErr }) => {
   };
 
   const dateComponent = (
-    <div>
-      <Grid item>
+    <div className={classes.cashbookUi}>
+      <Grid item spacing={5}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <p className={classes.cashbookDateAlign}>To :</p>
           <KeyboardDatePicker
