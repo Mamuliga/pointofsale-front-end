@@ -10,14 +10,14 @@ import AddIcon from '@material-ui/icons/Add';
 import PrintIcon from '@material-ui/icons/Print';
 import { PAGE_ROUTES } from '../../../services/routeService';
 
-const Cashups = (props) => {
+const Cashbooks = (props) => {
   const { push } = useHistory();
   return (
     <Fragment>
       <Divider />
       <ListItem
         onClick={(e) => {
-          push(`${PAGE_ROUTES.cashups}/${e.key || 'new'}`);
+          push(`${PAGE_ROUTES.cashbooks}/${e.key || 'new'}`);
         }}
         button
       >
@@ -29,7 +29,7 @@ const Cashups = (props) => {
       <Divider />
       <ListItem
         onClick={(e) => {
-          push(`${PAGE_ROUTES.cashups}/${e.key || 'print'}`);
+          push(`${PAGE_ROUTES.cashbooks}/${e.key || 'print'}`);
         }}
         button
       >
@@ -43,4 +43,4 @@ const Cashups = (props) => {
   );
 };
 
-export default Cashups;
+export default Cashbooks;

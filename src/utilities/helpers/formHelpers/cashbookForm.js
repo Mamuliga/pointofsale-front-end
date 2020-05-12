@@ -2,7 +2,7 @@ import React from 'react';
 import BusinessIcon from '@material-ui/icons/Business';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
-export const getCashupFormData = [
+export const getCashbookFormData = [
   {
     id: 'refNo',
     type: 'text',

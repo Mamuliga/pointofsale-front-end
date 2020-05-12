@@ -2,63 +2,61 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import TableBuilder from '../uis/TableBuilder.js';
 import { useHistory } from 'react-router-dom';
-import { getCashupTableHeaders } from '../../utilities/helpers/tableHelpers.js';
-import { getCashupList } from '../../http/cashupApi';
+import { getCashbookTableHeaders } from '../../utilities/helpers/tableHelpers.js';
+import { getCashbookList } from '../../http/cashbookApi';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker
+  KeyboardDatePicker,
 } from '@material-ui/pickers';
 import useStyles from '../../styles/useStyles';
 import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
 
-const Cashups = ({ fetchApi, setFetchApiErr }) => {
+const Cashbooks = ({ fetchApi, setFetchApiErr }) => {
   const classes = useStyles();
   const { location, push } = useHistory();
-  const [cashupList, setCashupList] = useState([]);
+  const [cashbookList, setCashbookList] = useState([]);
 
   useEffect(() => {
-    const handleGetCashupResp = res => {
+    const handleGetCashbookResp = (res) => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
-        const displayCashupList = res.data.map(
+        const displayCashbookList = res.data.map(
           ({ id, refNo, type, amount, description }) => {
             return { id, date: '2020/05/11', refNo, type, amount, description };
           }
         );
-        setCashupList(displayCashupList);
+        setCashbookList(displayCashbookList);
       }
     };
-    const handleGetCashupErr = err => {
-      setFetchApiErr('Unable to get cashups');
+    const handleGetCashbookErr = (err) => {
+      setFetchApiErr('Unable to get cashbooks');
       fetchApi(false);
     };
 
     fetchApi(true);
-    getCashupList()
-      .then(handleGetCashupResp)
-      .catch(handleGetCashupErr);
+    getCashbookList().then(handleGetCashbookResp).catch(handleGetCashbookErr);
   }, [fetchApi, setFetchApiErr]);
 
-  const handleEdit = cashup => {
+  const handleEdit = (cashbook) => {
     const editClick = () => {
-      push(`${location.pathname}/edit/${cashup.id}`);
+      push(`${location.pathname}/edit/${cashbook.id}`);
     };
     return editClick;
   };
 
-  const [selectedDateTo, setSelectedDateTo] = React.useState(
+  const [selectedDateTo, setSelectedDateTo] = useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeTo = date => {
+  const handleDateChangeTo = (date) => {
     setSelectedDateTo(date);
   };
-  const [selectedDateFrom, setSelectedDateFrom] = React.useState(
+  const [selectedDateFrom, setSelectedDateFrom] = useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeFrom = date => {
+  const handleDateChangeFrom = (date) => {
     setSelectedDateFrom(date);
   };
 
@@ -66,7 +64,7 @@ const Cashups = ({ fetchApi, setFetchApiErr }) => {
     <div>
       <Grid item>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <p className={classes.cashupDateAlign}>To :</p>
+          <p className={classes.cashbookDateAlign}>To :</p>
           <KeyboardDatePicker
             autoFocus
             margin='medium'
@@ -77,7 +75,7 @@ const Cashups = ({ fetchApi, setFetchApiErr }) => {
           />
         </MuiPickersUtilsProvider>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <p className={classes.cashupDateAlign}>From :</p>
+          <p className={classes.cashbookDateAlign}>From :</p>
           <KeyboardDatePicker
             margin='medium'
             id='date-picker-dialog'
@@ -92,10 +90,10 @@ const Cashups = ({ fetchApi, setFetchApiErr }) => {
 
   return (
     <TableBuilder
-      tableData={cashupList}
-      tableHeaders={getCashupTableHeaders}
+      tableData={cashbookList}
+      tableHeaders={getCashbookTableHeaders}
       handleEdit={handleEdit}
-      title={'Cashups'}
+      title={'Cashbooks'}
       tableTopUis={dateComponent}
       hideEditIcon
     />
@@ -108,7 +106,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr
+  setFetchApiErr,
 };
 
-export default connect(mapStateToProps, mapActionToProps)(Cashups);
+export default connect(mapStateToProps, mapActionToProps)(Cashbooks);

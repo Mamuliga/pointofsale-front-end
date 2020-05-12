@@ -179,9 +179,9 @@ export const getItemTableHeaders = [
   },
 ];
 
-export const getCashupTableHeaders = [
+export const getCashbookTableHeaders = [
   {
-    id: 'cashupId',
+    id: 'cashbookId',
     numeric: false,
     disablePadding: false,
     label: 'Id',
@@ -216,5 +216,4 @@ export const getCashupTableHeaders = [
     disablePadding: false,
     label: 'Description',
   },
-  // getEditColumn(),
 ];

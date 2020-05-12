@@ -1,6 +1,6 @@
-import React from "react";
-import { Switch, useLocation } from "react-router-dom";
-import { Drawer, Divider, List } from "@material-ui/core";
+import React from 'react';
+import { Switch, useLocation } from 'react-router-dom';
+import { Drawer, Divider, List } from '@material-ui/core';
 import {
   Customers,
   Employees,
@@ -9,23 +9,23 @@ import {
   Receives,
   Dashboard,
   Items,
-  Cashups
-} from "../../components/pages/sideMenu";
-import ProtectedRoute from "../ProtectedRoute";
-import { PAGE_ROUTES } from "../../services/routeService";
-import useStyles from "../../styles/useStyles";
-import FooterLabel from "./FooterLabel";
+  Cashbooks,
+} from '../../components/pages/sideMenu';
+import ProtectedRoute from '../ProtectedRoute';
+import { PAGE_ROUTES } from '../../services/routeService';
+import useStyles from '../../styles/useStyles';
+import FooterLabel from './FooterLabel';
 
-const SideMenuRoutes = props => {
+const SideMenuRoutes = (props) => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const isSalesPage = pathname === PAGE_ROUTES.sales;
   const isReceivesPage = pathname === PAGE_ROUTES.receives;
-  const getSidePane = route => {
+  const getSidePane = (route) => {
     if (route === PAGE_ROUTES.sales || route === PAGE_ROUTES.receives) {
-      return "right";
+      return 'right';
     }
-    return "left";
+    return 'left';
   };
   return (
     <Drawer
@@ -37,10 +37,10 @@ const SideMenuRoutes = props => {
           classes[
             `${
               isSalesPage || isReceivesPage
-                ? "drawerPaperLeft"
-                : "drawerPaperRight"
+                ? 'drawerPaperLeft'
+                : 'drawerPaperRight'
             }`
-          ]
+          ],
       }}
     >
       <div className={classes.sideMenuContainer}>
@@ -62,7 +62,10 @@ const SideMenuRoutes = props => {
               path={PAGE_ROUTES.employees}
               component={Employees}
             />
-            <ProtectedRoute path={PAGE_ROUTES.cashups} component={Cashups} />
+            <ProtectedRoute
+              path={PAGE_ROUTES.cashbooks}
+              component={Cashbooks}
+            />
 
             <ProtectedRoute path={PAGE_ROUTES.items} component={Items} />
 

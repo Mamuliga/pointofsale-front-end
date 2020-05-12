@@ -1,21 +1,21 @@
 import http from './http';
 
-export async function getCashupList() {
+export async function getCashbookList() {
   return await http.get('/cashbooks', { limit: 20 });
 }
 
-export async function getCashupById(id) {
+export async function getCashbookById(id) {
   return await http.get(`./cashbooks/${id}`);
 }
 
-export async function updateCashupById(id, body) {
+export async function updateCashbookById(id, body) {
   return await http.put(`./cashbooks/${id}`, body);
 }
 
-export async function createCashup(body) {
+export async function createCashbook(body) {
   return await http.post('./cashbooks', body);
 }
 
-export async function deleteCashup(id) {
+export async function deleteCashbook(id) {
   return await http.deleteById('./cashbooks', id);
 }
