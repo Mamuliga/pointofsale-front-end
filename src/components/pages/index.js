@@ -1,18 +1,18 @@
-import Customers from "./Customers";
-import Items from "./Items";
-import Dashboard from "./Dashboard";
-import Login from "./Login";
-import NotFoundPage from "./NotFoundPage";
-import FormCustomer from "./FormCustomer";
-import FormEmployee from "./FormEmployee";
-import FormSupplier from "./FormSupplier";
-import FormCashup from "./FormCashup";
-import FormItem from "./FormItem";
-import Employees from "./Employees";
-import Suppliers from "./Suppliers";
-import Cashups from "./Cashups";
-import Sales from "./Sales";
-import Receives from "./Receives";
+import Customers from './Customers';
+import Items from './Items';
+import Dashboard from './Dashboard';
+import Login from './Login';
+import NotFoundPage from './NotFoundPage';
+import FormCustomer from './FormCustomer';
+import FormEmployee from './FormEmployee';
+import FormSupplier from './FormSupplier';
+import FormCashbook from './FormCashbook';
+import FormItem from './FormItem';
+import Employees from './Employees';
+import Suppliers from './Suppliers';
+import Cashbooks from './Cashbooks';
+import Sales from './Sales';
+import Receives from './Receives';
 
 export {
   Dashboard,
@@ -23,11 +23,11 @@ export {
   Sales,
   Receives,
   Items,
-  Cashups,
+  Cashbooks,
   NotFoundPage,
   FormCustomer,
   FormEmployee,
   FormSupplier,
   FormItem,
-  FormCashup
+  FormCashbook,
 };

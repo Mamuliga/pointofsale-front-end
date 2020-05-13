@@ -7,11 +7,11 @@ export const PAGE_ROUTES = {
   home: '/dashboard',
   login: '/login',
   customers: '/customers',
-  cashups: '/cashups',
+  cashbooks: '/cashbooks',
   newCustomer: '/customers/new',
-  newCashup: '/cashups/new',
+  newCashbook: '/cashbooks/new',
   editCustomer: '/customers/edit/:id',
-  editCashup: '/cashups/edit/:id',
+  editCashbook: '/cashbooks/edit/:id',
   employees: '/employees',
   newEmployee: '/employees/new',
   editEmployee: '/employees/edit/:id',
@@ -22,15 +22,15 @@ export const PAGE_ROUTES = {
   receives: '/receives',
   items: '/items',
   newItem: '/items/new',
-  editItem: '/items/edit/:id'
+  editItem: '/items/edit/:id',
 };
 
 const TOP_MENU_HIDE_ROUTES = {
-  [PAGE_ROUTES.login]: true
+  [PAGE_ROUTES.login]: true,
 };
 
 const SIDE_MENU_HIDE_ROUTES = {
-  [PAGE_ROUTES.login]: true
+  [PAGE_ROUTES.login]: true,
 };
 
 export const TOP_MENU_ITEMS = [
@@ -38,56 +38,56 @@ export const TOP_MENU_ITEMS = [
     key: 'home',
     path: PAGE_ROUTES.home,
     title: 'Dashboard',
-    icon: DashboardIcon
+    icon: DashboardIcon,
   },
   {
     key: 'customers',
     path: PAGE_ROUTES.customers,
     title: 'Customers',
-    icon: PeopleIcon
+    icon: PeopleIcon,
   },
   {
     key: 'employees',
     path: PAGE_ROUTES.employees,
     title: 'Employees',
-    icon: PeopleIcon
+    icon: PeopleIcon,
   },
   {
     key: 'suppliers',
     path: PAGE_ROUTES.suppliers,
     title: 'Suppliers',
-    icon: PeopleIcon
+    icon: PeopleIcon,
   },
   {
     key: 'sales',
     path: PAGE_ROUTES.sales,
     title: 'Sales',
-    icon: AttachMoneyIcon
+    icon: AttachMoneyIcon,
   },
   {
     key: 'receives',
     path: PAGE_ROUTES.receives,
     title: 'Receives',
-    icon: AttachMoneyIcon
+    icon: AttachMoneyIcon,
   },
   {
     key: 'items',
     path: PAGE_ROUTES.items,
     title: 'Items',
-    icon: StorageIcon
+    icon: StorageIcon,
   },
   {
-    key: 'cashups',
-    path: PAGE_ROUTES.cashups,
-    title: 'Cashups',
-    icon: AttachMoneyIcon
-  }
+    key: 'cashbooks',
+    path: PAGE_ROUTES.cashbooks,
+    title: 'Cashbooks',
+    icon: AttachMoneyIcon,
+  },
 ];
 
-export const showTopMenuForRoute = route => {
+export const showTopMenuForRoute = (route) => {
   return !TOP_MENU_HIDE_ROUTES[route];
 };
 
-export const showSideMenuForRoute = route => {
+export const showSideMenuForRoute = (route) => {
   return !SIDE_MENU_HIDE_ROUTES[route];
 };

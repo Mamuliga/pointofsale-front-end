@@ -82,6 +82,7 @@ const FormBuilder = ({
                 case 'text':
                 case 'email':
                 case 'tel':
+                case 'number':
                   return (
                     <CustomTextField
                       entry={entry}
