@@ -10,16 +10,17 @@ const CustomTextField = ({ entry, getValue }) => {
     icon,
     type,
     required,
+    autoFocus,
     value,
     multiline,
     rows,
     id,
     helperText,
-    error
+    error,
   } = entry;
   const [newValue, setNewValue] = useState(value);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     console.log(e.target.value);
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
@@ -36,6 +37,7 @@ const CustomTextField = ({ entry, getValue }) => {
         name={name}
         type={type}
         required={required}
+        autoFocus={autoFocus}
         value={newValue}
         multiline={multiline}
         rows={rows}
@@ -46,7 +48,7 @@ const CustomTextField = ({ entry, getValue }) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>{icon}</InputAdornment>
-          )
+          ),
         }}
       />
     </Grid>

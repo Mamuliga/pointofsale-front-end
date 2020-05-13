@@ -14,6 +14,7 @@ export const getEmployeeFormData = [
     label: 'First Name',
     name: 'firstName',
     required: true,
+    autoFocus: true,
     icon: <PersonIcon />,
   },
   {
