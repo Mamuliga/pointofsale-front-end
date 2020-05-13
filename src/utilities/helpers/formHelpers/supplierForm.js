@@ -14,6 +14,7 @@ export const getSupplierFormData = [
     label: 'First Name',
     name: 'firstName',
     required: true,
+    autoFocus: true,
     icon: <PersonIcon />,
   },
   {
