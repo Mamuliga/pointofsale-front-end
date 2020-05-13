@@ -59,6 +59,11 @@ export default makeStyles((theme) => ({
   innerButton: {
     padding: theme.spacing(1),
   },
+  logoutButton: {
+    padding: theme.spacing(1),
+    color: 'inherit',
+    opacity: 0.7,
+  },
   leftMenubar: {
     display: 'flex',
     flex: 1,
@@ -119,6 +124,11 @@ export default makeStyles((theme) => ({
     width: '100%',
   },
   searchForm: {
+    width: '100%',
+  },
+  searchItemSuggestionBox: {
+    background: theme.palette.grey[400],
+    padding: '10px',
     width: '100%',
   },
   total: {
