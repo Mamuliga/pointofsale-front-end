@@ -36,7 +36,7 @@ export const getCustomerFormData = [
   {
     id: 'phoneNo',
     name: 'phoneNo',
-    type: 'number',
+    type: 'tel',
     label: 'Mobile Number',
     required: false,
     icon: <PhoneIphoneIcon />,
