@@ -25,7 +25,7 @@ import {
 import ErrorDisplay from '../uis/ErrorDisplay';
 import useStyles from '../../styles/useStyles';
 import CustomPassword from '../uis/FormComponents/Password';
-import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction';
+import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
 const Login = props => {
   const classes = useStyles();
@@ -226,7 +226,7 @@ const mapStateToProps = ({ auth }) => ({
 const mapActionToProps = {
   onLoginClick: authenticate,
   setLoginErrorFalse,
-  setFetchApiErr,
+  setFetchApiErr: setFetchApiInfo,
   fetchApi
 };
 

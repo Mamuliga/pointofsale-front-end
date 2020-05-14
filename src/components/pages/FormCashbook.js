@@ -10,7 +10,7 @@ import {
   deleteCashbook,
 } from '../../http/cashbookApi';
 import { PAGE_ROUTES } from '../../services/routeService';
-import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction';
+import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
 const FormCashbook = ({ fetchApi, setFetchApiErr }) => {
   const { id } = useParams();
@@ -131,7 +131,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr,
+  setFetchApiErr: setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(FormCashbook);

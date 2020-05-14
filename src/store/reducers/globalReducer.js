@@ -14,7 +14,7 @@ export default (state = { as: 'ad' }, action) => {
       newState.isFetching = action.payload;
       break;
     case DATA_FETCHING_ERR:
-      newState.isFetchingErr = action.payload;
+      newState.messageInfo = action.payload;
       break;
     default:
       return state;
