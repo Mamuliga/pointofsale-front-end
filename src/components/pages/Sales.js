@@ -19,7 +19,7 @@ const Sales = ({ setFetchApiErr }) => {
     'salesPrice',
     'qty',
     'discount',
-    'total'
+    'total',
   ];
   const editableRowIndexes = ['salesPrice', 'qty', 'discount'];
   const [searchWord, setSearchWord] = useState('');
@@ -53,7 +53,7 @@ const Sales = ({ setFetchApiErr }) => {
     if (value) {
       const {
         item: { id, itemName },
-        salesPrice
+        salesPrice,
       } = value;
       const rowIndex = rowArray.filter(rows => rows['id']).length;
       setRowArray([...rowArray, columnArray]);
@@ -134,19 +134,33 @@ const Sales = ({ setFetchApiErr }) => {
           renderOption={option => {
             if (option.detail) {
               return (
-                <li className={classes.searchItemSuggestionBox}>
-                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
-                    {`Price : ${option.salesPrice}`}
-                  </span>
-                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
-                    {`Available qty : ${option.quantity}`}
-                  </span>
-                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
-                    {`Exp. date : ${option.expDate}`}
-                  </span>
-                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
-                    {`Manu. date : ${option.manuDate}`}
-                  </span>
+                <li
+                  className={classes.searchItemSuggestionBox}
+                  style={{ position: 'absolute', top: '400px' }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    <span>{`Price : ${option.salesPrice}`}</span>
+                    <span>{`Available qty : ${option.quantity}`}</span>
+                    <span>
+                      {`Supp. name : ${option.supplier.firstName} ${option.supplier.lastName}`}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-around',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    <span>{`Exp. date : ${option.expDate}`}</span>
+                    <span>{`Manu. date : ${option.manuDate}`}</span>
+                  </div>
                 </li>
               );
             }
@@ -183,7 +197,7 @@ const Sales = ({ setFetchApiErr }) => {
                     )}
                     {params.InputProps.endAdornment}
                   </React.Fragment>
-                )
+                ),
               }}
             />
           )}
@@ -211,7 +225,7 @@ const mapStateToProps = ({ ...global }) => {
 };
 
 const mapActionToProps = {
-  setFetchApiErr: setFetchApiInfo
+  setFetchApiErr: setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Sales);
