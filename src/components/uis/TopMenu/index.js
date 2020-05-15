@@ -17,14 +17,13 @@ const TopMenu = props => {
       props.onLogoutPress();
     }
   };
+
   console.log(props);
   const [value, setValue] = React.useState(0);
   return (
     <div>
       <AppBar className={classes.appBar} color='primary'>
-        <div
-          style={{ display: 'inline-flex', justifyContent: 'space-between' }}
-        >
+        <div style={classes.TopMenu}>
           <Tabs
             value={value}
             onChange={(event, newValue) => {
