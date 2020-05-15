@@ -24,8 +24,15 @@ const Cashbooks = ({ fetchApi, setFetchApiErr }) => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
         const displayCashbookList = res.data.map(
-          ({ id, refNo, type, amount, description }) => {
-            return { id, date: '2020/05/11', refNo, type, amount, description };
+          ({ id, date, refNo, type, amount, description }) => {
+            return {
+              id,
+              date: date.slice(0, 10),
+              refNo,
+              type,
+              amount,
+              description,
+            };
           }
         );
         setCashbookList(displayCashbookList);
