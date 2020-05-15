@@ -3,7 +3,7 @@ import { Grid, TextField } from '@material-ui/core';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import useStyles from '../../../styles/useStyles';
 
-const CustomPassword = ({ onChange, value }) => {
+const CustomPassword = ({ onChange, value, label }) => {
   const classes = useStyles();
   return (
     <Grid
@@ -20,7 +20,7 @@ const CustomPassword = ({ onChange, value }) => {
           className={classes.loginputField}
           id='input-with-icon-grid'
           xs={3}
-          label='password'
+          label={label}
           type='password'
           name='password'
           onChange={onChange}
