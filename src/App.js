@@ -43,7 +43,7 @@ function App(props) {
           <Routes {...props} />
         </div>
       </div>
-      <ErrorDisplay errorMessage={props.isFetchingErr} />
+      <ErrorDisplay info={props.messageInfo} />
     </div>
   );
 }

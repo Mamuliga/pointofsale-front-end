@@ -10,7 +10,7 @@ import {
   deleteCustomer,
 } from '../../http/customerApi';
 import { PAGE_ROUTES } from '../../services/routeService';
-import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction';
+import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
 const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
   const { id } = useParams();
@@ -49,11 +49,12 @@ const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
     const handleCreateSuccuess = (res) => {
       fetchApi(false);
       push(PAGE_ROUTES.customers);
+      setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
     };
     const handleCreateErr = (err) => {
       console.log(err);
       fetchApi(false);
-      setFetchApiErr('Unable to create customer');
+      setFetchApiErr({ type: 'error', message: 'Unable to create employee' });
     };
     fetchApi(true);
     createCustomer(newCustomer)
@@ -65,6 +66,7 @@ const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
     const handleUpdateSuccuess = (res) => {
       fetchApi(false);
       push(PAGE_ROUTES.customers);
+      setFetchApiErr({ type: 'success', message: 'Succuessfully Updated' });
     };
     const handleUpdateErr = (err) => {
       fetchApi(false);
@@ -131,7 +133,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr,
+  setFetchApiErr: setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(FormCustomer);
