@@ -9,7 +9,7 @@ import useStyle from '../../../styles/useStyles';
 import { LinearProgress, Tabs, Tab } from '@material-ui/core';
 
 const TopMenu = props => {
-  const { push } = useHistory();
+  const { push, location } = useHistory();
   const classes = useStyle();
 
   const handleLogoutClick = e => {
@@ -17,9 +17,13 @@ const TopMenu = props => {
       props.onLogoutPress();
     }
   };
-
-  console.log(props);
-  const [value, setValue] = React.useState(0);
+  let topMenuValue = 0;
+  TOP_MENU_ITEMS.forEach((menu, index) => {
+    if (menu.path === location.pathname) {
+      topMenuValue = index;
+    }
+  });
+  const [value, setValue] = React.useState(topMenuValue);
   return (
     <div>
       <AppBar className={classes.appBar} color='primary'>
