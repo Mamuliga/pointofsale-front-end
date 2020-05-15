@@ -21,7 +21,7 @@ const Sales = ({ setFetchApiErr }) => {
     'discount',
     'total',
   ];
-  const editableRowIndexes = ['salesPrice', 'qty', 'discount'];
+  const editableRowIndexes = ['qty', 'discount'];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
