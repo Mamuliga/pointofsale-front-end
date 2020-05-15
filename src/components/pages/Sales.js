@@ -59,7 +59,6 @@ const Sales = ({ setFetchApiErr }) => {
   };
 
   const tableRows = items.map((row, rowIndex) => {
-    console.log(row);
     if (row.id) {
       const deleteClick = () => {
         items.splice(rowIndex, 1);
