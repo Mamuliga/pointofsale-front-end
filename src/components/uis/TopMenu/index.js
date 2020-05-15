@@ -23,7 +23,7 @@ const TopMenu = props => {
   return (
     <div>
       <AppBar className={classes.appBar} color='primary'>
-        <div style={classes.TopMenu}>
+        <div className={classes.topMenu}>
           <Tabs
             value={value}
             onChange={(event, newValue) => {
