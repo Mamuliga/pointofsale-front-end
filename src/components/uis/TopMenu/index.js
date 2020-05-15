@@ -12,7 +12,7 @@ const TopMenu = props => {
   const { push, location } = useHistory();
   const classes = useStyle();
 
-  const handleLogoutClick = e => {
+  const handleLogoutClick = () => {
     if (typeof props.onLogoutPress === 'function') {
       props.onLogoutPress();
     }
@@ -30,7 +30,7 @@ const TopMenu = props => {
         <div className={classes.topMenu}>
           <Tabs
             value={value}
-            onChange={(event, newValue) => {
+            onChange={(_event, newValue) => {
               const menuItem = TOP_MENU_ITEMS[newValue];
               push(menuItem.path);
               setValue(newValue);
