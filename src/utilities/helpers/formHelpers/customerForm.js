@@ -14,6 +14,7 @@ export const getCustomerFormData = [
     label: 'First Name',
     name: 'firstName',
     required: true,
+    autoFocus: true,
     icon: <PersonIcon />,
   },
   {
@@ -35,7 +36,7 @@ export const getCustomerFormData = [
   {
     id: 'phoneNo',
     name: 'phoneNo',
-    type: 'number',
+    type: 'tel',
     label: 'Mobile Number',
     required: false,
     icon: <PhoneIphoneIcon />,

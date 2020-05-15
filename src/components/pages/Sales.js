@@ -10,7 +10,7 @@ import { TableCell, CircularProgress } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { itemSearch } from '../../http/itemApi.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { setFetchApiErr } from '../../store/actions/globalAction.js';
+import { setFetchApiInfo } from '../../store/actions/globalAction.js';
 
 const Sales = ({ setFetchApiErr }) => {
   const columnArray = [
@@ -211,7 +211,7 @@ const mapStateToProps = ({ ...global }) => {
 };
 
 const mapActionToProps = {
-  setFetchApiErr
+  setFetchApiErr: setFetchApiInfo
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Sales);

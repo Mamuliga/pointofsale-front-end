@@ -7,10 +7,10 @@ import {
   updateEmployeeById,
   getEmployeeById,
   createEmployee,
-  deleteEmployee
+  deleteEmployee,
 } from '../../http/employeeApi';
 import { PAGE_ROUTES } from '../../services/routeService';
-import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction';
+import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
 const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
   const { id } = useParams();
@@ -18,13 +18,13 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
   const [dataWithValue, setDataWithValue] = useState([]);
   const [employee, setEmployee] = useState({});
   useEffect(() => {
-    const handleGetSuccuess = res => {
+    const handleGetSuccuess = (res) => {
       fetchApi(false);
       const dataArray = [];
       const data = getEmployeeFormData;
       const newEmployee = res.data;
-      Object.keys(res.data).forEach(id => {
-        data.forEach(entry => {
+      Object.keys(res.data).forEach((id) => {
+        data.forEach((entry) => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newEmployee[`${id}`] });
           }
@@ -34,27 +34,26 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
       setEmployee(newEmployee);
       setDataWithValue([...dataArray]);
     };
-    const handleGetErr = err => {
+    const handleGetErr = (err) => {
       fetchApi(false);
       setFetchApiErr('Unable to get the employee details');
     };
     if (id) {
       fetchApi(true);
-      getEmployeeById(id)
-        .then(handleGetSuccuess)
-        .catch(handleGetErr);
+      getEmployeeById(id).then(handleGetSuccuess).catch(handleGetErr);
     }
   }, [fetchApi, id, setFetchApiErr]);
 
-  const handleCreateNewEmployee = newEmployee => {
-    const handleCreateSuccuess = res => {
+  const handleCreateNewEmployee = (newEmployee) => {
+    const handleCreateSuccuess = (res) => {
       fetchApi(false);
       push(PAGE_ROUTES.employees);
+      setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
     };
-    const handleCreateErr = err => {
+    const handleCreateErr = (err) => {
       console.log(err);
       fetchApi(false);
-      setFetchApiErr('Unable to create employee');
+      setFetchApiErr({ type: 'error', message: 'Unable to create employee' });
     };
     fetchApi(true);
     createEmployee(newEmployee)
@@ -63,11 +62,12 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
   };
 
   const handleFormSubmit = (updatedEmployee, id) => {
-    const handleUpdateSuccuess = res => {
+    const handleUpdateSuccuess = (res) => {
       fetchApi(false);
       push(PAGE_ROUTES.employees);
+      setFetchApiErr({ type: 'success', message: 'Succuessfully Updated' });
     };
-    const handleUpdateErr = err => {
+    const handleUpdateErr = (err) => {
       fetchApi(false);
       setFetchApiErr('Unable to update employee details');
     };
@@ -84,7 +84,7 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
       fetchApi(false);
       push(PAGE_ROUTES.employees);
     };
-    const handleDeleteError = err => {
+    const handleDeleteError = (err) => {
       fetchApi(false);
       setFetchApiErr('Unable to delete employee');
     };
@@ -95,7 +95,7 @@ const FormEmployee = ({ fetchApi, setFetchApiErr }) => {
   };
   if (employee.id && dataWithValue.length) {
     const editingEmployee = { ...employee };
-    dataWithValue.forEach(field => {
+    dataWithValue.forEach((field) => {
       editingEmployee[`${field.id}`] = field.value;
     });
     console.log(editingEmployee);
@@ -131,7 +131,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr
+  setFetchApiErr: setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(FormEmployee);

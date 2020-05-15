@@ -2,80 +2,80 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import FormBuilder from '../uis/FormBuilder';
-import { getCustomerFormData } from '../../utilities/helpers/formHelpers/customerForm';
+import { getCashbookFormData } from '../../utilities/helpers/formHelpers/cashbookForm';
 import {
-  updateCustomerById,
-  getCustomerById,
-  createCustomer,
-  deleteCustomer,
-} from '../../http/customerApi';
+  updateCashbookById,
+  getCashbookById,
+  createCashbook,
+  deleteCashbook,
+} from '../../http/cashbookApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
-const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
+const FormCashbook = ({ fetchApi, setFetchApiErr }) => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
-  const [customer, setCustomer] = useState({});
+  const [cashbook, setCashbook] = useState({});
 
   useEffect(() => {
     const handleGetSuccuess = (res) => {
       fetchApi(false);
       const dataArray = [];
-      const data = getCustomerFormData;
-      const newCustomer = res.data;
+      const data = getCashbookFormData;
+      const newCashbook = res.data;
       Object.keys(res.data).forEach((id) => {
         data.forEach((entry) => {
           if (id === entry.id) {
-            dataArray.push({ ...entry, value: newCustomer[`${id}`] });
+            dataArray.push({ ...entry, value: newCashbook[`${id}`] });
           }
           return null;
         });
       });
-      setCustomer(newCustomer);
+      setCashbook(newCashbook);
       setDataWithValue([...dataArray]);
     };
+
     const handleGetErr = (err) => {
       fetchApi(false);
-      setFetchApiErr('Unable to get the customer details');
+      setFetchApiErr('Unable to get the cashbook details');
     };
     if (id) {
       fetchApi(true);
-      getCustomerById(id).then(handleGetSuccuess).catch(handleGetErr);
+      getCashbookById(id).then(handleGetSuccuess).catch(handleGetErr);
     }
   }, [fetchApi, id, setFetchApiErr]);
 
-  const handleCreateNewCustomer = (newCustomer) => {
+  const handleCreateNewCashbook = (newCashbook) => {
     const handleCreateSuccuess = (res) => {
       fetchApi(false);
-      push(PAGE_ROUTES.customers);
+      push(PAGE_ROUTES.cashbooks);
       setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
     };
     const handleCreateErr = (err) => {
       console.log(err);
       fetchApi(false);
-      setFetchApiErr({ type: 'error', message: 'Unable to create employee' });
+      setFetchApiErr('Unable to create cashbook');
     };
     fetchApi(true);
-    createCustomer(newCustomer)
+    createCashbook(newCashbook)
       .then(handleCreateSuccuess)
       .catch(handleCreateErr);
   };
 
-  const handleFormSubmit = (updatedCustomer, id) => {
+  const handleFormSubmit = (updatedCashbook, id) => {
     const handleUpdateSuccuess = (res) => {
       fetchApi(false);
-      push(PAGE_ROUTES.customers);
-      setFetchApiErr({ type: 'success', message: 'Succuessfully Updated' });
+      push(PAGE_ROUTES.cashbooks);
     };
     const handleUpdateErr = (err) => {
       fetchApi(false);
-      setFetchApiErr('Unable to update customer details');
+      setFetchApiErr('Unable to update cashbook details');
     };
-    updatedCustomer.id = undefined;
-    updatedCustomer.roleInPOS = undefined;
+    updatedCashbook.id = undefined;
+    updatedCashbook.roleInPOS = undefined;
     fetchApi(true);
-    updateCustomerById(id, updatedCustomer)
+    updateCashbookById(id, updatedCashbook)
       .then(handleUpdateSuccuess)
       .catch(handleUpdateErr);
   };
@@ -83,50 +83,49 @@ const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
   const handleDelete = () => {
     const handleDeleteSuccuess = () => {
       fetchApi(false);
-      push(PAGE_ROUTES.customers);
+      push(PAGE_ROUTES.cashbooks);
     };
     const handleDeleteError = (err) => {
       fetchApi(false);
-      setFetchApiErr('Unable to delete customer');
+      setFetchApiErr('Unable to delete cashbook');
     };
     fetchApi(true);
-    deleteCustomer(customer.id)
+    deleteCashbook(cashbook.id)
       .then(handleDeleteSuccuess)
       .catch(handleDeleteError);
   };
 
-  if (customer.id && dataWithValue.length) {
-    const editingCustomer = { ...customer };
+  if (cashbook.id && dataWithValue.length) {
+    const editingCashbook = { ...cashbook };
     dataWithValue.forEach((field) => {
-      editingCustomer[`${field.id}`] = field.value;
+      editingCashbook[`${field.id}`] = field.value;
     });
-    console.log(editingCustomer);
-    if (editingCustomer) {
+    console.log(editingCashbook);
+    if (editingCashbook) {
       return (
         <FormBuilder
-          title={'Edit Customer'}
+          title={'Edit cashbook'}
           data={dataWithValue}
           onClick={handleFormSubmit}
-          actor={editingCustomer}
+          actor={cashbook}
           handleDelete={handleDelete}
         />
       );
     }
     return null;
   } else if (!id) {
-    const actor = { ...customer, gender: 'male' };
+    const actor = { ...cashbook };
     return (
       <FormBuilder
-        title={'Create new Customer'}
-        data={getCustomerFormData}
-        onClick={handleCreateNewCustomer}
+        title={'Create new Cashbook'}
+        data={getCashbookFormData}
+        onClick={handleCreateNewCashbook}
         actor={actor}
       />
     );
   }
   return null;
 };
-
 const mapStateToProps = ({ global }) => {
   return { ...global };
 };
@@ -136,4 +135,4 @@ const mapActionToProps = {
   setFetchApiErr: setFetchApiInfo,
 };
 
-export default connect(mapStateToProps, mapActionToProps)(FormCustomer);
+export default connect(mapStateToProps, mapActionToProps)(FormCashbook);

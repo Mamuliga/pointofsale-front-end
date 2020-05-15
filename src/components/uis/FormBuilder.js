@@ -13,7 +13,7 @@ import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
 import {
   validateEmail,
-  validateRequiredFields
+  validateRequiredFields,
 } from '../../utilities/helpers/formHelpers/formBuilderhelpers.js/validations';
 
 const FormBuilder = ({
@@ -22,7 +22,7 @@ const FormBuilder = ({
   onClick,
   actor = {},
   handleDelete,
-  handleDatePickerChange
+  handleDatePickerChange,
 }) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const [dataFields, setDataFields] = useState();
@@ -60,17 +60,18 @@ const FormBuilder = ({
     setOpenConfirmation(false);
   };
 
-  const classes = useStyles();
-  let fields = data;
-  if (dataFields) {
-    fields = dataFields;
-  }
   const getIdentity = () => {
     if (actor.firstName) {
       return `${actor.firstName} ${actor.lastName}`;
     }
     return actor.itemName;
   };
+
+  const classes = useStyles();
+  let fields = data;
+  if (dataFields) {
+    fields = dataFields;
+  }
   return (
     <Container component='main' maxWidth='md'>
       <CssBaseline />
@@ -88,6 +89,7 @@ const FormBuilder = ({
                 case 'text':
                 case 'email':
                 case 'tel':
+                case 'number':
                   return (
                     <CustomTextField
                       entry={entry}

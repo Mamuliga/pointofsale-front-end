@@ -4,7 +4,7 @@ import TableBuilder from '../uis/TableBuilder.js';
 import { useHistory } from 'react-router-dom';
 import { getSupplierTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getSupplierList } from '../../http/supplierApi';
-import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
+import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 
 const Suppliers = ({ fetchApi, setFetchApiErr }) => {
   const { location, push } = useHistory();
@@ -71,7 +71,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr,
+  setFetchApiErr: setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Suppliers);

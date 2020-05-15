@@ -1,8 +1,8 @@
-const getEmptyColumnForEditOrDelete = id => ({
+const getEmptyColumnForEditOrDelete = (id) => ({
   id,
   numeric: false,
   disablePadding: false,
-  label: ''
+  label: '',
 });
 
 export const getCustomerTableHeaders = [
@@ -10,13 +10,13 @@ export const getCustomerTableHeaders = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Customer Id'
+    label: 'Customer Id',
   },
   {
     id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: 'First Name'
+    label: 'First Name',
   },
   { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
   { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
@@ -24,15 +24,15 @@ export const getCustomerTableHeaders = [
     id: 'gender',
     numeric: false,
     disablePadding: false,
-    label: 'Gender'
+    label: 'Gender',
   },
   {
     id: 'bankAccount',
     numeric: false,
     disablePadding: false,
-    label: 'Acc no'
+    label: 'Acc no',
   },
-  getEmptyColumnForEditOrDelete('edit')
+  getEmptyColumnForEditOrDelete('edit'),
 ];
 
 export const getEmployeeTableHeaders = [
@@ -40,34 +40,34 @@ export const getEmployeeTableHeaders = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Employee Id'
+    label: 'Employee Id',
   },
   {
     id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: 'First Name'
+    label: 'First Name',
   },
   { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
   {
     id: 'phoneNo',
     numeric: false,
     disablePadding: false,
-    label: 'Phone Number'
+    label: 'Phone Number',
   },
   {
     id: 'gender',
     numeric: false,
     disablePadding: false,
-    label: 'Gender'
+    label: 'Gender',
   },
   {
     id: 'bankAccount',
     numeric: false,
     disablePadding: false,
-    label: 'Acc no'
+    label: 'Acc no',
   },
-  getEmptyColumnForEditOrDelete('edit')
+  getEmptyColumnForEditOrDelete('edit'),
 ];
 
 export const getSupplierTableHeaders = [
@@ -75,13 +75,13 @@ export const getSupplierTableHeaders = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Supplier Id'
+    label: 'Supplier Id',
   },
   {
     id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: 'First Name'
+    label: 'First Name',
   },
   { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
   { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
@@ -89,15 +89,15 @@ export const getSupplierTableHeaders = [
     id: 'gender',
     numeric: false,
     disablePadding: false,
-    label: 'Gender'
+    label: 'Gender',
   },
   {
     id: 'bankAccount',
     numeric: false,
     disablePadding: false,
-    label: 'Acc no'
+    label: 'Acc no',
   },
-  getEmptyColumnForEditOrDelete('edit')
+  getEmptyColumnForEditOrDelete('edit'),
 ];
 
 export const getSaleTableHeaders = [
@@ -105,13 +105,13 @@ export const getSaleTableHeaders = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Item Id'
+    label: 'Item Id',
   },
   {
     id: 'itemName',
     numeric: false,
     disablePadding: false,
-    label: 'Item Name'
+    label: 'Item Name',
   },
   { id: 'price', numeric: false, disablePadding: false, label: 'Price' },
   { id: 'quantity', numeric: false, disablePadding: false, label: 'Quantity' },
@@ -119,15 +119,15 @@ export const getSaleTableHeaders = [
     id: 'discount',
     numeric: false,
     disablePadding: false,
-    label: 'Discount'
+    label: 'Discount',
   },
   {
     id: 'total',
     numeric: false,
     disablePadding: false,
-    label: 'Total'
+    label: 'Total',
   },
-  getEmptyColumnForEditOrDelete('delete')
+  getEmptyColumnForEditOrDelete('delete'),
 ];
 
 export const getReceiveTableHeaders = [
@@ -135,13 +135,13 @@ export const getReceiveTableHeaders = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Receive Id'
+    label: 'Receive Id',
   },
   {
     id: 'ItemName',
     numeric: false,
     disablePadding: false,
-    label: 'Item Name'
+    label: 'Item Name',
   },
   { id: 'price', numeric: false, disablePadding: false, label: 'Price' },
   { id: 'quantity', numeric: false, disablePadding: false, label: 'Quantity' },
@@ -149,15 +149,15 @@ export const getReceiveTableHeaders = [
     id: 'discount',
     numeric: false,
     disablePadding: false,
-    label: 'Discount'
+    label: 'Discount',
   },
   {
     id: 'total',
     numeric: false,
     disablePadding: false,
-    label: 'Total'
+    label: 'Total',
   },
-  getEmptyColumnForEditOrDelete('delete')
+  getEmptyColumnForEditOrDelete('delete'),
 ];
 
 export const getItemTableHeaders = [
@@ -165,7 +165,7 @@ export const getItemTableHeaders = [
     id: 'itemid',
     numeric: false,
     disablePadding: false,
-    label: 'Item Id'
+    label: 'Item Id',
   },
   { id: 'barcode', numeric: false, disablePadding: false, label: 'Bar Code' },
   { id: 'itemname', numeric: false, disablePadding: false, label: 'Item Name' },
@@ -173,42 +173,53 @@ export const getItemTableHeaders = [
     id: 'category',
     numeric: false,
     disablePadding: false,
-    label: 'Category'
+    label: 'Category',
   },
   {
     id: 'reorderLevel',
     numeric: false,
     disablePadding: false,
-    label: 'Reorder level'
+    label: 'Reorder level',
   },
-  getEmptyColumnForEditOrDelete('edit')
+  getEmptyColumnForEditOrDelete('edit'),
 ];
 
-export const getCashupTableHeaders = [
+export const getCashbookTableHeaders = [
   {
-    id: 'refNo',
+    id: 'cashbookId',
     numeric: false,
     disablePadding: false,
-    label: 'Ref. No.'
+    label: 'Id',
   },
   {
     id: 'date',
     numeric: false,
     disablePadding: false,
-    label: 'Date'
+    label: 'Date',
+  },
+  {
+    id: 'refNo',
+    numeric: false,
+    disablePadding: false,
+    label: 'Ref. No.',
+  },
+  {
+    id: 'type',
+    numeric: false,
+    disablePadding: false,
+    label: 'type',
+  },
+  {
+    id: 'amount',
+    numeric: false,
+    disablePadding: false,
+    label: 'Amount',
   },
   {
     id: 'description',
     numeric: false,
     disablePadding: false,
-    label: 'Description'
+    label: 'Description',
   },
-  { id: 'credit', numeric: true, disablePadding: false, label: 'Credit' },
-  {
-    id: 'debit',
-    numeric: true,
-    disablePadding: false,
-    label: 'Debit'
-  },
-  getEmptyColumnForEditOrDelete('edit')
+  getEmptyColumnForEditOrDelete('edit'),
 ];

@@ -1,11 +1,11 @@
-import Customers from "./Customers";
-import Employees from "./Employees";
-import Dashboard from "./Dashboard";
-import Suppliers from "./Suppliers";
-import Items from "./Items";
-import Cashups from "./Cashups";
-import Sales from "./Sales";
-import Receives from "./Receives";
+import Customers from './Customers';
+import Employees from './Employees';
+import Dashboard from './Dashboard';
+import Suppliers from './Suppliers';
+import Items from './Items';
+import Cashbooks from './Cashbooks';
+import Sales from './Sales';
+import Receives from './Receives';
 
 export {
   Customers,
@@ -13,7 +13,7 @@ export {
   Suppliers,
   Items,
   Dashboard,
-  Cashups,
+  Cashbooks,
   Sales,
-  Receives
+  Receives,
 };
