@@ -13,19 +13,19 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiInfo } from '../../store/actions/globalAction.js';
 
 const Sales = ({ setFetchApiErr }) => {
-  const columnArray = [
-    'id',
-    'itemName',
-    'salesPrice',
-    'qty',
-    'discount',
-    'total',
-  ];
+  const columnArray = {
+    id: '',
+    itemName: '',
+    salesPrice: '',
+    qty: '',
+    discount: '',
+    total: '',
+  };
   const editableRowIndexes = ['qty', 'discount'];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
-  const [rowArray, setRowArray] = useState([columnArray]);
+  const [rowArray, setRowArray] = useState([]);
   const [fetchItems, setFetchItems] = useState(false);
   const classes = useStyles();
 
@@ -55,29 +55,29 @@ const Sales = ({ setFetchApiErr }) => {
         item: { id, itemName },
         salesPrice,
       } = value;
-      const rowIndex = rowArray.filter(rows => rows['id']).length;
-      setRowArray([...rowArray, columnArray]);
-      rowArray[rowIndex]['id'] = id;
-      rowArray[rowIndex]['itemName'] = itemName;
-      rowArray[rowIndex]['salesPrice'] = parseFloat(salesPrice).toFixed(2);
-      rowArray[rowIndex]['qty'] = 1;
-      rowArray[rowIndex]['discount'] = parseFloat(0).toFixed(2);
+      rowArray.push({
+        id,
+        itemName,
+        salesPrice: parseFloat(salesPrice).toFixed(2),
+        qty: 1,
+        discount: parseFloat(0).toFixed(2),
+        total: parseFloat(salesPrice).toFixed(2),
+      });
     }
   };
 
   const tableRows = rowArray.map((row, rowIndex) => {
     console.log(row);
-    if (rowArray[rowIndex]['id']) {
+    if (row.id) {
       const deleteClick = () => {
         rowArray.splice(rowIndex, 1);
-        setRowArray([...rowArray, columnArray]);
+        setRowArray([...rowArray]);
       };
       return (
-        <TableRow hover key={`${rowIndex}+${rowArray[rowIndex]['id']}`}>
-          {rowArray[rowIndex].map(cell => {
-            rowArray[rowIndex]['total'] = parseFloat(
-              rowArray[rowIndex]['qty'] * rowArray[rowIndex]['salesPrice'] -
-                rowArray[rowIndex]['discount']
+        <TableRow hover key={`${rowIndex}+${row.id}`}>
+          {Object.keys(row).map(cell => {
+            row.total = parseFloat(
+              row.qty * row.salesPrice - row.discount
             ).toFixed(2);
             if (editableRowIndexes.includes(cell)) {
               const handleTextInputChange = event => {
@@ -86,7 +86,7 @@ const Sales = ({ setFetchApiErr }) => {
                 console.log(value);
                 console.log(columnArray);
                 if (value >= 0) {
-                  rowArray[rowIndex][cell] = value;
+                  row[cell] = value;
                   setRowArray([...rowArray]);
                 }
               };
@@ -98,13 +98,13 @@ const Sales = ({ setFetchApiErr }) => {
                     name={cell}
                     onFocus={handleFocus}
                     autoFocus={cell === 'qty'}
-                    value={rowArray[rowIndex][cell]}
+                    value={row[cell]}
                     onChange={handleTextInputChange}
                   />
                 </TableCell>
               );
             }
-            return <TableCell key={cell}>{rowArray[rowIndex][cell]}</TableCell>;
+            return <TableCell key={cell}>{row[cell]}</TableCell>;
           })}
           <TableCell key={'delete'} align='right'>
             <DeleteIcon onClick={deleteClick} />
