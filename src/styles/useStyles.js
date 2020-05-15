@@ -5,7 +5,7 @@ import {
   RIGHT_SIDE_BAR_WIDTH,
 } from '../utilities/constants';
 
-export default makeStyles((theme) => ({
+export default makeStyles(theme => ({
   root: {
     display: 'flex',
   },
@@ -21,6 +21,10 @@ export default makeStyles((theme) => ({
       marginLeft: LEFT_SIDE_BAR_WIDTH,
       zIndex: '20000 !important',
     },
+  },
+  topMenu: {
+    display: 'inline-flex',
+    justifyContent: 'space-between',
   },
   sideMenuContainer: {
     marginTop: TOP_MENU_MAX_HEIGHT,
