@@ -232,7 +232,7 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing(3),
   },
   formbuilderSubmit: {
-    margin: theme.spacing(2, 0),
+    margin: theme.spacing(2, 1),
   },
   formbuilderMargin: {
     marginRight: theme.spacing(1),
