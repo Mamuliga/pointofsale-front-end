@@ -13,19 +13,11 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiInfo } from '../../store/actions/globalAction.js';
 
 const Sales = ({ setFetchApiErr }) => {
-  const columnArray = {
-    id: '',
-    itemName: '',
-    salesPrice: '',
-    qty: '',
-    discount: '',
-    total: '',
-  };
   const editableRowIndexes = ['qty', 'discount'];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
-  const [rowArray, setRowArray] = useState([]);
+  const [items, setItems] = useState([]);
   const [fetchItems, setFetchItems] = useState(false);
   const classes = useStyles();
 
@@ -55,7 +47,7 @@ const Sales = ({ setFetchApiErr }) => {
         item: { id, itemName },
         salesPrice,
       } = value;
-      rowArray.push({
+      items.push({
         id,
         itemName,
         salesPrice: parseFloat(salesPrice).toFixed(2),
@@ -66,12 +58,12 @@ const Sales = ({ setFetchApiErr }) => {
     }
   };
 
-  const tableRows = rowArray.map((row, rowIndex) => {
+  const tableRows = items.map((row, rowIndex) => {
     console.log(row);
     if (row.id) {
       const deleteClick = () => {
-        rowArray.splice(rowIndex, 1);
-        setRowArray([...rowArray]);
+        items.splice(rowIndex, 1);
+        setItems([...items]);
       };
       return (
         <TableRow hover key={`${rowIndex}+${row.id}`}>
@@ -81,13 +73,10 @@ const Sales = ({ setFetchApiErr }) => {
             ).toFixed(2);
             if (editableRowIndexes.includes(cell)) {
               const handleTextInputChange = event => {
-                const { name, value } = event.target;
-                console.log(name);
-                console.log(value);
-                console.log(columnArray);
+                const { value } = event.target;
                 if (value >= 0) {
                   row[cell] = value;
-                  setRowArray([...rowArray]);
+                  setItems([...items]);
                 }
               };
               const handleFocus = event => event.target.select();
