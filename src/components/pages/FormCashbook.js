@@ -50,6 +50,7 @@ const FormCashbook = ({ fetchApi, setFetchApiErr }) => {
     const handleCreateSuccuess = (res) => {
       fetchApi(false);
       push(PAGE_ROUTES.cashbooks);
+      setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
     };
     const handleCreateErr = (err) => {
       console.log(err);

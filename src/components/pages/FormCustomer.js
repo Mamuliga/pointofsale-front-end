@@ -49,11 +49,12 @@ const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
     const handleCreateSuccuess = (res) => {
       fetchApi(false);
       push(PAGE_ROUTES.customers);
+      setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
     };
     const handleCreateErr = (err) => {
       console.log(err);
       fetchApi(false);
-      setFetchApiErr('Unable to create customer');
+      setFetchApiErr({ type: 'error', message: 'Unable to create employee' });
     };
     fetchApi(true);
     createCustomer(newCustomer)
@@ -65,6 +66,7 @@ const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
     const handleUpdateSuccuess = (res) => {
       fetchApi(false);
       push(PAGE_ROUTES.customers);
+      setFetchApiErr({ type: 'success', message: 'Succuessfully Updated' });
     };
     const handleUpdateErr = (err) => {
       fetchApi(false);

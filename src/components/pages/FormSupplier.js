@@ -50,6 +50,7 @@ const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
       fetchApi(false);
 
       push(PAGE_ROUTES.suppliers);
+      setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
     };
     const handleCreateErr = (err) => {
       console.log(err);
@@ -66,6 +67,7 @@ const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
     const handleUpdateSuccuess = (res) => {
       fetchApi(false);
       push(PAGE_ROUTES.suppliers);
+      setFetchApiErr({ type: 'success', message: 'Succuessfully Updated' });
     };
     const handleUpdateErr = (err) => {
       fetchApi(false);
