@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { TOP_MENU_ITEMS } from '../../../services/routeService';
-import LogoutIcon from '@material-ui/icons/Lock';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import useStyle from '../../../styles/useStyles';
@@ -44,7 +44,7 @@ const TopMenu = props => {
             label=''
             className={classes.logoutButton}
             onClick={handleLogoutClick}
-            endIcon={<LogoutIcon />}
+            endIcon={<ExitToAppIcon />}
           />
         </div>
         {props.isFetching && <LinearProgress color='secondary' />}
