@@ -85,20 +85,9 @@ const Sales = ({ setFetchApiErr }) => {
                 console.log(name);
                 console.log(value);
                 console.log(columnArray);
-                //TODO Set min validations for discount
-                // const minAmount =
-                //   name === 'discount' && rowArray[rowIndex]['salesPrice'];
-                // console.log(minAmount);
                 if (value >= 0) {
-                  // if (!minAmount) {
-                  //   rowArray[rowIndex][cell] = value;
-                  //   setRowArray([...rowArray]);
-                  // } else if (value <= minAmount) {
                   rowArray[rowIndex][cell] = value;
                   setRowArray([...rowArray]);
-                  // } else {
-                  // setRowArray([...rowArray]);
-                  // }
                 }
               };
               const handleFocus = event => event.target.select();
