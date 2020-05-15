@@ -9,6 +9,8 @@
   "editor.suggestSelection": "first",
   "prettier.jsxSingleQuote": true,
   "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.arrowParens": "avoid",
   // "javascript.implicitProjectConfig.checkJs": true,
   "todo-tree.filtering.excludedWorkspaces": ["node_modules"],
   "[typescript]": {

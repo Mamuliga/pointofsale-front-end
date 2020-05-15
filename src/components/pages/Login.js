@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { logo } from '../../assets/images';
 import {
   authenticate,
-  setLoginErrorFalse
+  setLoginErrorFalse,
 } from '../../store/actions/authActions';
 import Button from '@material-ui/core/Button';
 import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
@@ -20,12 +20,12 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  CircularProgress
+  CircularProgress,
 } from '@material-ui/core';
 import ErrorDisplay from '../uis/ErrorDisplay';
 import useStyles from '../../styles/useStyles';
 import CustomPassword from '../uis/FormComponents/Password';
-import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction';
+import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
 const Login = props => {
   const classes = useStyles();
@@ -36,7 +36,7 @@ const Login = props => {
     loginError,
     setLoginErrorFalse,
     fetchApi,
-    setFetchApiErr
+    setFetchApiErr,
   } = props;
 
   const [password, setPwd] = useState('');
@@ -164,11 +164,16 @@ const Login = props => {
                   </FormControl>
                 </Grid>
               </Grid>
-              <CustomPassword onChange={handlePwd} value={password} />
+              <CustomPassword
+                onChange={handlePwd}
+                value={password}
+                label='Password'
+              />
               {employee.isFirstTimeLogin && (
                 <CustomPassword
                   onChange={handleConfirmPwd}
                   value={confirmPwd}
+                  label='Confirm Password'
                 />
               )}
             </div>
@@ -220,14 +225,14 @@ const Login = props => {
 };
 
 const mapStateToProps = ({ auth }) => ({
-  ...auth
+  ...auth,
 });
 
 const mapActionToProps = {
   onLoginClick: authenticate,
   setLoginErrorFalse,
-  setFetchApiErr,
-  fetchApi
+  setFetchApiErr: setFetchApiInfo,
+  fetchApi,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Login);

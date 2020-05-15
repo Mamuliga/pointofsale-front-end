@@ -13,7 +13,7 @@ import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
 import {
   validateEmail,
-  validateRequiredFields,
+  validateRequiredFields
 } from '../../utilities/helpers/formHelpers/formBuilderhelpers.js/validations';
 
 const FormBuilder = ({
@@ -22,7 +22,7 @@ const FormBuilder = ({
   onClick,
   actor = {},
   handleDelete,
-  handleDatePickerChange,
+  handleDatePickerChange
 }) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const [dataFields, setDataFields] = useState();
@@ -33,11 +33,11 @@ const FormBuilder = ({
     console.log({ ...newActor, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     console.log(newActor);
     e.preventDefault();
     const dataFiledsWithErrors = [];
-    data.forEach((field) => {
+    data.forEach(field => {
       const newActorField = newActor[`${field.id}`];
       if (field.type === 'email') {
         validateEmail(field, newActorField, dataFiledsWithErrors);
@@ -46,7 +46,7 @@ const FormBuilder = ({
       }
     });
     setDataFields(dataFiledsWithErrors);
-    const errors = dataFiledsWithErrors.filter((dataField) => dataField.error);
+    const errors = dataFiledsWithErrors.filter(dataField => dataField.error);
     if (!errors.length) {
       onClick(newActor, actor.id);
     }
@@ -58,6 +58,13 @@ const FormBuilder = ({
 
   const handleCloseConfiramtion = () => {
     setOpenConfirmation(false);
+  };
+
+  const getIdentity = () => {
+    if (actor.firstName) {
+      return `${actor.firstName} ${actor.lastName}`;
+    }
+    return actor.itemName;
   };
 
   const classes = useStyles();
@@ -77,7 +84,7 @@ const FormBuilder = ({
       <div>
         <form className={classes.formbuilderForm}>
           <Grid container spacing={3}>
-            {fields.map((entry) => {
+            {fields.map(entry => {
               switch (entry.type) {
                 case 'text':
                 case 'email':
@@ -145,7 +152,7 @@ const FormBuilder = ({
           handleAgree={handleDelete}
           id='deletePopup'
           header='Confirm Delete'
-          content={`Are you sure want to delete the ${actor.firstName} ${actor.lastName}`}
+          content={`Are you sure want to delete the ${getIdentity()}`}
         />
       )}
     </Container>

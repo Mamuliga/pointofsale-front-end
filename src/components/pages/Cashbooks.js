@@ -9,18 +9,18 @@ import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
+  KeyboardDatePicker
 } from '@material-ui/pickers';
 import useStyles from '../../styles/useStyles';
-import { fetchApi, setFetchApiErr } from '../../store/actions/globalAction.js';
+import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 
-const Cashbooks = ({ fetchApi, setFetchApiErr }) => {
+const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
   const classes = useStyles();
   const { location, push } = useHistory();
   const [cashbookList, setCashbookList] = useState([]);
 
   useEffect(() => {
-    const handleGetCashbookResp = (res) => {
+    const handleGetCashbookResp = res => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
         const displayCashbookList = res.data.map(
@@ -38,16 +38,18 @@ const Cashbooks = ({ fetchApi, setFetchApiErr }) => {
         setCashbookList(displayCashbookList);
       }
     };
-    const handleGetCashbookErr = (err) => {
-      setFetchApiErr('Unable to get cashbooks');
+    const handleGetCashbookErr = err => {
+      setFetchApiInfo('Unable to get cashbooks');
       fetchApi(false);
     };
 
     fetchApi(true);
-    getCashbookList().then(handleGetCashbookResp).catch(handleGetCashbookErr);
-  }, [fetchApi, setFetchApiErr]);
+    getCashbookList()
+      .then(handleGetCashbookResp)
+      .catch(handleGetCashbookErr);
+  }, [fetchApi, setFetchApiInfo]);
 
-  const handleEdit = (cashbook) => {
+  const handleEdit = cashbook => {
     const editClick = () => {
       push(`${location.pathname}/edit/${cashbook.id}`);
     };
@@ -57,13 +59,13 @@ const Cashbooks = ({ fetchApi, setFetchApiErr }) => {
   const [selectedDateTo, setSelectedDateTo] = useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeTo = (date) => {
+  const handleDateChangeTo = date => {
     setSelectedDateTo(date);
   };
   const [selectedDateFrom, setSelectedDateFrom] = useState(
     new Date('2014-08-18T21:11:54')
   );
-  const handleDateChangeFrom = (date) => {
+  const handleDateChangeFrom = date => {
     setSelectedDateFrom(date);
   };
 
@@ -113,7 +115,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr,
+  setFetchApiInfo
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Cashbooks);
