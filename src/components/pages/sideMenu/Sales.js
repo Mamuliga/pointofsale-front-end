@@ -7,8 +7,12 @@ import Barcode from 'react-barcode';
 
 const Sale = props => {
   const classes = useStyles();
+  const { cartItems } = props;
   console.log(props);
-
+  const cartTotal = cartItems.reduce(
+    (billTotal, { qty, salesPrice }) => qty * salesPrice + billTotal,
+    0
+  );
   return (
     <Fragment>
       <form>
@@ -17,7 +21,12 @@ const Sale = props => {
         </div>
         <div style={{ position: 'fixed', bottom: 0 }}>
           <div className={classes.total}>
-            <TextField id='sale-total-inputs' label='Total' />
+            <TextField
+              id='sale-total-inputs'
+              label='Total'
+              value={parseFloat(cartTotal).toFixed(2)}
+              disabled
+            />
           </div>
           <div className={classes.cash}>
             <TextField id='sale-cash-inputs' label='Cash' />
@@ -52,7 +61,7 @@ const Sale = props => {
   );
 };
 
-const mapStateToProps = ({ global }) => ({ ...global });
+const mapStateToProps = ({ global, sale }) => ({ ...global, ...sale });
 
 const mapActionToProps = {};
 
