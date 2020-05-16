@@ -13,7 +13,8 @@ import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
 import {
   validateEmail,
-  validateRequiredFields
+  validateRequiredFields,
+  validatePhone,
 } from '../../utilities/helpers/formHelpers/formBuilderhelpers.js/validations';
 
 const FormBuilder = ({
@@ -22,7 +23,7 @@ const FormBuilder = ({
   onClick,
   actor = {},
   handleDelete,
-  handleDatePickerChange
+  handleDatePickerChange,
 }) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const [dataFields, setDataFields] = useState();
@@ -41,6 +42,8 @@ const FormBuilder = ({
       const newActorField = newActor[`${field.id}`];
       if (field.type === 'email') {
         validateEmail(field, newActorField, dataFiledsWithErrors);
+      } else if (field.type === 'tel') {
+        validatePhone(field, newActorField, dataFiledsWithErrors);
       } else {
         validateRequiredFields(field, newActorField, dataFiledsWithErrors);
       }
@@ -49,6 +52,8 @@ const FormBuilder = ({
     const errors = dataFiledsWithErrors.filter(dataField => dataField.error);
     if (!errors.length) {
       onClick(newActor, actor.id);
+    } else {
+      console.log('Form validation error');
     }
   };
 
