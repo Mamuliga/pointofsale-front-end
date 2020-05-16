@@ -14,7 +14,7 @@ import { setFetchApiInfo } from '../../store/actions/globalAction.js';
 import { setCartItems } from '../../store/actions/saleActions.js';
 import { getItemTotal } from '../../utilities/helpers/saleHelpers.js';
 
-const Sales = ({ setFetchApiErr, cartItems, setCartItems }) => {
+const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   console.log(cartItems);
   const editableRowIndexes = ['qty', 'discount'];
   const [searchWord, setSearchWord] = useState('');
@@ -33,14 +33,14 @@ const Sales = ({ setFetchApiErr, cartItems, setCartItems }) => {
 
     const handleItemSearchErr = err => {
       setFetchItems(false);
-      setFetchApiErr('Unable to search items');
+      setFetchApiInfo({ type: 'error', error: 'Unable to search items' });
       console.log(err);
     };
     setFetchItems(true);
     itemSearch(searchWord)
       .then(handleItemSearchSuccuess)
       .catch(handleItemSearchErr);
-  }, [searchWord, setFetchApiErr]);
+  }, [searchWord, setFetchApiInfo]);
 
   const handleSearchSubmit = (_e, value) => {
     setHighlightedOption();
@@ -205,7 +205,7 @@ const mapStateToProps = ({ global, sale }) => {
 };
 
 const mapActionToProps = {
-  setFetchApiErr: setFetchApiInfo,
+  setFetchApiInfo,
   setCartItems,
 };
 
