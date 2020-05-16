@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import useStyles from '../../../styles/useStyles';
@@ -7,7 +7,13 @@ import Barcode from 'react-barcode';
 
 const Sale = props => {
   const classes = useStyles();
+  const [cashAmount, setCashAmount] = useState(parseFloat(0).toFixed(2));
   const { cartItems } = props;
+  const handleCashAmountChange = e => {
+    if (e.target.value > 0) {
+      setCashAmount(e.target.value);
+    }
+  };
   console.log(props);
   const cartTotal = cartItems.reduce(
     (billTotal, { qty, salesPrice }) => qty * salesPrice + billTotal,
@@ -25,14 +31,32 @@ const Sale = props => {
               id='sale-total-inputs'
               label='Total'
               value={parseFloat(cartTotal).toFixed(2)}
-              disabled
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </div>
           <div className={classes.cash}>
-            <TextField id='sale-cash-inputs' label='Cash' />
+            <TextField
+              id='sale-cash-inputs'
+              label='Cash'
+              value={cashAmount}
+              onChange={handleCashAmountChange}
+            />
           </div>
           <div className={classes.balance}>
-            <TextField id='sale-balance-inputs' label='Balance' />
+            <TextField
+              id='sale-balance-inputs'
+              label='Balance'
+              value={
+                cashAmount > 0
+                  ? parseFloat(cashAmount - cartTotal).toFixed(2)
+                  : cashAmount
+              }
+              InputProps={{
+                readOnly: true,
+              }}
+            />
           </div>
           <div>
             <Button
