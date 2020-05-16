@@ -61,11 +61,15 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
       setCartItems([...cartItems]);
     }
   };
-
-  const handleKeyDown = e => {
-    if (e.key === 'Enter') {
-      document.getElementById('sales-item-search').focus();
-    }
+  const handleKeyDown = cell => {
+    const keyDown = e => {
+      if (e.key === 'Tab' && cell === 'discount') {
+        document.getElementById('sale-total-inputs').focus();
+      } else if (e.key === 'Enter') {
+        document.getElementById('sales-item-search').focus();
+      }
+    };
+    return keyDown;
   };
 
   const tableRows = cartItems.map((row, rowIndex) => {
@@ -98,7 +102,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
                     autoFocus={cell === 'quantity'}
                     value={row[cell]}
                     onChange={handleTextInputChange}
-                    onKeyDown={handleKeyDown}
+                    onKeyDown={handleKeyDown(cell)}
                   />
                 </TableCell>
               );
