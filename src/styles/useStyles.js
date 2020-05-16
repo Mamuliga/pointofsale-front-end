@@ -137,6 +137,10 @@ export default makeStyles(theme => ({
     position: 'absolute',
     top: '400px',
   },
+  salesPageBottomInputs: {
+    position: 'fixed',
+    bottom: 0,
+  },
   total: {
     textAlign: 'left',
     display: 'flex',

@@ -86,7 +86,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
         <div className={classes.customerName}>
           <TextField id='sale-customer-name' label='Customer Name' />
         </div>
-        <div style={{ position: 'fixed', bottom: 0 }}>
+        <div className={classes.salesPageBottomInputs}>
           <div className={classes.total}>
             <TextField
               id='sale-total-inputs'
