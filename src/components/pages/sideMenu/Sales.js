@@ -61,6 +61,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo }) => {
     };
     const handleCreateSaleSuccuess = () => {
       setCartItems([]);
+      setRevdAmount(parseFloat(0).toFixed(2));
       setFetchApiInfo({ type: 'success', message: 'Bill create succuess' });
     };
 
