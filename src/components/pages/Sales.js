@@ -13,6 +13,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiInfo } from '../../store/actions/globalAction.js';
 import { setCartItems } from '../../store/actions/saleActions.js';
 import { getItemTotal } from '../../utilities/helpers/saleHelpers.js';
+import SaleToolTip from '../uis/SaleComponents/SaleToolTip.js';
 
 const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   console.log(cartItems);
@@ -113,36 +114,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
           id='sales-item-search'
           renderOption={option => {
             if (option.detail) {
-              return (
-                <li
-                  className={classes.searchItemSuggestionBox}
-                  style={{ position: 'absolute', top: '400px' }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    <span>{`Price : ${option.salesPrice}`}</span>
-                    <span>{`Available qty : ${option.quantity}`}</span>
-                    <span>
-                      {`Supp. name : ${option.supplier.firstName} ${option.supplier.lastName}`}
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-around',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    <span>{`Exp. date : ${option.expDate}`}</span>
-                    <span>{`Manu. date : ${option.manuDate}`}</span>
-                  </div>
-                </li>
-              );
+              return <SaleToolTip option={option} />;
             }
             return <div>{`${option.item.id}-${option.item.itemName}`}</div>;
           }}
