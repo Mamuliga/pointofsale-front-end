@@ -120,8 +120,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
               color='primary'
               type='submit'
               disabled={!cartItems.length}
+              id='proceedSale'
             >
-              Submit
+              Proceed Sale
             </Button>
           </div>
           <div>
@@ -130,8 +131,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
               variant='contained'
               color='secondary'
               onClick={handleDiscardClick}
+              id='discardSale'
             >
-              Discard
+              Discard Sale
             </Button>
             <div className={classes.barcode}>
               <Barcode value='0000000000001' />
@@ -144,9 +146,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
           open={openConfirm}
           close={handleCloseConfiramtion}
           handleAgree={handleDiscard}
-          id='deletePopup'
+          id='discardSalePopup'
           header='Confirm discard bill'
-          content='Are you sure want to discard this bill?'
+          content='Are you sure want to discard this sale and create a new sale?'
         />
       )}
     </Fragment>
