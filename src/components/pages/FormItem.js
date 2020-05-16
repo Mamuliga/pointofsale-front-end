@@ -12,20 +12,20 @@ import {
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
-const FormItem = ({ fetchApi, setFetchApiErr }) => {
+const FormItem = ({ fetchApi, setFetchApiInfo }) => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [item, setItem] = useState({});
 
   useEffect(() => {
-    const handleGetSuccuess = (res) => {
+    const handleGetSuccuess = res => {
       fetchApi(false);
       const dataArray = [];
       const data = getItemFormData;
       const newItem = res.data;
-      Object.keys(res.data).forEach((id) => {
-        data.forEach((entry) => {
+      Object.keys(res.data).forEach(id => {
+        data.forEach(entry => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newItem[`${id}`] });
           }
@@ -36,40 +36,46 @@ const FormItem = ({ fetchApi, setFetchApiErr }) => {
       setItem(newItem);
       setDataWithValue([...dataArray]);
     };
-    const handleGetErr = (err) => {
+    const handleGetErr = err => {
       fetchApi(false);
-      setFetchApiErr('unable to get the item details');
+      setFetchApiInfo({
+        type: 'error',
+        message: 'unable to get the item details',
+      });
     };
     if (id) {
       fetchApi(true);
       getItemById(id).then(handleGetSuccuess).catch(handleGetErr);
     }
-  }, [fetchApi, id, setFetchApiErr]);
+  }, [fetchApi, id, setFetchApiInfo]);
 
-  const handleCreateNewItem = (newItem) => {
-    const handleCreateSuccuess = (res) => {
+  const handleCreateNewItem = newItem => {
+    const handleCreateSuccuess = res => {
       fetchApi(false);
       push(PAGE_ROUTES.items);
-      setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
+      setFetchApiInfo({ type: 'success', message: 'Succuessfully created' });
     };
-    const handleCreateErr = (err) => {
+    const handleCreateErr = err => {
       console.log(err);
       fetchApi(false);
-      setFetchApiErr('unable to create item');
+      setFetchApiInfo({ type: 'error', message: 'unable to create item' });
     };
     fetchApi(true);
     createItem(newItem).then(handleCreateSuccuess).catch(handleCreateErr);
   };
 
   const handleFormSubmit = (updatedItem, id) => {
-    const handleUpdateSuccuess = (res) => {
+    const handleUpdateSuccuess = res => {
       fetchApi(false);
       push(PAGE_ROUTES.items);
-      setFetchApiErr({ type: 'success', message: 'Succuessfully Updated' });
+      setFetchApiInfo({ type: 'success', message: 'Succuessfully Updated' });
     };
-    const handleUpdateErr = (err) => {
+    const handleUpdateErr = err => {
       fetchApi(false);
-      setFetchApiErr('unable to update item details');
+      setFetchApiInfo({
+        type: 'error',
+        message: 'unable to update item details',
+      });
     };
     updatedItem.id = undefined;
     updatedItem.roleInPOS = undefined;
@@ -83,16 +89,16 @@ const FormItem = ({ fetchApi, setFetchApiErr }) => {
       fetchApi(false);
       push(PAGE_ROUTES.items);
     };
-    const handleDeleteError = (err) => {
+    const handleDeleteError = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to delete item');
+      setFetchApiInfo({ type: 'error', message: 'Unable to delete item' });
     };
     fetchApi(true);
     deleteItem(item.id).then(handleDeleteSuccuess).catch(handleDeleteError);
   };
   if (item.id && dataWithValue.length) {
     const editingItem = { ...item };
-    dataWithValue.forEach((field) => {
+    dataWithValue.forEach(field => {
       editingItem[`${field.id}`] = field.value;
     });
     console.log(editingItem);
@@ -127,7 +133,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr: setFetchApiInfo,
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(FormItem);

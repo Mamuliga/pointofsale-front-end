@@ -9,7 +9,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker
+  KeyboardDatePicker,
 } from '@material-ui/pickers';
 import useStyles from '../../styles/useStyles';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
@@ -32,14 +32,12 @@ const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
       }
     };
     const handleGetCashbookErr = err => {
-      setFetchApiInfo('Unable to get cashbooks');
+      setFetchApiInfo({ type: 'error', message: 'Unable to get Cashbooks' });
       fetchApi(false);
     };
 
     fetchApi(true);
-    getCashbookList()
-      .then(handleGetCashbookResp)
-      .catch(handleGetCashbookErr);
+    getCashbookList().then(handleGetCashbookResp).catch(handleGetCashbookErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = cashbook => {
@@ -108,7 +106,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiInfo
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Cashbooks);

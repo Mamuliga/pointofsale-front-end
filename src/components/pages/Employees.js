@@ -6,7 +6,7 @@ import { getEmployeeTableHeaders } from '../../utilities/helpers/tableHelpers.js
 import { getEmployeeList } from '../../http/employeeApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 
-const Employees = ({ fetchApi, setFetchApiErr }) => {
+const Employees = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
   const [employeeList, setEmployeeList] = useState([]);
 
@@ -23,7 +23,7 @@ const Employees = ({ fetchApi, setFetchApiErr }) => {
       }
     };
     const handleGetEmployeeErr = err => {
-      setFetchApiErr('Unable to get employees');
+      setFetchApiInfo({ type: 'error', message: 'Unable to get employees' });
       fetchApi(false);
     };
 
@@ -31,7 +31,7 @@ const Employees = ({ fetchApi, setFetchApiErr }) => {
     getEmployeeList()
       .then(handleGetEmployeeResp)
       .catch(handleGetEmployeeErr);
-  }, [fetchApi, setFetchApiErr]);
+  }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = employee => {
     const editClick = () => {
@@ -56,7 +56,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr: setFetchApiInfo
+  setFetchApiInfo
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Employees);

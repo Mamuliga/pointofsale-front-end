@@ -12,20 +12,20 @@ import {
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
-const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
+const FormCustomer = ({ fetchApi, setFetchApiInfo }) => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [customer, setCustomer] = useState({});
 
   useEffect(() => {
-    const handleGetSuccuess = (res) => {
+    const handleGetSuccuess = res => {
       fetchApi(false);
       const dataArray = [];
       const data = getCustomerFormData;
       const newCustomer = res.data;
-      Object.keys(res.data).forEach((id) => {
-        data.forEach((entry) => {
+      Object.keys(res.data).forEach(id => {
+        data.forEach(entry => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newCustomer[`${id}`] });
           }
@@ -35,26 +35,29 @@ const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
       setCustomer(newCustomer);
       setDataWithValue([...dataArray]);
     };
-    const handleGetErr = (err) => {
+    const handleGetErr = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to get the customer details');
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Unable to get the customer details',
+      });
     };
     if (id) {
       fetchApi(true);
       getCustomerById(id).then(handleGetSuccuess).catch(handleGetErr);
     }
-  }, [fetchApi, id, setFetchApiErr]);
+  }, [fetchApi, id, setFetchApiInfo]);
 
-  const handleCreateNewCustomer = (newCustomer) => {
-    const handleCreateSuccuess = (res) => {
+  const handleCreateNewCustomer = newCustomer => {
+    const handleCreateSuccuess = res => {
       fetchApi(false);
       push(PAGE_ROUTES.customers);
-      setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
+      setFetchApiInfo({ type: 'success', message: 'Succuessfully created' });
     };
-    const handleCreateErr = (err) => {
+    const handleCreateErr = err => {
       console.log(err);
       fetchApi(false);
-      setFetchApiErr({ type: 'error', message: 'Unable to create employee' });
+      setFetchApiInfo({ type: 'error', message: 'Unable to create Customer' });
     };
     fetchApi(true);
     createCustomer(newCustomer)
@@ -63,14 +66,17 @@ const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
   };
 
   const handleFormSubmit = (updatedCustomer, id) => {
-    const handleUpdateSuccuess = (res) => {
+    const handleUpdateSuccuess = res => {
       fetchApi(false);
       push(PAGE_ROUTES.customers);
-      setFetchApiErr({ type: 'success', message: 'Succuessfully Updated' });
+      setFetchApiInfo({ type: 'success', message: 'Succuessfully Updated' });
     };
-    const handleUpdateErr = (err) => {
+    const handleUpdateErr = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to update customer details');
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Unable to update customer details',
+      });
     };
     updatedCustomer.id = undefined;
     updatedCustomer.roleInPOS = undefined;
@@ -85,9 +91,9 @@ const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
       fetchApi(false);
       push(PAGE_ROUTES.customers);
     };
-    const handleDeleteError = (err) => {
+    const handleDeleteError = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to delete customer');
+      setFetchApiInfo({ type: 'error', message: 'Unable to delete customer' });
     };
     fetchApi(true);
     deleteCustomer(customer.id)
@@ -97,7 +103,7 @@ const FormCustomer = ({ fetchApi, setFetchApiErr }) => {
 
   if (customer.id && dataWithValue.length) {
     const editingCustomer = { ...customer };
-    dataWithValue.forEach((field) => {
+    dataWithValue.forEach(field => {
       editingCustomer[`${field.id}`] = field.value;
     });
     console.log(editingCustomer);
@@ -133,7 +139,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr: setFetchApiInfo,
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(FormCustomer);
