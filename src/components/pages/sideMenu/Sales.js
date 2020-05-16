@@ -6,14 +6,32 @@ import Button from '@material-ui/core/Button';
 import Barcode from 'react-barcode';
 import { getItemTotal } from '../../../utilities/helpers/saleHelpers';
 import { createSale } from '../../../http/saleApi';
+import ConfirmationPopup from '../../uis/ConfirmationPopup';
+import { setCartItems } from '../../../store/actions/saleActions';
 
-const Sale = ({ cartItems }) => {
+const Sale = ({ cartItems, setCartItems }) => {
   const classes = useStyles();
   const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
       setRevdAmount(e.target.value);
     }
+  };
+  const [openConfirm, setOpenConfirmation] = React.useState(false);
+  const handleDiscard = () => {
+    setCartItems([]);
+  };
+  const handleDiscardClick = () => {
+    if (cartItems.length) {
+      handleOpenConfirmation();
+    }
+  };
+  const handleOpenConfirmation = () => {
+    setOpenConfirmation(true);
+  };
+
+  const handleCloseConfiramtion = () => {
+    setOpenConfirmation(false);
   };
   let cartTotal = 0;
   cartItems.forEach(row => {
@@ -95,6 +113,7 @@ const Sale = ({ cartItems }) => {
               className={classes.button}
               variant='contained'
               color='secondary'
+              onClick={handleDiscardClick}
             >
               Discard
             </Button>
@@ -104,12 +123,22 @@ const Sale = ({ cartItems }) => {
           </div>
         </div>
       </form>
+      {openConfirm && (
+        <ConfirmationPopup
+          open={openConfirm}
+          close={handleCloseConfiramtion}
+          handleAgree={handleDiscard}
+          id='deletePopup'
+          header='Confirm discard bill'
+          content='Are you sure want to discard this bill?'
+        />
+      )}
     </Fragment>
   );
 };
 
 const mapStateToProps = ({ global, sale }) => ({ ...global, ...sale });
 
-const mapActionToProps = {};
+const mapActionToProps = { setCartItems };
 
 export default connect(mapStateToProps, mapActionToProps)(Sale);
