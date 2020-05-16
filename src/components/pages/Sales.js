@@ -11,14 +11,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { itemSearch } from '../../http/itemApi.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiInfo } from '../../store/actions/globalAction.js';
+import { setCartItems } from '../../store/actions/saleActions.js';
 
-const Sales = ({ setFetchApiErr }) => {
+const Sales = ({ setFetchApiErr, cartItems, setCartItems }) => {
+  console.log(cartItems);
   const editableRowIndexes = ['qty', 'discount'];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
-  const [items, setItems] = useState([]);
   const [fetchItems, setFetchItems] = useState(false);
+  const [state, updateState] = useState('');
   const classes = useStyles();
 
   useEffect(() => {
@@ -47,7 +49,7 @@ const Sales = ({ setFetchApiErr }) => {
         item: { id, itemName },
         salesPrice,
       } = value;
-      items.push({
+      cartItems.push({
         id,
         itemName,
         salesPrice: parseFloat(salesPrice).toFixed(2),
@@ -55,14 +57,16 @@ const Sales = ({ setFetchApiErr }) => {
         discount: parseFloat(0).toFixed(2),
         total: parseFloat(salesPrice).toFixed(2),
       });
+      setCartItems([...cartItems]);
     }
   };
 
-  const tableRows = items.map((row, rowIndex) => {
+  const tableRows = cartItems.map((row, rowIndex) => {
     if (row.id) {
       const deleteClick = () => {
-        items.splice(rowIndex, 1);
-        setItems([...items]);
+        cartItems.splice(rowIndex, 1);
+        setCartItems([...cartItems]);
+        updateState(rowIndex);
       };
       return (
         <TableRow hover key={`${rowIndex}+${row.id}`}>
@@ -74,11 +78,14 @@ const Sales = ({ setFetchApiErr }) => {
               const handleTextInputChange = event => {
                 const { value } = event.target;
                 if (value >= 0) {
+                  console.log(value);
                   row[cell] = value;
-                  setItems([...items]);
+                  setCartItems(cartItems);
+                  updateState(value);
                 }
               };
               const handleFocus = event => event.target.select();
+              console.log(row[cell]);
               return (
                 <TableCell key={cell}>
                   <TextField
@@ -197,12 +204,13 @@ const Sales = ({ setFetchApiErr }) => {
   );
 };
 
-const mapStateToProps = ({ ...global }) => {
-  return { ...global };
+const mapStateToProps = ({ global, sale }) => {
+  return { ...global, ...sale };
 };
 
 const mapActionToProps = {
   setFetchApiErr: setFetchApiInfo,
+  setCartItems,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Sales);
