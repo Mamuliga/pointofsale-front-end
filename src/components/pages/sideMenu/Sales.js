@@ -11,7 +11,7 @@ const Sale = ({ cartItems }) => {
   const classes = useStyles();
   const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
   const handleCashAmountChange = e => {
-    if (e.target.value > 0) {
+    if (e.target.value >= 0) {
       setRevdAmount(e.target.value);
     }
   };
