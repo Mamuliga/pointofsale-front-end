@@ -8,8 +8,9 @@ import { getItemTotal } from '../../../utilities/helpers/saleHelpers';
 import { createSale } from '../../../http/saleApi';
 import ConfirmationPopup from '../../uis/ConfirmationPopup';
 import { setCartItems } from '../../../store/actions/saleActions';
+import { setFetchApiInfo } from '../../../store/actions/globalAction';
 
-const Sale = ({ cartItems, setCartItems }) => {
+const Sale = ({ cartItems, setCartItems, setFetchApiInfo }) => {
   const classes = useStyles();
   const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
   const handleCashAmountChange = e => {
@@ -58,8 +59,17 @@ const Sale = ({ cartItems, setCartItems }) => {
         amount: cartTotal,
       },
     };
-    createSale(newSale);
-    alert('sale submit');
+    const handleCreateSaleSuccuess = () => {
+      setCartItems([]);
+      setFetchApiInfo({ type: 'success', message: 'Bill create succuess' });
+    };
+
+    const handlereateSaleError = () => {
+      setFetchApiInfo({ type: 'error', message: 'Bill create error' });
+    };
+    createSale(newSale)
+      .then(handleCreateSaleSuccuess)
+      .catch(handlereateSaleError);
   };
 
   return (
@@ -139,6 +149,6 @@ const Sale = ({ cartItems, setCartItems }) => {
 
 const mapStateToProps = ({ global, sale }) => ({ ...global, ...sale });
 
-const mapActionToProps = { setCartItems };
+const mapActionToProps = { setCartItems, setFetchApiInfo };
 
 export default connect(mapStateToProps, mapActionToProps)(Sale);
