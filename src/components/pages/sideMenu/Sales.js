@@ -114,7 +114,8 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo }) => {
               className={classes.button}
               variant='contained'
               color='primary'
-              type={'submit'}
+              type='submit'
+              disabled={!cartItems.length}
             >
               Submit
             </Button>
