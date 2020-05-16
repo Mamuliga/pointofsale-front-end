@@ -21,6 +21,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo }) => {
   const [openConfirm, setOpenConfirmation] = React.useState(false);
   const handleDiscard = () => {
     setCartItems([]);
+    setOpenConfirmation(false);
   };
   const handleDiscardClick = () => {
     if (cartItems.length) {
