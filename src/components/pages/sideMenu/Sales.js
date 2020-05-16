@@ -5,25 +5,48 @@ import useStyles from '../../../styles/useStyles';
 import Button from '@material-ui/core/Button';
 import Barcode from 'react-barcode';
 import { getItemTotal } from '../../../utilities/helpers/saleHelpers';
+import { createSale } from '../../../http/saleApi';
 
-const Sale = props => {
+const Sale = ({ cartItems }) => {
   const classes = useStyles();
-  const [cashAmount, setCashAmount] = useState(parseFloat(0).toFixed(2));
-  const { cartItems } = props;
+  const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
   const handleCashAmountChange = e => {
     if (e.target.value > 0) {
-      setCashAmount(e.target.value);
+      setRevdAmount(e.target.value);
     }
   };
-  console.log(props);
-  const cartTotal = cartItems.reduce(
-    (billTotal, row) => getItemTotal(row) + billTotal,
-    0
-  );
+  let cartTotal = 0;
+  cartItems.forEach(row => {
+    cartTotal = cartTotal + parseFloat(getItemTotal(row));
+  });
+  cartTotal = parseFloat(cartTotal).toFixed(2);
+  const balance =
+    revdAmount > 0 ? parseFloat(revdAmount - cartTotal).toFixed(2) : revdAmount;
   const handleFocus = e => e.target.select();
+  const handleSaleSubmit = e => {
+    e.preventDefault();
+    const newSale = {
+      customerId: 1,
+      total: cartTotal,
+      totalDiscount: 0,
+      paymentType: 'cash',
+      balance,
+      revdAmount,
+      itemSales: cartItems,
+      cashBookDetails: {
+        refNo: '25',
+        description: 'Desc123455',
+        type: 'cash',
+        amount: cartTotal,
+      },
+    };
+    createSale(newSale);
+    alert('sale submit');
+  };
+
   return (
     <Fragment>
-      <form>
+      <form onSubmit={handleSaleSubmit}>
         <div className={classes.customerName}>
           <TextField id='sale-customer-name' label='Customer Name' />
         </div>
@@ -32,7 +55,7 @@ const Sale = props => {
             <TextField
               id='sale-total-inputs'
               label='Total'
-              value={parseFloat(cartTotal).toFixed(2)}
+              value={cartTotal}
               InputProps={{
                 readOnly: true,
               }}
@@ -42,7 +65,7 @@ const Sale = props => {
             <TextField
               id='sale-cash-inputs'
               label='Cash'
-              value={cashAmount}
+              value={revdAmount}
               onChange={handleCashAmountChange}
               onFocus={handleFocus}
             />
@@ -51,11 +74,7 @@ const Sale = props => {
             <TextField
               id='sale-balance-inputs'
               label='Balance'
-              value={
-                cashAmount > 0
-                  ? parseFloat(cashAmount - cartTotal).toFixed(2)
-                  : cashAmount
-              }
+              value={balance}
               InputProps={{
                 readOnly: true,
               }}
@@ -66,6 +85,7 @@ const Sale = props => {
               className={classes.button}
               variant='contained'
               color='primary'
+              type={'submit'}
             >
               Submit
             </Button>
