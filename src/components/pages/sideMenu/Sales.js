@@ -8,9 +8,9 @@ import { getItemTotal } from '../../../utilities/helpers/saleHelpers';
 import { createSale } from '../../../http/saleApi';
 import ConfirmationPopup from '../../uis/ConfirmationPopup';
 import { setCartItems } from '../../../store/actions/saleActions';
-import { setFetchApiInfo } from '../../../store/actions/globalAction';
+import { setFetchApiInfo, fetchApi } from '../../../store/actions/globalAction';
 
-const Sale = ({ cartItems, setCartItems, setFetchApiInfo }) => {
+const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
   const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
   const handleCashAmountChange = e => {
@@ -61,14 +61,17 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo }) => {
       },
     };
     const handleCreateSaleSuccuess = () => {
+      fetchApi(false);
       setCartItems([]);
       setRevdAmount(parseFloat(0).toFixed(2));
       setFetchApiInfo({ type: 'success', message: 'Bill create succuess' });
     };
 
     const handlereateSaleError = () => {
+      fetchApi(false);
       setFetchApiInfo({ type: 'error', message: 'Bill create error' });
     };
+    fetchApi(true);
     createSale(newSale)
       .then(handleCreateSaleSuccuess)
       .catch(handlereateSaleError);
@@ -152,6 +155,6 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo }) => {
 
 const mapStateToProps = ({ global, sale }) => ({ ...global, ...sale });
 
-const mapActionToProps = { setCartItems, setFetchApiInfo };
+const mapActionToProps = { setCartItems, setFetchApiInfo, fetchApi };
 
 export default connect(mapStateToProps, mapActionToProps)(Sale);
