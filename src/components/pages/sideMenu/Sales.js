@@ -104,6 +104,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
               value={revdAmount}
               onChange={handleCashAmountChange}
               onFocus={handleFocus}
+              autoComplete='off'
             />
           </div>
           <div className={classes.balance}>
