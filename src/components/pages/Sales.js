@@ -42,7 +42,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
       .then(handleItemSearchSuccuess)
       .catch(handleItemSearchErr);
   }, [searchWord, setFetchApiInfo]);
-
+  const handleFocus = event => event.target.select();
   const handleSearchSubmit = (_e, value) => {
     setHighlightedOption();
     if (value) {
@@ -87,7 +87,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
                   setCartItems([...cartItems]);
                 }
               };
-              const handleFocus = event => event.target.select();
+
               console.log(row[cell]);
               return (
                 <TableCell key={cell}>
@@ -138,6 +138,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
           getOptionDisabled={opt => opt.detail}
           disabledItemsFocusable
           loading={fetchItems}
+          onFocus={handleFocus}
           renderInput={params => (
             <TextField
               autoFocus
