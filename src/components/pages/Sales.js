@@ -20,7 +20,6 @@ const Sales = ({ setFetchApiErr, cartItems, setCartItems }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
   const [fetchItems, setFetchItems] = useState(false);
-  const [state, updateState] = useState('');
   const classes = useStyles();
 
   useEffect(() => {
@@ -66,7 +65,6 @@ const Sales = ({ setFetchApiErr, cartItems, setCartItems }) => {
       const deleteClick = () => {
         cartItems.splice(rowIndex, 1);
         setCartItems([...cartItems]);
-        updateState(rowIndex);
       };
       return (
         <TableRow hover key={`${rowIndex}+${row.id}`}>
@@ -80,8 +78,7 @@ const Sales = ({ setFetchApiErr, cartItems, setCartItems }) => {
                 if (value >= 0) {
                   console.log(value);
                   row[cell] = value;
-                  setCartItems(cartItems);
-                  updateState(value);
+                  setCartItems([...cartItems]);
                 }
               };
               const handleFocus = event => event.target.select();
