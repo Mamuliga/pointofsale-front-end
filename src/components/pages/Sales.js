@@ -62,6 +62,12 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     }
   };
 
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      document.getElementById('sales-item-search').focus();
+    }
+  };
+
   const tableRows = cartItems.map((row, rowIndex) => {
     if (row.id) {
       const deleteClick = () => {
@@ -92,6 +98,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
                     autoFocus={cell === 'quantity'}
                     value={row[cell]}
                     onChange={handleTextInputChange}
+                    onKeyDown={handleKeyDown}
                   />
                 </TableCell>
               );
