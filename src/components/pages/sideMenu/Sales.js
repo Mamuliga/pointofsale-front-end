@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import useStyles from '../../../styles/useStyles';
 import Button from '@material-ui/core/Button';
 import Barcode from 'react-barcode';
+import { getItemTotal } from '../../../utilities/helpers/saleHelpers';
 
 const Sale = props => {
   const classes = useStyles();
@@ -16,7 +17,7 @@ const Sale = props => {
   };
   console.log(props);
   const cartTotal = cartItems.reduce(
-    (billTotal, { qty, salesPrice }) => qty * salesPrice + billTotal,
+    (billTotal, row) => getItemTotal(row) + billTotal,
     0
   );
   return (

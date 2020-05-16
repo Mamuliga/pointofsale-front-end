@@ -12,6 +12,7 @@ import { itemSearch } from '../../http/itemApi.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiInfo } from '../../store/actions/globalAction.js';
 import { setCartItems } from '../../store/actions/saleActions.js';
+import { getItemTotal } from '../../utilities/helpers/saleHelpers.js';
 
 const Sales = ({ setFetchApiErr, cartItems, setCartItems }) => {
   console.log(cartItems);
@@ -69,9 +70,7 @@ const Sales = ({ setFetchApiErr, cartItems, setCartItems }) => {
       return (
         <TableRow hover key={`${rowIndex}+${row.id}`}>
           {Object.keys(row).map(cell => {
-            row.total = parseFloat(
-              row.qty * row.salesPrice - row.discount
-            ).toFixed(2);
+            row.total = getItemTotal(row);
             if (editableRowIndexes.includes(cell)) {
               const handleTextInputChange = event => {
                 const { value } = event.target;
