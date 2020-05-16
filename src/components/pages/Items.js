@@ -6,7 +6,7 @@ import { getItemTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getItemList } from '../../http/itemApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 
-const Items = ({ fetchApi, setFetchApiErr }) => {
+const Items = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
   const [itemList, setItemList] = useState([]);
 
@@ -23,15 +23,13 @@ const Items = ({ fetchApi, setFetchApiErr }) => {
       }
     };
     const handleGetItemErr = () => {
-      setFetchApiErr('Unable to get items');
+      setFetchApiInfo({ type: 'error', message: 'Unable to get Items' });
       fetchApi(false);
     };
 
     fetchApi(true);
-    getItemList()
-      .then(handleGetItemResp)
-      .catch(handleGetItemErr);
-  }, [fetchApi, setFetchApiErr]);
+    getItemList().then(handleGetItemResp).catch(handleGetItemErr);
+  }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = item => {
     const editClick = () => {
@@ -54,7 +52,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr: setFetchApiInfo
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Items);

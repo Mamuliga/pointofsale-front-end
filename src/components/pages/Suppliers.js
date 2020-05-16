@@ -6,7 +6,7 @@ import { getSupplierTableHeaders } from '../../utilities/helpers/tableHelpers.js
 import { getSupplierList } from '../../http/supplierApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 
-const Suppliers = ({ fetchApi, setFetchApiErr }) => {
+const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
   const [supplierList, setSupplierList] = useState([]);
 
@@ -28,7 +28,7 @@ const Suppliers = ({ fetchApi, setFetchApiErr }) => {
     //       console.log(err);
     //     });
     // }, []);
-    const handleGetSupplierResp = (res) => {
+    const handleGetSupplierResp = res => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
         const displaySupplierList = res.data.map(
@@ -39,16 +39,16 @@ const Suppliers = ({ fetchApi, setFetchApiErr }) => {
         setSupplierList(displaySupplierList);
       }
     };
-    const handleGetSupplierErr = (err) => {
-      setFetchApiErr('Unable to get supplier');
+    const handleGetSupplierErr = err => {
+      setFetchApiInfo({ type: 'error', message: 'Unable to get Suppliers' });
       fetchApi(false);
     };
 
     fetchApi(true);
     getSupplierList().then(handleGetSupplierResp).catch(handleGetSupplierErr);
-  }, [fetchApi, setFetchApiErr]);
+  }, [fetchApi, setFetchApiInfo]);
 
-  const handleEdit = (supplier) => {
+  const handleEdit = supplier => {
     const editClick = () => {
       push(`${location.pathname}/edit/${supplier.id}`);
     };
@@ -71,7 +71,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr: setFetchApiInfo,
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Suppliers);

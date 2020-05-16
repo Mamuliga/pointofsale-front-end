@@ -12,20 +12,20 @@ import {
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
-const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
+const FormSupplier = ({ fetchApi, setFetchApiInfo }) => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [supplier, setSupplier] = useState({});
 
   useEffect(() => {
-    const handleGetSuccuess = (res) => {
+    const handleGetSuccuess = res => {
       fetchApi(false);
       const dataArray = [];
       const data = getSupplierFormData;
       const newSupplier = res.data;
-      Object.keys(res.data).forEach((id) => {
-        data.forEach((entry) => {
+      Object.keys(res.data).forEach(id => {
+        data.forEach(entry => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newSupplier[`${id}`] });
           }
@@ -35,27 +35,30 @@ const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
       setSupplier(newSupplier);
       setDataWithValue([...dataArray]);
     };
-    const handleGetErr = (err) => {
+    const handleGetErr = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to get the supplier details');
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Unable to get the supplier details',
+      });
     };
     if (id) {
       fetchApi(true);
       getSupplierById(id).then(handleGetSuccuess).catch(handleGetErr);
     }
-  }, [fetchApi, id, setFetchApiErr]);
+  }, [fetchApi, id, setFetchApiInfo]);
 
-  const handleCreateNewSupplier = (newSupplier) => {
-    const handleCreateSuccuess = (res) => {
+  const handleCreateNewSupplier = newSupplier => {
+    const handleCreateSuccuess = res => {
       fetchApi(false);
 
       push(PAGE_ROUTES.suppliers);
-      setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
+      setFetchApiInfo({ type: 'success', message: 'Succuessfully created' });
     };
-    const handleCreateErr = (err) => {
+    const handleCreateErr = err => {
       console.log(err);
       fetchApi(false);
-      setFetchApiErr('Unable to create supplier');
+      setFetchApiInfo({ type: 'error', message: 'Unable to create supplier' });
     };
     fetchApi(true);
     createSupplier(newSupplier)
@@ -64,14 +67,17 @@ const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
   };
 
   const handleFormSubmit = (updatedSupplier, id) => {
-    const handleUpdateSuccuess = (res) => {
+    const handleUpdateSuccuess = res => {
       fetchApi(false);
       push(PAGE_ROUTES.suppliers);
-      setFetchApiErr({ type: 'success', message: 'Succuessfully Updated' });
+      setFetchApiInfo({ type: 'success', message: 'Succuessfully Updated' });
     };
-    const handleUpdateErr = (err) => {
+    const handleUpdateErr = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to update supplier details');
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Unable to update supplier details',
+      });
     };
     updatedSupplier.id = undefined;
     updatedSupplier.roleInPOS = undefined;
@@ -86,9 +92,9 @@ const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
       fetchApi(false);
       push(PAGE_ROUTES.suppliers);
     };
-    const handleDeleteError = (err) => {
+    const handleDeleteError = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to delete supplier');
+      setFetchApiInfo({ type: 'error', message: 'Unable to delete supplier' });
     };
     fetchApi(true);
     deleteSupplier(supplier.id)
@@ -98,7 +104,7 @@ const FormSupplier = ({ fetchApi, setFetchApiErr }) => {
 
   if (supplier.id && dataWithValue.length) {
     const editingSupplier = { ...supplier };
-    dataWithValue.forEach((field) => {
+    dataWithValue.forEach(field => {
       editingSupplier[`${field.id}`] = field.value;
     });
     console.log(editingSupplier);
@@ -134,7 +140,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr: setFetchApiInfo,
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(FormSupplier);

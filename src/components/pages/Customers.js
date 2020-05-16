@@ -6,12 +6,12 @@ import { getCustomerTableHeaders } from '../../utilities/helpers/tableHelpers.js
 import { getCustomerList } from '../../http/customerApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 
-const Customers = ({ fetchApi, setFetchApiErr }) => {
+const Customers = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
   const [customerList, setCustomerList] = useState([]);
 
   useEffect(() => {
-    const handleGetCustomerResp = (res) => {
+    const handleGetCustomerResp = res => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
         const displayCustomerList = res.data.map(
@@ -22,15 +22,15 @@ const Customers = ({ fetchApi, setFetchApiErr }) => {
         setCustomerList(displayCustomerList);
       }
     };
-    const handleGetCustomerErr = (err) => {
-      setFetchApiErr('Unable to get customers');
+    const handleGetCustomerErr = err => {
+      setFetchApiInfo({ type: 'error', message: 'Unable to get customers' });
       fetchApi(false);
     };
     fetchApi(true);
     getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
-  }, [fetchApi, setFetchApiErr]);
+  }, [fetchApi, setFetchApiInfo]);
 
-  const handleEdit = (customer) => {
+  const handleEdit = customer => {
     const editClick = () => {
       push(`${location.pathname}/edit/${customer.id}`);
     };
@@ -53,7 +53,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr: setFetchApiInfo,
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Customers);
