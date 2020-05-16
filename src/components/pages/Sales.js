@@ -16,7 +16,7 @@ import { getItemTotal } from '../../utilities/helpers/saleHelpers.js';
 
 const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   console.log(cartItems);
-  const editableRowIndexes = ['qty', 'discount'];
+  const editableRowIndexes = ['quantity', 'discount'];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
@@ -53,7 +53,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
         id,
         itemName,
         salesPrice: parseFloat(salesPrice).toFixed(2),
-        qty: 1,
+        quantity: 1,
         discount: parseFloat(0).toFixed(2),
         total: parseFloat(salesPrice).toFixed(2),
       });
@@ -88,7 +88,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
                     id={cell}
                     name={cell}
                     onFocus={handleFocus}
-                    autoFocus={cell === 'qty'}
+                    autoFocus={cell === 'quantity'}
                     value={row[cell]}
                     onChange={handleTextInputChange}
                   />
