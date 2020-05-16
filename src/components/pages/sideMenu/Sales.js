@@ -64,12 +64,15 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       fetchApi(false);
       setCartItems([]);
       setRevdAmount(parseFloat(0).toFixed(2));
-      setFetchApiInfo({ type: 'success', message: 'Bill create succuess' });
+      setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
     };
 
     const handlereateSaleError = () => {
       fetchApi(false);
-      setFetchApiInfo({ type: 'error', message: 'Bill create error' });
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Error occured in bill creation',
+      });
     };
     fetchApi(true);
     createSale(newSale)
