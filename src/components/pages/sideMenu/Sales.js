@@ -20,6 +20,7 @@ const Sale = props => {
     (billTotal, row) => getItemTotal(row) + billTotal,
     0
   );
+  const handleFocus = e => e.target.select();
   return (
     <Fragment>
       <form>
@@ -43,6 +44,7 @@ const Sale = props => {
               label='Cash'
               value={cashAmount}
               onChange={handleCashAmountChange}
+              onFocus={handleFocus}
             />
           </div>
           <div className={classes.balance}>
