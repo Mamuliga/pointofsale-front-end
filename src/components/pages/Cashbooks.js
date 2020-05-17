@@ -34,7 +34,7 @@ const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
       }
     };
     const handleGetCashbookErr = err => {
-      setFetchApiInfo('Unable to get cashbooks');
+      setFetchApiInfo({ type: 'error', message: 'Unable to get Cashbooks' });
       fetchApi(false);
     };
 

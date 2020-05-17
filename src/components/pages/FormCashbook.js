@@ -12,20 +12,20 @@ import {
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
-const FormCashbook = ({ fetchApi, setFetchApiErr }) => {
+const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [cashbook, setCashbook] = useState({});
 
   useEffect(() => {
-    const handleGetSuccuess = (res) => {
+    const handleGetSuccuess = res => {
       fetchApi(false);
       const dataArray = [];
       const data = getCashbookFormData;
       const newCashbook = res.data;
-      Object.keys(res.data).forEach((id) => {
-        data.forEach((entry) => {
+      Object.keys(res.data).forEach(id => {
+        data.forEach(entry => {
           if (id === entry.id) {
             dataArray.push({ ...entry, value: newCashbook[`${id}`] });
           }
@@ -36,26 +36,29 @@ const FormCashbook = ({ fetchApi, setFetchApiErr }) => {
       setDataWithValue([...dataArray]);
     };
 
-    const handleGetErr = (err) => {
+    const handleGetErr = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to get the cashbook details');
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Unable to get the cashbook details',
+      });
     };
     if (id) {
       fetchApi(true);
       getCashbookById(id).then(handleGetSuccuess).catch(handleGetErr);
     }
-  }, [fetchApi, id, setFetchApiErr]);
+  }, [fetchApi, id, setFetchApiInfo]);
 
-  const handleCreateNewCashbook = (newCashbook) => {
-    const handleCreateSuccuess = (res) => {
+  const handleCreateNewCashbook = newCashbook => {
+    const handleCreateSuccuess = res => {
       fetchApi(false);
       push(PAGE_ROUTES.cashbooks);
-      setFetchApiErr({ type: 'success', message: 'Succuessfully created' });
+      setFetchApiInfo({ type: 'success', message: 'Succuessfully created' });
     };
-    const handleCreateErr = (err) => {
+    const handleCreateErr = err => {
       console.log(err);
       fetchApi(false);
-      setFetchApiErr('Unable to create cashbook');
+      setFetchApiInfo({ type: 'error', message: 'Unable to create cashbook' });
     };
     fetchApi(true);
     createCashbook(newCashbook)
@@ -64,13 +67,16 @@ const FormCashbook = ({ fetchApi, setFetchApiErr }) => {
   };
 
   const handleFormSubmit = (updatedCashbook, id) => {
-    const handleUpdateSuccuess = (res) => {
+    const handleUpdateSuccuess = res => {
       fetchApi(false);
       push(PAGE_ROUTES.cashbooks);
     };
-    const handleUpdateErr = (err) => {
+    const handleUpdateErr = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to update cashbook details');
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Unable to update cashbook details',
+      });
     };
     updatedCashbook.id = undefined;
     updatedCashbook.roleInPOS = undefined;
@@ -85,9 +91,9 @@ const FormCashbook = ({ fetchApi, setFetchApiErr }) => {
       fetchApi(false);
       push(PAGE_ROUTES.cashbooks);
     };
-    const handleDeleteError = (err) => {
+    const handleDeleteError = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to delete cashbook');
+      setFetchApiInfo({ type: 'error', message: 'Unable to delete cashbook' });
     };
     fetchApi(true);
     deleteCashbook(cashbook.id)
@@ -97,7 +103,7 @@ const FormCashbook = ({ fetchApi, setFetchApiErr }) => {
 
   if (cashbook.id && dataWithValue.length) {
     const editingCashbook = { ...cashbook };
-    dataWithValue.forEach((field) => {
+    dataWithValue.forEach(field => {
       editingCashbook[`${field.id}`] = field.value;
     });
     console.log(editingCashbook);
@@ -132,7 +138,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiErr: setFetchApiInfo,
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(FormCashbook);
