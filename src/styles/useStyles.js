@@ -180,6 +180,9 @@ export default makeStyles(theme => ({
     textAlign: 'center',
   },
   /*Login styles */
+  loginHeading: {
+    textAlign: 'center',
+  },
   loginFormFieldIcon: {
     width: '10%',
   },
