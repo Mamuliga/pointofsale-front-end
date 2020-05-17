@@ -11,7 +11,7 @@ const validateRequiredFields = (field, newActorField, dataFields) => {
       dataFields.push({
         ...field,
         error: true,
-        helperText: `${field.label} isRequired`,
+        helperText: `${field.label} is required`,
       });
     }
   } else {
