@@ -4,6 +4,13 @@ export async function getCashbookList() {
   return await http.get('/cashbooks', { limit: 20 });
 }
 
+export async function getFilteredCashbooks(startDate, endDate) {
+  return await http.get(
+    `/cashbooks?startDate=${startDate}&endDate=${endDate}`,
+    { limit: 20 }
+  );
+}
+
 export async function getCashbookById(id) {
   return await http.get(`./cashbooks/${id}`);
 }

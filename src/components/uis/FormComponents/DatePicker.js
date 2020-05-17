@@ -6,15 +6,8 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-const DatePicker = (id, name, value) => {
-  // const { label, name, value, required, id } = entry;
-  const handleDateChange = date => {
-    console.log(date);
-    setSelectedDate(date);
-  };
-  const [selectedDate, setSelectedDate] = React.useState(
-    value ? new Date(value) : new Date()
-  );
+const DatePicker = ({ entry, handleDatePickerChange, selectedDate }) => {
+  const { name, id } = entry;
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
@@ -23,10 +16,7 @@ const DatePicker = (id, name, value) => {
         name={name}
         format='  MM  / dd  / yyyy  '
         value={selectedDate}
-        onChange={handleDateChange}
-        // label={label}
-        // fullWidth
-        // required={required}
+        onChange={handleDatePickerChange}
       />
     </MuiPickersUtilsProvider>
   );
