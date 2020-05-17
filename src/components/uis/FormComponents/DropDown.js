@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
+import { FormHelperText } from '@material-ui/core';
 
 const DropDown = ({ entry, getValue }) => {
-  const { value, name, required, id } = entry;
+  const { value, name, required, id, helperText, error } = entry;
   const [newValue, setNewValue] = useState(value);
-
   const handleChange = e => {
     console.log(e.target.value);
     setNewValue(e.target.value);
@@ -17,7 +17,7 @@ const DropDown = ({ entry, getValue }) => {
 
   return (
     <Grid item xs={6}>
-      <FormControl fullWidth>
+      <FormControl fullWidth error={error}>
         <NativeSelect
           id={id}
           value={newValue}
@@ -29,6 +29,7 @@ const DropDown = ({ entry, getValue }) => {
           <option value='credit'>Credit</option>
           <option value='debit'>Debit</option>
         </NativeSelect>
+        {error && <FormHelperText>{helperText}</FormHelperText>}
       </FormControl>
     </Grid>
   );
