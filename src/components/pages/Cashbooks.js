@@ -4,15 +4,10 @@ import TableBuilder from '../uis/TableBuilder.js';
 import { useHistory } from 'react-router-dom';
 import { getCashbookTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getCashbookList } from '../../http/cashbookApi';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
 import useStyles from '../../styles/useStyles';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
+import DatePicker from './../uis/FormComponents/DatePicker';
 
 const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
   const classes = useStyles();
@@ -44,9 +39,7 @@ const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
     };
 
     fetchApi(true);
-    getCashbookList()
-      .then(handleGetCashbookResp)
-      .catch(handleGetCashbookErr);
+    getCashbookList().then(handleGetCashbookResp).catch(handleGetCashbookErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = cashbook => {
@@ -72,27 +65,22 @@ const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
   const dateComponent = (
     <div className={classes.cashbookUi}>
       <Grid item spacing={5}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <p className={classes.cashbookDateAlign}>To :</p>
-          <KeyboardDatePicker
-            autoFocus
-            margin='medium'
-            id='date-picker-dialog'
-            format='  MM  / dd  / yyyy  '
-            value={selectedDateTo}
-            onChange={handleDateChangeTo}
-          />
-        </MuiPickersUtilsProvider>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <p className={classes.cashbookDateAlign}>From :</p>
-          <KeyboardDatePicker
-            margin='medium'
-            id='date-picker-dialog'
-            format='  MM  / dd  / yyyy  '
-            value={selectedDateFrom}
-            onChange={handleDateChangeFrom}
-          />
-        </MuiPickersUtilsProvider>
+        <p className={classes.cashbookDateAlign}>From :</p>
+        <DatePicker
+          id='id'
+          name='dateChangeTo'
+          label='To:'
+          value={selectedDateFrom}
+          handleDatePickerChange={handleDateChangeFrom}
+        />
+        <p className={classes.cashbookDateAlign}>To :</p>
+        <DatePicker
+          id='id'
+          name='dateChangeTo'
+          label='To:'
+          value={selectedDateTo}
+          handleDatePickerChange={handleDateChangeTo}
+        />
       </Grid>
     </div>
   );
@@ -115,7 +103,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiInfo
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Cashbooks);
