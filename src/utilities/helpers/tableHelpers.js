@@ -1,4 +1,4 @@
-const getEmptyColumnForEditOrDelete = (id) => ({
+const getEmptyColumnForEditOrDelete = id => ({
   id,
   numeric: false,
   disablePadding: false,
@@ -119,7 +119,7 @@ export const getSaleTableHeaders = [
     id: 'discount',
     numeric: false,
     disablePadding: false,
-    label: 'Discount',
+    label: 'Discount per item',
   },
   {
     id: 'total',
