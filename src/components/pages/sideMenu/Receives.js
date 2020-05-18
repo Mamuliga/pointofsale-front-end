@@ -7,7 +7,7 @@ import Barcode from 'react-barcode';
 import { getItemTotal } from '../../../utilities/helpers/receiveHelpers';
 import { createReceive } from '../../../http/receiveApi';
 import ConfirmationPopup from '../../uis/ConfirmationPopup';
-import { setCartItems } from '../../../store/actions/receiveActions';
+import { setCartItems } from '../../../store/actions/receiveAction';
 import { setFetchApiInfo, fetchApi } from '../../../store/actions/globalAction';
 
 const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
@@ -84,7 +84,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     <Fragment>
       <form onSubmit={handleReceiveSubmit}>
         <div className={classes.customerName}>
-          <TextField id='receive-customer-name' label='Customer Name' />
+          <TextField id='receive-supplier-name' label='Supplier Name' />
         </div>
         <div className={classes.receivePageBottomInputs}>
           <div className={classes.total}>
