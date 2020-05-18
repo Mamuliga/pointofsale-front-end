@@ -186,6 +186,9 @@ export default makeStyles(theme => ({
     textAlign: 'center',
   },
   /*Login styles */
+  loginHeading: {
+    textAlign: 'center',
+  },
   loginFormFieldIcon: {
     width: '10%',
   },
@@ -207,6 +210,8 @@ export default makeStyles(theme => ({
   loginSubmit: {
     width: theme.spacing(40),
     display: 'flex',
+    marginRight: theme.spacing(9),
+    marginTop: theme.spacing(4),
   },
   loginGridField: {
     padding: theme.spacing(2),
@@ -216,6 +221,7 @@ export default makeStyles(theme => ({
   },
   loginForgetPassword: {
     width: theme.spacing(80),
+    marginTop: theme.spacing(3),
   },
   '& > *': {
     margin: theme.spacing(10),
@@ -238,7 +244,7 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing(3),
   },
   formbuilderSubmit: {
-    margin: theme.spacing(2, 0),
+    margin: theme.spacing(2, 1),
   },
   formbuilderMargin: {
     marginRight: theme.spacing(1),
