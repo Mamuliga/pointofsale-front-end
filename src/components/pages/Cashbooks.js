@@ -18,7 +18,7 @@ const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
 
   useEffect(() => {
     const handleGetCashbookResp = res => {
-      handleGetCashbbokSuccues(fetchApi, res, setCashbookList);
+      handleGetCashbookSuccues(fetchApi, res, setCashbookList);
     };
     const handleGetCashbookErr = err => {
       setFetchApiInfo({ type: 'error', message: 'Unable to get Cashbooks' });
@@ -26,9 +26,7 @@ const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
     };
 
     fetchApi(true);
-    getCashbookList()
-      .then(handleGetCashbookResp)
-      .catch(handleGetCashbookErr);
+    getCashbookList().then(handleGetCashbookResp).catch(handleGetCashbookErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = () => {
@@ -38,7 +36,7 @@ const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
 
   const handleGetFilteredCashbook = (startDate, endDate) => {
     const handleSuccuess = res => {
-      handleGetCashbbokSuccues(fetchApi, res, setCashbookList);
+      handleGetCashbookSuccues(fetchApi, res, setCashbookList);
     };
     const handleError = () => {};
     getFilteredCashbooks(
@@ -110,7 +108,7 @@ const mapActionToProps = {
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Cashbooks);
-function handleGetCashbbokSuccues(fetchApi, res, setCashbookList) {
+function handleGetCashbookSuccues(fetchApi, res, setCashbookList) {
   fetchApi(false);
   if (Array.isArray(res.data)) {
     const displayCashbookList = res.data.map(

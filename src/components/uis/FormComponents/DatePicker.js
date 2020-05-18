@@ -14,7 +14,7 @@ const DatePicker = ({ entry, handleDatePickerChange, selectedDate }) => {
         margin='medium'
         id={id}
         name={name}
-        format='  MM  / dd  / yyyy  '
+        format=' yyyy / MM / dd'
         value={selectedDate}
         onChange={handleDatePickerChange}
       />
