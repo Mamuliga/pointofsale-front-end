@@ -5,10 +5,10 @@ import ViewListRoundedIcon from '@material-ui/icons/ViewListRounded';
 export const getItemFormData = [
   {
     id: 'barcode',
-    type: 'number',
+    type: 'text',
     label: 'Barcode',
     name: 'barcode',
-    required: false,
+    required: true,
     icon: <CalendarViewDayRoundedIcon />,
   },
   {
@@ -25,11 +25,11 @@ export const getItemFormData = [
     type: 'text',
     label: 'Category',
     name: 'category',
-    required: true,
+    required: false,
   },
   {
-    id: 'reorderlevel',
-    name: 'reorderlevel',
+    id: 'reOrderLevel',
+    name: 'reOrderLevel',
     type: 'number',
     label: 'Reorder Level',
   },
@@ -40,6 +40,6 @@ export const getItemFormData = [
     name: 'description',
     multiline: true,
     rows: 4,
-    required: true,
+    required: false,
   },
 ];

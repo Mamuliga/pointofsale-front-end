@@ -176,7 +176,7 @@ export const getItemTableHeaders = [
     label: 'Category',
   },
   {
-    id: 'reorderLevel',
+    id: 'reOrderLevel',
     numeric: false,
     disablePadding: false,
     label: 'Reorder level',
