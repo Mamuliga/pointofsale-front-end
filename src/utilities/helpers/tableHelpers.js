@@ -1,4 +1,4 @@
-const getEmptyColumnForEditOrDelete = (id) => ({
+const getEmptyColumnForEditOrDelete = id => ({
   id,
   numeric: false,
   disablePadding: false,
@@ -176,7 +176,7 @@ export const getItemTableHeaders = [
     label: 'Category',
   },
   {
-    id: 'reorderLevel',
+    id: 'reOrderLevel',
     numeric: false,
     disablePadding: false,
     label: 'Reorder level',
