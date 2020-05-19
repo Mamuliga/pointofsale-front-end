@@ -134,6 +134,12 @@ export default makeStyles(theme => ({
     background: theme.palette.grey[400],
     padding: '10px',
     width: '100%',
+    position: 'absolute',
+    top: '400px',
+  },
+  salesPageBottomInputs: {
+    position: 'fixed',
+    bottom: 0,
   },
   total: {
     textAlign: 'left',
@@ -238,7 +244,7 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing(3),
   },
   formbuilderSubmit: {
-    margin: theme.spacing(2, 0),
+    margin: theme.spacing(2, 1),
   },
   formbuilderMargin: {
     marginRight: theme.spacing(1),
@@ -249,5 +255,15 @@ export default makeStyles(theme => ({
   },
   cashbookUi: {
     padding: theme.spacing(2),
+  },
+  toolTipRows: {
+    display: 'flex',
+    fontWeight: 'bold',
+  },
+  toolTipFirstRow: {
+    justifyContent: 'space-between',
+  },
+  toolTipSecondRow: {
+    justifyContent: 'space-around',
   },
 }));

@@ -11,21 +11,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { itemSearch } from '../../http/itemApi.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiInfo } from '../../store/actions/globalAction.js';
+import { setCartItems } from '../../store/actions/saleActions.js';
+import { getItemTotal } from '../../utilities/helpers/saleHelpers.js';
+import SaleToolTip from '../uis/SaleComponents/SaleToolTip.js';
 
-const Sales = ({ setFetchApiErr }) => {
-  const columnArray = [
-    'id',
-    'itemName',
-    'salesPrice',
-    'qty',
-    'discount',
-    'total'
-  ];
-  const editableRowIndexes = ['salesPrice', 'qty', 'discount'];
+const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
+  console.log(cartItems);
+  const editableRowIndexes = ['quantity', 'discount'];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
-  const [rowArray, setRowArray] = useState([columnArray]);
   const [fetchItems, setFetchItems] = useState(false);
   const classes = useStyles();
 
@@ -39,83 +34,80 @@ const Sales = ({ setFetchApiErr }) => {
 
     const handleItemSearchErr = err => {
       setFetchItems(false);
-      setFetchApiErr('Unable to search items');
+      setFetchApiInfo({ type: 'error', error: 'Unable to search items' });
       console.log(err);
     };
     setFetchItems(true);
     itemSearch(searchWord)
       .then(handleItemSearchSuccuess)
       .catch(handleItemSearchErr);
-  }, [searchWord, setFetchApiErr]);
-
+  }, [searchWord, setFetchApiInfo]);
+  const handleFocus = event => event.target.select();
   const handleSearchSubmit = (_e, value) => {
     setHighlightedOption();
     if (value) {
       const {
         item: { id, itemName },
-        salesPrice
+        salesPrice,
       } = value;
-      const rowIndex = rowArray.filter(rows => rows['id']).length;
-      setRowArray([...rowArray, columnArray]);
-      rowArray[rowIndex]['id'] = id;
-      rowArray[rowIndex]['itemName'] = itemName;
-      rowArray[rowIndex]['salesPrice'] = parseFloat(salesPrice).toFixed(2);
-      rowArray[rowIndex]['qty'] = 1;
-      rowArray[rowIndex]['discount'] = parseFloat(0).toFixed(2);
+      cartItems.push({
+        id,
+        itemName,
+        salesPrice: parseFloat(salesPrice).toFixed(2),
+        quantity: 1,
+        discount: parseFloat(0).toFixed(2),
+        total: parseFloat(salesPrice).toFixed(2),
+      });
+      setCartItems([...cartItems]);
     }
   };
+  const handleKeyDown = cell => {
+    const keyDown = e => {
+      if (e.key === 'Tab' && cell === 'discount') {
+        document.getElementById('sale-total-inputs').focus();
+      } else if (e.key === 'Enter') {
+        document.getElementById('sales-item-search').focus();
+      }
+    };
+    return keyDown;
+  };
 
-  const tableRows = rowArray.map((row, rowIndex) => {
-    console.log(row);
-    if (rowArray[rowIndex]['id']) {
+  const tableRows = cartItems.map((row, rowIndex) => {
+    if (row.id) {
       const deleteClick = () => {
-        rowArray.splice(rowIndex, 1);
-        setRowArray([...rowArray, columnArray]);
+        cartItems.splice(rowIndex, 1);
+        setCartItems([...cartItems]);
       };
       return (
-        <TableRow hover key={`${rowIndex}+${rowArray[rowIndex]['id']}`}>
-          {rowArray[rowIndex].map(cell => {
-            rowArray[rowIndex]['total'] = parseFloat(
-              rowArray[rowIndex]['qty'] * rowArray[rowIndex]['salesPrice'] -
-                rowArray[rowIndex]['discount']
-            ).toFixed(2);
+        <TableRow hover key={`${rowIndex}+${row.id}`}>
+          {Object.keys(row).map(cell => {
+            row.total = getItemTotal(row);
             if (editableRowIndexes.includes(cell)) {
               const handleTextInputChange = event => {
-                const { name, value } = event.target;
-                console.log(name);
-                console.log(value);
-                console.log(columnArray);
-                //TODO Set min validations for discount
-                // const minAmount =
-                //   name === 'discount' && rowArray[rowIndex]['salesPrice'];
-                // console.log(minAmount);
+                const { value } = event.target;
                 if (value >= 0) {
-                  // if (!minAmount) {
-                  //   rowArray[rowIndex][cell] = value;
-                  //   setRowArray([...rowArray]);
-                  // } else if (value <= minAmount) {
-                  rowArray[rowIndex][cell] = value;
-                  setRowArray([...rowArray]);
-                  // } else {
-                  // setRowArray([...rowArray]);
-                  // }
+                  console.log(value);
+                  row[cell] = value;
+                  setCartItems([...cartItems]);
                 }
               };
-              const handleFocus = event => event.target.select();
+
+              console.log(row[cell]);
               return (
                 <TableCell key={cell}>
                   <TextField
                     id={cell}
                     name={cell}
                     onFocus={handleFocus}
-                    autoFocus={cell === 'qty'}
-                    value={rowArray[rowIndex][cell]}
+                    autoFocus={cell === 'quantity'}
+                    value={row[cell]}
                     onChange={handleTextInputChange}
+                    onKeyDown={handleKeyDown(cell)}
                   />
                 </TableCell>
               );
             }
-            return <TableCell key={cell}>{rowArray[rowIndex][cell]}</TableCell>;
+            return <TableCell key={cell}>{row[cell]}</TableCell>;
           })}
           <TableCell key={'delete'} align='right'>
             <DeleteIcon onClick={deleteClick} />
@@ -133,22 +125,7 @@ const Sales = ({ setFetchApiErr }) => {
           id='sales-item-search'
           renderOption={option => {
             if (option.detail) {
-              return (
-                <li className={classes.searchItemSuggestionBox}>
-                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
-                    {`Price : ${option.salesPrice}`}
-                  </span>
-                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
-                    {`Available qty : ${option.quantity}`}
-                  </span>
-                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
-                    {`Exp. date : ${option.expDate}`}
-                  </span>
-                  <span style={{ fontWeight: 'bold', marginRight: '3em' }}>
-                    {`Manu. date : ${option.manuDate}`}
-                  </span>
-                </li>
-              );
+              return <SaleToolTip option={option} />;
             }
             return <div>{`${option.item.id}-${option.item.itemName}`}</div>;
           }}
@@ -165,6 +142,7 @@ const Sales = ({ setFetchApiErr }) => {
           getOptionDisabled={opt => opt.detail}
           disabledItemsFocusable
           loading={fetchItems}
+          onFocus={handleFocus}
           renderInput={params => (
             <TextField
               autoFocus
@@ -183,7 +161,7 @@ const Sales = ({ setFetchApiErr }) => {
                     )}
                     {params.InputProps.endAdornment}
                   </React.Fragment>
-                )
+                ),
               }}
             />
           )}
@@ -199,19 +177,20 @@ const Sales = ({ setFetchApiErr }) => {
           tableHeaders={getSaleTableHeaders}
           tableTopUis={searchComponent}
           hidePagination
-          tableRows={tableRows}
+          tableRows={tableRows.reverse()}
         />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ ...global }) => {
-  return { ...global };
+const mapStateToProps = ({ global, sale }) => {
+  return { ...global, ...sale };
 };
 
 const mapActionToProps = {
-  setFetchApiErr: setFetchApiInfo
+  setFetchApiInfo,
+  setCartItems,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Sales);

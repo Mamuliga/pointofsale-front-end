@@ -13,7 +13,7 @@ import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
 import {
   validateEmail,
-  validateRequiredFields
+  validateRequiredFields,
 } from '../../utilities/helpers/formHelpers/formBuilderhelpers.js/validations';
 
 const FormBuilder = ({
@@ -22,7 +22,7 @@ const FormBuilder = ({
   onClick,
   actor = {},
   handleDelete,
-  handleDatePickerChange
+  handleDatePickerChange,
 }) => {
   const [newActor, setNewActor] = useState({ ...actor });
   const [dataFields, setDataFields] = useState();
