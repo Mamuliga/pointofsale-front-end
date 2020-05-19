@@ -162,8 +162,8 @@ const Login = props => {
                         value={employee}
                         onChange={handleChange}
                       >
-                        {allEmployees.map(employee => (
-                          <MenuItem value={employee}>
+                        {allEmployees.map((employee, index) => (
+                          <MenuItem value={employee} key={index}>
                             {' '}
                             {employee.firstName}
                           </MenuItem>
