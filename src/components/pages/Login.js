@@ -33,17 +33,17 @@ const Login = props => {
     loading,
     onLoginClick,
     isAuthenticated,
-    loginError,
+    loginError = {},
     setLoginErrorFalse,
     fetchApi,
-    setFetchApiErr,
+    setFetchApiInfo,
   } = props;
 
   const [password, setPwd] = useState('');
   const [confirmPwd, setConfirmPwd] = useState('');
   const [allEmployees, setAllEmployess] = useState(['Admin']);
   const [employee, setEmployee] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState();
 
   useEffect(() => {
     const handleEmployeeResp = resp => {
@@ -56,20 +56,20 @@ const Login = props => {
     };
     const handlegetEmployeeErr = err => {
       fetchApi(false);
-      setFetchApiErr('Unable to get login user names');
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Unable to get login user names',
+      });
     };
 
     fetchApi(true);
     getEmployeeList()
       .then(handleEmployeeResp)
       .catch(handlegetEmployeeErr);
-  }, [fetchApi, setFetchApiErr]);
+  }, [fetchApi, setFetchApiInfo]);
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setErrorMessage(null);
+  const handleClose = () => {
+    setErrorMessage();
     setLoginErrorFalse();
   };
 
@@ -87,15 +87,21 @@ const Login = props => {
           if (password === confirmPwd) {
             return true;
           }
-          setErrorMessage('Password mismatch');
+          setErrorMessage({ type: 'error', message: 'Password mismatch' });
           return false;
         }
-        setErrorMessage('Password mismatch');
+        setErrorMessage({
+          type: 'error',
+          message: 'Please enter required fields',
+        });
         return false;
       }
       return true;
     }
-    setErrorMessage('Please enter username and password');
+    setErrorMessage({
+      type: 'error',
+      message: 'Please enter username and password',
+    });
     return false;
   };
 
@@ -221,7 +227,7 @@ const Login = props => {
       </Container>
       <ErrorDisplay
         handleClose={handleClose}
-        errorMessage={errorMessage || loginError}
+        info={errorMessage || loginError}
       />
     </React.Fragment>
   );
@@ -234,7 +240,7 @@ const mapStateToProps = ({ auth }) => ({
 const mapActionToProps = {
   onLoginClick: authenticate,
   setLoginErrorFalse,
-  setFetchApiErr: setFetchApiInfo,
+  setFetchApiInfo,
   fetchApi,
 };
 

@@ -32,11 +32,11 @@ const ErrorDisplay = ({ info = {}, handleClose, setFetchApiErr }) => {
 };
 
 const mapStateToProps = ({ global }) => ({
-  ...global
+  ...global,
 });
 
 const mapActionToProps = {
-  setFetchApiErr: setFetchApiInfo
+  setFetchApiErr: setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(ErrorDisplay);
