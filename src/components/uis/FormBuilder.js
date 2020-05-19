@@ -165,7 +165,3 @@ const FormBuilder = ({
 };
 
 export default FormBuilder;
-
-// TODO
-// Handle errorsplogin
-// Handle form input structure
