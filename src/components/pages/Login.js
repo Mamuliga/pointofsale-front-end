@@ -115,93 +115,96 @@ const Login = props => {
         <div className={classes.loginPaper}>
           <Paper className={classes.loginRoot}>
             <Paper elevation={2} />
-            <Box
-              fontFamily='Monospace'
-              fontSize='h5.fontSize'
-              fontWeight='fontWeightBold'
-              m={1}
-              mx={8}
-              height={40}
-              width={263}
-              display='inline-block'
-            >
-              Welcome to EIT POS
-            </Box>
-            <img src={logo} width='100%' height={250} alt={logo.title} />
-
-            <div
-              className={
-                employee.isFirstTimeLogin
-                  ? classes.loginPaperForConfirmPwd
-                  : classes.loginPaper
-              }
-            >
-              <Grid
-                container
-                spacing={2}
-                className={classes.loginGridField}
-                alignItems='flex-end'
+            <div className={classes.loginHeading}>
+              <Box
+                fontFamily='Monospace'
+                fontSize='h5.fontSize'
+                fontWeight='fontWeightBold'
+                m={1}
+                mx={8}
+                height={40}
+                width={263}
+                display='inline-block'
               >
-                <Grid item className={classes.loginFormFieldIcon}>
-                  <PersonOutlineRoundedIcon />
-                </Grid>
-                <Grid item className={classes.loginFormField}>
-                  <FormControl className={classes.loginFormControl}>
-                    <InputLabel id='login-dropdown'>Username</InputLabel>
-                    <Select
-                      labelId='login-dropdown'
-                      id='login-dropdown'
-                      value={employee}
-                      onChange={handleChange}
-                    >
-                      {allEmployees.map(employee => (
-                        <MenuItem value={employee}>
-                          {' '}
-                          {employee.firstName}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-              </Grid>
-              <CustomPassword
-                onChange={handlePwd}
-                value={password}
-                label='Password'
-              />
-              {employee.isFirstTimeLogin && (
-                <CustomPassword
-                  onChange={handleConfirmPwd}
-                  value={confirmPwd}
-                  label='Confirm Password'
-                />
-              )}
+                Welcome to EIT POS
+              </Box>
             </div>
-            <Box
-              display='flex'
-              width={475}
-              height={80}
-              alignItems='center'
-              justifyContent='center'
-            >
-              <Button
-                className={classes.loginSubmit}
-                variant='contained'
-                xs={12}
-                disabled={loading}
-                color='primary'
-                onClick={handleLoginClick}
-                disableElevation
+            <img src={logo} width='100%' height={250} alt={logo.title} />
+            <form onSubmit={handleLoginClick}>
+              <div
+                className={
+                  employee.isFirstTimeLogin
+                    ? classes.loginPaperForConfirmPwd
+                    : classes.loginPaper
+                }
               >
-                {loading ? (
-                  <div className={classes.loginProgress}>
-                    <CircularProgress />
-                  </div>
-                ) : (
-                  'Login'
+                <Grid
+                  container
+                  spacing={2}
+                  className={classes.loginGridField}
+                  alignItems='flex-end'
+                >
+                  <Grid item className={classes.loginFormFieldIcon}>
+                    <PersonOutlineRoundedIcon />
+                  </Grid>
+                  <Grid item className={classes.loginFormField}>
+                    <FormControl className={classes.loginFormControl}>
+                      <InputLabel id='login-dropdown'>Username</InputLabel>
+                      <Select
+                        labelId='login-dropdown'
+                        id='login-dropdown'
+                        value={employee}
+                        onChange={handleChange}
+                      >
+                        {allEmployees.map(employee => (
+                          <MenuItem value={employee}>
+                            {' '}
+                            {employee.firstName}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                </Grid>
+                <CustomPassword
+                  onChange={handlePwd}
+                  value={password}
+                  label='Password'
+                />
+                {employee.isFirstTimeLogin && (
+                  <CustomPassword
+                    onChange={handleConfirmPwd}
+                    value={confirmPwd}
+                    label='Confirm Password'
+                  />
                 )}
-              </Button>
-            </Box>
+              </div>
+              <Box
+                display='flex'
+                width={475}
+                height={80}
+                alignItems='center'
+                justifyContent='center'
+              >
+                <Button
+                  className={classes.loginSubmit}
+                  variant='contained'
+                  xs={12}
+                  disabled={loading}
+                  color='primary'
+                  onClick={handleLoginClick}
+                  disableElevation
+                >
+                  {loading ? (
+                    <div className={classes.loginProgress}>
+                      <CircularProgress />
+                    </div>
+                  ) : (
+                    'Login'
+                  )}
+                </Button>
+              </Box>
+            </form>
             <Box
               className={classes.loginForgetPassword}
               display='flex'
