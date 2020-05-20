@@ -18,11 +18,11 @@ const CustomPassword = ({ onChange, value, label }) => {
       <Grid item className={classes.loginFormField}>
         <TextField
           className={classes.loginputField}
-          id='input-with-icon-grid'
+          id={label}
           xs={3}
           label={label}
           type='password'
-          name='password'
+          name={label}
           onChange={onChange}
           value={value}
         />
