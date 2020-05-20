@@ -1,7 +1,7 @@
-import http from "./http";
+import http from './http';
 
 export async function getReceiveList() {
-  return await http.get("/receives", { limit: 20 });
+  return await http.get('/receives', { limit: 20 });
 }
 
 export async function getReceiveById(id) {
@@ -13,9 +13,9 @@ export async function updateReceiveById(id, body) {
 }
 
 export async function createReceive(body) {
-  return await http.post("./receives", body);
+  return await http.post('./receives', body);
 }
 
 export async function deleteReceive(id) {
-  return await http.deleteById("./receives", id);
+  return await http.deleteById('./receives', id);
 }
