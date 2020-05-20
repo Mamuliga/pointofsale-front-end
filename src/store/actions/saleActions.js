@@ -1,7 +1,7 @@
-import { SET_CART } from './actionTypes';
+import { SET_SALE_CART } from './actionTypes';
 
 export const setCartItems = payload => dispatch =>
   dispatch({
-    type: SET_CART,
+    type: SET_SALE_CART,
     payload,
   });
