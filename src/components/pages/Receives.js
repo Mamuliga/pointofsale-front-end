@@ -17,7 +17,7 @@ import SaleToolTip from '../uis/SaleComponents/SaleToolTip.js';
 
 const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   console.log(cartItems);
-  const editableRowIndexes = ['quantity', 'discount'];
+  const editableRowIndexes = ['receivePrice', 'quantity', 'discount'];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
@@ -48,15 +48,14 @@ const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     if (value) {
       const {
         item: { id, itemName },
-        receivePrice,
       } = value;
       cartItems.push({
         id,
         itemName,
-        receivePrice: parseFloat(receivePrice).toFixed(2),
+        receivePrice: parseFloat(0).toFixed(2),
         quantity: 1,
         discount: parseFloat(0).toFixed(2),
-        total: parseFloat(receivePrice).toFixed(2),
+        total: parseFloat(0).toFixed(2),
       });
       setCartItems([...cartItems]);
     }
@@ -99,7 +98,7 @@ const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
                     id={cell}
                     name={cell}
                     onFocus={handleFocus}
-                    autoFocus={cell === 'quantity'}
+                    autoFocus={cell === 'receivePrice'}
                     value={row[cell]}
                     onChange={handleTextInputChange}
                     onKeyDown={handleKeyDown(cell)}

@@ -12,10 +12,10 @@ import { setFetchApiInfo, fetchApi } from '../../../store/actions/globalAction';
 
 const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
-  const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
+  const [payedAmount, setPayedAmount] = useState(parseFloat(0).toFixed(2));
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
-      setRevdAmount(e.target.value);
+      setPayedAmount(e.target.value);
     }
   };
   const [openConfirm, setOpenConfirmation] = React.useState(false);
@@ -41,18 +41,20 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   });
   cartTotal = parseFloat(cartTotal).toFixed(2);
   const balance =
-    revdAmount > 0 ? parseFloat(revdAmount - cartTotal).toFixed(2) : revdAmount;
+    payedAmount > 0
+      ? parseFloat(payedAmount - cartTotal).toFixed(2)
+      : payedAmount;
   const handleFocus = e => e.target.select();
   const handleReceiveSubmit = e => {
     e.preventDefault();
     const newReceive = {
-      customerId: 1,
+      supplierId: 7,
       total: cartTotal,
       totalDiscount: 0,
       paymentType: 'cash',
       balance,
-      revdAmount,
-      itemReceive: cartItems,
+      payedAmount,
+      itemReceives: cartItems,
       cashBookDetails: {
         refNo: '25',
         description: 'Desc123455',
@@ -63,7 +65,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     const handleCreateReceiveSuccuess = () => {
       fetchApi(false);
       setCartItems([]);
-      setRevdAmount(parseFloat(0).toFixed(2));
+      setPayedAmount(parseFloat(0).toFixed(2));
       setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
     };
 
@@ -101,7 +103,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
             <TextField
               id='receive-cash-inputs'
               label='Cash'
-              value={revdAmount}
+              value={payedAmount}
               onChange={handleCashAmountChange}
               onFocus={handleFocus}
               autoComplete='off'
