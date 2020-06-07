@@ -1,6 +1,8 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
 import { Interpolation, Svg } from 'chartist';
+import VisualCard from '../uis/DashboardComponents/VisualCard';
+import GridContainer from '../uis/DashboardComponents/Grid/GridContainer';
 
 const Dashboard = () => {
   var data = {
@@ -178,21 +180,8 @@ const Dashboard = () => {
   };
   const emailsSubscriptionChart = {
     data: {
-      labels: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'Mai',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ],
-      series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]],
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      series: [[542, 443, 320, 780, 553, 453]],
     },
     options: {
       axisX: {
@@ -236,7 +225,7 @@ const Dashboard = () => {
         // .on('draw', function(data) {
         //   if(data.type === 'bar') {
         data.element.attr({
-          style: 'stroke-width: 50px',
+          style: 'stroke-width: 20px',
         });
       },
       // },
@@ -245,6 +234,61 @@ const Dashboard = () => {
 
   return (
     <div>
+      <GridContainer>
+        <VisualCard
+          title={'Daily Sales Title'}
+          desc={'Daile sales description'}
+        >
+          <ChartistGraph
+            className='ct-chart'
+            data={completedTasksChart.data}
+            type='Line'
+            options={completedTasksChart.options}
+            listener={completedTasksChart.animation}
+          />
+        </VisualCard>
+        <VisualCard title={'Pie chart'} desc={'Daile sales description'}>
+          <ChartistGraph
+            className={'ct-octave'}
+            data={dataPie}
+            /* options={options}  */ type={types[1]}
+          />
+        </VisualCard>
+        <VisualCard
+          title={'Sample line graph'}
+          desc={'Daile sales description'}
+        >
+          <ChartistGraph
+            className={'ct-octave'}
+            data={data}
+            /* options={options} */ type={types[2]}
+          />
+        </VisualCard>
+        <VisualCard title={'Sample bar graph'} desc={'Daile sales description'}>
+          <ChartistGraph
+            className='ct-chart'
+            data={emailsSubscriptionChart.data}
+            type='Bar'
+            options={emailsSubscriptionChart.options}
+            responsiveOptions={emailsSubscriptionChart.responsiveOptions}
+            listener={emailsSubscriptionChart.animation}
+          />
+        </VisualCard>
+        <VisualCard
+          title={'Daily Sales Title'}
+          desc={'Daile sales description'}
+        >
+          <ChartistGraph
+            className={'ct-octave'}
+            // options={barChartOptions}
+            // data={{ ...data, type: 'area' }}
+            data={dailySalesChart.data}
+            type={types[0]}
+            listener={dailySalesChart.animation}
+            options={dailySalesChart.options}
+          />
+        </VisualCard>
+      </GridContainer>
       <ChartistGraph
         className='ct-chart'
         data={emailsSubscriptionChart.data}
