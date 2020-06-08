@@ -80,6 +80,14 @@ export const getEmployeeFormData = [
     icon: <RecentActorsIcon />,
   },
   {
+    id: 'roleInPOS',
+    type: 'text',
+    label: 'Role In POS',
+    name: 'roleInPOS',
+    required: false,
+    icon: <PersonIcon />,
+  },
+  {
     id: 'description',
     type: 'text',
     label: 'Description',
