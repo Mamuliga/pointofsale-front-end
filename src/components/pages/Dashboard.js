@@ -5,27 +5,12 @@ import VisualCard from '../uis/DashboardComponents/VisualCard';
 import GridContainer from '../uis/DashboardComponents/Grid/GridContainer';
 
 const Dashboard = () => {
-  var data = {
+  var lineGraphData = {
     labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
     series: [[1, 2, 4, 8, 6, -2, -1, -4, -6, -2]],
   };
-  var dataPie = {
-    // labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
+  var pieChartData = {
     series: [10, 2, 4, 3],
-  };
-
-  // new Chartist.Pie('.ct-chart', {
-  //   series: [10, 2, 4, 3],
-  // });
-
-  var options = {
-    high: 10,
-    low: -10,
-    axisX: {
-      labelInterpolationFnc: function(value, index) {
-        return index % 2 === 0 ? value : null;
-      },
-    },
   };
 
   var delays = 80,
@@ -33,53 +18,6 @@ const Dashboard = () => {
   var delays2 = 80,
     durations2 = 500;
 
-  const barChartOptions = {
-    options: {
-      lineSmooth: Interpolation.cardinal({
-        tension: 0,
-      }),
-      low: 0,
-      high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-      },
-    },
-    // for animation
-    animation: {
-      draw: function(data) {
-        if (data.type === 'line' || data.type === 'area') {
-          data.element.animate({
-            d: {
-              begin: 600,
-              dur: 700,
-              from: data.path
-                .clone()
-                .scale(1, 0)
-                .translate(0, data.chartRect.height())
-                .stringify(),
-              to: data.path.clone().stringify(),
-              easing: Svg.Easing.easeOutQuint,
-            },
-          });
-        } else if (data.type === 'point') {
-          data.element.animate({
-            opacity: {
-              begin: (data.index + 1) * delays,
-              dur: durations,
-              from: 0,
-              to: 1,
-              easing: 'ease',
-            },
-          });
-        }
-      },
-    },
-  };
-
-  const types = ['Bar', 'Pie', 'Line'];
   const dailySalesChart = {
     data: {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -90,7 +28,7 @@ const Dashboard = () => {
         tension: 0,
       }),
       low: 0,
-      high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      high: 50,
       chartPadding: {
         top: 0,
         right: 0,
@@ -140,7 +78,7 @@ const Dashboard = () => {
         tension: 0,
       }),
       low: 0,
-      high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      high: 1000,
       chartPadding: {
         top: 0,
         right: 0,
@@ -222,107 +160,91 @@ const Dashboard = () => {
             },
           });
         }
-        // .on('draw', function(data) {
-        //   if(data.type === 'bar') {
         data.element.attr({
           style: 'stroke-width: 20px',
         });
       },
-      // },
     },
   };
 
+  const completedTasksChartOptions = {
+    title: 'Complted Tasks Chart Title',
+    desc: 'Complted Tasks Chart description',
+    className: 'ct-chart',
+    data: completedTasksChart.data,
+    type: 'Line',
+    options: completedTasksChart.options,
+    listener: completedTasksChart.animation,
+  };
+  const pieChartOptions = {
+    title: 'Pie chart',
+    desc: 'Pie chart description',
+    className: 'ct-octave',
+    data: pieChartData,
+    type: 'Pie',
+  };
+  const lineGraphOptions = {
+    title: 'Sample Line Graph2',
+    desc: 'Sample Line Graph2 description',
+    className: 'ct-octave',
+    data: lineGraphData,
+    type: 'Line',
+  };
+  const emailsSubscriptionChartOptions = {
+    title: 'Email subscription Chart',
+    desc: 'Email subscription Chart description',
+    className: 'ct-octave',
+    data: emailsSubscriptionChart.data,
+    type: 'Bar',
+    options: emailsSubscriptionChart.options,
+    listener: emailsSubscriptionChart.animation,
+    responsiveOption: emailsSubscriptionChart.responsiveOptions,
+  };
+  const dailySalesChartOptions = {
+    title: 'Daily Sales Chart',
+    desc: 'Daily Sales Chart description',
+    className: 'ct-octave',
+    data: dailySalesChart.data,
+    type: 'Bar',
+    options: dailySalesChart.options,
+    listener: dailySalesChart.animation,
+  };
+
+  const dataVisualizationChartPropsArray = [
+    completedTasksChartOptions,
+    pieChartOptions,
+    lineGraphOptions,
+    emailsSubscriptionChartOptions,
+    dailySalesChartOptions,
+  ];
   return (
     <div>
       <GridContainer>
-        <VisualCard
-          title={'Daily Sales Title'}
-          desc={'Daile sales description'}
-        >
-          <ChartistGraph
-            className='ct-chart'
-            data={completedTasksChart.data}
-            type='Line'
-            options={completedTasksChart.options}
-            listener={completedTasksChart.animation}
-          />
-        </VisualCard>
-        <VisualCard title={'Pie chart'} desc={'Daile sales description'}>
-          <ChartistGraph
-            className={'ct-octave'}
-            data={dataPie}
-            /* options={options}  */ type={types[1]}
-          />
-        </VisualCard>
-        <VisualCard
-          title={'Sample line graph'}
-          desc={'Daile sales description'}
-        >
-          <ChartistGraph
-            className={'ct-octave'}
-            data={data}
-            /* options={options} */ type={types[2]}
-          />
-        </VisualCard>
-        <VisualCard title={'Sample bar graph'} desc={'Daile sales description'}>
-          <ChartistGraph
-            className='ct-chart'
-            data={emailsSubscriptionChart.data}
-            type='Bar'
-            options={emailsSubscriptionChart.options}
-            responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-            listener={emailsSubscriptionChart.animation}
-          />
-        </VisualCard>
-        <VisualCard
-          title={'Daily Sales Title'}
-          desc={'Daile sales description'}
-        >
-          <ChartistGraph
-            className={'ct-octave'}
-            // options={barChartOptions}
-            // data={{ ...data, type: 'area' }}
-            data={dailySalesChart.data}
-            type={types[0]}
-            listener={dailySalesChart.animation}
-            options={dailySalesChart.options}
-          />
-        </VisualCard>
+        {dataVisualizationChartPropsArray.map((charts, index) => {
+          const {
+            title,
+            desc,
+            className,
+            type,
+            data,
+            options,
+            responsiveOptions,
+            listener,
+          } = charts;
+          return (
+            <VisualCard title={title} desc={desc} key={index}>
+              <ChartistGraph
+                className={className}
+                data={data}
+                type={type}
+                options={options}
+                responsiveOptions={responsiveOptions}
+                listener={listener}
+              />
+            </VisualCard>
+          );
+        })}
       </GridContainer>
-      <ChartistGraph
-        className='ct-chart'
-        data={emailsSubscriptionChart.data}
-        type='Bar'
-        options={emailsSubscriptionChart.options}
-        responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-        listener={emailsSubscriptionChart.animation}
-      />
-      <ChartistGraph
-        className={'ct-octave'}
-        // options={barChartOptions}
-        // data={{ ...data, type: 'area' }}
-        data={dailySalesChart.data}
-        type={types[0]}
-        listener={dailySalesChart.animation}
-        options={dailySalesChart.options}
-      />
-      <ChartistGraph
-        className={'ct-octave'}
-        data={dataPie}
-        /* options={options}  */ type={types[1]}
-      />
-      <ChartistGraph
-        className={'ct-octave'}
-        data={data}
-        /* options={options} */ type={types[2]}
-      />
-      <ChartistGraph
-        className='ct-chart'
-        data={completedTasksChart.data}
-        type='Line'
-        options={completedTasksChart.options}
-        listener={completedTasksChart.animation}
-      />
     </div>
   );
 };

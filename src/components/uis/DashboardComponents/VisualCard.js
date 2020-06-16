@@ -1,6 +1,5 @@
 import React from 'react';
 import dashboardStyles from '../../../styles/dashboard/dashboardStyles';
-import GridContainer from './Grid/GridContainer';
 import GridItem from './Grid/GridItem';
 
 const VisualCard = ({ children, title, desc }) => {
