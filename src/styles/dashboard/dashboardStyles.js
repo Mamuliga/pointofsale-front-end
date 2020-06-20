@@ -16,13 +16,19 @@ export default makeStyles(theme => ({
     color: 'black',
     background: '#ffffff',
     width: '100%',
-    boxShadow: '0 1px 4px 0 black',
+    boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.14)',
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     minWidth: '0',
     wordWrap: 'break-word',
     fontSize: '.875rem',
+  },
+  cardShading: {
+    color: '#FFF',
+    margin: '0 15px',
+    padding: 0,
+    position: 'relative',
   },
   cardInnerDiv2: {
     borderRadius: '3px',
@@ -87,6 +93,7 @@ const successCardHeader = {
   ...successBoxShadow,
 };
 
+// eslint-disable-next-line no-unused-vars
 const hexToRgb = input => {
   input = input + '';
   input = input.replace('#', '');
