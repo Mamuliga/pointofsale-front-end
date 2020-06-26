@@ -16,7 +16,7 @@ const Dashboard = props => {
       <Divider />
       <ListItem
         onClick={e => {
-          push(`${PAGE_ROUTES.home}/${e.key || 'summary'}`);
+          push(PAGE_ROUTES.home);
         }}
         button
       >
@@ -28,7 +28,7 @@ const Dashboard = props => {
       <Divider />
       <ListItem
         onClick={e => {
-          push(`${PAGE_ROUTES.home}/${'dailySales'}`);
+          push(PAGE_ROUTES.dailySales);
         }}
         button
       >
@@ -40,7 +40,7 @@ const Dashboard = props => {
       <Divider />
       <ListItem
         onClick={e => {
-          push(`${PAGE_ROUTES.home}/${'mostSelledItems'}`);
+          push(PAGE_ROUTES.mostSelledItems);
         }}
         button
       >
@@ -52,7 +52,7 @@ const Dashboard = props => {
       <Divider />
       <ListItem
         onClick={e => {
-          push(`${PAGE_ROUTES.home}/${'bestCustomers'}`);
+          push(PAGE_ROUTES.bestSellingCustomer);
         }}
         button
       >

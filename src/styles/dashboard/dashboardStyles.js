@@ -85,11 +85,12 @@ const successBoxShadow = {
     '0 4px 20px 0 rgba(0, 0, 0, .14), 0 7px 10px -5px rgba(76, 175, 80,.4)',
 };
 
+// eslint-disable-next-line no-unused-vars
 const successColor = ['#4caf50', '#66bb6a', '#43a047', '#5cb860'];
 
 const successCardHeader = {
-  background:
-    'linear-gradient(60deg, ' + successColor[1] + ', ' + successColor[2] + ')',
+  background: 'lightBlue',
+  // 'linear-gradient(60deg, ' + successColor[1] + ', ' + successColor[2] + ')',
   ...successBoxShadow,
 };
 

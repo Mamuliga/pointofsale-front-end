@@ -23,6 +23,9 @@ export const PAGE_ROUTES = {
   items: '/items',
   newItem: '/items/new',
   editItem: '/items/edit/:id',
+  dailySales: '/dashboard/dailySales',
+  bestSellingCustomer: '/dashboard/bestSellingCustomer',
+  mostSelledItems: '/dashboard/mostSelledItems',
 };
 
 const TOP_MENU_HIDE_ROUTES = {
@@ -84,10 +87,10 @@ export const TOP_MENU_ITEMS = [
   },
 ];
 
-export const showTopMenuForRoute = (route) => {
+export const showTopMenuForRoute = route => {
   return !TOP_MENU_HIDE_ROUTES[route];
 };
 
-export const showSideMenuForRoute = (route) => {
+export const showSideMenuForRoute = route => {
   return !SIDE_MENU_HIDE_ROUTES[route];
 };
