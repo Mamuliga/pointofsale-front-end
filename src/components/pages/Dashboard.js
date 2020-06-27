@@ -5,6 +5,7 @@ import GridContainer from '../uis/DashboardComponents/Grid/GridContainer';
 import { getDailySalesChartProps } from '../../utilities/helpers/graphHelpers/dailySalesChartHelpers';
 import { getCompletedTasksChart } from '../../utilities/helpers/graphHelpers/completedSalesChart';
 import { getEmailSubscriptionChart } from '../../utilities/helpers/graphHelpers/emailSubscriptionCHart';
+import { PAGE_ROUTES } from '../../services/routeService';
 
 const Dashboard = () => {
   const dailySalesChart = getDailySalesChartProps();
@@ -19,6 +20,7 @@ const Dashboard = () => {
     type: 'Line',
     options: completedTasksChart.options,
     listener: completedTasksChart.animation,
+    mainPath: PAGE_ROUTES.dailySales,
   };
   const pieChartOptions = {
     title: 'Pie chart',
@@ -26,6 +28,7 @@ const Dashboard = () => {
     className: 'ct-octave',
     data: { series: [10, 2, 4, 3] },
     type: 'Pie',
+    mainPath: PAGE_ROUTES.mostSelledItems,
   };
   const lineGraphOptions = {
     title: 'Sample Line Graph2',
@@ -36,6 +39,7 @@ const Dashboard = () => {
       series: [[1, 2, 4, 8, 6, -2, -1, -4, -6, -2]],
     },
     type: 'Line',
+    mainPath: PAGE_ROUTES.bestSellingCustomer,
   };
   const emailsSubscriptionChartOptions = {
     title: 'Email subscription Chart',
@@ -46,6 +50,7 @@ const Dashboard = () => {
     options: emailsSubscriptionChart.options,
     listener: emailsSubscriptionChart.animation,
     responsiveOption: emailsSubscriptionChart.responsiveOptions,
+    mainPath: PAGE_ROUTES.mostSelledItems,
   };
   const dailySalesChartOptions = {
     title: 'Daily Sales Chart',
@@ -55,6 +60,7 @@ const Dashboard = () => {
     type: 'Bar',
     options: dailySalesChart.options,
     listener: dailySalesChart.animation,
+    mainPath: PAGE_ROUTES.dailySales,
   };
 
   const dataVisualizationChartPropsArray = [
@@ -67,7 +73,7 @@ const Dashboard = () => {
   return (
     <div>
       <GridContainer>
-        {dataVisualizationChartPropsArray.map((charts, index) => {
+        {dataVisualizationChartPropsArray.map(charts => {
           const {
             title,
             desc,
@@ -77,9 +83,10 @@ const Dashboard = () => {
             options,
             responsiveOptions,
             listener,
+            mainPath,
           } = charts;
           return (
-            <VisualCard title={title} desc={desc} key={index}>
+            <VisualCard title={title} desc={desc} mainPath={mainPath}>
               <ChartistGraph
                 className={className}
                 data={data}

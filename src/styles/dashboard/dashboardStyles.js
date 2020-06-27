@@ -7,6 +7,7 @@ export default makeStyles(theme => ({
   },
   card: {
     padding: '0 15px !important',
+    cursor: 'pointer',
   },
   cardInnerDiv: {
     border: '0',
