@@ -19,7 +19,7 @@ const TopMenu = props => {
   };
   let topMenuValue = 0;
   TOP_MENU_ITEMS.forEach((menu, index) => {
-    if (menu.path === location.pathname) {
+    if (location.pathname.includes(menu.path)) {
       topMenuValue = index;
     }
   });

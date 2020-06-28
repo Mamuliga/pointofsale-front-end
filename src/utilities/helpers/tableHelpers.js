@@ -143,7 +143,7 @@ export const getReceiveTableHeaders = [
     disablePadding: false,
     label: 'Item Name',
   },
-  { id: 'price', numeric: false, disablePadding: false, label: 'Price' },
+  { id: 'price', numeric: false, disablePadding: false, label: 'Cost' },
   { id: 'quantity', numeric: false, disablePadding: false, label: 'Quantity' },
   {
     id: 'discount',

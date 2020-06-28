@@ -4,7 +4,7 @@ import {
   SET_AUTH_LOADING,
   LOAD_AUTH_DATA,
   SET_ERROR_NOTIFICATION,
-  SET_LOGIN_ERROR_FALSE
+  SET_LOGIN_ERROR_FALSE,
 } from '../actions/actionTypes';
 import { AUTH_LOCAL_STORAGE } from '../../utilities/constants';
 
@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   loading: false,
   isAuthenticated: null,
   token: null,
-  loginError: null
+  loginError: {},
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -26,10 +26,12 @@ export default (state = INITIAL_STATE, action) => {
       newState.loading = !!action.payload;
       break;
     case SET_ERROR_NOTIFICATION:
-      newState.loginError = 'Invalid Credentials';
-      break;
+      return {
+        ...state,
+        loginError: { type: 'error', message: 'Invalid Credentials' },
+      };
     case SET_LOGIN_ERROR_FALSE:
-      newState.loginError = false;
+      newState.loginError = {};
       break;
     case AUTHENTICATION:
       newState.isAuthenticated = true;
@@ -44,5 +46,5 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
   localStorage.setItem(AUTH_LOCAL_STORAGE, JSON.stringify(newState));
-  return newState;
+  return { ...newState };
 };
