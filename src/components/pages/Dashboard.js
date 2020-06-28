@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ChartistGraph from 'react-chartist';
 import VisualCard from '../uis/DashboardComponents/VisualCard';
 import GridContainer from '../uis/DashboardComponents/Grid/GridContainer';
@@ -6,8 +6,61 @@ import { getDailySalesChartProps } from '../../utilities/helpers/graphHelpers/da
 import { getCompletedTasksChart } from '../../utilities/helpers/graphHelpers/completedSalesChart';
 import { getEmailSubscriptionChart } from '../../utilities/helpers/graphHelpers/emailSubscriptionCHart';
 import { PAGE_ROUTES } from '../../services/routeService';
+import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
+import {
+  getBestSellingItems,
+  getDailySales,
+  getRecievesReportByPaymentType,
+  getRecievesByDateRange,
+  getReportByPaymentType,
+  getLowInventoryReport,
+  getBestProfitGivenCustomers,
+} from '../../http/dashboardApi';
 
 const Dashboard = () => {
+  useEffect(() => {
+    const handleGetBestSelllingItemsResponse = res => {
+      console.log(res);
+      fetchApi(false);
+      // if (Array.isArray(res.data)) {
+      //   const displayCustomerList = res.data.map(
+      //     ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
+      //       return { id, firstName, lastName, phoneNo, gender, bankAccount };
+      //     }
+      //   );
+      //   // setCustomerList(displayCustomerList);
+      // }
+    };
+    const handleBestSellingItemsErr = err => {
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Unable to get best selling items',
+      });
+      fetchApi(false);
+    };
+    fetchApi(true);
+    getBestSellingItems()
+      .then(handleGetBestSelllingItemsResponse)
+      .catch(handleBestSellingItemsErr);
+    getDailySales()
+      .then(handleGetBestSelllingItemsResponse)
+      .catch(handleBestSellingItemsErr);
+    getRecievesReportByPaymentType()
+      .then(handleGetBestSelllingItemsResponse)
+      .catch(handleBestSellingItemsErr);
+    getRecievesByDateRange()
+      .then(handleGetBestSelllingItemsResponse)
+      .catch(handleBestSellingItemsErr);
+    getReportByPaymentType()
+      .then(handleGetBestSelllingItemsResponse)
+      .catch(handleBestSellingItemsErr);
+    getLowInventoryReport()
+      .then(handleGetBestSelllingItemsResponse)
+      .catch(handleBestSellingItemsErr);
+    getBestProfitGivenCustomers()
+      .then(handleGetBestSelllingItemsResponse)
+      .catch(handleBestSellingItemsErr);
+  }, []);
   const dailySalesChart = getDailySalesChartProps();
   const completedTasksChart = getCompletedTasksChart();
   const emailsSubscriptionChart = getEmailSubscriptionChart();
