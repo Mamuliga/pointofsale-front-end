@@ -62,6 +62,18 @@ const Dashboard = props => {
         <ListItemText>Best Customers</ListItemText>
       </ListItem>
       <Divider />
+      <ListItem
+        onClick={e => {
+          push(PAGE_ROUTES.paymentTypeAnalytics);
+        }}
+        button
+      >
+        <ListItemIcon>
+          <MenuBookIcon />
+        </ListItemIcon>
+        <ListItemText>Payment Type Analytics</ListItemText>
+      </ListItem>
+      <Divider />
     </Fragment>
   );
 };

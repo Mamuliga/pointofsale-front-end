@@ -26,6 +26,7 @@ export const PAGE_ROUTES = {
   dailySales: '/dashboard/dailySales',
   bestSellingCustomer: '/dashboard/bestSellingCustomer',
   mostSelledItems: '/dashboard/mostSelledItems',
+  paymentTypeAnalytics: '/dashboard/paymentTypeAnalytics',
 };
 
 const TOP_MENU_HIDE_ROUTES = {

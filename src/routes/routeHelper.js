@@ -17,6 +17,7 @@ import {
 import DailySales from '../components/pages/dashboard/DailySales';
 import BestSellingEmployee from '../components/pages/dashboard/BestSellingCustomer';
 import MostSellingItems from '../components/pages/dashboard/MostSellingItems';
+import PaymentTypeAnalytics from '../components/pages/dashboard/PaymentTypeAnalytics';
 
 export const customerRoutes = [
   {
@@ -118,5 +119,9 @@ export const dashboardRoutes = [
   {
     path: PAGE_ROUTES.mostSelledItems,
     component: MostSellingItems,
+  },
+  {
+    path: PAGE_ROUTES.paymentTypeAnalytics,
+    component: PaymentTypeAnalytics,
   },
 ];

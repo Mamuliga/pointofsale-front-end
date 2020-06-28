@@ -81,7 +81,7 @@ const Dashboard = () => {
     className: 'ct-octave',
     data: { series: [10, 2, 4, 3] },
     type: 'Pie',
-    mainPath: PAGE_ROUTES.mostSelledItems,
+    mainPath: PAGE_ROUTES.paymentTypeAnalytics,
   };
   const lineGraphOptions = {
     title: 'Sample Line Graph2',
