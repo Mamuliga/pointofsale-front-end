@@ -27,6 +27,7 @@ export const PAGE_ROUTES = {
   bestSellingCustomer: '/dashboard/bestSellingCustomer',
   mostSelledItems: '/dashboard/mostSelledItems',
   paymentTypeAnalytics: '/dashboard/paymentTypeAnalytics',
+  lineGraph: '/dashboard/lineGraph',
 };
 
 const TOP_MENU_HIDE_ROUTES = {

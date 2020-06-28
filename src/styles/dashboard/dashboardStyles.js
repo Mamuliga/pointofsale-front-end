@@ -4,6 +4,7 @@ export default makeStyles(theme => ({
   cardOuterDiv: {
     width: 'unset',
     margin: '0 -15px !important',
+    color: 'black',
   },
   card: {
     padding: '0 15px !important',

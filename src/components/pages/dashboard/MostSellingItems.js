@@ -1,8 +1,14 @@
 import React from 'react';
 import { getCompletedTasksChart } from '../../../utilities/helpers/graphHelpers/completedSalesChart';
+import { useHistory } from 'react-router-dom';
 import ChartistGraph from 'react-chartist';
+import { PAGE_ROUTES } from '../../../services/routeService';
 
 const MostSellingItems = () => {
+  const { push } = useHistory();
+  const onClick = () => {
+    push(PAGE_ROUTES.mostSelledItems);
+  };
   const completedTasksChart = getCompletedTasksChart();
   const completedTasksChartOptions = {
     title: 'Complted Tasks Chart Title',
@@ -22,8 +28,7 @@ const MostSellingItems = () => {
     listener,
   } = completedTasksChartOptions;
   return (
-    <div>
-      <h1>Most Selling Items</h1>
+    <div onClick={onClick}>
       <ChartistGraph
         className={className}
         data={data}

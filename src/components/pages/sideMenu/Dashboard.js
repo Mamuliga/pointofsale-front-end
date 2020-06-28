@@ -74,6 +74,18 @@ const Dashboard = props => {
         <ListItemText>Payment Type Analytics</ListItemText>
       </ListItem>
       <Divider />
+      <ListItem
+        onClick={e => {
+          push(PAGE_ROUTES.lineGraph);
+        }}
+        button
+      >
+        <ListItemIcon>
+          <MenuBookIcon />
+        </ListItemIcon>
+        <ListItemText>Line Graph</ListItemText>
+      </ListItem>
+      <Divider />
     </Fragment>
   );
 };

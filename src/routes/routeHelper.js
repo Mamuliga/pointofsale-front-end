@@ -18,6 +18,7 @@ import DailySales from '../components/pages/dashboard/DailySales';
 import BestSellingEmployee from '../components/pages/dashboard/BestSellingCustomer';
 import MostSellingItems from '../components/pages/dashboard/MostSellingItems';
 import PaymentTypeAnalytics from '../components/pages/dashboard/PaymentTypeAnalytics';
+import LineGraph from '../components/pages/dashboard/LineGraph';
 
 export const customerRoutes = [
   {
@@ -123,5 +124,9 @@ export const dashboardRoutes = [
   {
     path: PAGE_ROUTES.paymentTypeAnalytics,
     component: PaymentTypeAnalytics,
+  },
+  {
+    path: PAGE_ROUTES.lineGraph,
+    component: LineGraph,
   },
 ];

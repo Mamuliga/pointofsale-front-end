@@ -1,17 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import dashboardStyles from '../../../styles/dashboard/dashboardStyles';
 import GridItem from './Grid/GridItem';
 
-const VisualCard = ({ children, title, desc, mainPath }) => {
+const VisualCard = ({ children, title, desc }) => {
   const classes = dashboardStyles();
-  const { push } = useHistory();
-  const onClick = () => {
-    push(mainPath);
-  };
-
   return (
-    <GridItem xs={12} sm={12} md={4} onClick={onClick}>
+    <GridItem xs={12} sm={12} md={4}>
       <div className={classes.card}>
         <div className={classes.cardInnerDiv}>
           <div className={classes.cardShading}>

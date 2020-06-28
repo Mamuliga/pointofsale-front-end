@@ -1,8 +1,13 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
+import { useHistory } from 'react-router-dom';
 import { PAGE_ROUTES } from '../../../services/routeService';
 
 const PaymentTypeAnalytics = () => {
+  const { push } = useHistory();
+  const onClick = () => {
+    push(PAGE_ROUTES.paymentTypeAnalytics);
+  };
   const paymetTypeAnalyticOptions = {
     title: 'Pie chart',
     desc: 'Pie chart description',
@@ -25,8 +30,7 @@ const PaymentTypeAnalytics = () => {
     listener,
   } = paymetTypeAnalyticOptions;
   return (
-    <div>
-      <h1>Payment Type Analytics</h1>
+    <div onClick={onClick}>
       <ChartistGraph
         className={className}
         data={data}
