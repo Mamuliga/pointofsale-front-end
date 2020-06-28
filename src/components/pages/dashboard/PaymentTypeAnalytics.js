@@ -7,7 +7,12 @@ const PaymentTypeAnalytics = () => {
     title: 'Pie chart',
     desc: 'Pie chart description',
     className: 'ct-octave',
-    data: { series: [10, 2, 4, 3] },
+    // TODO
+    // Set the correct paymet type
+    data: {
+      series: [10, 2, 4, 3],
+      labels: ['Cash', 'E-Cards', 'Credit sales', 'Cheques'],
+    },
     type: 'Pie',
     mainPath: PAGE_ROUTES.mostSelledItems,
   };
