@@ -16,6 +16,7 @@ import DailySales from './dashboard/DailySales';
 import MostSellingItems from './dashboard/MostSellingItems';
 import PaymentTypeAnalytics from './dashboard/PaymentTypeAnalytics';
 import LineGraph from './dashboard/LineGraph';
+import LowInventory from './dashboard/LowInventory';
 
 const Dashboard = () => {
   useEffect(() => {
@@ -87,6 +88,11 @@ const Dashboard = () => {
       component: <LineGraph />,
       title: 'Line Graph',
       desc: 'Desc for Line Graph',
+    },
+    {
+      component: <LowInventory />,
+      title: 'Low Inventory',
+      desc: 'Desc for Low Inventory',
     },
   ];
   return (

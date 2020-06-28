@@ -86,6 +86,18 @@ const Dashboard = props => {
         <ListItemText>Line Graph</ListItemText>
       </ListItem>
       <Divider />
+      <ListItem
+        onClick={e => {
+          push(PAGE_ROUTES.lowInventory);
+        }}
+        button
+      >
+        <ListItemIcon>
+          <MenuBookIcon />
+        </ListItemIcon>
+        <ListItemText>Low Inventory</ListItemText>
+      </ListItem>
+      <Divider />
     </Fragment>
   );
 };
