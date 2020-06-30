@@ -8,7 +8,7 @@ import TopMenu from './components/uis/TopMenu';
 import {
   showTopMenuForRoute,
   showSideMenuForRoute,
-  PAGE_ROUTES,
+  PAGE_ROUTES
 } from './services/routeService';
 import SideMenuRoutes from './routes/SideMenuRoutes';
 import { getUserList } from './http/usersApi';
@@ -28,11 +28,7 @@ function App(props) {
   };
   useEffect(loadPersistentAuthData, []);
   let sideBar = classes.mainRouteViewLeftSidebar;
-  if (
-    pathname === PAGE_ROUTES.sales ||
-    pathname === PAGE_ROUTES.receives ||
-    pathname === PAGE_ROUTES.creditbooks
-  ) {
+  if (pathname === PAGE_ROUTES.sales || pathname === PAGE_ROUTES.receives) {
     sideBar = classes.mainRouteViewRightSidebar;
   }
 
@@ -53,12 +49,12 @@ function App(props) {
 }
 
 const mapStateToProps = ({ global }) => ({
-  ...global,
+  ...global
 });
 
 const mapDispatchToProps = {
   loadAuthData: setPersistentData,
-  onLogoutPress: logout,
+  onLogoutPress: logout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

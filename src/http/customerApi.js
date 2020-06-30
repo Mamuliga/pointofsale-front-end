@@ -19,7 +19,3 @@ export async function createCustomer(body) {
 export async function deleteCustomer(id) {
   return await http.deleteById('./customers', id);
 }
-
-export async function searchCustomer(id) {
-  return await http.get(`/customers/search/${id}`, id);
-}

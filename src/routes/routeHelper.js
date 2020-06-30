@@ -13,7 +13,6 @@ import {
   Sales,
   Receives,
 } from '../components/pages';
-import Creditbooks from '../components/pages/Creditbooks';
 
 export const customerRoutes = [
   {
@@ -86,12 +85,6 @@ export const cashbookRoutes = [
   },
 ];
 
-export const creditbookRoutes = [
-  {
-    path: PAGE_ROUTES.creditbooks,
-    component: Creditbooks,
-  },
-];
 export const saleRoutes = [
   {
     path: PAGE_ROUTES.sales,
