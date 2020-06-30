@@ -5,6 +5,59 @@ const getEmptyColumnForEditOrDelete = id => ({
   label: '',
 });
 
+export const getSettingsTableHeaders = [
+  {
+    id: 'id',
+    numeric: false,
+    disablePadding: false,
+    label: 'Settings Id',
+  },
+  {
+    id: 'logo',
+    numeric: false,
+    disablePadding: false,
+    label: 'Company Logo',
+  },
+  {
+    id: 'companyName',
+    numeric: false,
+    disablePadding: false,
+    label: 'Company Name',
+  },
+  {
+    id: 'address',
+    numeric: false,
+    disablePadding: false,
+    label: 'Address',
+  },
+  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
+  {
+    id: 'phoneNo',
+    numeric: false,
+    disablePadding: false,
+    label: 'Phone Number',
+  },
+  {
+    id: 'description',
+    numeric: false,
+    disablePadding: false,
+    label: 'Description',
+  },
+  {
+    id: 'openingTime',
+    numeric: false,
+    disablePadding: false,
+    label: 'Opening Time',
+  },
+  {
+    id: 'closingTime',
+    numeric: false,
+    disablePadding: false,
+    label: 'Closing Time',
+  },
+  getEmptyColumnForEditOrDelete('edit'),
+];
+
 export const getCustomerTableHeaders = [
   {
     id: 'id',

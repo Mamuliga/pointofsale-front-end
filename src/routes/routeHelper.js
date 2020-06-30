@@ -12,6 +12,8 @@ import {
   FormCashbook,
   Sales,
   Receives,
+  Settings,
+  FormSettings,
 } from '../components/pages';
 
 export const customerRoutes = [
@@ -96,5 +98,20 @@ export const receiveRoutes = [
   {
     path: PAGE_ROUTES.receives,
     component: Receives,
+  },
+];
+
+export const settingsRoutes = [
+  {
+    path: PAGE_ROUTES.settings,
+    component: Settings,
+  },
+  {
+    path: PAGE_ROUTES.newSettings,
+    component: FormSettings,
+  },
+  {
+    path: PAGE_ROUTES.editSettings,
+    component: FormSettings,
   },
 ];

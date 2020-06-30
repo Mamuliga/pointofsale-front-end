@@ -7,10 +7,13 @@ export const PAGE_ROUTES = {
   home: '/dashboard',
   login: '/login',
   customers: '/customers',
+  settings: '/settings',
   cashbooks: '/cashbooks',
   newCustomer: '/customers/new',
+  newSettings: '/settings/new',
   newCashbook: '/cashbooks/new',
   editCustomer: '/customers/edit/:id',
+  editSettings: '/settings/edit/:id',
   editCashbook: '/cashbooks/edit/:id',
   employees: '/employees',
   newEmployee: '/employees/new',
@@ -82,12 +85,18 @@ export const TOP_MENU_ITEMS = [
     title: 'Cashbooks',
     icon: AttachMoneyIcon,
   },
+  {
+    key: 'settings',
+    path: PAGE_ROUTES.settings,
+    title: 'Settings',
+    icon: AttachMoneyIcon,
+  },
 ];
 
-export const showTopMenuForRoute = (route) => {
+export const showTopMenuForRoute = route => {
   return !TOP_MENU_HIDE_ROUTES[route];
 };
 
-export const showSideMenuForRoute = (route) => {
+export const showSideMenuForRoute = route => {
   return !SIDE_MENU_HIDE_ROUTES[route];
 };
