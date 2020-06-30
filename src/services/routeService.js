@@ -8,6 +8,7 @@ export const PAGE_ROUTES = {
   login: '/login',
   customers: '/customers',
   cashbooks: '/cashbooks',
+  creditbooks: '/creditbooks',
   newCustomer: '/customers/new',
   newCashbook: '/cashbooks/new',
   editCustomer: '/customers/edit/:id',
@@ -82,12 +83,18 @@ export const TOP_MENU_ITEMS = [
     title: 'Cashbooks',
     icon: AttachMoneyIcon,
   },
+  {
+    key: 'creditbooks',
+    path: PAGE_ROUTES.creditbooks,
+    title: 'Creditbooks',
+    icon: AttachMoneyIcon,
+  },
 ];
 
-export const showTopMenuForRoute = (route) => {
+export const showTopMenuForRoute = route => {
   return !TOP_MENU_HIDE_ROUTES[route];
 };
 
-export const showSideMenuForRoute = (route) => {
+export const showSideMenuForRoute = route => {
   return !SIDE_MENU_HIDE_ROUTES[route];
 };

@@ -10,19 +10,26 @@ import {
   Dashboard,
   Items,
   Cashbooks,
+  Creditbooks,
 } from '../../components/pages/sideMenu';
 import ProtectedRoute from '../ProtectedRoute';
 import { PAGE_ROUTES } from '../../services/routeService';
 import useStyles from '../../styles/useStyles';
 import FooterLabel from './FooterLabel';
 
-const SideMenuRoutes = (props) => {
+const SideMenuRoutes = props => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const isSalesPage = pathname === PAGE_ROUTES.sales;
   const isReceivesPage = pathname === PAGE_ROUTES.receives;
-  const getSidePane = (route) => {
-    if (route === PAGE_ROUTES.sales || route === PAGE_ROUTES.receives) {
+  const isCreditbooksPage = pathname === PAGE_ROUTES.creditbooks;
+
+  const getSidePane = route => {
+    if (
+      route === PAGE_ROUTES.sales ||
+      route === PAGE_ROUTES.receives ||
+      route === PAGE_ROUTES.creditbooks
+    ) {
       return 'right';
     }
     return 'left';
@@ -36,7 +43,7 @@ const SideMenuRoutes = (props) => {
         paper:
           classes[
             `${
-              isSalesPage || isReceivesPage
+              isSalesPage || isReceivesPage || isCreditbooksPage
                 ? 'drawerPaperLeft'
                 : 'drawerPaperRight'
             }`
@@ -66,14 +73,19 @@ const SideMenuRoutes = (props) => {
               path={PAGE_ROUTES.cashbooks}
               component={Cashbooks}
             />
-
+            <ProtectedRoute
+              path={PAGE_ROUTES.creditbooks}
+              component={Creditbooks}
+            />
             <ProtectedRoute path={PAGE_ROUTES.items} component={Items} />
 
             <ProtectedRoute path={PAGE_ROUTES.home} component={Dashboard} />
             <ProtectedRoute component={Dashboard} authRequired />
           </Switch>
         </List>
-        <FooterLabel hidden={isSalesPage || isReceivesPage} />
+        <FooterLabel
+          hidden={isSalesPage || isReceivesPage || isCreditbooksPage}
+        />
       </div>
     </Drawer>
   );
