@@ -46,7 +46,8 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const handleSaleSubmit = e => {
     e.preventDefault();
     const newSale = {
-      customerId: 1,
+      itemStatId: cartItems.itemStatId,
+      customerId: 2,
       total: cartTotal,
       totalDiscount: 0,
       paymentType: 'cash',
