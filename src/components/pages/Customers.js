@@ -88,12 +88,12 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
                 ...params.InputProps,
                 startAdornment: <SearchIcon />,
                 endAdornment: (
-                  <React.Fragment>
+                  <Fragment>
                     {fetchCustomers && (
                       <CircularProgress color='inherit' size={20} />
                     )}
                     {params.InputProps.endAdornment}
-                  </React.Fragment>
+                  </Fragment>
                 ),
               }}
             />
@@ -104,7 +104,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
   );
 
   return (
-    <Fragment>
+    <div className={classes.customerContainer}>
       {searchComponent}
       <TableBuilder
         tableData={customerList}
@@ -112,7 +112,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
         handleEdit={handleEdit}
         title={'Customers'}
       />
-    </Fragment>
+    </div>
   );
 };
 

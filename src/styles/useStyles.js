@@ -46,6 +46,9 @@ export default makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  customerContainer: {
+    marginTop: '13%',
+  },
   mainRouteViewLeftSidebar: {
     maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH}px)`,
     marginLeft: LEFT_SIDE_BAR_WIDTH,
