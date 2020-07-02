@@ -34,9 +34,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
     };
     fetchApi(true);
-    getCustomerList()
-      .then(handleGetCustomerResp)
-      .catch(handleGetCustomerErr);
+    getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = customer => {
@@ -62,9 +60,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value)
-      .then(searchSuccess)
-      .catch(searchErr);
+    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
   };
 
   const searchComponent = (
@@ -80,7 +76,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
             <TextField
               autoFocus
               {...params}
-              label='Enter a Ccustomer name or customer Id'
+              label='Enter a Customer name or Id'
               noOptionsText={'No customers found'}
               variant='outlined'
               onChange={handleSearchChange}
