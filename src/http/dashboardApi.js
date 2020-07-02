@@ -31,3 +31,7 @@ export async function getRecievesReportByPaymentType() {
 export async function getBestProfitGivenCustomers() {
   return await http.get('/report/best-profit-given-customers');
 }
+
+export async function getTotalCountOfEntries() {
+  return await http.get('/report//total-count-of-entries');
+}

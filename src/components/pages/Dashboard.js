@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import VisualCard from '../uis/DashboardComponents/VisualCard';
 import GridContainer from '../uis/DashboardComponents/Grid/GridContainer';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
@@ -10,6 +10,7 @@ import {
   getReportByPaymentType,
   getLowInventoryReport,
   getBestProfitGivenCustomers,
+  getTotalCountOfEntries,
 } from '../../http/dashboardApi';
 import BestSellingCustomer from './dashboard/BestSellingCustomer';
 import DailySales from './dashboard/DailySales';
@@ -17,8 +18,10 @@ import MostSellingItems from './dashboard/MostSellingItems';
 import PaymentTypeAnalytics from './dashboard/PaymentTypeAnalytics';
 import LineGraph from './dashboard/LineGraph';
 import LowInventory from './dashboard/LowInventory';
+import CountCard from '../uis/DashboardComponents/CountCard';
 
 const Dashboard = () => {
+  const [entryCountData, setEntryCountData] = useState({});
   useEffect(() => {
     const handleGetBestSelllingItemsResponse = res => {
       console.log(res);
@@ -38,6 +41,25 @@ const Dashboard = () => {
         message: 'Unable to get best selling items',
       });
       fetchApi(false);
+    };
+    const handleTotalCountOfEntries = response => {
+      if (response.data) {
+        const {
+          customersCount: { CustomersCount },
+          salesCount: { SalesCount },
+          suppliersCount: { SuppliersCount },
+          itemsCount: { ItemsCount },
+          employeesCount: { EmployeesCount },
+        } = response.data;
+        setEntryCountData({
+          CustomersCount,
+          SalesCount,
+          SuppliersCount,
+          ItemsCount,
+          EmployeesCount,
+        });
+        console.log(response.data);
+      }
     };
     fetchApi(true);
     getBestSellingItems()
@@ -61,7 +83,12 @@ const Dashboard = () => {
     getBestProfitGivenCustomers()
       .then(handleGetBestSelllingItemsResponse)
       .catch(handleBestSellingItemsErr);
+    getTotalCountOfEntries()
+      .then(handleTotalCountOfEntries)
+      .catch(handleBestSellingItemsErr);
   }, []);
+
+  const countSummary = [];
 
   const dataVisualizationChartPropsArray = [
     {
@@ -95,8 +122,23 @@ const Dashboard = () => {
       desc: 'Desc for Low Inventory',
     },
   ];
+  const {
+    CustomersCount,
+    SalesCount,
+    SuppliersCount,
+    ItemsCount,
+    EmployeesCount,
+  } = entryCountData;
   return (
     <div>
+      <GridContainer>
+        <CountCard count={SalesCount} description={'TOTAL SALES'} />
+        <CountCard count={CustomersCount} description={'TOTAL CUSTOMERS'} />
+        <CountCard count={SuppliersCount} description={'TOTAL SUPPLIERS'} />
+        <CountCard count={EmployeesCount} description={'TOTAL EMPLOYEES'} />
+        <CountCard count={ItemsCount} description={'TOTAL ITEMS'} />
+      </GridContainer>
+      <hr />
       <GridContainer>
         {dataVisualizationChartPropsArray.map(charts => {
           const { title, desc, component } = charts;
