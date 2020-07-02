@@ -95,6 +95,7 @@ export default makeStyles(theme => ({
     display: 'flex',
     width: '100%',
     justifyContent: 'space-between',
+    marginTop: '10px',
   },
   searchIcon: {
     height: '100%',
