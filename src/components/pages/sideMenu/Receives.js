@@ -13,11 +13,13 @@ import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { searchSupplier } from '../../../http/supplierApi';
 import { CircularProgress } from '@material-ui/core';
+import PaymentDropdown from '../../uis/PaymentDropdown';
 const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
   const [payedAmount, setPayedAmount] = useState(parseFloat(0).toFixed(2));
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
+  const [paymentType, setPaymentType] = useState('cash');
 
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
@@ -57,7 +59,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       supplierId: 7,
       total: cartTotal,
       totalDiscount: 0,
-      paymentType: 'cash',
+      paymentType,
       balance,
       payedAmount,
       itemReceives: cartItems,
@@ -90,6 +92,10 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
 
   const handleSearchSubmit = () => {};
 
+  const handlePaymentMethod = e => {
+    setPaymentType(e.target.value);
+  };
+
   const handleSearchChange = e => {
     const searchSuccess = res => {
       setFetchCustomers(false);
@@ -104,7 +110,9 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchSupplier(e.target.value).then(searchSuccess).catch(searchErr);
+    searchSupplier(e.target.value)
+      .then(searchSuccess)
+      .catch(searchErr);
   };
 
   const searchComponent = (
@@ -147,7 +155,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     <Fragment>
       <form onSubmit={handleReceiveSubmit}>
         {searchComponent}
-        <div className={classes.receivePageBottomInputs}>
+        <div className={classes.sideMenuPageBottomInputs}>
           <div className={classes.total}>
             <TextField
               id='receive-total-inputs'
@@ -158,6 +166,10 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
               }}
             />
           </div>
+          <PaymentDropdown
+            paymentType={paymentType}
+            handlePaymentMethod={handlePaymentMethod}
+          />
           <div className={classes.cash}>
             <TextField
               id='receive-cash-inputs'

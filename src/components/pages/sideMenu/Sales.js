@@ -13,12 +13,14 @@ import { setFetchApiInfo, fetchApi } from '../../../store/actions/globalAction';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { searchCustomer } from '../../../http/customerApi';
+import PaymentDropdown from '../../uis/PaymentDropdown';
 
 const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
   const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
+  const [paymentType, setPaymentType] = useState('cash');
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
       setRevdAmount(e.target.value);
@@ -55,7 +57,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       customerId: 1,
       total: cartTotal,
       totalDiscount: 0,
-      paymentType: 'cash',
+      paymentType,
       balance,
       revdAmount,
       itemSales: cartItems,
@@ -88,6 +90,10 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
 
   const handleSearchSubmit = () => {};
 
+  const handlePaymentMethod = e => {
+    setPaymentType(e.target.value);
+  };
+
   const handleSearchChange = e => {
     const searchSuccess = res => {
       setFetchCustomers(false);
@@ -102,7 +108,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
+    searchCustomer(e.target.value)
+      .then(searchSuccess)
+      .catch(searchErr);
   };
 
   const searchComponent = (
@@ -144,7 +152,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     <Fragment>
       <form onSubmit={handleSaleSubmit}>
         {searchComponent}
-        <div className={classes.salesPageBottomInputs}>
+        <div className={classes.sideMenuPageBottomInputs}>
           <div className={classes.total}>
             <TextField
               id='sale-total-inputs'
@@ -155,6 +163,10 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
               }}
             />
           </div>
+          <PaymentDropdown
+            paymentType={paymentType}
+            handlePaymentMethod={handlePaymentMethod}
+          />
           <div className={classes.cash}>
             <TextField
               id='sale-cash-inputs'

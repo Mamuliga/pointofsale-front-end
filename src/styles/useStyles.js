@@ -140,7 +140,7 @@ export default makeStyles(theme => ({
     position: 'absolute',
     top: '400px',
   },
-  salesPageBottomInputs: {
+  sideMenuPageBottomInputs: {
     position: 'fixed',
     bottom: 0,
   },
@@ -268,5 +268,9 @@ export default makeStyles(theme => ({
   },
   toolTipSecondRow: {
     justifyContent: 'space-around',
+  },
+  paymentdropDown: {
+    width: '100%',
+    margin: '10px 0',
   },
 }));
