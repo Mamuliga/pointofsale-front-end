@@ -110,9 +110,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchSupplier(e.target.value)
-      .then(searchSuccess)
-      .catch(searchErr);
+    searchSupplier(e.target.value).then(searchSuccess).catch(searchErr);
   };
 
   const searchComponent = (
@@ -173,7 +171,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
           <div className={classes.cash}>
             <TextField
               id='receive-cash-inputs'
-              label='Cash'
+              label='Amount'
               value={payedAmount}
               onChange={handleCashAmountChange}
               onFocus={handleFocus}
