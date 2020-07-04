@@ -18,6 +18,7 @@ import PaymentDropdown from '../../uis/PaymentDropdown';
 const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
   const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
+  const [customerId, setCustomerId] = useState(1);
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
   const [paymentType, setPaymentType] = useState('cash');
@@ -55,7 +56,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     e.preventDefault();
     const newSale = {
       itemStatId: cartItems.itemStatId,
-      customerId: 2,
+      customerId,
       total: cartTotal,
       totalDiscount: 0,
       paymentType,
@@ -89,7 +90,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       .catch(handlereateSaleError);
   };
 
-  const handleSearchSubmit = () => {};
+  const handleSearchSubmit = (_e, value) => {
+    setCustomerId(value.id);
+  };
 
   const handlePaymentMethod = e => {
     setPaymentType(e.target.value);
