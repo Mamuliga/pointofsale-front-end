@@ -16,6 +16,7 @@ import { CircularProgress } from '@material-ui/core';
 import PaymentDropdown from '../../uis/PaymentDropdown';
 const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
+  const [supplierId, setsupplierId] = useState(1);
   const [payedAmount, setPayedAmount] = useState(parseFloat(0).toFixed(2));
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
@@ -39,7 +40,6 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const handleOpenConfirmation = () => {
     setOpenConfirmation(true);
   };
-
   const handleCloseConfiramtion = () => {
     setOpenConfirmation(false);
   };
@@ -56,7 +56,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const handleReceiveSubmit = e => {
     e.preventDefault();
     const newReceive = {
-      supplierId: 7,
+      supplierId,
       total: cartTotal,
       totalDiscount: 0,
       paymentType,
@@ -90,7 +90,9 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       .catch(handlereateReceiveError);
   };
 
-  const handleSearchSubmit = () => {};
+  const handleSearchSubmit = (_e, value) => {
+    setsupplierId(value.id);
+  };
 
   const handlePaymentMethod = e => {
     setPaymentType(e.target.value);
