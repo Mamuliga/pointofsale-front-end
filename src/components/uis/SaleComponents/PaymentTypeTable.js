@@ -10,33 +10,19 @@ import {
   Button,
 } from '@material-ui/core';
 
-const PaymentTypeTable = () => {
+const PaymentTypeTable = ({ paymentMethod, setPaymentMethod }) => {
   const classes = useStyles();
-  const [paymentType, setPaymentType] = useState([
-    {
-      Type: 'cash',
-      Amount: '1000',
-    },
-    {
-      Type: 'due',
-      Amount: '2000',
-    },
-    {
-      Type: 'cheque',
-      Amount: '4000',
-    },
-  ]);
 
   const handleDelete = i => {
     // alert('delet');
     console.log('ewf');
-    const deletePaymentType = () => {
-      paymentType.splice(i, 1);
-      console.log(paymentType);
+    const deletePaymentMethod = () => {
+      paymentMethod.splice(i, 1);
+      console.log(paymentMethod);
 
-      setPaymentType([...paymentType]);
+      setPaymentMethod([...paymentMethod]);
     };
-    return deletePaymentType;
+    return deletePaymentMethod;
   };
   return (
     <Paper className={classes.paymentTypeTable}>
@@ -49,7 +35,7 @@ const PaymentTypeTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {paymentType.map((row, i) => {
+          {paymentMethod.map((row, i) => {
             return (
               <TableRow key={`row-${i}`}>
                 <TableCell>
@@ -57,8 +43,8 @@ const PaymentTypeTable = () => {
                     Delete
                   </Button>
                 </TableCell>
-                <TableCell>{row.Type}</TableCell>
-                <TableCell>{row.Amount}</TableCell>
+                <TableCell>{row.type}</TableCell>
+                <TableCell>{row.amount}</TableCell>
               </TableRow>
             );
           })}

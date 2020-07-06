@@ -23,6 +23,12 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
   const [paymentType, setPaymentType] = useState('cash');
+  const [paymentMethod, setPaymentMethod] = useState([
+    {
+      type: 'cheque',
+      amount: '4000',
+    },
+  ]);
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
       setRevdAmount(e.target.value);
@@ -116,6 +122,8 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
   };
 
+  const handleAddPayment = () => {};
+
   const searchComponent = (
     <div className={classes.inputsTop}>
       <div className={classes.searchTab}>
@@ -172,7 +180,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
           />
           <div className={classes.cash}>
             <TextField
-              id='sale-cash-inputs'
+              id='payment-method-input'
               label='Amount'
               value={revdAmount}
               onChange={handleCashAmountChange}
@@ -181,7 +189,31 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
             />
           </div>
           <div>
-            <PaymentTypeTable />
+            <Button
+              className={classes.button}
+              variant='contained'
+              color='primary'
+              onClick={handleAddPayment}
+              id='addPayment'
+            >
+              Add Payment
+            </Button>
+          </div>
+          <div>
+            <PaymentTypeTable
+              paymentMethod={paymentMethod}
+              setPaymentMethod={setPaymentMethod}
+            />
+          </div>
+          <div className={classes.cash}>
+            <TextField
+              id='sale-cash-inputs'
+              label='Total Received Amount'
+              value={revdAmount}
+              onChange={handleCashAmountChange}
+              onFocus={handleFocus}
+              autoComplete='off'
+            />
           </div>
           <div className={classes.balance}>
             <TextField
@@ -215,9 +247,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
             >
               Discard Sale
             </Button>
-            <div className={classes.barcode}>
+            {/* <div className={classes.barcode}>
               <Barcode value='0000000000001' />
-            </div>
+            </div> */}
           </div>
         </div>
       </form>
