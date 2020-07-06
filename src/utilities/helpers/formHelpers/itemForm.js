@@ -42,4 +42,10 @@ export const getItemFormData = [
     rows: 4,
     required: false,
   },
+  {
+    id: 'customSwitch',
+    type: 'switch',
+    label: 'Expiry Date Validation',
+    name: 'switch',
+  },
 ];

@@ -9,6 +9,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import DatePicker from './FormComponents/DatePicker';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import DropDown from './FormComponents/DropDown';
+import CustomSwitch from './FormComponents/CustomSwitch';
 import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
 import {
@@ -123,6 +124,14 @@ const FormBuilder = ({
                       entry={entry}
                       key={entry.label}
                       getValue={getValue}
+                    />
+                  );
+                case 'switch':
+                  return (
+                    <CustomSwitch
+                      entry={entry}
+                      getValue={getValue}
+                      key={entry.name}
                     />
                   );
                 default:

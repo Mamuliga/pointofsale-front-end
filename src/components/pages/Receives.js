@@ -17,7 +17,12 @@ import SaleToolTip from '../uis/SaleComponents/SaleToolTip.js';
 
 const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   console.log(cartItems);
-  const editableRowIndexes = ['receivePrice', 'quantity', 'discount'];
+  const editableRowIndexes = [
+    'receivePrice',
+    'quantity',
+    'discount',
+    'expiryDate',
+  ];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
