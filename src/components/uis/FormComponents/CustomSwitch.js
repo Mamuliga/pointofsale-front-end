@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomSwitch = ({ entry, getValue }) => {
-  const { value, name, label } = entry;
-  const [switched, setSwitched] = React.useState(value);
+  const { name, label, checked } = entry;
+  const [switched, setSwitched] = React.useState(checked);
   const classes = useStyles();
   const handleChange = e => {
     setSwitched(e.target.checked);
@@ -48,6 +48,7 @@ const CustomSwitch = ({ entry, getValue }) => {
     <Grid item xs={6}>
       <FormLabel component='legend'>{label}</FormLabel>
       <Switch
+        defaultChecked={false}
         color='primary'
         classes={classes}
         checked={switched}

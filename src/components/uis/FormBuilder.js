@@ -29,10 +29,10 @@ const FormBuilder = ({
   const [newActor, setNewActor] = useState({ ...actor });
   const [dataFields, setDataFields] = useState();
   const [openConfirm, setOpenConfirmation] = React.useState(false);
-  const getValue = ({ target: { value, name } }) => {
+  const getValue = ({ target: { value, name, checked } }) => {
     console.log(name);
-    setNewActor({ ...newActor, [name]: value });
-    console.log({ ...newActor, [name]: value });
+    setNewActor({ ...newActor, [name]: value || checked });
+    console.log({ ...newActor, [name]: value || checked });
   };
 
   const handleSubmit = e => {
