@@ -274,4 +274,9 @@ export default makeStyles(theme => ({
     width: '100%',
     margin: '10px 0',
   },
+  paymentTypeTable: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
 }));

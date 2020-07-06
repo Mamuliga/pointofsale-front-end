@@ -14,6 +14,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { searchCustomer } from '../../../http/customerApi';
 import PaymentDropdown from '../../uis/PaymentDropdown';
+import PaymentTypeTable from '../../uis/SaleComponents/PaymentTypeTable';
 
 const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
@@ -178,6 +179,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
               onFocus={handleFocus}
               autoComplete='off'
             />
+          </div>
+          <div>
+            <PaymentTypeTable />
           </div>
           <div className={classes.balance}>
             <TextField
