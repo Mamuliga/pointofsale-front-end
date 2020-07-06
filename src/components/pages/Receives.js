@@ -8,12 +8,13 @@ import TextField from '@material-ui/core/TextField';
 import TableRow from '@material-ui/core/TableRow';
 import { TableCell, CircularProgress } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { itemSearch } from '../../http/itemApi.js';
+import { itemSearchForReceives } from '../../http/itemApi.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiInfo } from '../../store/actions/globalAction.js';
 import { setCartItems } from '../../store/actions/receiveAction.js';
 import { getItemTotal } from '../../utilities/helpers/receiveHelpers.js';
-import SaleToolTip from '../uis/SaleComponents/SaleToolTip.js';
+import DatePicker from '../uis/FormComponents/DatePicker.js';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   console.log(cartItems);
@@ -25,12 +26,12 @@ const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   ];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [highlightedOption, setHighlightedOption] = useState();
   const [fetchItems, setFetchItems] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
+      console.log(resp.data);
       setFetchItems(false);
       if (Array.isArray(resp.data)) {
         setSuggestions(resp.data);
@@ -43,22 +44,20 @@ const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
       console.log(err);
     };
     setFetchItems(true);
-    itemSearch(searchWord)
+    itemSearchForReceives(searchWord)
       .then(handleItemSearchSuccuess)
       .catch(handleItemSearchErr);
   }, [searchWord, setFetchApiInfo]);
   const handleFocus = event => event.target.select();
   const handleSearchSubmit = (_e, value) => {
-    setHighlightedOption();
     if (value) {
-      const {
-        item: { id, itemName },
-      } = value;
+      const { id, itemName, isExpireDateEnabled } = value;
       cartItems.push({
         id,
         itemName,
         receivePrice: parseFloat(0).toFixed(2),
         quantity: 1,
+        expiryDate: isExpireDateEnabled,
         discount: parseFloat(0).toFixed(2),
         total: parseFloat(0).toFixed(2),
       });
@@ -95,8 +94,44 @@ const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
                   setCartItems([...cartItems]);
                 }
               };
-
+              const handleExpDateChange = expDate => {
+                row[cell] = expDate;
+                setCartItems([...cartItems]);
+              };
+              console.log(cell);
               console.log(row[cell]);
+              if (cell === 'expiryDate') {
+                console.log(row[cell]);
+                if (row[cell]) {
+                  return (
+                    <DatePicker
+                      entry={{
+                        id: 'id',
+                        name: 'dateChangeTo',
+                        label: 'To:',
+                        value: 'sad',
+                      }}
+                      handleDatePickerChange={handleExpDateChange}
+                      selectedDate={row[cell]}
+                    />
+                  );
+                } else {
+                  return (
+                    <TableCell key={cell}>
+                      <TextField
+                        id={cell}
+                        name={cell}
+                        // onFocus={handleFocus}
+                        // autoFocus={cell === 'receivePrice'}
+                        value={'N/A'}
+                        disabled
+                        // onChange={handleTextInputChange}
+                        // onKeyDown={handleKeyDown(cell)}
+                      />
+                    </TableCell>
+                  );
+                }
+              }
               return (
                 <TableCell key={cell}>
                   <TextField
@@ -127,26 +162,10 @@ const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
       <div className={classes.searchTab}>
         <Autocomplete
           id='receive-item-search'
-          renderOption={option => {
-            if (option.detail) {
-              return <SaleToolTip option={option} />;
-            }
-            return <div>{`${option.item.id}-${option.item.itemName}`}</div>;
-          }}
-          getOptionLabel={option => `${option.item.id}-${option.item.itemName}`}
-          options={
-            highlightedOption
-              ? [...suggestions, { ...highlightedOption, detail: true }]
-              : suggestions
-          }
+          getOptionLabel={option => option.itemName}
+          options={suggestions}
           onChange={handleSearchSubmit}
-          onHighlightChange={(_event, selectedOpt) => {
-            setHighlightedOption(selectedOpt);
-          }}
-          getOptionDisabled={opt => opt.detail}
-          disabledItemsFocusable
           loading={fetchItems}
-          onFocus={handleFocus}
           renderInput={params => (
             <TextField
               autoFocus

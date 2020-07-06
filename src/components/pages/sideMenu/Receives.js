@@ -9,10 +9,19 @@ import { createReceive } from '../../../http/receiveApi';
 import ConfirmationPopup from '../../uis/ConfirmationPopup';
 import { setCartItems } from '../../../store/actions/receiveAction';
 import { setFetchApiInfo, fetchApi } from '../../../store/actions/globalAction';
-
+import SearchIcon from '@material-ui/icons/Search';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { searchSupplier } from '../../../http/supplierApi';
+import { CircularProgress } from '@material-ui/core';
+import PaymentDropdown from '../../uis/PaymentDropdown';
 const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
+  const [supplierId, setsupplierId] = useState(1);
   const [payedAmount, setPayedAmount] = useState(parseFloat(0).toFixed(2));
+  const [suggestions, setSuggestions] = useState([]);
+  const [fetchCustomers, setFetchCustomers] = useState(false);
+  const [paymentType, setPaymentType] = useState('cash');
+
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
       setPayedAmount(e.target.value);
@@ -31,7 +40,6 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const handleOpenConfirmation = () => {
     setOpenConfirmation(true);
   };
-
   const handleCloseConfiramtion = () => {
     setOpenConfirmation(false);
   };
@@ -48,10 +56,10 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const handleReceiveSubmit = e => {
     e.preventDefault();
     const newReceive = {
-      supplierId: 7,
+      supplierId,
       total: cartTotal,
       totalDiscount: 0,
-      paymentType: 'cash',
+      paymentType,
       balance,
       payedAmount,
       itemReceives: cartItems,
@@ -82,13 +90,72 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       .catch(handlereateReceiveError);
   };
 
+  const handleSearchSubmit = (_e, value) => {
+    setsupplierId(value.id);
+  };
+
+  const handlePaymentMethod = e => {
+    setPaymentType(e.target.value);
+  };
+
+  const handleSearchChange = e => {
+    const searchSuccess = res => {
+      setFetchCustomers(false);
+      console.log(res.data);
+      if (Array.isArray(res.data)) {
+        setSuggestions(res.data);
+      }
+    };
+
+    const searchErr = () => {
+      setFetchApiInfo({ type: 'error', message: 'Unable to search suppliers' });
+      setFetchCustomers(false);
+    };
+    setFetchCustomers(true);
+    searchSupplier(e.target.value).then(searchSuccess).catch(searchErr);
+  };
+
+  const searchComponent = (
+    <div className={classes.inputsTop}>
+      <div className={classes.searchTab}>
+        <Autocomplete
+          id='customer search-item-search'
+          getOptionLabel={option => `${option.firstName}-${option.lastName}`}
+          options={suggestions}
+          onChange={handleSearchSubmit}
+          loading={fetchCustomers}
+          renderInput={params => (
+            <TextField
+              autoFocus
+              {...params}
+              label='Enter a Supplier Name or Id'
+              noOptionsText={'No suppliers found'}
+              variant='outlined'
+              onChange={handleSearchChange}
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: <SearchIcon />,
+                endAdornment: (
+                  <Fragment>
+                    {fetchCustomers && (
+                      <CircularProgress color='inherit' size={20} />
+                    )}
+                    {params.InputProps.endAdornment}
+                  </Fragment>
+                ),
+              }}
+            />
+          )}
+        />
+      </div>
+    </div>
+  );
+
   return (
     <Fragment>
       <form onSubmit={handleReceiveSubmit}>
-        <div className={classes.customerName}>
-          <TextField id='receive-supplier-name' label='Supplier Name' />
-        </div>
-        <div className={classes.receivePageBottomInputs}>
+        {searchComponent}
+        <div className={classes.sideMenuPageBottomInputs}>
           <div className={classes.total}>
             <TextField
               id='receive-total-inputs'
@@ -99,10 +166,14 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
               }}
             />
           </div>
+          <PaymentDropdown
+            paymentType={paymentType}
+            handlePaymentMethod={handlePaymentMethod}
+          />
           <div className={classes.cash}>
             <TextField
               id='receive-cash-inputs'
-              label='Cash'
+              label='Amount'
               value={payedAmount}
               onChange={handleCashAmountChange}
               onFocus={handleFocus}
