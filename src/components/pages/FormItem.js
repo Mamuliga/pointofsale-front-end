@@ -121,7 +121,7 @@ const FormItem = ({ fetchApi, setFetchApiInfo }) => {
     }
     return null;
   } else if (!id) {
-    const actor = { ...item, isExpDateEnabled: false };
+    const actor = { ...item, isExpireDateEnabled: false };
     return (
       <FormBuilder
         title={'Create new Item'}

@@ -46,6 +46,6 @@ export const getItemFormData = [
     id: 'customSwitch',
     type: 'switch',
     label: 'Expiry Date Validation',
-    name: 'isExpDateEnabled',
+    name: 'isExpireDateEnabled',
   },
 ];
