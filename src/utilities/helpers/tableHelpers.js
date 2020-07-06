@@ -135,7 +135,7 @@ export const getReceiveTableHeaders = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Receive Id',
+    label: 'Item Id',
   },
   {
     id: 'ItemName',
