@@ -51,8 +51,17 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     cartTotal = cartTotal + parseFloat(getItemTotal(row));
   });
   cartTotal = parseFloat(cartTotal).toFixed(2);
+
+  let totalReceivedAmount = 0;
+  paymentMethod.forEach(method => {
+    totalReceivedAmount = totalReceivedAmount + parseFloat(method.amount);
+  });
+  totalReceivedAmount = parseFloat(totalReceivedAmount).toFixed(2);
+
   const balance =
-    revdAmount > 0 ? parseFloat(revdAmount - cartTotal).toFixed(2) : revdAmount;
+    totalReceivedAmount > 0
+      ? parseFloat(totalReceivedAmount - cartTotal).toFixed(2)
+      : totalReceivedAmount;
   const handleFocus = e => e.target.select();
   const handleSaleSubmit = e => {
     e.preventDefault();
@@ -63,7 +72,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       totalDiscount: 0,
       paymentType,
       balance,
-      revdAmount,
+      totalReceivedAmount,
       itemSales: cartItems,
       cashBookDetails: {
         refNo: '25',
@@ -120,7 +129,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const handleAddPayment = () => {
     setPaymentMethod([
       ...paymentMethod,
-      { type: paymentType, amount: revdAmount },
+      { type: paymentType, amount: parseFloat(revdAmount).toFixed(2) },
     ]);
   };
 
@@ -182,7 +191,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
           <div className={classes.cash}>
             <TextField
               id='payment-method-input'
-              label='Amount'
+              label='Received Amount'
               value={revdAmount}
               onChange={handleCashAmountChange}
               onFocus={handleFocus}
@@ -210,10 +219,10 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
             <TextField
               id='sale-cash-inputs'
               label='Total Received Amount'
-              value={revdAmount}
-              onChange={handleCashAmountChange}
-              onFocus={handleFocus}
-              autoComplete='off'
+              value={totalReceivedAmount}
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </div>
           <div className={classes.balance}>
