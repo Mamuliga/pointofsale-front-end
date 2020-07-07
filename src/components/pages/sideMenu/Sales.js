@@ -23,12 +23,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
   const [paymentType, setPaymentType] = useState('cash');
-  const [paymentMethod, setPaymentMethod] = useState([
-    {
-      type: 'cheque',
-      amount: '4000',
-    },
-  ]);
+  const [paymentMethod, setPaymentMethod] = useState([]);
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
       setRevdAmount(e.target.value);
@@ -122,7 +117,12 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
   };
 
-  const handleAddPayment = () => {};
+  const handleAddPayment = () => {
+    setPaymentMethod([
+      ...paymentMethod,
+      { type: paymentType, amount: revdAmount },
+    ]);
+  };
 
   const searchComponent = (
     <div className={classes.inputsTop}>
@@ -177,6 +177,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
           <PaymentDropdown
             paymentType={paymentType}
             handlePaymentMethod={handlePaymentMethod}
+            value={paymentType}
           />
           <div className={classes.cash}>
             <TextField
@@ -190,7 +191,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
           </div>
           <div>
             <Button
-              className={classes.button}
+              className={classes.payment}
               variant='contained'
               color='primary'
               onClick={handleAddPayment}

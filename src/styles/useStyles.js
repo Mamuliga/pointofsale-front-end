@@ -180,9 +180,16 @@ export default makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
+
   button: {
     width: '100%',
     marginBottom: theme.spacing(1),
+  },
+  payment: {
+    width: '56%',
+    marginLeft: '124px',
+    marginBottom: theme.spacing(1),
+    backgroundColor: '#f44336',
   },
   barcode: {
     width: '100%',
