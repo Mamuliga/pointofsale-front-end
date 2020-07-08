@@ -14,7 +14,6 @@ import { setFetchApiInfo } from '../../store/actions/globalAction.js';
 import { setCartItems } from '../../store/actions/receiveAction.js';
 import { getItemTotal } from '../../utilities/helpers/receiveHelpers.js';
 import DatePicker from '../uis/FormComponents/DatePicker.js';
-import { KeyboardDatePicker } from '@material-ui/pickers';
 
 const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   console.log(cartItems);
