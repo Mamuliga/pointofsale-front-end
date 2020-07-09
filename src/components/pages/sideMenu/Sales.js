@@ -205,15 +205,18 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
               color='primary'
               onClick={handleAddPayment}
               id='addPayment'
+              disabled={!(revdAmount > 0)}
             >
               Add Payment
             </Button>
           </div>
           <div>
-            <PaymentTypeTable
-              paymentMethod={paymentMethod}
-              setPaymentMethod={setPaymentMethod}
-            />
+            {paymentMethod.length ? (
+              <PaymentTypeTable
+                paymentMethod={paymentMethod}
+                setPaymentMethod={setPaymentMethod}
+              />
+            ) : null}
           </div>
           <div className={classes.cash}>
             <TextField
