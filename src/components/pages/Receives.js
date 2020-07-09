@@ -13,9 +13,16 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { setFetchApiInfo } from '../../store/actions/globalAction.js';
 import { setCartItems } from '../../store/actions/receiveAction.js';
 import { getItemTotal } from '../../utilities/helpers/receiveHelpers.js';
+import DatePicker from '../uis/FormComponents/DatePicker.js';
 
 const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
-  const editableRowIndexes = ['receivePrice', 'quantity', 'discount'];
+  console.log(cartItems);
+  const editableRowIndexes = [
+    'receivePrice',
+    'quantity',
+    'discount',
+    'expiryDate',
+  ];
   const [searchWord, setSearchWord] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [fetchItems, setFetchItems] = useState(false);
@@ -43,12 +50,13 @@ const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   const handleFocus = event => event.target.select();
   const handleSearchSubmit = (_e, value) => {
     if (value) {
-      const { id, itemName } = value;
+      const { id, itemName, isExpireDateEnabled } = value;
       cartItems.push({
         id,
         itemName,
         receivePrice: parseFloat(0).toFixed(2),
         quantity: 1,
+        expiryDate: isExpireDateEnabled,
         discount: parseFloat(0).toFixed(2),
         total: parseFloat(0).toFixed(2),
       });
@@ -85,8 +93,44 @@ const Receives = ({ setFetchApiInfo, cartItems, setCartItems }) => {
                   setCartItems([...cartItems]);
                 }
               };
-
+              const handleExpDateChange = expDate => {
+                row[cell] = expDate;
+                setCartItems([...cartItems]);
+              };
+              console.log(cell);
               console.log(row[cell]);
+              if (cell === 'expiryDate') {
+                console.log(row[cell]);
+                if (row[cell]) {
+                  return (
+                    <DatePicker
+                      entry={{
+                        id: 'id',
+                        name: 'dateChangeTo',
+                        label: 'To:',
+                        value: 'sad',
+                      }}
+                      handleDatePickerChange={handleExpDateChange}
+                      selectedDate={row[cell]}
+                    />
+                  );
+                } else {
+                  return (
+                    <TableCell key={cell}>
+                      <TextField
+                        id={cell}
+                        name={cell}
+                        // onFocus={handleFocus}
+                        // autoFocus={cell === 'receivePrice'}
+                        value={'N/A'}
+                        disabled
+                        // onChange={handleTextInputChange}
+                        // onKeyDown={handleKeyDown(cell)}
+                      />
+                    </TableCell>
+                  );
+                }
+              }
               return (
                 <TableCell key={cell}>
                   <TextField
