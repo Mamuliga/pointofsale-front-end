@@ -63,23 +63,37 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       ? parseFloat(totalReceivedAmount - cartTotal).toFixed(2)
       : totalReceivedAmount;
   const handleFocus = e => e.target.select();
+  const itemSales = [];
+  cartItems.forEach(item => {
+    const {
+      id,
+      quantity,
+      discount,
+      itemStatId,
+      salesPrice: sellingPrice,
+    } = item;
+    itemSales.push({
+      itemId: id,
+      sellingPrice,
+      quantity,
+      discount,
+      itemStatId,
+    });
+  });
+
   const handleSaleSubmit = e => {
     e.preventDefault();
     const newSale = {
-      itemStatId: cartItems.itemStatId,
       customerId,
       total: cartTotal,
       totalDiscount: 0,
-      paymentType,
-      balance,
-      totalReceivedAmount,
-      itemSales: cartItems,
-      cashBookDetails: {
-        refNo: '25',
-        description: 'Desc123455',
-        type: 'cash',
-        amount: cartTotal,
+      paymentType: {
+        cash: cartTotal,
       },
+      balance,
+      revdAmount,
+      itemSales,
+      dueDate: '2020-05-18',
     };
     const handleCreateSaleSuccuess = () => {
       fetchApi(false);
@@ -123,7 +137,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
+    searchCustomer(e.target.value)
+      .then(searchSuccess)
+      .catch(searchErr);
   };
 
   const handleAddPayment = () => {
