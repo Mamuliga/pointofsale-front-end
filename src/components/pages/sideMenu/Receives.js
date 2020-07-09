@@ -65,7 +65,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
         quantity,
         itemId: id,
         description: '',
-        supplierId: 7,
+        supplierId: 1,
         expDate: '2025-05-05',
         manuDate: '2019-05-05',
         salesPrice: 25,
@@ -80,12 +80,6 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       balance,
       payedAmount,
       itemReceives,
-      cashBookDetails: {
-        refNo: '25',
-        description: 'Desc123455',
-        type: 'cash',
-        amount: cartTotal,
-      },
     };
     const handleCreateReceiveSuccuess = () => {
       fetchApi(false);
