@@ -53,8 +53,25 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       ? parseFloat(payedAmount - cartTotal).toFixed(2)
       : payedAmount;
   const handleFocus = e => e.target.select();
+
   const handleReceiveSubmit = e => {
     e.preventDefault();
+    const itemReceives = [];
+    cartItems.forEach(item => {
+      const { receivePrice, discount, quantity, id } = item;
+      const receiveItem = {
+        receivePrice,
+        discount,
+        quantity,
+        itemId: id,
+        description: '',
+        supplierId: 7,
+        expDate: '2025-05-05',
+        manuDate: '2019-05-05',
+        salesPrice: 25,
+      };
+      itemReceives.push(receiveItem);
+    });
     const newReceive = {
       supplierId,
       total: cartTotal,
@@ -62,7 +79,7 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       paymentType,
       balance,
       payedAmount,
-      itemReceives: cartItems,
+      itemReceives,
       cashBookDetails: {
         refNo: '25',
         description: 'Desc123455',
@@ -112,7 +129,9 @@ const Receive = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchSupplier(e.target.value).then(searchSuccess).catch(searchErr);
+    searchSupplier(e.target.value)
+      .then(searchSuccess)
+      .catch(searchErr);
   };
 
   const searchComponent = (
