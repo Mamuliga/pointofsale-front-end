@@ -18,12 +18,15 @@ import PaymentTypeTable from '../../uis/SaleComponents/PaymentTypeTable';
 
 const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
+  const paymentType = {};
   const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
   const [customerId, setCustomerId] = useState(1);
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
-  const [paymentType, setPaymentType] = useState('cash');
-  const [paymentMethod, setPaymentMethod] = useState([]);
+  const [selectedPayTypeInDropdown, setSelectedPayTypeInDropdownn] = useState(
+    'cash'
+  );
+  const [paymentTypeInTable, setPaymentTypeInTable] = useState([]);
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
       setRevdAmount(e.target.value);
@@ -53,7 +56,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   cartTotal = parseFloat(cartTotal).toFixed(2);
 
   let totalReceivedAmount = 0;
-  paymentMethod.forEach(method => {
+  paymentTypeInTable.forEach(method => {
     totalReceivedAmount = totalReceivedAmount + parseFloat(method.amount);
   });
   totalReceivedAmount = parseFloat(totalReceivedAmount).toFixed(2);
@@ -80,16 +83,16 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       itemStatId,
     });
   });
-
+  paymentTypeInTable.forEach(({ type, amount }) => {
+    paymentType[`${type}`] = amount;
+  });
   const handleSaleSubmit = e => {
     e.preventDefault();
     const newSale = {
       customerId,
       total: cartTotal,
       totalDiscount: 0,
-      paymentType: {
-        cash: cartTotal,
-      },
+      paymentType,
       balance,
       revdAmount,
       itemSales,
@@ -120,7 +123,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   };
 
   const handlePaymentMethod = e => {
-    setPaymentType(e.target.value);
+    setSelectedPayTypeInDropdownn(e.target.value);
   };
 
   const handleSearchChange = e => {
@@ -143,9 +146,12 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   };
 
   const handleAddPayment = () => {
-    setPaymentMethod([
-      ...paymentMethod,
-      { type: paymentType, amount: parseFloat(revdAmount).toFixed(2) },
+    setPaymentTypeInTable([
+      ...paymentTypeInTable,
+      {
+        type: selectedPayTypeInDropdown,
+        amount: parseFloat(revdAmount).toFixed(2),
+      },
     ]);
   };
 
@@ -200,9 +206,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
             />
           </div>
           <PaymentDropdown
-            paymentType={paymentType}
+            paymentType={selectedPayTypeInDropdown}
             handlePaymentMethod={handlePaymentMethod}
-            value={paymentType}
+            value={selectedPayTypeInDropdown}
           />
           <div className={classes.cash}>
             <TextField
@@ -227,10 +233,10 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
             </Button>
           </div>
           <div>
-            {paymentMethod.length ? (
+            {paymentTypeInTable.length ? (
               <PaymentTypeTable
-                paymentMethod={paymentMethod}
-                setPaymentMethod={setPaymentMethod}
+                paymentMethod={paymentTypeInTable}
+                setPaymentMethod={setPaymentTypeInTable}
               />
             ) : null}
           </div>
