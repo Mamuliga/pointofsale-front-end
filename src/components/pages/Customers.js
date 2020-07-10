@@ -48,8 +48,10 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
     };
     fetchApi(true);
-    getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
-  }, [fetchApi, setFetchApiInfo]);
+    getCustomerList()
+      .then(handleGetCustomerResp)
+      .catch(handleGetCustomerErr);
+  }, [fetchApi, setFetchApiInfo, isCreditCustomers]);
 
   const handleEdit = customer => {
     const editClick = () => {
@@ -77,7 +79,9 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
+    searchCustomer(e.target.value)
+      .then(searchSuccess)
+      .catch(searchErr);
   };
 
   const searchComponent = (
