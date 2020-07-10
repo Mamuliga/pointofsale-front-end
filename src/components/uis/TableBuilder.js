@@ -13,7 +13,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import EditIcon from '@material-ui/icons/Edit';
-import Sales from '../pages/sideMenu/Sales';
 import Button from '@material-ui/core/Button';
 
 function desc(a, b, orderBy) {
@@ -146,6 +145,7 @@ export default function TableBuilder({
   hidePagination,
   tableRows,
   hideEditIcon,
+  payButton,
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -193,19 +193,15 @@ export default function TableBuilder({
                     return (
                       <TableRow hover tabIndex={-1} key={row.id}>
                         {Object.values(row).map((cell, index) => {
-                          if (index === Object.values(row).length - 1) {
-                            return (
-                              <TableCell key={index}>
-                                {cell > 0 ? (
-                                  <Button variant='contained' color='secondary'>
-                                    Pay
-                                  </Button>
-                                ) : null}
-                              </TableCell>
-                            );
-                          }
                           return <TableCell key={index}>{cell}</TableCell>;
                         })}
+                        {payButton && (
+                          <TableCell key={'payButton'}>
+                            <Button variant='contained' color='secondary'>
+                              Pay
+                            </Button>
+                          </TableCell>
+                        )}
                         {!hideEditIcon && (
                           <TableCell key={'edit'} align='right'>
                             <EditIcon onClick={handleEdit(row)} />

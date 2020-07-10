@@ -33,11 +33,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
         const displayCustomerList = res.data.map(
           ({ id, firstName, lastName, phoneNo, bankAccount }, index) => {
             const details = { id, firstName, lastName, phoneNo, bankAccount };
-            if (!isCreditCustomers) {
-              return { ...details, dueAmount: index === 1 ? 20 : 0 };
-            }
-
-            return details;
+            return { ...details, dueAmount: index === 1 ? 20 : 0 };
           }
         );
         setCustomerList(displayCustomerList);
@@ -51,7 +47,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
     getCustomerList()
       .then(handleGetCustomerResp)
       .catch(handleGetCustomerErr);
-  }, [fetchApi, setFetchApiInfo, isCreditCustomers]);
+  }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = customer => {
     const editClick = () => {
@@ -119,7 +115,21 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       </div>
     </div>
   );
-
+  let customerTableData;
+  if (isCreditCustomers) {
+    customerTableData = customerList.filter(({ dueAmount }) => dueAmount > 0);
+    customerTableData = customerTableData.map(
+      ({ id, firstName, lastName, phoneNo, bankAccount, dueAmount }, index) => {
+        return { id, firstName, lastName, phoneNo, bankAccount, dueAmount };
+      }
+    );
+  } else {
+    customerTableData = customerList.map(
+      ({ id, firstName, lastName, phoneNo, bankAccount }, index) => {
+        return { id, firstName, lastName, phoneNo, bankAccount };
+      }
+    );
+  }
   return (
     <Fragment>
       <div className={classes.customerContainer}>
@@ -138,8 +148,9 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
             labelPlacement='start'
           />
         </div>
+
         <TableBuilder
-          tableData={customerList}
+          tableData={customerTableData}
           tableHeaders={
             isCreditCustomers
               ? getDueCustomerTableHeaders
@@ -147,6 +158,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
           }
           handleEdit={handleEdit}
           title={'Customers'}
+          payButton={isCreditCustomers}
         />
       </div>
     </Fragment>
