@@ -2,7 +2,10 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import TableBuilder from '../uis/TableBuilder.js';
 import { useHistory } from 'react-router-dom';
-import { getCustomerTableHeaders } from '../../utilities/helpers/tableHelpers.js';
+import {
+  getCustomerTableHeaders,
+  getDueCustomerTableHeaders,
+} from '../../utilities/helpers/tableHelpers.js';
 import { getCustomerList, searchCustomer } from '../../http/customerApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 import useStyles from '../../styles/useStyles.js';
@@ -28,8 +31,13 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
         const displayCustomerList = res.data.map(
-          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
-            return { id, firstName, lastName, phoneNo, gender, bankAccount };
+          ({ id, firstName, lastName, phoneNo, bankAccount }, index) => {
+            const details = { id, firstName, lastName, phoneNo, bankAccount };
+            if (!isCreditCustomers) {
+              return { ...details, dueAmount: index === 1 ? 20 : 0 };
+            }
+
+            return details;
           }
         );
         setCustomerList(displayCustomerList);
@@ -40,9 +48,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
     };
     fetchApi(true);
-    getCustomerList()
-      .then(handleGetCustomerResp)
-      .catch(handleGetCustomerErr);
+    getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = customer => {
@@ -53,8 +59,8 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
   };
 
   const handleSearchSubmit = () => {};
-  const handleCreditCustomersToggler = () => {
-    setIsCreditCustomers(!isCreditCustomers);
+  const handleCreditCustomersToggler = e => {
+    setIsCreditCustomers(e.target.checked);
   };
 
   const handleSearchChange = e => {
@@ -71,9 +77,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value)
-      .then(searchSuccess)
-      .catch(searchErr);
+    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
   };
 
   const searchComponent = (
@@ -132,7 +136,11 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
         </div>
         <TableBuilder
           tableData={customerList}
-          tableHeaders={getCustomerTableHeaders}
+          tableHeaders={
+            isCreditCustomers
+              ? getDueCustomerTableHeaders
+              : getCustomerTableHeaders
+          }
           handleEdit={handleEdit}
           title={'Customers'}
         />
