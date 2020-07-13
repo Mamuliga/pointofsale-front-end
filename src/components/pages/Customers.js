@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { PAGE_ROUTES } from '../../services/routeService.js';
 
 const Customers = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
@@ -159,6 +160,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
           handleEdit={handleEdit}
           title={'Customers'}
           payButton={isCreditCustomers}
+          payButtonClick={() => push(PAGE_ROUTES.newCashbook)}
         />
       </div>
     </Fragment>

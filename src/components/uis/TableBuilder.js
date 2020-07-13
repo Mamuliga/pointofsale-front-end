@@ -146,6 +146,7 @@ export default function TableBuilder({
   tableRows,
   hideEditIcon,
   payButton,
+  payButtonClick,
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -197,7 +198,11 @@ export default function TableBuilder({
                         })}
                         {payButton && (
                           <TableCell key={'payButton'}>
-                            <Button variant='contained' color='secondary'>
+                            <Button
+                              variant='contained'
+                              color='secondary'
+                              onClick={payButtonClick}
+                            >
                               Pay
                             </Button>
                           </TableCell>
