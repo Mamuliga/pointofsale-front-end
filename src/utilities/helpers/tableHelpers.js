@@ -25,12 +25,7 @@ export const getCustomerTableHeaders = [
     disablePadding: false,
     label: 'Phone Number',
   },
-  {
-    id: 'bankAccount',
-    numeric: false,
-    disablePadding: false,
-    label: 'Acc no',
-  },
+
   getEmptyColumnForEditOrDelete('edit'),
 ];
 
@@ -48,18 +43,11 @@ export const getDueCustomerTableHeaders = [
     label: 'First Name',
   },
   { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
-
   {
-    id: 'Amount',
+    id: 'phoneNumber',
     numeric: false,
     disablePadding: false,
-    label: 'Amount',
-  },
-  {
-    id: 'bankAccount',
-    numeric: false,
-    disablePadding: false,
-    label: 'Acc no',
+    label: 'Phone Number',
   },
   {
     id: 'payHere',

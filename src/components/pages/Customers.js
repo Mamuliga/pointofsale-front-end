@@ -32,9 +32,8 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
         const displayCustomerList = res.data.map(
-          ({ id, firstName, lastName, phoneNo, bankAccount }, index) => {
-            const details = { id, firstName, lastName, phoneNo, bankAccount };
-            return { ...details, dueAmount: index === 1 ? 20 : 0 };
+          ({ id, firstName, lastName, phoneNo, dueTotal }) => {
+            return { id, firstName, lastName, phoneNo, dueTotal };
           }
         );
         setCustomerList(displayCustomerList);
@@ -45,9 +44,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
     };
     fetchApi(true);
-    getCustomerList()
-      .then(handleGetCustomerResp)
-      .catch(handleGetCustomerErr);
+    getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = customer => {
@@ -76,9 +73,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value)
-      .then(searchSuccess)
-      .catch(searchErr);
+    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
   };
 
   const searchComponent = (
@@ -118,16 +113,16 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
   );
   let customerTableData;
   if (isCreditCustomers) {
-    customerTableData = customerList.filter(({ dueAmount }) => dueAmount > 0);
+    customerTableData = customerList.filter(({ dueTotal }) => dueTotal > 0);
     customerTableData = customerTableData.map(
-      ({ id, firstName, lastName, phoneNo, bankAccount, dueAmount }, index) => {
-        return { id, firstName, lastName, phoneNo, bankAccount, dueAmount };
+      ({ id, firstName, lastName, phoneNo, dueTotal }, index) => {
+        return { id, firstName, lastName, phoneNo, dueTotal };
       }
     );
   } else {
     customerTableData = customerList.map(
-      ({ id, firstName, lastName, phoneNo, bankAccount }, index) => {
-        return { id, firstName, lastName, phoneNo, bankAccount };
+      ({ id, firstName, lastName, phoneNo }, index) => {
+        return { id, firstName, lastName, phoneNo };
       }
     );
   }
