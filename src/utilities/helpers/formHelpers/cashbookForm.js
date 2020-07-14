@@ -1,5 +1,4 @@
 import React from 'react';
-import BusinessIcon from '@material-ui/icons/Business';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 export const getCashbookFormData = [
@@ -9,14 +8,6 @@ export const getCashbookFormData = [
     label: 'Ref. No',
     name: 'refNo',
     required: true,
-  },
-  {
-    id: 'type',
-    type: 'dropDown',
-    label: 'Payment',
-    name: 'type',
-    required: true,
-    icon: <BusinessIcon />,
   },
   {
     id: 'amount',

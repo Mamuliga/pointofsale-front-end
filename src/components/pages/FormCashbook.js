@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import FormBuilder from '../uis/FormBuilder';
+import { useTheme } from '@material-ui/core/styles';
 import { getCashbookFormData } from '../../utilities/helpers/formHelpers/cashbookForm';
 import {
   updateCashbookById,
@@ -11,13 +12,15 @@ import {
 } from '../../http/cashbookApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
+import { Tab, AppBar, Tabs, Box, Typography } from '@material-ui/core';
 
 const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
   const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
-  const [cashbook, setCashbook] = useState({});
-
+  const [cashbook, setCashbook] = useState({ type: 'DEBIT' });
+  const theme = useTheme();
+  const [value, setValue] = React.useState('DEBIT');
   useEffect(() => {
     const handleGetSuccuess = res => {
       fetchApi(false);
@@ -36,7 +39,7 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
       setDataWithValue([...dataArray]);
     };
 
-    const handleGetErr = err => {
+    const handleGetErr = () => {
       fetchApi(false);
       setFetchApiInfo({
         type: 'error',
@@ -45,12 +48,14 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
     };
     if (id) {
       fetchApi(true);
-      getCashbookById(id).then(handleGetSuccuess).catch(handleGetErr);
+      getCashbookById(id)
+        .then(handleGetSuccuess)
+        .catch(handleGetErr);
     }
   }, [fetchApi, id, setFetchApiInfo]);
 
   const handleCreateNewCashbook = newCashbook => {
-    const handleCreateSuccuess = res => {
+    const handleCreateSuccuess = () => {
       fetchApi(false);
       push(PAGE_ROUTES.cashbooks);
       setFetchApiInfo({ type: 'success', message: 'Succuessfully created' });
@@ -67,11 +72,11 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
   };
 
   const handleFormSubmit = (updatedCashbook, id) => {
-    const handleUpdateSuccuess = res => {
+    const handleUpdateSuccuess = () => {
       fetchApi(false);
       push(PAGE_ROUTES.cashbooks);
     };
-    const handleUpdateErr = err => {
+    const handleUpdateErr = () => {
       fetchApi(false);
       setFetchApiInfo({
         type: 'error',
@@ -91,7 +96,7 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
       push(PAGE_ROUTES.cashbooks);
     };
-    const handleDeleteError = err => {
+    const handleDeleteError = () => {
       fetchApi(false);
       setFetchApiInfo({ type: 'error', message: 'Unable to delete cashbook' });
     };
@@ -100,28 +105,49 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
       .then(handleDeleteSuccuess)
       .catch(handleDeleteError);
   };
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
 
+    return (
+      <div
+        role='tabpanel'
+        hidden={value !== index}
+        id={`full-width-tabpanel-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+  const handleChange = (_event, newValue) => {
+    setValue(newValue);
+    setCashbook({ ...cashbook, type: newValue });
+    console.log(newValue);
+  };
+
+  let cashbookForm = null;
   if (cashbook.id && dataWithValue.length) {
     const editingCashbook = { ...cashbook };
     dataWithValue.forEach(field => {
       editingCashbook[`${field.id}`] = field.value;
     });
-    console.log(editingCashbook);
-    if (editingCashbook) {
-      return (
-        <FormBuilder
-          title={'Edit cashbook'}
-          data={dataWithValue}
-          onClick={handleFormSubmit}
-          actor={cashbook}
-          handleDelete={handleDelete}
-        />
-      );
-    }
-    return null;
+    cashbookForm = (
+      <FormBuilder
+        title={'Edit cashbook'}
+        data={dataWithValue}
+        onClick={handleFormSubmit}
+        actor={cashbook}
+        handleDelete={handleDelete}
+      />
+    );
   } else if (!id) {
     const actor = { ...cashbook };
-    return (
+    cashbookForm = (
       <FormBuilder
         title={'Create new Cashbook'}
         data={getCashbookFormData}
@@ -130,8 +156,33 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
       />
     );
   }
-  return null;
+
+  return (
+    <div>
+      <AppBar position='static' color='default'>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor='primary'
+          textColor='primary'
+          variant='fullWidth'
+        >
+          <Tab label='Debit' value='DEBIT' />
+          <Tab label='Credit' value='CREDIT' />
+        </Tabs>
+      </AppBar>
+      <div>
+        <TabPanel value={value} index={'CREDIT'} dir={theme.direction}>
+          {cashbookForm}
+        </TabPanel>
+        <TabPanel value={value} index={'DEBIT'} dir={theme.direction}>
+          {cashbookForm}
+        </TabPanel>
+      </div>
+    </div>
+  );
 };
+
 const mapStateToProps = ({ global }) => {
   return { ...global };
 };
