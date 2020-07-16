@@ -9,6 +9,11 @@ import {
   TableBody,
   Button,
 } from '@material-ui/core';
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const PaymentTypeTable = ({ paymentMethod, setPaymentMethod }) => {
   const classes = useStyles();
@@ -32,6 +37,7 @@ const PaymentTypeTable = ({ paymentMethod, setPaymentMethod }) => {
             <TableCell>Delete</TableCell>
             <TableCell>Type</TableCell>
             <TableCell>Amount</TableCell>
+            <TableCell>Due Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -43,7 +49,18 @@ const PaymentTypeTable = ({ paymentMethod, setPaymentMethod }) => {
                     Delete
                   </Button>
                 </TableCell>
-                <TableCell>{row.type}</TableCell>
+                <TableCell>
+                  {row.type}
+                  {row.type === 'due' && (
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <KeyboardDatePicker
+                        onChange={() => {}}
+                        value='2020/05/20'
+                        format=' yyyy / MM / dd'
+                      />
+                    </MuiPickersUtilsProvider>
+                  )}
+                </TableCell>
                 <TableCell>{row.amount}</TableCell>
               </TableRow>
             );
