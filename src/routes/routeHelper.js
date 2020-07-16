@@ -80,6 +80,10 @@ export const cashbookRoutes = [
     component: FormCashbook,
   },
   {
+    path: PAGE_ROUTES.payDue,
+    component: FormCashbook,
+  },
+  {
     path: PAGE_ROUTES.editCashbook,
     component: FormCashbook,
   },

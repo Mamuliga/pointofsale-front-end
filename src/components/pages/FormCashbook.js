@@ -13,9 +13,10 @@ import {
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 import { Tab, AppBar, Tabs, Box, Typography } from '@material-ui/core';
+import { getDuesByCustomerId } from '../../http/dueApi';
 
 const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
-  const { id } = useParams();
+  const { id, customerId } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [cashbook, setCashbook] = useState({ type: 'DEBIT' });
@@ -52,7 +53,14 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
         .then(handleGetSuccuess)
         .catch(handleGetErr);
     }
-  }, [fetchApi, id, setFetchApiInfo]);
+
+    if (customerId) {
+      fetchApi(true);
+      getDuesByCustomerId(customerId)
+        .then(handleGetSuccuess)
+        .catch(handleGetErr);
+    }
+  }, [customerId, fetchApi, id, setFetchApiInfo]);
 
   const handleCreateNewCashbook = newCashbook => {
     const handleCreateSuccuess = () => {

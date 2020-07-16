@@ -17,7 +17,6 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { PAGE_ROUTES } from '../../services/routeService.js';
 
 const Customers = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
@@ -44,7 +43,9 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
     };
     fetchApi(true);
-    getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
+    getCustomerList()
+      .then(handleGetCustomerResp)
+      .catch(handleGetCustomerErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = customer => {
@@ -73,7 +74,9 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
+    searchCustomer(e.target.value)
+      .then(searchSuccess)
+      .catch(searchErr);
   };
 
   const searchComponent = (
@@ -126,6 +129,12 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       }
     );
   }
+  const handlePayButttonClick = customer => {
+    const handlePayClick = () => {
+      push(`/cashbooks/payCustomerDue/${customer.id}`);
+    };
+    return handlePayClick;
+  };
   return (
     <Fragment>
       <div className={classes.customerContainer}>
@@ -155,7 +164,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
           handleEdit={handleEdit}
           title={'Customers'}
           payButton={isCreditCustomers}
-          payButtonClick={() => push(PAGE_ROUTES.newCashbook)}
+          payButtonClick={handlePayButttonClick}
         />
       </div>
     </Fragment>

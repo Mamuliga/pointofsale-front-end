@@ -23,6 +23,7 @@ export const PAGE_ROUTES = {
   items: '/items',
   newItem: '/items/new',
   editItem: '/items/edit/:id',
+  payDue: '/cashbooks/payCustomerDue/:customerId',
 };
 
 const TOP_MENU_HIDE_ROUTES = {
@@ -84,10 +85,10 @@ export const TOP_MENU_ITEMS = [
   },
 ];
 
-export const showTopMenuForRoute = (route) => {
+export const showTopMenuForRoute = route => {
   return !TOP_MENU_HIDE_ROUTES[route];
 };
 
-export const showSideMenuForRoute = (route) => {
+export const showSideMenuForRoute = route => {
   return !SIDE_MENU_HIDE_ROUTES[route];
 };

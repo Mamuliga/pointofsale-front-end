@@ -201,7 +201,7 @@ export default function TableBuilder({
                             <Button
                               variant='contained'
                               color='secondary'
-                              onClick={payButtonClick}
+                              onClick={payButtonClick(row)}
                             >
                               Pay
                             </Button>
