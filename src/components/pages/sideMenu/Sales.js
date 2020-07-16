@@ -27,6 +27,11 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     'cash'
   );
   const [paymentTypeInTable, setPaymentTypeInTable] = useState([]);
+  const [dueDate, setDueDate] = useState('');
+
+  const handleDueDateChange = date => {
+    setDueDate(date);
+  };
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
       setRevdAmount(e.target.value);
@@ -96,7 +101,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       balance,
       revdAmount,
       itemSales,
-      dueDate: '2020-05-18',
+      dueDate,
     };
     const handleCreateSaleSuccuess = () => {
       fetchApi(false);
@@ -140,9 +145,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value)
-      .then(searchSuccess)
-      .catch(searchErr);
+    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
   };
 
   const handleAddPayment = () => {
@@ -235,6 +238,8 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
           <div>
             {paymentTypeInTable.length ? (
               <PaymentTypeTable
+                dueDate={dueDate}
+                handleDueDateChange={handleDueDateChange}
                 paymentMethod={paymentTypeInTable}
                 setPaymentMethod={setPaymentTypeInTable}
               />

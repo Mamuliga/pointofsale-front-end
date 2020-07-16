@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useStyles from '../../../styles/useStyles';
 import {
   Paper,
@@ -15,7 +15,12 @@ import {
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-const PaymentTypeTable = ({ paymentMethod, setPaymentMethod }) => {
+const PaymentTypeTable = ({
+  paymentMethod,
+  setPaymentMethod,
+  handleDueDateChange,
+  dueDate,
+}) => {
   const classes = useStyles();
 
   const handleDelete = i => {
@@ -37,7 +42,6 @@ const PaymentTypeTable = ({ paymentMethod, setPaymentMethod }) => {
             <TableCell>Delete</TableCell>
             <TableCell>Type</TableCell>
             <TableCell>Amount</TableCell>
-            <TableCell>Due Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -54,9 +58,12 @@ const PaymentTypeTable = ({ paymentMethod, setPaymentMethod }) => {
                   {row.type === 'due' && (
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <KeyboardDatePicker
-                        onChange={() => {}}
-                        value='2020/05/20'
+                        onChange={handleDueDateChange}
+                        value={dueDate}
+                        error={false}
                         format=' yyyy / MM / dd'
+                        helperText='Due Date'
+                        //settoday date here
                       />
                     </MuiPickersUtilsProvider>
                   )}
