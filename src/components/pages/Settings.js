@@ -2,65 +2,45 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import TableBuilder from '../uis/TableBuilder.js';
 import { useHistory } from 'react-router-dom';
-import { getSettingsTableHeaders } from '../../utilities/helpers/tableHelpers.js';
-import { getSettings } from '../../http/settingsApi';
+import { getCustomerTableHeaders } from '../../utilities/helpers/tableHelpers.js';
+import { getCustomerList } from '../../http/customerApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 
 const Settings = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
-  const [settingsList, setSettingsList] = useState([]);
+  const [customerList, setCustomerList] = useState([]);
 
   useEffect(() => {
-    const handleGetSettingsResp = res => {
+    const handleGetCustomerResp = res => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
-        const displaySettingsList = res.data.map(
-          ({
-            id,
-            logo,
-            companyName,
-            address,
-            email,
-            phoneNo,
-            description,
-            openingTime,
-            closingTime,
-          }) => {
-            return {
-              id,
-              logo,
-              companyName,
-              address,
-              email,
-              phoneNo,
-              description,
-              openingTime,
-              closingTime,
-            };
+        const displayCustomerList = res.data.map(
+          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
+            return { id, firstName, lastName, phoneNo, gender, bankAccount };
           }
         );
-        setSettingsList(displaySettingsList);
+        setCustomerList(displayCustomerList);
       }
     };
-    const handleGetSettingsErr = err => {
-      setFetchApiInfo({ type: 'error', message: 'Unable to get settings' });
+    const handleGetCustomerErr = err => {
+      setFetchApiInfo({ type: 'error', message: 'Unable to get customers' });
       fetchApi(false);
     };
     fetchApi(true);
-    getSettings().then(handleGetSettingsResp).catch(handleGetSettingsErr);
+    getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
   }, [fetchApi, setFetchApiInfo]);
 
-  const handleEdit = settings => {
+  const handleEdit = customer => {
     const editClick = () => {
-      push(`${location.pathname}/edit/${settings.id}`);
+      push(`${location.pathname}/edit/${customer.id}`);
     };
     return editClick;
   };
 
   return (
     <TableBuilder
-      tableData={settingsList}
-      tableHeaders={getSettingsTableHeaders}
+      tableData={customerList}
+      tableHeaders={getCustomerTableHeaders}
       handleEdit={handleEdit}
       title={'Settings'}
     />

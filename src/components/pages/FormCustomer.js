@@ -127,6 +127,7 @@ const FormCustomer = ({ fetchApi, setFetchApiInfo }) => {
         data={getCustomerFormData}
         onClick={handleCreateNewCustomer}
         actor={actor}
+        buttonName={'Submit'}
       />
     );
   }

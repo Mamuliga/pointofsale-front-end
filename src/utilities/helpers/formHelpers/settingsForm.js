@@ -3,18 +3,16 @@ import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import HomeIcon from '@material-ui/icons/Home';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import RecentActorsIcon from '@material-ui/icons/RecentActors';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
+import PublicIcon from '@material-ui/icons/Public';
 
 export const getSettingsFormData = [
   {
-    id: 'logo',
-    type: 'text',
+    id: 'avatar',
+    type: 'avatar',
     label: 'Company Logo',
-    name: 'logo',
-    required: true,
-    autoFocus: true,
+    name: 'companyAvatar',
+    required: false,
     icon: <PersonIcon />,
   },
   {
@@ -28,10 +26,18 @@ export const getSettingsFormData = [
   {
     id: 'address',
     type: 'text',
-    label: 'Address',
+    label: 'Company Address',
     name: 'address',
     required: false,
     icon: <HomeIcon />,
+  },
+  {
+    id: 'website',
+    type: 'text',
+    label: 'Website',
+    name: 'website',
+    required: false,
+    icon: <PublicIcon />,
   },
   {
     id: 'email',
@@ -50,15 +56,6 @@ export const getSettingsFormData = [
     icon: <PhoneIphoneIcon />,
   },
   {
-    id: 'description',
-    type: 'text',
-    label: 'Description',
-    name: 'description',
-    multiline: true,
-    rows: 4,
-    required: false,
-  },
-  {
     id: 'openingTime',
     type: 'text',
     label: 'opening Time',
@@ -73,5 +70,14 @@ export const getSettingsFormData = [
     name: 'closingTime',
     required: false,
     icon: <LocalOfferIcon />,
+  },
+  {
+    id: 'description',
+    type: 'text',
+    label: 'Description',
+    name: 'description',
+    multiline: true,
+    rows: 4,
+    required: false,
   },
 ];

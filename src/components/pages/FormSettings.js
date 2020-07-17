@@ -123,10 +123,11 @@ const FormSettings = ({ fetchApi, setFetchApiInfo }) => {
     const actor = { ...settings };
     return (
       <FormBuilder
-        title={'Create new Settings'}
+        title={'Settings'}
         data={getSettingsFormData}
         onClick={handleCreateNewSettings}
         actor={actor}
+        buttonName={'Save Changes'}
       />
     );
   }

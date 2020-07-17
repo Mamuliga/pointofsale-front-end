@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import CustomTextField from './FormComponents/CustomTextField';
 import CustomGender from './FormComponents/CustomGender';
+import CustomAvatar from './FormComponents/CustomAvatar';
 import { Button, Container } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CreateIcon from '@material-ui/icons/Create';
@@ -19,12 +20,15 @@ import {
 
 const FormBuilder = ({
   title,
+  topUis,
+  buttonName,
   data = [],
   onClick,
   actor = {},
   handleDelete,
   handleDatePickerChange,
 }) => {
+  console.log(data);
   const [newActor, setNewActor] = useState({ ...actor });
   const [dataFields, setDataFields] = useState();
   const [openConfirm, setOpenConfirmation] = React.useState(false);
@@ -125,6 +129,8 @@ const FormBuilder = ({
                       getValue={getValue}
                     />
                   );
+                case 'avatar':
+                  return <CustomAvatar entry={entry} getValue={getValue} />;
                 default:
                   return null;
               }
@@ -137,7 +143,7 @@ const FormBuilder = ({
             onClick={handleSubmit}
             className={classes.formbuilderSubmit}
           >
-            Submit
+            {buttonName}
           </Button>
           {actor.id && (
             <Button

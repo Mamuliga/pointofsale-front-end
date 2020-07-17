@@ -8,6 +8,7 @@ const Dashboard = () => {
       title={'Customer Details'}
       data={getCustomerFormData}
       onClick={() => {}}
+      buttonName={'Submit'}
     />
   );
 };

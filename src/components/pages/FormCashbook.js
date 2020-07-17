@@ -127,6 +127,7 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
         data={getCashbookFormData}
         onClick={handleCreateNewCashbook}
         actor={actor}
+        buttonName={'Submit'}
       />
     );
   }
