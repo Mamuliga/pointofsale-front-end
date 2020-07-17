@@ -1,0 +1,40 @@
+import React, { useState } from 'react';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
+import { FormHelperText } from '@material-ui/core';
+
+const DueDropDown = ({ entry, getValue }) => {
+  const { value, name, required, id, helperText, error, options } = entry;
+  const [newValue, setNewValue] = useState(value);
+  const handleChange = e => {
+    console.log(e.target.value);
+    setNewValue(e.target.value);
+    if (typeof getValue === 'function') {
+      getValue(e);
+    }
+  };
+
+  return (
+    <Grid item xs={6}>
+      <FormControl fullWidth error={error}>
+        <NativeSelect
+          id={id}
+          value={newValue}
+          onChange={handleChange}
+          name={name}
+          required={required}
+        >
+          {options.map(opt => (
+            <option value=''>{opt.amount}</option>
+          ))}
+          {/* <option value=''>Choose Payement Type</option>
+          <option value='credit'>Credit</option>
+          <option value='debit'>Debit</option> */}
+        </NativeSelect>
+        {error && <FormHelperText>{helperText}</FormHelperText>}
+      </FormControl>
+    </Grid>
+  );
+};
+export default DueDropDown;

@@ -17,6 +17,7 @@ import {
   validateRequiredFields,
   validatePhone,
 } from '../../utilities/helpers/formHelpers/formBuilderhelpers.js/validations';
+import DueDropDown from './FormComponents/DueDropDown';
 
 const FormBuilder = ({
   title,
@@ -121,6 +122,14 @@ const FormBuilder = ({
                 case 'dropDown':
                   return (
                     <DropDown
+                      entry={entry}
+                      key={entry.label}
+                      getValue={getValue}
+                    />
+                  );
+                case 'dueDropDown':
+                  return (
+                    <DueDropDown
                       entry={entry}
                       key={entry.label}
                       getValue={getValue}

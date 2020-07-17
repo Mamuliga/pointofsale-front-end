@@ -84,4 +84,11 @@ export const getCashbookFormDataForDue = [
     rows: 4,
     required: true,
   },
+  {
+    id: 'dueDropdown',
+    type: 'dropDown',
+    label: 'Due dropdown',
+    name: 'dropdown',
+    required: true,
+  },
 ];
