@@ -27,3 +27,61 @@ export const getCashbookFormData = [
     required: true,
   },
 ];
+export const getCashbookFormDataForDue = [
+  {
+    id: 'id',
+    type: 'text',
+    label: 'Custommer ID',
+    name: 'customerId',
+    required: true,
+  },
+  {
+    id: 'firstName',
+    name: 'firstName',
+    type: 'text',
+    label: 'First Name',
+    required: true,
+    // icon: <People />,
+  },
+  {
+    id: 'lastName',
+    name: 'lastName',
+    type: 'text',
+    label: 'Last Name',
+    required: true,
+    // icon: <People />,
+  },
+  {
+    id: 'firstName',
+    name: 'fistName',
+    type: 'text',
+    label: 'First Name',
+    required: true,
+    icon: <MonetizationOnIcon />,
+  },
+  {
+    id: 'refNo',
+    type: 'text',
+    label: 'Ref. No',
+    name: 'refNo',
+    required: true,
+  },
+  {
+    id: 'amount',
+    name: 'amount',
+    type: 'number',
+    label: 'Amount',
+    required: true,
+    // readOnly:true
+    icon: <MonetizationOnIcon />,
+  },
+  {
+    id: 'description',
+    type: 'text',
+    label: 'Description',
+    name: 'description',
+    multiline: true,
+    rows: 4,
+    required: true,
+  },
+];

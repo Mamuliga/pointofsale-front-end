@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import FormBuilder from '../uis/FormBuilder';
 import { useTheme } from '@material-ui/core/styles';
-import { getCashbookFormData } from '../../utilities/helpers/formHelpers/cashbookForm';
+import {
+  getCashbookFormData,
+  getCashbookFormDataForDue,
+} from '../../utilities/helpers/formHelpers/cashbookForm';
 import { getCashbookById, createCashbook } from '../../http/cashbookApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
@@ -17,6 +20,8 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
   const [cashbook, setCashbook] = useState({ type: 'DEBIT' });
   const theme = useTheme();
   const [value, setValue] = React.useState('DEBIT');
+  const [customerDataWithValues, setCustomerDataWithValues] = useState([]);
+
   useEffect(() => {
     const handleGetSuccuess = res => {
       fetchApi(false);
@@ -49,13 +54,43 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
     }
 
     if (customerId) {
+      const handleGetCustomerDuesSuccess = dueData => {
+        console.log(dueData.data);
+        getCustomerById(customerId)
+          .then(handleGetCustomerByIdSuccess)
+          .catch(handleGetCustomerByIdErr);
+      };
+      const handleGetCustomerDuesErr = () => {
+        fetchApi(false);
+      };
+      const handleGetCustomerByIdSuccess = customerData => {
+        console.log(customerData.data);
+        const cusData = customerData.data;
+        fetchApi(false);
+        console.log(cusData);
+        const cashBookFormDataWithCustomerValues = [];
+        Object.keys(cusData).forEach(id => {
+          getCashbookFormDataForDue.forEach(entry => {
+            if (id === entry.id) {
+              cashBookFormDataWithCustomerValues.push({
+                ...entry,
+                value: cusData[`${id}`],
+              });
+            }
+            return null;
+          });
+        });
+        console.log(cashBookFormDataWithCustomerValues);
+        setCustomerDataWithValues([...cashBookFormDataWithCustomerValues]);
+      };
+      const handleGetCustomerByIdErr = () => {
+        fetchApi(false);
+      };
+
       fetchApi(true);
       getDuesByCustomerId(customerId)
-        .then(handleGetSuccuess)
-        .catch(handleGetErr);
-      getCustomerById(customerId)
-        .then(handleGetSuccuess)
-        .catch(handleGetErr);
+        .then(handleGetCustomerDuesSuccess)
+        .catch(handleGetCustomerDuesErr);
     }
   }, [customerId, fetchApi, id, setFetchApiInfo]);
 
@@ -107,7 +142,7 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
     cashbookForm = (
       <FormBuilder
         title={'Create new Cashbook'}
-        data={getCashbookFormData}
+        data={customerId ? customerDataWithValues : getCashbookFormData}
         onClick={handleCreateNewCashbook}
         actor={actor}
       />
