@@ -4,21 +4,16 @@ import { useParams, useHistory } from 'react-router-dom';
 import FormBuilder from '../uis/FormBuilder';
 import { useTheme } from '@material-ui/core/styles';
 import { getCashbookFormData } from '../../utilities/helpers/formHelpers/cashbookForm';
-import {
-  updateCashbookById,
-  getCashbookById,
-  createCashbook,
-  deleteCashbook,
-} from '../../http/cashbookApi';
+import { getCashbookById, createCashbook } from '../../http/cashbookApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 import { Tab, AppBar, Tabs, Box, Typography } from '@material-ui/core';
 import { getDuesByCustomerId } from '../../http/dueApi';
+import { getCustomerById } from '../../http/customerApi';
 
 const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
   const { id, customerId } = useParams();
   const { push } = useHistory();
-  const [dataWithValue, setDataWithValue] = useState([]);
   const [cashbook, setCashbook] = useState({ type: 'DEBIT' });
   const theme = useTheme();
   const [value, setValue] = React.useState('DEBIT');
@@ -37,7 +32,6 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
         });
       });
       setCashbook(newCashbook);
-      setDataWithValue([...dataArray]);
     };
 
     const handleGetErr = () => {
@@ -57,6 +51,9 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
     if (customerId) {
       fetchApi(true);
       getDuesByCustomerId(customerId)
+        .then(handleGetSuccuess)
+        .catch(handleGetErr);
+      getCustomerById(customerId)
         .then(handleGetSuccuess)
         .catch(handleGetErr);
     }
@@ -79,40 +76,6 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
       .catch(handleCreateErr);
   };
 
-  const handleFormSubmit = (updatedCashbook, id) => {
-    const handleUpdateSuccuess = () => {
-      fetchApi(false);
-      push(PAGE_ROUTES.cashbooks);
-    };
-    const handleUpdateErr = () => {
-      fetchApi(false);
-      setFetchApiInfo({
-        type: 'error',
-        message: 'Unable to update cashbook details',
-      });
-    };
-    updatedCashbook.id = undefined;
-    updatedCashbook.roleInPOS = undefined;
-    fetchApi(true);
-    updateCashbookById(id, updatedCashbook)
-      .then(handleUpdateSuccuess)
-      .catch(handleUpdateErr);
-  };
-
-  const handleDelete = () => {
-    const handleDeleteSuccuess = () => {
-      fetchApi(false);
-      push(PAGE_ROUTES.cashbooks);
-    };
-    const handleDeleteError = () => {
-      fetchApi(false);
-      setFetchApiInfo({ type: 'error', message: 'Unable to delete cashbook' });
-    };
-    fetchApi(true);
-    deleteCashbook(cashbook.id)
-      .then(handleDeleteSuccuess)
-      .catch(handleDeleteError);
-  };
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -139,21 +102,7 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
   };
 
   let cashbookForm = null;
-  if (cashbook.id && dataWithValue.length) {
-    const editingCashbook = { ...cashbook };
-    dataWithValue.forEach(field => {
-      editingCashbook[`${field.id}`] = field.value;
-    });
-    cashbookForm = (
-      <FormBuilder
-        title={'Edit cashbook'}
-        data={dataWithValue}
-        onClick={handleFormSubmit}
-        actor={cashbook}
-        handleDelete={handleDelete}
-      />
-    );
-  } else if (!id) {
+  if (!id) {
     const actor = { ...cashbook };
     cashbookForm = (
       <FormBuilder
