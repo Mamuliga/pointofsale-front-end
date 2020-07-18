@@ -26,6 +26,12 @@ export const PAGE_ROUTES = {
   items: '/items',
   newItem: '/items/new',
   editItem: '/items/edit/:id',
+  dailySales: '/dashboard/dailySales',
+  bestSellingCustomer: '/dashboard/bestSellingCustomer',
+  mostSelledItems: '/dashboard/mostSelledItems',
+  paymentTypeAnalytics: '/dashboard/paymentTypeAnalytics',
+  lineGraph: '/dashboard/lineGraph',
+  lowInventory: '/dashboard/lowInventory',
 };
 
 const TOP_MENU_HIDE_ROUTES = {

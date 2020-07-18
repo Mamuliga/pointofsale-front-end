@@ -14,7 +14,14 @@ import {
   Receives,
   Settings,
   FormSettings,
+  Dashboard,
 } from '../components/pages';
+import DailySales from '../components/pages/dashboard/DailySales';
+import BestSellingEmployee from '../components/pages/dashboard/BestSellingCustomer';
+import MostSellingItems from '../components/pages/dashboard/MostSellingItems';
+import PaymentTypeAnalytics from '../components/pages/dashboard/PaymentTypeAnalytics';
+import LineGraph from '../components/pages/dashboard/LineGraph';
+import LowInventory from '../components/pages/dashboard/LowInventory';
 
 export const customerRoutes = [
   {
@@ -113,5 +120,35 @@ export const settingsRoutes = [
   {
     path: PAGE_ROUTES.editSettings,
     component: FormSettings,
+  },
+];
+export const dashboardRoutes = [
+  {
+    path: PAGE_ROUTES.home,
+    component: Dashboard,
+  },
+  {
+    path: PAGE_ROUTES.dailySales,
+    component: DailySales,
+  },
+  {
+    path: PAGE_ROUTES.bestSellingCustomer,
+    component: BestSellingEmployee,
+  },
+  {
+    path: PAGE_ROUTES.mostSelledItems,
+    component: MostSellingItems,
+  },
+  {
+    path: PAGE_ROUTES.paymentTypeAnalytics,
+    component: PaymentTypeAnalytics,
+  },
+  {
+    path: PAGE_ROUTES.lineGraph,
+    component: LineGraph,
+  },
+  {
+    path: PAGE_ROUTES.lowInventory,
+    component: LowInventory,
   },
 ];

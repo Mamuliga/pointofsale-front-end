@@ -19,11 +19,19 @@ import {
   saleRoutes,
   receiveRoutes,
   settingsRoutes,
+  dashboardRoutes,
 } from './routeHelper';
 
 const Routes = props => (
   <Switch>
-    <ProtectedRoute exact path={PAGE_ROUTES.home} component={Dashboard} />
+    {dashboardRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
     <ProtectedRoute
       exact
       path={PAGE_ROUTES.login}
@@ -95,9 +103,6 @@ const Routes = props => (
         key={route.path}
       />
     ))}
-
-    <ProtectedRoute exact path={PAGE_ROUTES.customers} component={Customers} />
-
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
     <ProtectedRoute exact path={PAGE_ROUTES.settings} component={Settings} />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
