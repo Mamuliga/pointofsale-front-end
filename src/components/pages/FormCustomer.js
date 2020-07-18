@@ -44,7 +44,9 @@ const FormCustomer = ({ fetchApi, setFetchApiInfo }) => {
     };
     if (id) {
       fetchApi(true);
-      getCustomerById(id).then(handleGetSuccuess).catch(handleGetErr);
+      getCustomerById(id)
+        .then(handleGetSuccuess)
+        .catch(handleGetErr);
     }
   }, [fetchApi, id, setFetchApiInfo]);
 

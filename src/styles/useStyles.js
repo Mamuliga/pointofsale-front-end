@@ -46,6 +46,9 @@ export default makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  customerContainer: {
+    marginTop: '13%',
+  },
   mainRouteViewLeftSidebar: {
     maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH}px)`,
     marginLeft: LEFT_SIDE_BAR_WIDTH,
@@ -92,6 +95,7 @@ export default makeStyles(theme => ({
     display: 'flex',
     width: '100%',
     justifyContent: 'space-between',
+    marginTop: '10px',
   },
   searchIcon: {
     height: '100%',
@@ -137,7 +141,7 @@ export default makeStyles(theme => ({
     position: 'absolute',
     top: '400px',
   },
-  salesPageBottomInputs: {
+  sideMenuPageBottomInputs: {
     position: 'fixed',
     bottom: 0,
   },
@@ -265,5 +269,9 @@ export default makeStyles(theme => ({
   },
   toolTipSecondRow: {
     justifyContent: 'space-around',
+  },
+  paymentdropDown: {
+    width: '100%',
+    margin: '10px 0',
   },
 }));
