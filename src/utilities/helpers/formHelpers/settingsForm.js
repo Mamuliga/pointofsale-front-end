@@ -5,7 +5,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import PublicIcon from '@material-ui/icons/Public';
-
+import PrintIcon from '@material-ui/icons/Print';
 export const getSettingsFormData = [
   {
     id: 'avatar',
@@ -56,6 +56,14 @@ export const getSettingsFormData = [
     icon: <PhoneIphoneIcon />,
   },
   {
+    id: 'fax',
+    name: 'fax',
+    type: 'tel',
+    label: 'Fax',
+    required: false,
+    icon: <PrintIcon />,
+  },
+  {
     id: 'openingTime',
     type: 'text',
     label: 'opening Time',
@@ -72,10 +80,10 @@ export const getSettingsFormData = [
     icon: <LocalOfferIcon />,
   },
   {
-    id: 'description',
+    id: 'returnPolicy',
     type: 'text',
-    label: 'Description',
-    name: 'description',
+    label: 'Return Policy',
+    name: 'returnPolicy',
     multiline: true,
     rows: 4,
     required: false,

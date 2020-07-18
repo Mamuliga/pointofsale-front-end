@@ -120,7 +120,7 @@ const FormSettings = ({ fetchApi, setFetchApiInfo }) => {
     }
     return null;
   } else if (!id) {
-    const actor = { ...settings };
+    const actor = { ...settings, logo: 'wewe' };
     return (
       <FormBuilder
         title={'Settings'}
