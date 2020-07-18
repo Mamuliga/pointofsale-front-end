@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import CreateIcon from '@material-ui/icons/Create';
 import DatePicker from './FormComponents/DatePicker';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import DropDown from './FormComponents/DropDown';
+import Dropdown from './FormComponents/Dropdown';
 import CustomSwitch from './FormComponents/CustomSwitch';
 import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
@@ -17,7 +17,6 @@ import {
   validateRequiredFields,
   validatePhone,
 } from '../../utilities/helpers/formHelpers/formBuilderhelpers.js/validations';
-import DueDropDown from './FormComponents/DueDropDown';
 
 const FormBuilder = ({
   title,
@@ -119,17 +118,9 @@ const FormBuilder = ({
                       getValue={getValue}
                     />
                   );
-                case 'dropDown':
+                case 'dropdown':
                   return (
-                    <DropDown
-                      entry={entry}
-                      key={entry.label}
-                      getValue={getValue}
-                    />
-                  );
-                case 'dueDropDown':
-                  return (
-                    <DueDropDown
+                    <Dropdown
                       entry={entry}
                       key={entry.label}
                       getValue={getValue}

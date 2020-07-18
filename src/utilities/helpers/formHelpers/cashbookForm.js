@@ -52,14 +52,6 @@ export const getCashbookFormDataForDue = [
     // icon: <People />,
   },
   {
-    id: 'firstName',
-    name: 'fistName',
-    type: 'text',
-    label: 'First Name',
-    required: true,
-    icon: <MonetizationOnIcon />,
-  },
-  {
     id: 'refNo',
     type: 'text',
     label: 'Ref. No',
@@ -85,10 +77,11 @@ export const getCashbookFormDataForDue = [
     required: true,
   },
   {
-    id: 'dueDropdown',
-    type: 'dropDown',
+    id: 'dropdown',
+    type: 'dropdown',
     label: 'Due dropdown',
     name: 'dropdown',
     required: true,
+    multiple: true,
   },
 ];

@@ -21,7 +21,7 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
   const theme = useTheme();
   const [value, setValue] = React.useState('DEBIT');
   const [customerDataWithValues, setCustomerDataWithValues] = useState([]);
-  const [dueData, setDueData] = useState([]);
+  const [dropdown, setDueData] = useState([]);
 
   useEffect(() => {
     const handleGetSuccuess = res => {
@@ -57,19 +57,20 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
     if (customerId) {
       const handleGetCustomerDuesSuccess = dueData => {
         console.log(dueData.data);
-        // setDueData(dueData.data);...set due option
+        setDueData(dueData.data);
         getCustomerById(customerId)
-          .then(handleGetCustomerByIdSuccess)
+          .then(res => handleGetCustomerByIdSuccess(res, dueData))
           .catch(handleGetCustomerByIdErr);
       };
       const handleGetCustomerDuesErr = () => {
         fetchApi(false);
       };
-      const handleGetCustomerByIdSuccess = customerData => {
+      const handleGetCustomerByIdSuccess = (customerData, dueData) => {
         console.log(customerData.data);
         const cusData = {
           ...customerData.data,
-          ...{ dueDropdown: 'dueDropdown', options: {} },
+          ...{ amount: '' },
+          ...{ dropdown: dueData.data },
         };
         fetchApi(false);
         console.log(cusData, { id: 'dueDropdown' });
