@@ -6,14 +6,12 @@ import { getSettingsFormData } from '../../utilities/helpers/formHelpers/setting
 import {
   updateSettingsById,
   getSettingsById,
-  createSettings,
   deleteSettings,
 } from '../../http/settingsApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
 
 const FormSettings = ({ fetchApi, setFetchApiInfo }) => {
-  const { id } = useParams();
   const { push } = useHistory();
   const [dataWithValue, setDataWithValue] = useState([]);
   const [settings, setSettings] = useState({});
@@ -42,28 +40,10 @@ const FormSettings = ({ fetchApi, setFetchApiInfo }) => {
         message: 'Unable to get the settings details',
       });
     };
-    if (id) {
-      fetchApi(true);
-      getSettingsById(id).then(handleGetSuccuess).catch(handleGetErr);
-    }
-  }, [fetchApi, id, setFetchApiInfo]);
 
-  const handleCreateNewSettings = newSettings => {
-    const handleCreateSuccuess = res => {
-      fetchApi(false);
-      push(PAGE_ROUTES.settings);
-      setFetchApiInfo({ type: 'success', message: 'Succuessfully created' });
-    };
-    const handleCreateErr = err => {
-      console.log(err);
-      fetchApi(false);
-      setFetchApiInfo({ type: 'error', message: 'Unable to create Settings' });
-    };
     fetchApi(true);
-    createSettings(newSettings)
-      .then(handleCreateSuccuess)
-      .catch(handleCreateErr);
-  };
+    getSettingsById(1).then(handleGetSuccuess).catch(handleGetErr);
+  }, [fetchApi, setFetchApiInfo]);
 
   const handleFormSubmit = (updatedSettings, id) => {
     const handleUpdateSuccuess = res => {
@@ -85,53 +65,17 @@ const FormSettings = ({ fetchApi, setFetchApiInfo }) => {
       .then(handleUpdateSuccuess)
       .catch(handleUpdateErr);
   };
-
-  const handleDelete = () => {
-    const handleDeleteSuccuess = () => {
-      fetchApi(false);
-      push(PAGE_ROUTES.settings);
-    };
-    const handleDeleteError = err => {
-      fetchApi(false);
-      setFetchApiInfo({ type: 'error', message: 'Unable to delete settings' });
-    };
-    fetchApi(true);
-    deleteSettings(settings.id)
-      .then(handleDeleteSuccuess)
-      .catch(handleDeleteError);
-  };
-
-  if (settings.id && dataWithValue.length) {
-    const editingSettings = { ...settings };
-    dataWithValue.forEach(field => {
-      editingSettings[`${field.id}`] = field.value;
-    });
-    console.log(editingSettings);
-    if (editingSettings) {
-      return (
-        <FormBuilder
-          title={'Edit Settings'}
-          data={dataWithValue}
-          onClick={handleFormSubmit}
-          actor={editingSettings}
-          handleDelete={handleDelete}
-        />
-      );
-    }
-    return null;
-  } else if (!id) {
-    const actor = { ...settings, logo: 'wewe' };
-    return (
-      <FormBuilder
-        title={'Settings'}
-        data={getSettingsFormData}
-        onClick={handleCreateNewSettings}
-        actor={actor}
-        buttonName={'Save Changes'}
-      />
-    );
-  }
-  return null;
+  const actor = { ...settings, logo: 'wewe' };
+  return (
+    <FormBuilder
+      title={'Settings'}
+      data={dataWithValue}
+      onClick={handleFormSubmit}
+      actor={actor}
+      hideDeleteButton
+      buttonName={'Save Changes'}
+    />
+  );
 };
 
 const mapStateToProps = ({ global }) => {

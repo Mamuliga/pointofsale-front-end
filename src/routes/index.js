@@ -6,7 +6,7 @@ import {
   Customers,
   NotFoundPage,
   Items,
-  Settings,
+  FormSettings,
 } from '../components/pages';
 import ProtectedRoute from './ProtectedRoute';
 import { PAGE_ROUTES } from '../services/routeService';
@@ -104,7 +104,11 @@ const Routes = props => (
       />
     ))}
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
-    <ProtectedRoute exact path={PAGE_ROUTES.settings} component={Settings} />
+    <ProtectedRoute
+      exact
+      path={PAGE_ROUTES.settings}
+      component={FormSettings}
+    />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
   </Switch>
 );

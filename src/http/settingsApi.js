@@ -9,7 +9,7 @@ export async function getSettingsById(id) {
 }
 
 export async function updateSettingsById(id, body) {
-  return await http.put(`./settings/${id}`, body);
+  return await http.put(`./settings/1`, body);
 }
 
 export async function createSettings(body) {

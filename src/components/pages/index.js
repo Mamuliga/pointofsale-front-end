@@ -14,7 +14,6 @@ import Suppliers from './Suppliers';
 import Cashbooks from './Cashbooks';
 import Sales from './Sales';
 import Receives from './Receives';
-import Settings from './Settings';
 
 export {
   Dashboard,
@@ -26,7 +25,6 @@ export {
   Receives,
   Items,
   Cashbooks,
-  Settings,
   NotFoundPage,
   FormCustomer,
   FormEmployee,

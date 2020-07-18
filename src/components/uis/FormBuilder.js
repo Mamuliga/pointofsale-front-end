@@ -27,6 +27,7 @@ const FormBuilder = ({
   onClick,
   actor = {},
   handleDelete,
+  hideDeleteButton,
   handleDatePickerChange,
 }) => {
   console.log(data);
@@ -154,7 +155,7 @@ const FormBuilder = ({
           >
             {buttonName}
           </Button>
-          {actor.id && (
+          {actor.id && !hideDeleteButton && (
             <Button
               variant='contained'
               color='secondary'
