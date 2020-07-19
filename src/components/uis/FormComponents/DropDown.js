@@ -48,10 +48,14 @@ const Dropdown = ({ entry, getValue }) => {
     };
   }
   const handleChange = event => {
-    event.target.value = event.target.value.amount;
     console.log(event.target.value.amount);
+    console.log(duePayment);
     setDuePayment([...duePayment, event.target.value]);
     if (typeof getValue === 'function') {
+      event.target.value = duePayment.reduce(
+        (a, b) => a + b.amount,
+        event.target.value.amount
+      );
       getValue(event);
     }
   };
