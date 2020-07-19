@@ -7,15 +7,16 @@ import {
   getCashbookFormData,
   getCashbookFormDataForDue,
 } from '../../utilities/helpers/formHelpers/cashbookForm';
-import { getCashbookById, createCashbook } from '../../http/cashbookApi';
+import { createCashbook } from '../../http/cashbookApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
-import { Tab, AppBar, Tabs, Box, Typography } from '@material-ui/core';
+import { Tab, AppBar, Tabs } from '@material-ui/core';
 import { getDuesByCustomerId } from '../../http/dueApi';
 import { getCustomerById } from '../../http/customerApi';
+import TabPanel from '../uis/FormComponents/TabPanel';
 
 const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
-  const { id, customerId } = useParams();
+  const { customerId } = useParams();
   const { push } = useHistory();
   const [cashbook, setCashbook] = useState({
     type: 'DEBIT',
@@ -24,45 +25,12 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
     amount: 0,
   });
   const theme = useTheme();
-  const [value, setValue] = React.useState('DEBIT');
+  const [tabPanelValue, setTabPanelValue] = React.useState('DEBIT');
   const [customerDataWithValues, setCustomerDataWithValues] = useState([]);
-  const [dropdown, setDueData] = useState([]);
 
   useEffect(() => {
-    const handleGetSuccuess = res => {
-      fetchApi(false);
-      const dataArray = [];
-      const data = getCashbookFormData;
-      const newCashbook = res.data;
-      Object.keys(res.data).forEach(id => {
-        data.forEach(entry => {
-          if (id === entry.id) {
-            dataArray.push({ ...entry, value: newCashbook[`${id}`] });
-          }
-          return null;
-        });
-      });
-      setCashbook(newCashbook);
-    };
-
-    const handleGetErr = () => {
-      fetchApi(false);
-      setFetchApiInfo({
-        type: 'error',
-        message: 'Unable to get the cashbook details',
-      });
-    };
-    if (id) {
-      fetchApi(true);
-      getCashbookById(id)
-        .then(handleGetSuccuess)
-        .catch(handleGetErr);
-    }
-
     if (customerId) {
       const handleGetCustomerDuesSuccess = dueData => {
-        console.log(dueData.data);
-        setDueData(dueData.data);
         getCustomerById(customerId)
           .then(res => handleGetCustomerByIdSuccess(res, dueData))
           .catch(handleGetCustomerByIdErr);
@@ -71,13 +39,11 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
         fetchApi(false);
       };
       const handleGetCustomerByIdSuccess = (customerData, dueData) => {
-        console.log(customerData.data);
         const cusData = {
           ...customerData.data,
           amount: dueData.data,
         };
         fetchApi(false);
-        console.log(cusData);
         const cashBookFormDataWithCustomerValues = [];
         Object.keys(cusData).forEach(id => {
           getCashbookFormDataForDue.forEach(entry => {
@@ -90,7 +56,6 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
             return null;
           });
         });
-        console.log(cashBookFormDataWithCustomerValues);
         setCustomerDataWithValues([...cashBookFormDataWithCustomerValues]);
       };
       const handleGetCustomerByIdErr = () => {
@@ -102,7 +67,7 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
         .then(handleGetCustomerDuesSuccess)
         .catch(handleGetCustomerDuesErr);
     }
-  }, [customerId, fetchApi, id, setFetchApiInfo]);
+  }, [customerId, fetchApi, setFetchApiInfo]);
 
   const handleCreateNewCashbook = newCashbook => {
     const handleCreateSuccuess = () => {
@@ -121,49 +86,30 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
       .catch(handleCreateErr);
   };
 
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-      <div
-        role='tabpanel'
-        hidden={value !== index}
-        id={`full-width-tabpanel-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
-
   const handleChange = (_event, newValue) => {
-    setValue(newValue);
+    setTabPanelValue(newValue);
     setCashbook({ ...cashbook, type: newValue });
-    console.log(newValue);
   };
 
-  let cashbookForm = null;
-  if (!id) {
-    const actor = { ...cashbook };
-    cashbookForm = (
-      <FormBuilder
-        title={'Create new Cashbook'}
-        data={customerId ? customerDataWithValues : getCashbookFormData}
-        onClick={handleCreateNewCashbook}
-        actor={actor}
-      />
-    );
-  }
+  const actor = { ...cashbook };
+  const cashbookForm = (
+    <FormBuilder
+      title={'Create new Cashbook'}
+      data={
+        customerId && tabPanelValue === 'DEBIT'
+          ? customerDataWithValues
+          : getCashbookFormData
+      }
+      onClick={handleCreateNewCashbook}
+      actor={actor}
+    />
+  );
 
   return (
     <div>
       <AppBar position='static' color='default'>
         <Tabs
-          value={value}
+          value={tabPanelValue}
           onChange={handleChange}
           indicatorColor='primary'
           textColor='primary'
@@ -174,10 +120,10 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
         </Tabs>
       </AppBar>
       <div>
-        <TabPanel value={value} index={'CREDIT'} dir={theme.direction}>
+        <TabPanel value={tabPanelValue} index={'CREDIT'} dir={theme.direction}>
           {cashbookForm}
         </TabPanel>
-        <TabPanel value={value} index={'DEBIT'} dir={theme.direction}>
+        <TabPanel value={tabPanelValue} index={'DEBIT'} dir={theme.direction}>
           {cashbookForm}
         </TabPanel>
       </div>

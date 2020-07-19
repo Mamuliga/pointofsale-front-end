@@ -286,4 +286,12 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto',
   },
+  dropdownControl: {
+    width: '100%',
+  },
+  dropdownChips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  dropdownChip: {},
 }));

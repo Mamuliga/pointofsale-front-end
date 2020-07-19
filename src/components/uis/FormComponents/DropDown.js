@@ -7,37 +7,12 @@ import {
   Input,
   Chip,
   MenuItem,
-  makeStyles,
   FormHelperText,
 } from '@material-ui/core';
+import useStyles from '../../../styles/useStyles.js';
 
 import { useTheme } from '@material-ui/styles';
 const Dropdown = ({ entry, getValue }) => {
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      },
-    },
-  };
-  const useStyles = makeStyles(theme => ({
-    formControl: {
-      width: '100%',
-    },
-    chips: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    chip: {
-      margin: 2,
-    },
-    noLabel: {
-      marginTop: theme.spacing(3),
-    },
-  }));
   const { value, name, id, label, helperText, error } = entry;
   const [duePayment, setDuePayment] = React.useState([]);
   const classes = useStyles();
@@ -77,7 +52,7 @@ const Dropdown = ({ entry, getValue }) => {
 
   return (
     <Grid item xs={6}>
-      <FormControl className={classes.formControl}>
+      <FormControl className={classes.dropdownControl}>
         <InputLabel id={label}>Due</InputLabel>
         <Select
           labelId={label}
@@ -87,17 +62,16 @@ const Dropdown = ({ entry, getValue }) => {
           input={<Input id='Select due' />}
           name={name}
           renderValue={selected => (
-            <div className={classes.chips}>
+            <div className={classes.dropdownChips}>
               {selected.map(due => (
                 <Chip
                   key={due.id}
                   label={`Rs. ${parseFloat(due.total).toFixed(2)}`}
-                  className={classes.chip}
+                  className={classes.dropdownChip}
                 />
               ))}
             </div>
           )}
-          MenuProps={MenuProps}
         >
           {value.map(value => (
             <MenuItem
