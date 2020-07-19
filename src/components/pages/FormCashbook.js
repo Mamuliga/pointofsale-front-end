@@ -76,7 +76,6 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
       setFetchApiInfo({ type: 'success', message: 'Succuessfully created' });
     };
     const handleCreateErr = err => {
-      console.log(err);
       fetchApi(false);
       setFetchApiInfo({ type: 'error', message: 'Unable to create cashbook' });
     };

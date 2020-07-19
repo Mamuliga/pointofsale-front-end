@@ -293,5 +293,4 @@ export default makeStyles(theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-  dropdownChip: {},
 }));

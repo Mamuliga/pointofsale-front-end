@@ -67,7 +67,6 @@ const Dropdown = ({ entry, getValue }) => {
                 <Chip
                   key={due.id}
                   label={`Rs. ${parseFloat(due.total).toFixed(2)}`}
-                  className={classes.dropdownChip}
                 />
               ))}
             </div>
