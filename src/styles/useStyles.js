@@ -50,12 +50,12 @@ export default makeStyles(theme => ({
     marginTop: '13%',
   },
   mainRouteViewLeftSidebar: {
-    maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH}px)`,
+    maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH})`,
     marginLeft: LEFT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT,
   },
   mainRouteViewRightSidebar: {
-    maxWidth: `calc(100% - ${RIGHT_SIDE_BAR_WIDTH}px)`,
+    maxWidth: `calc(100% - ${RIGHT_SIDE_BAR_WIDTH})`,
     marginRight: RIGHT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT,
   },
@@ -70,10 +70,6 @@ export default makeStyles(theme => ({
     padding: theme.spacing(1),
     color: 'inherit',
     opacity: 0.7,
-  },
-  leftMenubar: {
-    display: 'flex',
-    flex: 1,
   },
   copyrightLabel: {
     position: 'absolute',
