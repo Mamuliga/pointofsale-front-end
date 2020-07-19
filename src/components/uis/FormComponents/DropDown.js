@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import {
@@ -8,6 +8,7 @@ import {
   Chip,
   MenuItem,
   makeStyles,
+  FormHelperText,
 } from '@material-ui/core';
 
 import { useTheme } from '@material-ui/styles';
@@ -37,26 +38,40 @@ const Dropdown = ({ entry, getValue }) => {
       marginTop: theme.spacing(3),
     },
   }));
-  const { value, name, required, id, error, multiple, label } = entry;
+  const { value, name, id, label, helperText, error } = entry;
   const [duePayment, setDuePayment] = React.useState([]);
   const classes = useStyles();
   const theme = useTheme();
+  const totalDueAmount = (amount = 0) =>
+    duePayment.reduce((a, b) => a + b.amount, amount);
 
-  function getStyles(name, personName, theme) {
+  function getStyles(dueId) {
+    const isSelected = duePayment.filter(due => due.id === dueId);
     return {
-      // fontWeight: personName.id.indexOf(name) === -1 ? 'normal' : 'bold',
+      fontWeight: isSelected.length ? 'bold' : 'normal',
     };
   }
   const handleChange = event => {
-    console.log(event.target.value.amount);
-    console.log(duePayment);
-    setDuePayment([...duePayment, event.target.value]);
-    if (typeof getValue === 'function') {
-      event.target.value = duePayment.reduce(
-        (a, b) => a + b.amount,
-        event.target.value.amount
-      );
-      getValue(event);
+    let arrayIndex = -1;
+    duePayment.forEach((due, index) => {
+      if (due.id === event.target.value.id) {
+        arrayIndex = index;
+      }
+    });
+    console.log(arrayIndex);
+    if (arrayIndex < 0) {
+      setDuePayment([...duePayment, event.target.value]);
+      if (typeof getValue === 'function') {
+        event.target.value = totalDueAmount(event.target.value.amount);
+        getValue(event);
+      }
+    } else {
+      duePayment.splice(arrayIndex, 1);
+      setDuePayment([...duePayment]);
+      if (typeof getValue === 'function') {
+        event.target.value = totalDueAmount();
+        getValue(event);
+      }
     }
   };
 
@@ -88,7 +103,7 @@ const Dropdown = ({ entry, getValue }) => {
             <MenuItem
               key={id}
               value={value}
-              style={getStyles(id, duePayment, theme)}
+              style={getStyles(value.id, duePayment, theme)}
             >
               {`pay due Rs. ${parseFloat(value.amount).toFixed(
                 2
@@ -99,6 +114,7 @@ const Dropdown = ({ entry, getValue }) => {
             </MenuItem>
           ))}
         </Select>
+        {error && <FormHelperText error>{helperText}</FormHelperText>}
       </FormControl>
     </Grid>
   );
