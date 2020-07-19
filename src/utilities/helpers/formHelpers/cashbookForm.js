@@ -34,6 +34,7 @@ export const getCashbookFormDataForDue = [
     label: 'Custommer ID',
     name: 'customerId',
     required: true,
+    readOnly: true,
   },
   {
     id: 'firstName',
@@ -41,6 +42,7 @@ export const getCashbookFormDataForDue = [
     type: 'text',
     label: 'First Name',
     required: true,
+    readOnly: true,
     // icon: <People />,
   },
   {
@@ -49,6 +51,7 @@ export const getCashbookFormDataForDue = [
     type: 'text',
     label: 'Last Name',
     required: true,
+    readOnly: true,
     // icon: <People />,
   },
   {
@@ -59,24 +62,6 @@ export const getCashbookFormDataForDue = [
     required: true,
   },
   {
-    id: 'amount',
-    name: 'amount',
-    type: 'number',
-    label: 'Amount',
-    required: true,
-    // readOnly:true
-    icon: <MonetizationOnIcon />,
-  },
-  {
-    id: 'description',
-    type: 'text',
-    label: 'Description',
-    name: 'description',
-    multiline: true,
-    rows: 4,
-    required: true,
-  },
-  {
     id: 'dropdown',
     type: 'dropdown',
     label: 'Due dropdown',
@@ -84,4 +69,13 @@ export const getCashbookFormDataForDue = [
     required: true,
     multiple: true,
   },
+  // {
+  //   id: 'description',
+  //   type: 'text',
+  //   label: 'Description',
+  //   name: 'description',
+  //   multiline: true,
+  //   rows: 4,
+  //   required: true,
+  // },
 ];

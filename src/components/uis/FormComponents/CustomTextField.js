@@ -17,10 +17,11 @@ const CustomTextField = ({ entry, getValue }) => {
     id,
     helperText,
     error,
+    readOnly,
   } = entry;
   const [newValue, setNewValue] = useState(value);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     console.log(e.target.value);
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
@@ -49,6 +50,7 @@ const CustomTextField = ({ entry, getValue }) => {
           startAdornment: (
             <InputAdornment position='start'>{icon}</InputAdornment>
           ),
+          readOnly,
         }}
       />
     </Grid>
