@@ -20,11 +20,11 @@ const CustomTextField = ({ entry, getValue }) => {
   } = entry;
   const [newValue, setNewValue] = useState(value);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     console.log(e.target.value);
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
-      getValue(e);
+      getValue(e.target.name, e.target.value);
     }
   };
   return (
