@@ -24,9 +24,7 @@ const Dropdown = ({ entry, getValue }) => {
   };
   const useStyles = makeStyles(theme => ({
     formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-      maxWidth: 300,
+      width: '100%',
     },
     chips: {
       display: 'flex',
@@ -39,32 +37,10 @@ const Dropdown = ({ entry, getValue }) => {
       marginTop: theme.spacing(3),
     },
   }));
-  const {
-    value,
-    name,
-    required,
-    id,
-    helperText,
-    error,
-    multiple,
-    label,
-  } = entry;
-  const [newValue, setNewValue] = useState(value);
-  const [personName, setPersonName] = React.useState([]);
+  const { value, name, required, id, error, multiple, label } = entry;
+  const [duePayment, setDuePayment] = React.useState([]);
   const classes = useStyles();
   const theme = useTheme();
-  const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-  ];
 
   function getStyles(name, personName, theme) {
     return {
@@ -72,7 +48,8 @@ const Dropdown = ({ entry, getValue }) => {
     };
   }
   const handleChange = event => {
-    setPersonName(event.target.value);
+    console.log(event.target.value);
+    setDuePayment([...duePayment, event.target.value]);
   };
 
   return (
@@ -82,29 +59,37 @@ const Dropdown = ({ entry, getValue }) => {
         <Select
           labelId={label}
           id={id}
-          value={personName}
+          value={duePayment}
           onChange={handleChange}
           input={<Input id='Select due' />}
           renderValue={selected => (
             <div className={classes.chips}>
-              {selected.map(amount => (
-                <Chip key={amount} label={amount} className={classes.chip} />
+              {selected.map(due => (
+                <Chip
+                  key={due.id}
+                  label={`Rs. ${parseFloat(due.total).toFixed(2)}`}
+                  className={classes.chip}
+                />
               ))}
             </div>
           )}
           MenuProps={MenuProps}
         >
-          {newValue.map(({ id, amount }) => (
+          {value.map(value => (
             <MenuItem
               key={id}
-              value={[]}
-              style={getStyles(id, personName, theme)}
+              value={value}
+              style={getStyles(id, duePayment, theme)}
             >
-              {`Id is ${id} - Amount is ${amount}`}
+              {`pay due Rs. ${parseFloat(value.amount).toFixed(
+                2
+              )} on ${new Date(value.createdAt).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+              })}`}
             </MenuItem>
           ))}
         </Select>
-        {/* {error && <FormHelperText>{helperText}</FormHelperText>} */}
       </FormControl>
     </Grid>
   );
