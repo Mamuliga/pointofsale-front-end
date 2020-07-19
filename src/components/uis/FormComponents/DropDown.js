@@ -48,8 +48,12 @@ const Dropdown = ({ entry, getValue }) => {
     };
   }
   const handleChange = event => {
-    console.log(event.target.value);
+    event.target.value = event.target.value.amount;
+    console.log(event.target.value.amount);
     setDuePayment([...duePayment, event.target.value]);
+    if (typeof getValue === 'function') {
+      getValue(event);
+    }
   };
 
   return (
@@ -62,6 +66,7 @@ const Dropdown = ({ entry, getValue }) => {
           value={duePayment}
           onChange={handleChange}
           input={<Input id='Select due' />}
+          name={name}
           renderValue={selected => (
             <div className={classes.chips}>
               {selected.map(due => (

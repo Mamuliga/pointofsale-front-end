@@ -55,6 +55,7 @@ const FormBuilder = ({
       onClick(newActor, actor.id);
     } else {
       console.log('Form validation error');
+      console.log(errors);
     }
   };
 
@@ -119,6 +120,7 @@ const FormBuilder = ({
                     />
                   );
                 case 'dropdown':
+                case 'amount':
                   return (
                     <Dropdown
                       entry={entry}

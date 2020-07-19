@@ -17,7 +17,12 @@ import { getCustomerById } from '../../http/customerApi';
 const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
   const { id, customerId } = useParams();
   const { push } = useHistory();
-  const [cashbook, setCashbook] = useState({ type: 'DEBIT' });
+  const [cashbook, setCashbook] = useState({
+    type: 'DEBIT',
+    refNo: 1,
+    description: 'DUE_PAYMENT',
+    amount: 0,
+  });
   const theme = useTheme();
   const [value, setValue] = React.useState('DEBIT');
   const [customerDataWithValues, setCustomerDataWithValues] = useState([]);
@@ -69,11 +74,10 @@ const FormCashbook = ({ fetchApi, setFetchApiInfo }) => {
         console.log(customerData.data);
         const cusData = {
           ...customerData.data,
-          ...{ amount: '' },
-          ...{ dropdown: dueData.data },
+          amount: dueData.data,
         };
         fetchApi(false);
-        console.log(cusData, { id: 'dueDropdown' });
+        console.log(cusData);
         const cashBookFormDataWithCustomerValues = [];
         Object.keys(cusData).forEach(id => {
           getCashbookFormDataForDue.forEach(entry => {
