@@ -8,6 +8,10 @@ export async function itemSearch(param) {
   return await http.get(`/items/search/${param}`, { limit: 20 });
 }
 
+export async function itemSearchForReceives(param) {
+  return await http.get(`items/item-search/${param}`, { limit: 20 });
+}
+
 export async function getItemById(id) {
   return await http.get(`./items/${id}`);
 }

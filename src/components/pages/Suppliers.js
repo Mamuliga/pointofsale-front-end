@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import TableBuilder from '../uis/TableBuilder.js';
 import { useHistory } from 'react-router-dom';
 import { getSupplierTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getSupplierList } from '../../http/supplierApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
+import useStyles from '../../styles/useStyles.js';
+import { searchSupplier } from '../../http/supplierApi';
+import { TextField, CircularProgress } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
   const [supplierList, setSupplierList] = useState([]);
-
+  const [suggestions, setSuggestions] = useState([]);
+  const [fetchSuppliers, setFetchSuppliers] = useState(false);
+  const classes = useStyles();
   useEffect(() => {
     //   getSupplierList()
     //     .then(res => {
@@ -55,13 +62,71 @@ const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
     return editClick;
   };
 
+  const handleSearchSubmit = () => {};
+
+  const handleSearchChange = e => {
+    const searchSuccess = res => {
+      setFetchSuppliers(false);
+      console.log(res.data);
+      if (Array.isArray(res.data)) {
+        setSuggestions(res.data);
+      }
+    };
+
+    const searchErr = () => {
+      setFetchApiInfo({ type: 'error', message: 'Unable to search suppliers' });
+      setFetchSuppliers(false);
+    };
+    setFetchSuppliers(true);
+    searchSupplier(e.target.value).then(searchSuccess).catch(searchErr);
+  };
+
+  const searchComponent = (
+    <div className={classes.inputsTop}>
+      <div className={classes.searchTab}>
+        <Autocomplete
+          id='customer search-item-search'
+          getOptionLabel={option => `${option.firstName}-${option.lastName}`}
+          options={suggestions}
+          onChange={handleSearchSubmit}
+          loading={fetchSuppliers}
+          renderInput={params => (
+            <TextField
+              autoFocus
+              {...params}
+              label='Enter a Supplier Name or Id'
+              noOptionsText={'No suppliers found'}
+              variant='outlined'
+              onChange={handleSearchChange}
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: <SearchIcon />,
+                endAdornment: (
+                  <Fragment>
+                    {fetchSuppliers && (
+                      <CircularProgress color='inherit' size={20} />
+                    )}
+                    {params.InputProps.endAdornment}
+                  </Fragment>
+                ),
+              }}
+            />
+          )}
+        />
+      </div>
+    </div>
+  );
+
   return (
-    <TableBuilder
-      tableData={supplierList}
-      tableHeaders={getSupplierTableHeaders}
-      handleEdit={handleEdit}
-      title={'Suppliers'}
-    />
+    <div className={classes.customerContainer}>
+      {searchComponent}
+      <TableBuilder
+        tableData={supplierList}
+        tableHeaders={getSupplierTableHeaders}
+        handleEdit={handleEdit}
+        title={'Suppliers'}
+      />
+    </div>
   );
 };
 

@@ -49,6 +49,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
       const {
         item: { id, itemName },
         salesPrice,
+        id: itemStatId,
       } = value;
       cartItems.push({
         id,
@@ -57,6 +58,7 @@ const Sales = ({ setFetchApiInfo, cartItems, setCartItems }) => {
         quantity: 1,
         discount: parseFloat(0).toFixed(2),
         total: parseFloat(salesPrice).toFixed(2),
+        itemStatId,
       });
       setCartItems([...cartItems]);
     }

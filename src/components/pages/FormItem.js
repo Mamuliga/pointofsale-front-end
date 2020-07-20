@@ -45,7 +45,9 @@ const FormItem = ({ fetchApi, setFetchApiInfo }) => {
     };
     if (id) {
       fetchApi(true);
-      getItemById(id).then(handleGetSuccuess).catch(handleGetErr);
+      getItemById(id)
+        .then(handleGetSuccuess)
+        .catch(handleGetErr);
     }
   }, [fetchApi, id, setFetchApiInfo]);
 
@@ -61,7 +63,9 @@ const FormItem = ({ fetchApi, setFetchApiInfo }) => {
       setFetchApiInfo({ type: 'error', message: 'unable to create item' });
     };
     fetchApi(true);
-    createItem(newItem).then(handleCreateSuccuess).catch(handleCreateErr);
+    createItem(newItem)
+      .then(handleCreateSuccuess)
+      .catch(handleCreateErr);
   };
 
   const handleFormSubmit = (updatedItem, id) => {
@@ -94,7 +98,9 @@ const FormItem = ({ fetchApi, setFetchApiInfo }) => {
       setFetchApiInfo({ type: 'error', message: 'Unable to delete item' });
     };
     fetchApi(true);
-    deleteItem(item.id).then(handleDeleteSuccuess).catch(handleDeleteError);
+    deleteItem(item.id)
+      .then(handleDeleteSuccuess)
+      .catch(handleDeleteError);
   };
   if (item.id && dataWithValue.length) {
     const editingItem = { ...item };
@@ -116,7 +122,7 @@ const FormItem = ({ fetchApi, setFetchApiInfo }) => {
     }
     return null;
   } else if (!id) {
-    const actor = { ...item };
+    const actor = { ...item, isExpireDateEnabled: false };
     return (
       <FormBuilder
         title={'Create new Item'}

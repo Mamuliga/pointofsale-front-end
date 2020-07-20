@@ -188,7 +188,7 @@ export const getReceiveTableHeaders = [
     id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Receive Id',
+    label: 'Item Id',
   },
   {
     id: 'ItemName',
@@ -198,6 +198,12 @@ export const getReceiveTableHeaders = [
   },
   { id: 'price', numeric: false, disablePadding: false, label: 'Cost' },
   { id: 'quantity', numeric: false, disablePadding: false, label: 'Quantity' },
+  {
+    id: 'expiryDate',
+    numeric: false,
+    disablePadding: false,
+    label: 'Ex. Date',
+  },
   {
     id: 'discount',
     numeric: false,

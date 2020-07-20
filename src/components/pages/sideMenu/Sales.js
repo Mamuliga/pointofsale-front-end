@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import { CircularProgress } from '@material-ui/core';
 import useStyles from '../../../styles/useStyles';
 import Button from '@material-ui/core/Button';
 import Barcode from 'react-barcode';
@@ -9,10 +10,18 @@ import { createSale } from '../../../http/saleApi';
 import ConfirmationPopup from '../../uis/ConfirmationPopup';
 import { setCartItems } from '../../../store/actions/saleActions';
 import { setFetchApiInfo, fetchApi } from '../../../store/actions/globalAction';
+import SearchIcon from '@material-ui/icons/Search';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { searchCustomer } from '../../../http/customerApi';
+import PaymentDropdown from '../../uis/PaymentDropdown';
 
 const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
   const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
+  const [customerId, setCustomerId] = useState(1);
+  const [suggestions, setSuggestions] = useState([]);
+  const [fetchCustomers, setFetchCustomers] = useState(false);
+  const [paymentType, setPaymentType] = useState('cash');
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
       setRevdAmount(e.target.value);
@@ -46,10 +55,11 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const handleSaleSubmit = e => {
     e.preventDefault();
     const newSale = {
-      customerId: 1,
+      itemStatId: cartItems.itemStatId,
+      customerId,
       total: cartTotal,
       totalDiscount: 0,
-      paymentType: 'cash',
+      paymentType,
       balance,
       revdAmount,
       itemSales: cartItems,
@@ -80,13 +90,73 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       .catch(handlereateSaleError);
   };
 
+  const handleSearchSubmit = (_e, value) => {
+    setCustomerId(value.id);
+  };
+
+  const handlePaymentMethod = e => {
+    setPaymentType(e.target.value);
+  };
+
+  const handleSearchChange = e => {
+    const searchSuccess = res => {
+      setFetchCustomers(false);
+      console.log(res.data);
+      if (Array.isArray(res.data)) {
+        setSuggestions(res.data);
+      }
+    };
+
+    const searchErr = () => {
+      setFetchApiInfo({ type: 'error', message: 'Unable to search customers' });
+      setFetchCustomers(false);
+    };
+    setFetchCustomers(true);
+    searchCustomer(e.target.value)
+      .then(searchSuccess)
+      .catch(searchErr);
+  };
+
+  const searchComponent = (
+    <div className={classes.inputsTop}>
+      <div className={classes.searchTab}>
+        <Autocomplete
+          id='customer search-item-search'
+          getOptionLabel={option => `${option.firstName}-${option.lastName}`}
+          options={suggestions}
+          onChange={handleSearchSubmit}
+          loading={fetchCustomers}
+          renderInput={params => (
+            <TextField
+              autoFocus
+              {...params}
+              label='Enter a Customer name or Id'
+              noOptionsText={'No customers found'}
+              variant='outlined'
+              onChange={handleSearchChange}
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: <SearchIcon />,
+                endAdornment: (
+                  <Fragment>
+                    {fetchCustomers && (
+                      <CircularProgress color='inherit' size={20} />
+                    )}
+                    {params.InputProps.endAdornment}
+                  </Fragment>
+                ),
+              }}
+            />
+          )}
+        />
+      </div>
+    </div>
+  );
   return (
     <Fragment>
       <form onSubmit={handleSaleSubmit}>
-        <div className={classes.customerName}>
-          <TextField id='sale-customer-name' label='Customer Name' />
-        </div>
-        <div className={classes.salesPageBottomInputs}>
+        {searchComponent}
+        <div className={classes.sideMenuPageBottomInputs}>
           <div className={classes.total}>
             <TextField
               id='sale-total-inputs'
@@ -97,10 +167,14 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
               }}
             />
           </div>
+          <PaymentDropdown
+            paymentType={paymentType}
+            handlePaymentMethod={handlePaymentMethod}
+          />
           <div className={classes.cash}>
             <TextField
               id='sale-cash-inputs'
-              label='Cash'
+              label='Amount'
               value={revdAmount}
               onChange={handleCashAmountChange}
               onFocus={handleFocus}

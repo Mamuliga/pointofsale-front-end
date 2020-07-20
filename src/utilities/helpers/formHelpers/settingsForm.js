@@ -9,7 +9,7 @@ import PrintIcon from '@material-ui/icons/Print';
 
 export const getSettingsFormData = [
   {
-    id: 'avatar',
+    id: 'logo',
     type: 'avatar',
     label: 'Company Logo',
     name: 'companyAvatar',
@@ -33,7 +33,7 @@ export const getSettingsFormData = [
     icon: <HomeIcon />,
   },
   {
-    id: 'website',
+    id: 'websiteUrl',
     type: 'text',
     label: 'Website',
     name: 'website',
@@ -56,6 +56,7 @@ export const getSettingsFormData = [
     required: false,
     icon: <PhoneIphoneIcon />,
   },
+
   {
     id: 'fax',
     type: 'tel',
@@ -79,6 +80,15 @@ export const getSettingsFormData = [
     label: 'Closing Time',
     name: 'closingTime',
     required: false,
+  },
+
+  {
+    id: 'fax',
+    name: 'fax',
+    type: 'tel',
+    label: 'Fax',
+    required: false,
+    icon: <PrintIcon />,
   },
   {
     id: 'returnPolicy',
