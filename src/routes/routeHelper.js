@@ -12,12 +12,8 @@ import {
   FormCashbook,
   Sales,
   Receives,
-<<<<<<< HEAD
-  Settings,
-=======
   FormSettings,
   Dashboard,
->>>>>>> 7fed5d6a67c00b647a4f70b3d25c893188971130
 } from '../components/pages';
 import DailySales from '../components/pages/dashboard/DailySales';
 import BestSellingEmployee from '../components/pages/dashboard/BestSellingCustomer';
@@ -114,16 +110,8 @@ export const receiveRoutes = [
 export const settingsRoutes = [
   {
     path: PAGE_ROUTES.settings,
-    component: Settings,
+    component: FormSettings,
   },
-  // {
-  //   path: PAGE_ROUTES.newSettings,
-  //   component: FormSettings,
-  // },
-  // {
-  //   path: PAGE_ROUTES.editSettings,
-  //   component: FormSettings,
-  // },
 ];
 export const dashboardRoutes = [
   {

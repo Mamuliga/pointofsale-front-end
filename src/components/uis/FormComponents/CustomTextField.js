@@ -17,11 +17,10 @@ const CustomTextField = ({ entry, getValue }) => {
     id,
     helperText,
     error,
-    defaultValue,
   } = entry;
   const [newValue, setNewValue] = useState(value);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     console.log(e.target.value);
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
@@ -46,7 +45,6 @@ const CustomTextField = ({ entry, getValue }) => {
         error={error}
         helperText={error && helperText}
         variant='outlined'
-        defaultValue={defaultValue}
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>{icon}</InputAdornment>

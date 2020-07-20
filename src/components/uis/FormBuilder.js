@@ -21,6 +21,7 @@ import {
 
 const FormBuilder = ({
   title,
+  topUis,
   buttonName,
   data = [],
   onClick,
@@ -100,7 +101,6 @@ const FormBuilder = ({
                 case 'email':
                 case 'tel':
                 case 'number':
-                case 'time':
                   return (
                     <CustomTextField
                       entry={entry}

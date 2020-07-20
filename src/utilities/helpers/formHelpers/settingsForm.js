@@ -2,6 +2,7 @@ import React from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import HomeIcon from '@material-ui/icons/Home';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import PublicIcon from '@material-ui/icons/Public';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
@@ -56,10 +57,9 @@ export const getSettingsFormData = [
     required: false,
     icon: <PhoneIphoneIcon />,
   },
-
   {
     id: 'fax',
-    type: 'tel',
+    type: 'text',
     label: 'Fax',
     name: 'fax',
     required: false,
@@ -67,28 +67,19 @@ export const getSettingsFormData = [
   },
   {
     id: 'openingTime',
-    type: 'time',
-    defaultValue: '08:00',
+    type: 'text',
     label: 'opening Time',
     name: 'openingTime',
     required: false,
+    icon: <LocalOfferIcon />,
   },
   {
     id: 'closingTime',
-    type: 'time',
-    defaultValue: '20:00',
+    type: 'text',
     label: 'Closing Time',
     name: 'closingTime',
     required: false,
-  },
-
-  {
-    id: 'fax',
-    name: 'fax',
-    type: 'tel',
-    label: 'Fax',
-    required: false,
-    icon: <PrintIcon />,
+    icon: <LocalOfferIcon />,
   },
   {
     id: 'returnPolicy',
