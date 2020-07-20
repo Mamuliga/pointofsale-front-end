@@ -13,7 +13,6 @@ import {
   Sales,
   Receives,
   Settings,
-  FormSettings,
 } from '../components/pages';
 
 export const customerRoutes = [
@@ -106,12 +105,12 @@ export const settingsRoutes = [
     path: PAGE_ROUTES.settings,
     component: Settings,
   },
-  {
-    path: PAGE_ROUTES.newSettings,
-    component: FormSettings,
-  },
-  {
-    path: PAGE_ROUTES.editSettings,
-    component: FormSettings,
-  },
+  // {
+  //   path: PAGE_ROUTES.newSettings,
+  //   component: FormSettings,
+  // },
+  // {
+  //   path: PAGE_ROUTES.editSettings,
+  //   component: FormSettings,
+  // },
 ];

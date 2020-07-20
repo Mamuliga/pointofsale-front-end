@@ -259,6 +259,7 @@ export default makeStyles(theme => ({
   },
   formbuilderMargin: {
     marginRight: theme.spacing(1),
+    marginTop: theme.spacing(3),
   },
   cashbookDateAlign: {
     display: 'inline',

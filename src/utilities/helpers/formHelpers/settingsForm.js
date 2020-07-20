@@ -2,9 +2,10 @@ import React from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import HomeIcon from '@material-ui/icons/Home';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import PublicIcon from '@material-ui/icons/Public';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import PrintIcon from '@material-ui/icons/Print';
 
 export const getSettingsFormData = [
   {
@@ -21,7 +22,7 @@ export const getSettingsFormData = [
     label: 'Company Name',
     name: 'companyName',
     required: true,
-    icon: <PersonIcon />,
+    icon: <LocationCityIcon />,
   },
   {
     id: 'address',
@@ -56,28 +57,36 @@ export const getSettingsFormData = [
     icon: <PhoneIphoneIcon />,
   },
   {
+    id: 'fax',
+    type: 'tel',
+    label: 'Fax',
+    name: 'fax',
+    required: false,
+    icon: <PrintIcon />,
+  },
+  {
     id: 'openingTime',
-    type: 'text',
+    type: 'time',
+    defaultValue: '08:00',
     label: 'opening Time',
     name: 'openingTime',
     required: false,
-    icon: <LocalOfferIcon />,
   },
   {
     id: 'closingTime',
-    type: 'text',
+    type: 'time',
+    defaultValue: '20:00',
     label: 'Closing Time',
     name: 'closingTime',
     required: false,
-    icon: <LocalOfferIcon />,
   },
   {
-    id: 'description',
+    id: 'returnPolicy',
     type: 'text',
-    label: 'Description',
-    name: 'description',
+    label: 'Return Policy',
+    name: 'returnPolicy',
     multiline: true,
-    rows: 4,
+    rows: 3,
     required: false,
   },
 ];
