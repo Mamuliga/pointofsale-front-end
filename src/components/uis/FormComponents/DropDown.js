@@ -1,36 +1,95 @@
-import React, { useState } from 'react';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
-import { FormHelperText } from '@material-ui/core';
+import {
+  InputLabel,
+  Select,
+  Input,
+  Chip,
+  MenuItem,
+  FormHelperText,
+} from '@material-ui/core';
+import useStyles from '../../../styles/useStyles.js';
 
-const DropDown = ({ entry, getValue }) => {
-  const { value, name, required, id, helperText, error } = entry;
-  const [newValue, setNewValue] = useState(value);
-  const handleChange = e => {
-    setNewValue(e.target.value);
-    if (typeof getValue === 'function') {
-      getValue(e.target.name, e.target.value);
+import { useTheme } from '@material-ui/styles';
+const Dropdown = ({ entry, getValue }) => {
+  const { value, name, id, label, helperText, error } = entry;
+  const [duePayment, setDuePayment] = React.useState([]);
+  const classes = useStyles();
+  const theme = useTheme();
+  const totalDueAmount = (amount = 0) =>
+    duePayment.reduce((a, b) => a + b.amount, amount);
+
+  function getStyles(dueId) {
+    const isSelected = duePayment.filter(due => due.id === dueId);
+    return {
+      fontWeight: isSelected.length ? 'bold' : 'normal',
+    };
+  }
+  const handleChange = event => {
+    let arrayIndex = -1;
+    duePayment.forEach((due, index) => {
+      if (due.id === event.target.value.id) {
+        arrayIndex = index;
+      }
+    });
+    console.log(arrayIndex);
+    if (arrayIndex < 0) {
+      setDuePayment([...duePayment, event.target.value]);
+      if (typeof getValue === 'function') {
+        event.target.value = totalDueAmount(event.target.value.amount);
+        getValue(event);
+      }
+    } else {
+      duePayment.splice(arrayIndex, 1);
+      setDuePayment([...duePayment]);
+      if (typeof getValue === 'function') {
+        event.target.value = totalDueAmount();
+        getValue(event);
+      }
     }
   };
 
   return (
     <Grid item xs={6}>
-      <FormControl fullWidth error={error}>
-        <NativeSelect
+      <FormControl className={classes.dropdownControl}>
+        <InputLabel id={label}>Due</InputLabel>
+        <Select
+          labelId={label}
           id={id}
-          value={newValue}
+          value={duePayment}
           onChange={handleChange}
+          input={<Input id='Select due' />}
           name={name}
-          required={required}
+          renderValue={selected => (
+            <div className={classes.dropdownChips}>
+              {selected.map(due => (
+                <Chip
+                  key={due.id}
+                  label={`Rs. ${parseFloat(due.total).toFixed(2)}`}
+                />
+              ))}
+            </div>
+          )}
         >
-          <option value=''>Choose Payement Type</option>
-          <option value='credit'>Credit</option>
-          <option value='debit'>Debit</option>
-        </NativeSelect>
-        {error && <FormHelperText>{helperText}</FormHelperText>}
+          {value.map(value => (
+            <MenuItem
+              key={id}
+              value={value}
+              style={getStyles(value.id, duePayment, theme)}
+            >
+              {`pay due Rs. ${parseFloat(value.amount).toFixed(
+                2
+              )} on ${new Date(value.createdAt).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+              })}`}
+            </MenuItem>
+          ))}
+        </Select>
+        {error && <FormHelperText error>{helperText}</FormHelperText>}
       </FormControl>
     </Grid>
   );
 };
-export default DropDown;
+export default Dropdown;

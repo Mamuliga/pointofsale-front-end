@@ -23,6 +23,7 @@ export const PAGE_ROUTES = {
   items: '/items',
   newItem: '/items/new',
   editItem: '/items/edit/:id',
+  payDue: '/cashbooks/payCustomerDue/:customerId',
   dailySales: '/dashboard/dailySales',
   bestSellingCustomer: '/dashboard/bestSellingCustomer',
   mostSelledItems: '/dashboard/mostSelledItems',

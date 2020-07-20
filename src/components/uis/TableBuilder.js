@@ -13,6 +13,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import EditIcon from '@material-ui/icons/Edit';
+import Button from '@material-ui/core/Button';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -79,27 +80,27 @@ EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired
+  orderBy: PropTypes.string.isRequired,
 };
 
 const useToolbarStyles = makeStyles(theme => ({
   root: {
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1)
+    paddingRight: theme.spacing(1),
   },
   highlight:
     theme.palette.type === 'light'
       ? {
           color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
+          backgroundColor: theme.palette.secondary.dark,
         },
   title: {
-    flex: '1 1 100%'
-  }
+    flex: '1 1 100%',
+  },
 }));
 
 const EnhancedTableToolbar = props => {
@@ -115,11 +116,11 @@ const EnhancedTableToolbar = props => {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%'
+    width: '100%',
   },
   paper: {
     width: '100%',
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   table: {},
   visuallyHidden: {
@@ -131,8 +132,8 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
     position: 'absolute',
     top: 20,
-    width: 1
-  }
+    width: 1,
+  },
 }));
 
 export default function TableBuilder({
@@ -143,7 +144,9 @@ export default function TableBuilder({
   tableTopUis,
   hidePagination,
   tableRows,
-  hideEditIcon
+  hideEditIcon,
+  payButton,
+  payButtonClick,
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -193,6 +196,17 @@ export default function TableBuilder({
                         {Object.values(row).map((cell, index) => {
                           return <TableCell key={index}>{cell}</TableCell>;
                         })}
+                        {payButton && (
+                          <TableCell key={'payButton'}>
+                            <Button
+                              variant='contained'
+                              color='secondary'
+                              onClick={payButtonClick(row)}
+                            >
+                              Pay
+                            </Button>
+                          </TableCell>
+                        )}
                         {!hideEditIcon && (
                           <TableCell key={'edit'} align='right'>
                             <EditIcon onClick={handleEdit(row)} />

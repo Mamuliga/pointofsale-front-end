@@ -176,9 +176,16 @@ export default makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
+
   button: {
     width: '100%',
     marginBottom: theme.spacing(1),
+  },
+  payment: {
+    width: '56%',
+    marginLeft: '124px',
+    marginBottom: theme.spacing(1),
+    backgroundColor: '#f44336',
   },
   barcode: {
     width: '100%',
@@ -269,5 +276,17 @@ export default makeStyles(theme => ({
   paymentdropDown: {
     width: '100%',
     margin: '10px 0',
+  },
+  paymentTypeTable: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  dropdownControl: {
+    width: '100%',
+  },
+  dropdownChips: {
+    display: 'flex',
+    flexWrap: 'wrap',
   },
 }));

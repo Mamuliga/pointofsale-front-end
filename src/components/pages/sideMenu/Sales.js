@@ -14,14 +14,24 @@ import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { searchCustomer } from '../../../http/customerApi';
 import PaymentDropdown from '../../uis/PaymentDropdown';
+import PaymentTypeTable from '../../uis/SaleComponents/PaymentTypeTable';
 
 const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
+  const paymentType = {};
   const [revdAmount, setRevdAmount] = useState(parseFloat(0).toFixed(2));
   const [customerId, setCustomerId] = useState(1);
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
-  const [paymentType, setPaymentType] = useState('cash');
+  const [selectedPayTypeInDropdown, setSelectedPayTypeInDropdownn] = useState(
+    'cash'
+  );
+  const [paymentTypeInTable, setPaymentTypeInTable] = useState([]);
+  const [dueDate, setDueDate] = useState('');
+
+  const handleDueDateChange = date => {
+    setDueDate(date);
+  };
   const handleCashAmountChange = e => {
     if (e.target.value >= 0) {
       setRevdAmount(e.target.value);
@@ -49,26 +59,49 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     cartTotal = cartTotal + parseFloat(getItemTotal(row));
   });
   cartTotal = parseFloat(cartTotal).toFixed(2);
+
+  let totalReceivedAmount = 0;
+  paymentTypeInTable.forEach(method => {
+    totalReceivedAmount = totalReceivedAmount + parseFloat(method.amount);
+  });
+  totalReceivedAmount = parseFloat(totalReceivedAmount).toFixed(2);
+
   const balance =
-    revdAmount > 0 ? parseFloat(revdAmount - cartTotal).toFixed(2) : revdAmount;
+    totalReceivedAmount > 0
+      ? parseFloat(totalReceivedAmount - cartTotal).toFixed(2)
+      : totalReceivedAmount;
   const handleFocus = e => e.target.select();
+  const itemSales = [];
+  cartItems.forEach(item => {
+    const {
+      id,
+      quantity,
+      discount,
+      itemStatId,
+      salesPrice: sellingPrice,
+    } = item;
+    itemSales.push({
+      itemId: id,
+      sellingPrice,
+      quantity,
+      discount,
+      itemStatId,
+    });
+  });
+  paymentTypeInTable.forEach(({ type, amount }) => {
+    paymentType[`${type}`] = amount;
+  });
   const handleSaleSubmit = e => {
     e.preventDefault();
     const newSale = {
-      itemStatId: cartItems.itemStatId,
       customerId,
       total: cartTotal,
       totalDiscount: 0,
       paymentType,
       balance,
       revdAmount,
-      itemSales: cartItems,
-      cashBookDetails: {
-        refNo: '25',
-        description: 'Desc123455',
-        type: 'cash',
-        amount: cartTotal,
-      },
+      itemSales,
+      dueDate,
     };
     const handleCreateSaleSuccuess = () => {
       fetchApi(false);
@@ -95,7 +128,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
   };
 
   const handlePaymentMethod = e => {
-    setPaymentType(e.target.value);
+    setSelectedPayTypeInDropdownn(e.target.value);
   };
 
   const handleSearchChange = e => {
@@ -115,6 +148,16 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     searchCustomer(e.target.value)
       .then(searchSuccess)
       .catch(searchErr);
+  };
+
+  const handleAddPayment = () => {
+    setPaymentTypeInTable([
+      ...paymentTypeInTable,
+      {
+        type: selectedPayTypeInDropdown,
+        amount: parseFloat(revdAmount).toFixed(2),
+      },
+    ]);
   };
 
   const searchComponent = (
@@ -168,17 +211,50 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
             />
           </div>
           <PaymentDropdown
-            paymentType={paymentType}
+            paymentType={selectedPayTypeInDropdown}
             handlePaymentMethod={handlePaymentMethod}
+            value={selectedPayTypeInDropdown}
           />
           <div className={classes.cash}>
             <TextField
-              id='sale-cash-inputs'
-              label='Amount'
+              id='payment-method-input'
+              label='Received Amount'
               value={revdAmount}
               onChange={handleCashAmountChange}
               onFocus={handleFocus}
               autoComplete='off'
+            />
+          </div>
+          <div>
+            <Button
+              className={classes.payment}
+              variant='contained'
+              color='primary'
+              onClick={handleAddPayment}
+              id='addPayment'
+              disabled={!(revdAmount > 0)}
+            >
+              Add Payment
+            </Button>
+          </div>
+          <div>
+            {paymentTypeInTable.length ? (
+              <PaymentTypeTable
+                dueDate={dueDate}
+                handleDueDateChange={handleDueDateChange}
+                paymentMethod={paymentTypeInTable}
+                setPaymentMethod={setPaymentTypeInTable}
+              />
+            ) : null}
+          </div>
+          <div className={classes.cash}>
+            <TextField
+              id='sale-cash-inputs'
+              label='Total Received Amount'
+              value={totalReceivedAmount}
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </div>
           <div className={classes.balance}>
@@ -213,9 +289,9 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
             >
               Discard Sale
             </Button>
-            <div className={classes.barcode}>
+            {/* <div className={classes.barcode}>
               <Barcode value='0000000000001' />
-            </div>
+            </div> */}
           </div>
         </div>
       </form>

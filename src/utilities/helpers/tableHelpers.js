@@ -19,18 +19,41 @@ export const getCustomerTableHeaders = [
     label: 'First Name',
   },
   { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
-  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
   {
-    id: 'gender',
+    id: 'phoneNumber',
     numeric: false,
     disablePadding: false,
-    label: 'Gender',
+    label: 'Phone Number',
+  },
+
+  getEmptyColumnForEditOrDelete('edit'),
+];
+
+export const getDueCustomerTableHeaders = [
+  {
+    id: 'id',
+    numeric: false,
+    disablePadding: false,
+    label: 'Customer Id',
   },
   {
-    id: 'bankAccount',
+    id: 'firstName',
     numeric: false,
     disablePadding: false,
-    label: 'Acc no',
+    label: 'First Name',
+  },
+  { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
+  {
+    id: 'phoneNumber',
+    numeric: false,
+    disablePadding: false,
+    label: 'Phone Number',
+  },
+  {
+    id: 'payHere',
+    numeric: false,
+    disablePadding: false,
+    label: 'Pay Due',
   },
   getEmptyColumnForEditOrDelete('edit'),
 ];
