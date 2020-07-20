@@ -30,6 +30,8 @@ const TopMenu = props => {
         <div className={classes.topMenu}>
           <Tabs
             value={value}
+            variant='scrollable'
+            scrollButtons='auto'
             onChange={(_event, newValue) => {
               const menuItem = TOP_MENU_ITEMS[newValue];
               push(menuItem.path);
