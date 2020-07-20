@@ -3,14 +3,16 @@ import { Avatar, Grid, Button } from '@material-ui/core';
 import useStyles from '../../../styles/useStyles';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
-const CustomAvatar = ({ entry }) => {
-  const { src, alt } = entry;
+const CustomAvatar = ({ entry, getValue }) => {
+  console.log(entry);
+  const { alt, value } = entry;
   const classes = useStyles();
-  const [imageSrc, setImageSrc] = useState('');
+  const [imageSrc, setImageSrc] = useState(value);
 
   const fileSelectedHandler = event => {
-    console.log(URL.createObjectURL(event.target.files[0]));
-
+    console.log(event.target.name);
+    console.log(event);
+    getValue('logo', URL.createObjectURL(event.target.files[0]));
     setImageSrc(URL.createObjectURL(event.target.files[0]));
   };
 

@@ -13,7 +13,7 @@ export const getSettingsFormData = [
     id: 'logo',
     type: 'avatar',
     label: 'Company Logo',
-    name: 'companyAvatar',
+    name: 'logo',
     required: false,
     icon: <PersonIcon />,
   },

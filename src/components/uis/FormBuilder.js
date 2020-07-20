@@ -9,7 +9,7 @@ import Box from '@material-ui/core/Box';
 import CreateIcon from '@material-ui/icons/Create';
 import DatePicker from './FormComponents/DatePicker';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Dropdown from './FormComponents/Dropdown';
+import Dropdown from './FormComponents/DropDown';
 import CustomSwitch from './FormComponents/CustomSwitch';
 import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
