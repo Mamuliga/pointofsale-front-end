@@ -9,8 +9,10 @@ export const PAGE_ROUTES = {
   customers: '/customers',
   cashbooks: '/cashbooks',
   newCustomer: '/customers/new',
+  settings: '/settings',
   newCashbook: '/cashbooks/new',
   editCustomer: '/customers/edit/:id',
+  editSettings: '/settings/edit/:id',
   editCashbook: '/cashbooks/edit/:id',
   employees: '/employees',
   newEmployee: '/employees/new',
@@ -87,6 +89,12 @@ export const TOP_MENU_ITEMS = [
     key: 'cashbooks',
     path: PAGE_ROUTES.cashbooks,
     title: 'Cashbooks',
+    icon: AttachMoneyIcon,
+  },
+  {
+    key: 'settings',
+    path: PAGE_ROUTES.settings,
+    title: 'Settings',
     icon: AttachMoneyIcon,
   },
 ];

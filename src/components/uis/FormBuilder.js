@@ -3,12 +3,13 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import CustomTextField from './FormComponents/CustomTextField';
 import CustomGender from './FormComponents/CustomGender';
+import CustomAvatar from './FormComponents/CustomAvatar';
 import { Button, Container } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CreateIcon from '@material-ui/icons/Create';
 import DatePicker from './FormComponents/DatePicker';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Dropdown from './FormComponents/Dropdown';
+import Dropdown from './FormComponents/DropDown';
 import CustomSwitch from './FormComponents/CustomSwitch';
 import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
@@ -20,12 +21,16 @@ import {
 
 const FormBuilder = ({
   title,
+  topUis,
+  buttonName,
   data = [],
   onClick,
   actor = {},
   handleDelete,
+  hideDeleteButton,
   handleDatePickerChange,
 }) => {
+  console.log(data);
   const [newActor, setNewActor] = useState({ ...actor });
   const [dataFields, setDataFields] = useState();
   const [openConfirm, setOpenConfirmation] = React.useState(false);
@@ -126,6 +131,8 @@ const FormBuilder = ({
                       getValue={getValue}
                     />
                   );
+                case 'avatar':
+                  return <CustomAvatar entry={entry} getValue={getValue} />;
                 case 'switch':
                   return (
                     <CustomSwitch
@@ -146,9 +153,9 @@ const FormBuilder = ({
             onClick={handleSubmit}
             className={classes.formbuilderSubmit}
           >
-            Submit
+            {buttonName}
           </Button>
-          {actor.id && (
+          {actor.id && !hideDeleteButton && (
             <Button
               variant='contained'
               color='secondary'

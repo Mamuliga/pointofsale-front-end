@@ -10,18 +10,19 @@ import {
   Dashboard,
   Items,
   Cashbooks,
+  Settings,
 } from '../../components/pages/sideMenu';
 import ProtectedRoute from '../ProtectedRoute';
 import { PAGE_ROUTES } from '../../services/routeService';
 import useStyles from '../../styles/useStyles';
 import FooterLabel from './FooterLabel';
 
-const SideMenuRoutes = (props) => {
+const SideMenuRoutes = props => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const isSalesPage = pathname === PAGE_ROUTES.sales;
   const isReceivesPage = pathname === PAGE_ROUTES.receives;
-  const getSidePane = (route) => {
+  const getSidePane = route => {
     if (route === PAGE_ROUTES.sales || route === PAGE_ROUTES.receives) {
       return 'right';
     }
@@ -66,6 +67,7 @@ const SideMenuRoutes = (props) => {
               path={PAGE_ROUTES.cashbooks}
               component={Cashbooks}
             />
+            <ProtectedRoute path={PAGE_ROUTES.settings} component={Settings} />
 
             <ProtectedRoute path={PAGE_ROUTES.items} component={Items} />
 

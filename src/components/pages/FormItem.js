@@ -116,6 +116,7 @@ const FormItem = ({ fetchApi, setFetchApiInfo }) => {
           onClick={handleFormSubmit}
           actor={editingItem}
           handleDelete={handleDelete}
+          buttonName={'Submit'}
         />
       );
     }

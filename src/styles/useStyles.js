@@ -82,8 +82,19 @@ export default makeStyles(theme => ({
   },
   customAvatarStyles: {
     margin: theme.spacing(1),
-    width: theme.spacing(10),
-    height: theme.spacing(10),
+    width: theme.spacing(13),
+    height: theme.spacing(13),
+  },
+  customAvatarRoot: {
+    display: 'flex',
+    margin: theme.spacing(2),
+  },
+  customAvatarButton: {
+    margin: theme.spacing(2),
+    paddingTop: theme.spacing(6),
+  },
+  customAvatarInput: {
+    display: 'none',
   },
   inputsTop: {
     position: 'relative',

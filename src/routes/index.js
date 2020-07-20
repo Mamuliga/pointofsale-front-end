@@ -1,6 +1,13 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import { Login, NotFoundPage, Items } from '../components/pages';
+import {
+  Dashboard,
+  Login,
+  Customers,
+  NotFoundPage,
+  Items,
+  FormSettings,
+} from '../components/pages';
 import ProtectedRoute from './ProtectedRoute';
 import { PAGE_ROUTES } from '../services/routeService';
 import {
@@ -11,6 +18,7 @@ import {
   cashbookRoutes,
   saleRoutes,
   receiveRoutes,
+  settingsRoutes,
   dashboardRoutes,
 } from './routeHelper';
 
@@ -87,7 +95,20 @@ const Routes = props => (
         key={route.path}
       />
     ))}
+    {settingsRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
     <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
+    <ProtectedRoute
+      exact
+      path={PAGE_ROUTES.settings}
+      component={FormSettings}
+    />
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
   </Switch>
 );

@@ -113,6 +113,7 @@ const FormEmployee = ({ fetchApi, setFetchApiInfo }) => {
           onClick={handleFormSubmit}
           actor={editingEmployee}
           handleDelete={handleDelete}
+          buttonName={'Submit'}
         />
       );
     }
