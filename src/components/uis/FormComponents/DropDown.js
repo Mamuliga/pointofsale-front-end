@@ -8,10 +8,9 @@ const DropDown = ({ entry, getValue }) => {
   const { value, name, required, id, helperText, error } = entry;
   const [newValue, setNewValue] = useState(value);
   const handleChange = e => {
-    console.log(e.target.value);
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
-      getValue(e);
+      getValue(e.target.name, e.target.value);
     }
   };
 
