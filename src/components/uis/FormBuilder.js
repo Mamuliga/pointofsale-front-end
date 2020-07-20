@@ -9,7 +9,7 @@ import Box from '@material-ui/core/Box';
 import CreateIcon from '@material-ui/icons/Create';
 import DatePicker from './FormComponents/DatePicker';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import DropDown from './FormComponents/DropDown';
+import Dropdown from './FormComponents/Dropdown';
 import CustomSwitch from './FormComponents/CustomSwitch';
 import useStyles from '../../styles/useStyles';
 import ConfirmationPopup from './ConfirmationPopup';
@@ -34,10 +34,8 @@ const FormBuilder = ({
   const [newActor, setNewActor] = useState({ ...actor });
   const [dataFields, setDataFields] = useState();
   const [openConfirm, setOpenConfirmation] = React.useState(false);
-  const getValue = ({ target: { value, name, checked } }) => {
-    console.log(name);
-    setNewActor({ ...newActor, [name]: value || checked });
-    console.log({ ...newActor, [name]: value || checked });
+  const getValue = (name, value) => {
+    setNewActor({ ...newActor, [name]: value });
   };
 
   const handleSubmit = e => {
@@ -60,6 +58,7 @@ const FormBuilder = ({
       onClick(newActor, actor.id);
     } else {
       console.log('Form validation error');
+      console.log(errors);
     }
   };
 
@@ -123,9 +122,10 @@ const FormBuilder = ({
                       getValue={getValue}
                     />
                   );
-                case 'dropDown':
+                case 'dropdown':
+                case 'amount':
                   return (
-                    <DropDown
+                    <Dropdown
                       entry={entry}
                       key={entry.label}
                       getValue={getValue}

@@ -50,12 +50,12 @@ export default makeStyles(theme => ({
     marginTop: '13%',
   },
   mainRouteViewLeftSidebar: {
-    maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH}px)`,
+    maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH})`,
     marginLeft: LEFT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT,
   },
   mainRouteViewRightSidebar: {
-    maxWidth: `calc(100% - ${RIGHT_SIDE_BAR_WIDTH}px)`,
+    maxWidth: `calc(100% - ${RIGHT_SIDE_BAR_WIDTH})`,
     marginRight: RIGHT_SIDE_BAR_WIDTH,
     marginTop: TOP_MENU_MAX_HEIGHT,
   },
@@ -70,10 +70,6 @@ export default makeStyles(theme => ({
     padding: theme.spacing(1),
     color: 'inherit',
     opacity: 0.7,
-  },
-  leftMenubar: {
-    display: 'flex',
-    flex: 1,
   },
   copyrightLabel: {
     position: 'absolute',
@@ -191,9 +187,16 @@ export default makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
+
   button: {
     width: '100%',
     marginBottom: theme.spacing(1),
+  },
+  payment: {
+    width: '56%',
+    marginLeft: '124px',
+    marginBottom: theme.spacing(1),
+    backgroundColor: '#f44336',
   },
   barcode: {
     width: '100%',
@@ -284,5 +287,17 @@ export default makeStyles(theme => ({
   paymentdropDown: {
     width: '100%',
     margin: '10px 0',
+  },
+  paymentTypeTable: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  dropdownControl: {
+    width: '100%',
+  },
+  dropdownChips: {
+    display: 'flex',
+    flexWrap: 'wrap',
   },
 }));

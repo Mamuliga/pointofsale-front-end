@@ -1,7 +1,7 @@
 export const AUTH_LOCAL_STORAGE = 'auth';
 
-export const LEFT_SIDE_BAR_WIDTH = 200;
-export const RIGHT_SIDE_BAR_WIDTH = 300;
+export const LEFT_SIDE_BAR_WIDTH = '15%';
+export const RIGHT_SIDE_BAR_WIDTH = '20%';
 
 export const TOP_MENU_MAX_HEIGHT = 70;
 

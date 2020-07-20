@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 
 // TODO: Need to move Global Styles
 // and make it much simpler
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     '&:hover': {
       backgroundColor: 'transparent',
@@ -62,7 +62,7 @@ function StyledRadio(props) {
     <Radio
       className={classes.root}
       disableRipple
-      color="default"
+      color='default'
       checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
       icon={<span className={classes.icon} />}
       {...props}
@@ -73,29 +73,28 @@ function StyledRadio(props) {
 const CustomGender = ({ entry, getValue }) => {
   const { value, name } = entry;
   const [newValue, setNewValue] = useState(value);
-  const handleChange = (e) => {
-    console.log(e.target.value);
+  const handleChange = e => {
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
-      getValue(e);
+      getValue(e.target.name, e.target.value);
     }
   };
   return (
     <Grid item xs={6}>
-      <FormLabel component="legend">Gender</FormLabel>
+      <FormLabel component='legend'>Gender</FormLabel>
       <RadioGroup
         row
-        defaultValue="male"
+        defaultValue='male'
         value={newValue}
         name={name}
         onChange={handleChange}
       >
-        <FormControlLabel value="male" control={<StyledRadio />} label="Male" />
+        <FormControlLabel value='male' control={<StyledRadio />} label='Male' />
 
         <FormControlLabel
-          value="female"
+          value='female'
           control={<StyledRadio />}
-          label="Female"
+          label='Female'
         />
       </RadioGroup>
     </Grid>

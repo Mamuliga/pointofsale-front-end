@@ -2,7 +2,10 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import TableBuilder from '../uis/TableBuilder.js';
 import { useHistory } from 'react-router-dom';
-import { getCustomerTableHeaders } from '../../utilities/helpers/tableHelpers.js';
+import {
+  getCustomerTableHeaders,
+  getDueCustomerTableHeaders,
+} from '../../utilities/helpers/tableHelpers.js';
 import { getCustomerList, searchCustomer } from '../../http/customerApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 import useStyles from '../../styles/useStyles.js';
@@ -28,8 +31,8 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
         const displayCustomerList = res.data.map(
-          ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
-            return { id, firstName, lastName, phoneNo, gender, bankAccount };
+          ({ id, firstName, lastName, phoneNo, dueTotal }) => {
+            return { id, firstName, lastName, phoneNo, dueTotal };
           }
         );
         setCustomerList(displayCustomerList);
@@ -53,8 +56,8 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
   };
 
   const handleSearchSubmit = () => {};
-  const handleCreditCustomersToggler = () => {
-    setIsCreditCustomers(!isCreditCustomers);
+  const handleCreditCustomersToggler = e => {
+    setIsCreditCustomers(e.target.checked);
   };
 
   const handleSearchChange = e => {
@@ -111,7 +114,27 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       </div>
     </div>
   );
-
+  let customerTableData;
+  if (isCreditCustomers) {
+    customerTableData = customerList.filter(({ dueTotal }) => dueTotal > 0);
+    customerTableData = customerTableData.map(
+      ({ id, firstName, lastName, phoneNo, dueTotal }, index) => {
+        return { id, firstName, lastName, phoneNo, dueTotal };
+      }
+    );
+  } else {
+    customerTableData = customerList.map(
+      ({ id, firstName, lastName, phoneNo }, index) => {
+        return { id, firstName, lastName, phoneNo };
+      }
+    );
+  }
+  const handlePayButttonClick = customer => {
+    const handlePayClick = () => {
+      push(`/cashbooks/payCustomerDue/${customer.id}`);
+    };
+    return handlePayClick;
+  };
   return (
     <Fragment>
       <div className={classes.customerContainer}>
@@ -130,11 +153,18 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
             labelPlacement='start'
           />
         </div>
+
         <TableBuilder
-          tableData={customerList}
-          tableHeaders={getCustomerTableHeaders}
+          tableData={customerTableData}
+          tableHeaders={
+            isCreditCustomers
+              ? getDueCustomerTableHeaders
+              : getCustomerTableHeaders
+          }
           handleEdit={handleEdit}
           title={'Customers'}
+          payButton={isCreditCustomers}
+          payButtonClick={handlePayButttonClick}
         />
       </div>
     </Fragment>
