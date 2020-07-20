@@ -25,7 +25,7 @@ const CustomTextField = ({ entry, getValue }) => {
     console.log(e.target.value);
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
-      getValue(e);
+      getValue(e.target.name, e.target.value);
     }
   };
   return (

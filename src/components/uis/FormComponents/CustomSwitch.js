@@ -41,7 +41,7 @@ const CustomSwitch = ({ entry, getValue }) => {
   const handleChange = e => {
     setSwitched(e.target.checked);
     if (typeof getValue === 'function') {
-      getValue(e);
+      getValue(e.target.name, e.target.value);
     }
   };
   return (

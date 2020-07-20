@@ -3,7 +3,7 @@
  * Font List goes here
  * 1. 'Calistoga', cursive;
  */
-@import url("https://fonts.googleapis.com/css?family=Calistoga&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Calistoga&display=swap');
 
 /* 
   Root HTML styles
@@ -30,7 +30,7 @@
   --box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); /* major shadow for layers */
 
   /* FONT FAMILY VARIABLES */
-  --title-font-family: "Calistoga", cursive;
+  --title-font-family: 'Calistoga', cursive;
   font-size: 16px;
 }
 
@@ -59,12 +59,6 @@
 .right-menu-item {
   margin-left: auto;
   cursor: auto;
-}
-
-.side-menu-route {
-  min-width: 200px;
-  background-color: var(--light-color);
-  min-height: 100%;
 }
 
 .side-menu-container {
