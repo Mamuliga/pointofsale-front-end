@@ -26,7 +26,9 @@ const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
     };
 
     fetchApi(true);
-    getCashbookList().then(handleGetCashbookResp).catch(handleGetCashbookErr);
+    getCashbookList()
+      .then(handleGetCashbookResp)
+      .catch(handleGetCashbookErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = () => {
