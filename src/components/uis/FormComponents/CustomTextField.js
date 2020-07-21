@@ -22,7 +22,6 @@ const CustomTextField = ({ entry, getValue }) => {
   const [newValue, setNewValue] = useState(value);
 
   const handleChange = e => {
-    console.log(e.target.value);
     setNewValue(e.target.value);
     if (typeof getValue === 'function') {
       getValue(e.target.name, e.target.value);
