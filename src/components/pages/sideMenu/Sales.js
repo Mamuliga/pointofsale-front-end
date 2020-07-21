@@ -27,7 +27,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     'cash'
   );
   const [paymentTypeInTable, setPaymentTypeInTable] = useState([]);
-  const [dueDate, setDueDate] = useState('');
+  const [dueDate, setDueDate] = useState(null);
 
   const handleDueDateChange = date => {
     setDueDate(date);
