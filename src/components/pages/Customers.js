@@ -24,21 +24,19 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
   const [isCreditCustomers, setIsCreditCustomers] = useState(false);
+  const [allCustomerList, setAllCustomerList] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
     const handleGetCustomerResp = res => {
       fetchApi(false);
       if (Array.isArray(res.data)) {
-        const displayCustomerList = res.data.map(
-          ({ id, firstName, lastName, phoneNo, dueTotal }) => {
-            return { id, firstName, lastName, phoneNo, dueTotal };
-          }
-        );
+        const displayCustomerList = getFormattedList(res.data);
         setCustomerList(displayCustomerList);
+        setAllCustomerList(displayCustomerList);
       }
     };
-    const handleGetCustomerErr = err => {
+    const handleGetCustomerErr = _err => {
       setFetchApiInfo({ type: 'error', message: 'Unable to get customers' });
       fetchApi(false);
     };
@@ -55,7 +53,25 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
     return editClick;
   };
 
-  const handleSearchSubmit = () => {};
+  const handleSearchSubmit = (_e, value) => {
+    const handleGetCustomerByIdSuccess = res => {
+      fetchApi(false);
+      if (Array.isArray(res.data)) {
+        const displayCustomerList = getFormattedList(res.data);
+        setCustomerList(displayCustomerList);
+      }
+    };
+    const handleGetCustomerByIdErr = _err => {
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Unable to filter customer detail',
+      });
+      fetchApi(false);
+    };
+    searchCustomer(value.id)
+      .then(handleGetCustomerByIdSuccess)
+      .catch(handleGetCustomerByIdErr);
+  };
   const handleCreditCustomersToggler = e => {
     setIsCreditCustomers(e.target.checked);
   };
@@ -66,6 +82,8 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       console.log(res.data);
       if (Array.isArray(res.data)) {
         setSuggestions(res.data);
+        const displayCustomerList = getFormattedList(res.data);
+        setCustomerList(displayCustomerList);
       }
     };
 
@@ -74,9 +92,13 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value)
-      .then(searchSuccess)
-      .catch(searchErr);
+    if (e.target.value.length) {
+      searchCustomer(e.target.value)
+        .then(searchSuccess)
+        .catch(searchErr);
+    } else {
+      setCustomerList(allCustomerList);
+    }
   };
 
   const searchComponent = (
@@ -181,3 +203,8 @@ const mapActionToProps = {
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Customers);
+
+const getFormattedList = data =>
+  data.map(({ id, firstName, lastName, phoneNo, dueTotal }) => {
+    return { id, firstName, lastName, phoneNo, dueTotal };
+  });
