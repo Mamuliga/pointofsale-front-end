@@ -9,6 +9,12 @@ export default makeStyles(theme => ({
   root: {
     display: 'flex',
   },
+  container: {
+    paddingTop: 72, // Space for top bar
+  },
+  salesItemTable: {
+    margin: 0,
+  },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: LEFT_SIDE_BAR_WIDTH,
@@ -17,10 +23,10 @@ export default makeStyles(theme => ({
     },
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: LEFT_SIDE_BAR_WIDTH,
-      zIndex: '20000 !important',
-    },
+    // [theme.breakpoints.up('sm')]: {
+    //   marginLeft: LEFT_SIDE_BAR_WIDTH,
+    //   zIndex: '20000 !important',
+    // },
   },
   topMenu: {
     display: 'inline-flex',
@@ -102,7 +108,10 @@ export default makeStyles(theme => ({
     display: 'flex',
     width: '100%',
     justifyContent: 'space-between',
-    marginTop: '10px',
+    padding: '10px',
+  },
+  searchSaleItems: {
+    fontSize: '2rem !important',
   },
   searchIcon: {
     height: '100%',
@@ -144,9 +153,10 @@ export default makeStyles(theme => ({
   searchItemSuggestionBox: {
     background: theme.palette.grey[400],
     padding: '10px',
-    width: '100%',
+    width: '98%',
     position: 'absolute',
-    top: '400px',
+    top: '-130px',
+    left: '0px',
   },
   sideMenuPageBottomInputs: {
     position: 'fixed',

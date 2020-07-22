@@ -21,6 +21,7 @@ import MostSellingItems from '../components/pages/dashboard/MostSellingItems';
 import PaymentTypeAnalytics from '../components/pages/dashboard/PaymentTypeAnalytics';
 import LineGraph from '../components/pages/dashboard/LineGraph';
 import LowInventory from '../components/pages/dashboard/LowInventory';
+import SalesNew from '../components/pages/SalesNew';
 
 export const customerRoutes = [
   {
@@ -101,6 +102,12 @@ export const saleRoutes = [
   {
     path: PAGE_ROUTES.sales,
     component: Sales,
+  },
+];
+export const saleNewRoutes = [
+  {
+    path: PAGE_ROUTES.salesNew,
+    component: SalesNew,
   },
 ];
 
