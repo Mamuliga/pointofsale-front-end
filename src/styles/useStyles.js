@@ -151,12 +151,20 @@ export default makeStyles(theme => ({
     width: '100%',
   },
   searchItemSuggestionBox: {
-    background: theme.palette.grey[400],
-    padding: '10px',
+    background: theme.palette.success.main,
+    padding: theme.spacing(0.5),
     width: '98%',
     position: 'absolute',
-    top: '-130px',
+    top: '-125px',
     left: '0px',
+    color: '#FFFFFF',
+    borderRadius: theme.shape.borderRadius,
+  },
+  toolTipItemDisplay: {
+    textAlign: 'center',
+  },
+  toolTipValue: {
+    fontSize: '1.5rem',
   },
   sideMenuPageBottomInputs: {
     position: 'fixed',
@@ -286,9 +294,6 @@ export default makeStyles(theme => ({
   },
   toolTipRows: {
     display: 'flex',
-    fontWeight: 'bold',
-  },
-  toolTipFirstRow: {
     justifyContent: 'space-between',
   },
   toolTipSecondRow: {
