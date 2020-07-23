@@ -6,6 +6,7 @@ import {
   TableRow,
   TableCell,
   CircularProgress,
+  Card,
 } from '@material-ui/core';
 import TableBuilder from '../uis/TableBuilder';
 import { getSaleTableHeaders } from '../../utilities/helpers/tableHelpers';
@@ -177,8 +178,14 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     </div>
   );
   return (
-    <div>
-      <Container maxWidth='md' className={classes.salesItemTable}>
+    <div
+      style={{
+        display: 'inline-flex',
+        width: '100%',
+        justifyContent: 'space-around',
+      }}
+    >
+      <Container className={classes.salesItemTable}>
         <TableBuilder
           tableData={[]}
           tableHeaders={getSaleTableHeaders}
@@ -187,6 +194,20 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
           tableRows={tableRows.reverse()}
         />
       </Container>
+      <div style={{ width: 'inherit' }}>
+        <Card>
+          <h1>Customer info card</h1>
+        </Card>
+        <Card>
+          <h1>Payment Table</h1>
+        </Card>
+        <Card>
+          <h1>Total and amount due</h1>
+        </Card>
+        <Card>
+          <h1>Select payment type</h1>
+        </Card>
+      </div>
     </div>
   );
 };
