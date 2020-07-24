@@ -34,6 +34,9 @@ export default makeStyles(theme => ({
     margin: 'auto',
     width: '10%',
   },
+  removePaymentTypeIcon: {
+    width: '10%',
+  },
   salesContainer: {
     display: 'inline-flex',
     width: '100%',
@@ -54,6 +57,23 @@ export default makeStyles(theme => ({
   },
   totalDueAmount: {
     fontSize: '3rem',
+  },
+  salesPaymentTypeContainer: {
+    display: 'flex',
+    width: '100%',
+  },
+  salesPayContainerRow: {
+    width: '90%',
+    marginTop: 0,
+    fontSize: '1.2rem',
+  },
+  salesPayContainerRowAmount: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  salesdueDateCalendar: {
+    width: '66%',
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {

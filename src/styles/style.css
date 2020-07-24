@@ -5,3 +5,6 @@
 .MuiAutocomplete-root .MuiFormLabel-root.MuiInputLabel-root {
   font-size: 1.3rem !important;
 }
+#salesDueDates {
+  width: 55% !important;
+}

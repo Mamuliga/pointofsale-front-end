@@ -22,6 +22,7 @@ import { setCartItems } from '../../store/actions/saleActions';
 import '../../styles/style.css';
 import CustomerSearch from '../uis/SaleComponents/CustomerSearch';
 import TotalDueCard from '../uis/SaleComponents/TotalDueCard';
+import PaymentMethodsInfo from '../uis/SaleComponents/PaymentTypeTableNew';
 
 const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   const classes = useStyles();
@@ -192,9 +193,22 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
       </Container>
       <div className={classes.salesRightMenu}>
         <CustomerSearch />
-        <Card>
-          <h1>Payment Table</h1>
-        </Card>
+        <PaymentMethodsInfo
+          paymentMethod={[
+            {
+              type: 'cash',
+              amount: '50.00',
+            },
+            {
+              type: 'cheque',
+              amount: '250.00',
+            },
+            {
+              type: 'due',
+              amount: '150.00',
+            },
+          ]}
+        />
         <TotalDueCard />
         <Card>
           <h1>Select payment type</h1>
