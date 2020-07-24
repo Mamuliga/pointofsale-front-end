@@ -14,6 +14,46 @@ export default makeStyles(theme => ({
   },
   salesItemTable: {
     margin: 0,
+    width: '72%',
+  },
+  cardSales: {
+    margin: '20px',
+    padding: '20px',
+  },
+  salesCustomerInfo: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  materialIcon: {
+    cursor: 'pointer',
+  },
+  displaySalesCustomerInfo: {
+    width: '90%',
+  },
+  removeCustomerIcon: {
+    margin: 'auto',
+    width: '10%',
+  },
+  salesContainer: {
+    display: 'inline-flex',
+    width: '100%',
+    justifyContent: 'space-around',
+  },
+  salesRightSideMenu: {
+    width: '25%',
+  },
+  totalDueAmountContainer: {
+    columnCount: 2,
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  salesDisplayAmountBox: {
+    textAlign: 'center',
+    padding: 10,
+    minWidth: '50px',
+  },
+  totalDueAmount: {
+    fontSize: '3rem',
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {

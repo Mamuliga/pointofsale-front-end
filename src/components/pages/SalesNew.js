@@ -20,6 +20,8 @@ import { itemSearch } from '../../http/itemApi';
 import { getItemTotal } from '../../utilities/helpers/saleHelpers';
 import { setCartItems } from '../../store/actions/saleActions';
 import '../../styles/style.css';
+import CustomerSearch from '../uis/SaleComponents/CustomerSearch';
+import TotalDueCard from '../uis/SaleComponents/TotalDueCard';
 
 const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   const classes = useStyles();
@@ -178,13 +180,7 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     </div>
   );
   return (
-    <div
-      style={{
-        display: 'inline-flex',
-        width: '100%',
-        justifyContent: 'space-around',
-      }}
-    >
+    <div className={classes.salesContainer}>
       <Container className={classes.salesItemTable}>
         <TableBuilder
           tableData={[]}
@@ -194,16 +190,12 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
           tableRows={tableRows.reverse()}
         />
       </Container>
-      <div style={{ width: 'inherit' }}>
-        <Card>
-          <h1>Customer info card</h1>
-        </Card>
+      <div className={classes.salesRightMenu}>
+        <CustomerSearch />
         <Card>
           <h1>Payment Table</h1>
         </Card>
-        <Card>
-          <h1>Total and amount due</h1>
-        </Card>
+        <TotalDueCard />
         <Card>
           <h1>Select payment type</h1>
         </Card>
