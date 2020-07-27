@@ -23,7 +23,7 @@ const Settings = props => {
         <ListItemIcon>
           <AddIcon />
         </ListItemIcon>
-        <ListItemText>Edit Settings</ListItemText>
+        <ListItemText>General</ListItemText>
       </ListItem>
       <Divider />
     </Fragment>

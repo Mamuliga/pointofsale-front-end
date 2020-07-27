@@ -6,11 +6,11 @@ import { getSettingsFormData } from '../../utilities/helpers/formHelpers/setting
 import { updateSettingsById, getSettingsById } from '../../http/settingsApi';
 import { PAGE_ROUTES } from '../../services/routeService';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction';
+import { SUPPORT_EMAIL } from '../../utilities/constants';
 
 const FormSettings = ({ fetchApi, setFetchApiInfo }) => {
   const { push } = useHistory();
-  const [dataWithValue, setDataWithValue] = useState([]);
-  const [settings, setSettings] = useState({});
+  const [dataWithValue, setDataWithValue] = useState(getSettingsFormData);
 
   useEffect(() => {
     const handleGetSuccuess = res => {
@@ -18,18 +18,24 @@ const FormSettings = ({ fetchApi, setFetchApiInfo }) => {
       const dataArray = [];
       const data = getSettingsFormData;
       const newSettings = res.data;
-      Object.keys(res.data).forEach(id => {
-        data.forEach(entry => {
-          if (id === entry.id) {
-            dataArray.push({ ...entry, value: newSettings[`${id}`] });
-          }
-          return null;
+      if (Array.isArray(res.data)) {
+        Object.keys(res.data).forEach(id => {
+          data.forEach(entry => {
+            if (id === entry.id) {
+              dataArray.push({ ...entry, value: newSettings[`${id}`] });
+            }
+            return null;
+          });
         });
-      });
-      setSettings(newSettings);
-      setDataWithValue([...dataArray]);
+        setDataWithValue([...dataArray]);
+      } else {
+        setFetchApiInfo({
+          type: 'error',
+          message: `Project settings not initialzed. Please contact ${SUPPORT_EMAIL}`,
+        });
+      }
     };
-    const handleGetErr = err => {
+    const handleGetErr = _err => {
       fetchApi(false);
       setFetchApiInfo({
         type: 'error',
@@ -38,16 +44,18 @@ const FormSettings = ({ fetchApi, setFetchApiInfo }) => {
     };
 
     fetchApi(true);
-    getSettingsById(1).then(handleGetSuccuess).catch(handleGetErr);
+    getSettingsById(1)
+      .then(handleGetSuccuess)
+      .catch(handleGetErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleFormSubmit = (updatedSettings, id) => {
-    const handleUpdateSuccuess = res => {
+    const handleUpdateSuccuess = _res => {
       fetchApi(false);
       push(PAGE_ROUTES.settings);
       setFetchApiInfo({ type: 'success', message: 'Succuessfully Updated' });
     };
-    const handleUpdateErr = err => {
+    const handleUpdateErr = _err => {
       fetchApi(false);
       setFetchApiInfo({
         type: 'error',
@@ -55,19 +63,16 @@ const FormSettings = ({ fetchApi, setFetchApiInfo }) => {
       });
     };
     updatedSettings.id = undefined;
-    // updatedCustomer.roleInPOS = undefined;
     fetchApi(true);
     updateSettingsById(id, updatedSettings)
       .then(handleUpdateSuccuess)
       .catch(handleUpdateErr);
   };
-  const actor = { ...settings, logo: 'wewe' };
   return (
     <FormBuilder
       title={'Settings'}
       data={dataWithValue}
       onClick={handleFormSubmit}
-      actor={actor}
       hideDeleteButton
       buttonName={'Save Changes'}
     />

@@ -1,3 +1,4 @@
+export const SUPPORT_EMAIL = 'support@emeraldit.com';
 export const AUTH_LOCAL_STORAGE = 'auth';
 
 export const LEFT_SIDE_BAR_WIDTH = '15%';
