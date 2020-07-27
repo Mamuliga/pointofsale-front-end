@@ -22,7 +22,7 @@ import {
 const FormBuilder = ({
   title,
   topUis,
-  buttonName,
+  buttonName = 'Submit',
   data = [],
   onClick,
   actor = {},

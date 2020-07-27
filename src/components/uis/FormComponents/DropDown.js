@@ -36,17 +36,14 @@ const Dropdown = ({ entry, getValue }) => {
     console.log(arrayIndex);
     if (arrayIndex < 0) {
       setDuePayment([...duePayment, event.target.value]);
-      if (typeof getValue === 'function') {
-        event.target.value = totalDueAmount(event.target.value.amount);
-        getValue(event);
-      }
+      event.target.value = totalDueAmount(event.target.value.amount);
     } else {
       duePayment.splice(arrayIndex, 1);
       setDuePayment([...duePayment]);
-      if (typeof getValue === 'function') {
-        event.target.value = totalDueAmount();
-        getValue(event);
-      }
+      event.target.value = totalDueAmount();
+    }
+    if (typeof getValue === 'function') {
+      getValue(event.target.name, event.target.value);
     }
   };
 
