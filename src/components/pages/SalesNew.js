@@ -8,13 +8,13 @@ import { setFetchApiInfo, fetchApi } from '../../store/actions/globalAction';
 import { getItemTotal } from '../../utilities/helpers/saleHelpers';
 import CustomerSearch from '../uis/SaleComponents/CustomerSearch';
 import TotalDueCard from '../uis/SaleComponents/TotalDueCard';
-import PaymentMethodsInfo from '../uis/SaleComponents/PaymentTypeTableNew';
+import PaymentMethodsInfo from '../uis/SaleComponents/PaymentMethodsInfo';
 import PaymentMethodSelection from '../uis/SaleComponents/PaymentMethodSelection';
 import { createSale } from '../../http/saleApi';
 import SaleItemSearch from '../uis/SaleComponents/SaleItemSearch';
 import SaleTableRows from '../uis/SaleComponents/SaleTableRows';
 
-const SalesNew = ({ setFetchApiInfo }) => {
+const SalesNew = ({ setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
   const revdAmount = 0;
   const defaultCustomer = {
@@ -29,7 +29,7 @@ const SalesNew = ({ setFetchApiInfo }) => {
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [payAmount, setPayAmount] = useState(0);
   const [buttonName, setButtonName] = useState(SALE_PAY_BUTTON_NAMES[0]);
-  const [dueDate, setDueDate] = useState('2020-02-02');
+  const [dueDate, setDueDate] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [customer, setCustomer] = useState({
     id: 2,
@@ -137,7 +137,11 @@ const SalesNew = ({ setFetchApiInfo }) => {
   };
 
   const handleDueDateChange = date => {
-    setDueDate(date);
+    if (date instanceof Date && !isNaN(date)) {
+      setDueDate(date);
+    } else {
+      setDueDate(null);
+    }
   };
 
   const addPaymentMethod = () => {
@@ -148,6 +152,21 @@ const SalesNew = ({ setFetchApiInfo }) => {
         amount: parseFloat(payAmount).toFixed(2),
       },
     ]);
+  };
+
+  const handleCreateSaleSuccuess = () => {
+    fetchApi(false);
+    setCartItems([]);
+    setPayAmount(parseFloat(0).toFixed(2));
+    setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
+  };
+
+  const handlereateSaleError = () => {
+    fetchApi(false);
+    setFetchApiInfo({
+      type: 'error',
+      message: 'Error occured in bill creation',
+    });
   };
 
   const getPaymentTypeObject = () => {
@@ -168,22 +187,7 @@ const SalesNew = ({ setFetchApiInfo }) => {
       balance: getBalance(),
       revdAmount,
       itemSales: getItemSales(cartItems),
-      dueDate,
-    };
-
-    const handleCreateSaleSuccuess = () => {
-      fetchApi(false);
-      setCartItems([]);
-      setPayAmount(parseFloat(0).toFixed(2));
-      setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
-    };
-
-    const handlereateSaleError = () => {
-      fetchApi(false);
-      setFetchApiInfo({
-        type: 'error',
-        message: 'Error occured in bill creation',
-      });
+      dueDate: null,
     };
     fetchApi(true);
     createSale(newSale)
@@ -285,6 +289,7 @@ const mapStateToProps = ({ global, sale }) => {
 
 const mapActionToProps = {
   setFetchApiInfo,
+  fetchApi,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(SalesNew);

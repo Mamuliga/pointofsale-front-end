@@ -2,11 +2,7 @@ import React from 'react';
 import { Card, Button, TextField, InputAdornment } from '@material-ui/core';
 import useStyles from '../../../styles/useStyles';
 import { PAYMENT_METHODS, CURRENCY } from '../../../utilities/constants';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import SaleDueDatePicker from './SaleDueDate';
 
 const PaymentMethodSelection = ({
   handlePaymentMethod,
@@ -22,7 +18,7 @@ const PaymentMethodSelection = ({
   const classes = useStyles();
   return (
     <Card className={classes.cardSales}>
-      <div>
+      <div className={classes.paymentMethodSelection}>
         <div className={classes.paymentMethodButtons}>
           {PAYMENT_METHODS.map(method => (
             <Button
@@ -35,18 +31,14 @@ const PaymentMethodSelection = ({
             </Button>
           ))}
         </div>
-        {paymentMethod === 'due' && (
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              onChange={handleDueDateChange}
-              value={dueDate}
-              error={false}
-              format=' yyyy / MM / dd'
-              helperText='Due Date'
-              //settoday date here
+        <div className={classes.paymentMethodDueView}>
+          {paymentMethod === 'due' && (
+            <SaleDueDatePicker
+              handleDueDateChange={handleDueDateChange}
+              dueDate={dueDate}
             />
-          </MuiPickersUtilsProvider>
-        )}
+          )}
+        </div>
       </div>
       <div>
         <form onSubmit={handleAddSubmit} className={classes.addSubmitPayment}>

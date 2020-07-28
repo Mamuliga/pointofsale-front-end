@@ -99,8 +99,18 @@ export default makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
-  salesdueDateCalendar: {
-    width: '66%',
+  paymentMethodSelection: {
+    textAlign: 'center',
+  },
+  salesDueDateCalendarExpand: {
+    width: '75%',
+  },
+  salesDueDateCalendarShrink: {
+    width: 'min-content',
+  },
+  paymentMethodDueView: {
+    width: '50%',
+    margin: 'auto',
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {

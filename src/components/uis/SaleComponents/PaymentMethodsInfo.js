@@ -1,12 +1,8 @@
 import React from 'react';
 import useStyles from '../../../styles/useStyles';
 import { Card } from '@material-ui/core';
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import SaleDueDatePicker from './SaleDueDate';
 
 const PaymentMethodsInfo = ({
   paymentMethods,
@@ -40,19 +36,10 @@ const PaymentMethodsInfo = ({
                 <div className={classes.salesPayContainerRowAmount}>
                   {row.type}
                   {row.type === 'due' && (
-                    <div className={classes.salesdueDateCalendar}>
-                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                          id='salesDueDates'
-                          onChange={handleDueDateChange}
-                          value={dueDate}
-                          error={false}
-                          format=' yyyy / MM / dd'
-                          helperText='Due Date'
-                          //settoday date here
-                        />
-                      </MuiPickersUtilsProvider>
-                    </div>
+                    <SaleDueDatePicker
+                      handleDueDateChange={handleDueDateChange}
+                      dueDate={dueDate}
+                    />
                   )}
                   <div>{row.amount}</div>
                 </div>
