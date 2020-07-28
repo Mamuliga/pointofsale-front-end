@@ -7,7 +7,6 @@ import useStyles from '../../styles/useStyles';
 import { setFetchApiInfo, fetchApi } from '../../store/actions/globalAction';
 import { getItemTotal } from '../../utilities/helpers/saleHelpers';
 import { setCartItems } from '../../store/actions/saleActions';
-import '../../styles/style.css';
 import CustomerSearch from '../uis/SaleComponents/CustomerSearch';
 import TotalDueCard from '../uis/SaleComponents/TotalDueCard';
 import PaymentMethodsInfo from '../uis/SaleComponents/PaymentTypeTableNew';
@@ -217,19 +216,16 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     payAmount,
   ]);
 
-  const tableRows = cartItems.map((row, rowIndex) => (
-    <SaleTableRows
-      updateDisplayTotal={updateDisplayTotal}
-      handleKeyDown={handleKeyDown}
-      getItemTotal={getItemTotal}
-      row={row}
-      rowIndex={rowIndex}
-    />
-  ));
-
-  const searchComponent = (
-    <SaleItemSearch updateDisplayTotal={updateDisplayTotal} />
-  );
+  const getTableRows = () =>
+    cartItems.map((row, rowIndex) => (
+      <SaleTableRows
+        updateDisplayTotal={updateDisplayTotal}
+        handleKeyDown={handleKeyDown}
+        getItemTotal={getItemTotal}
+        row={row}
+        rowIndex={rowIndex}
+      />
+    ));
 
   return (
     <div className={classes.salesContainer}>
@@ -237,9 +233,11 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
         <TableBuilder
           tableData={[]}
           tableHeaders={getSaleTableHeaders}
-          tableTopUis={searchComponent}
+          tableTopUis={
+            <SaleItemSearch updateDisplayTotal={updateDisplayTotal} />
+          }
           hidePagination
-          tableRows={tableRows.reverse()}
+          tableRows={getTableRows().reverse()}
         />
       </Container>
 
