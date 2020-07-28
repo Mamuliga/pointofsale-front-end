@@ -21,6 +21,7 @@ export const PAGE_ROUTES = {
   newSupplier: '/suppliers/new',
   editSupplier: '/suppliers/edit/:id',
   sales: '/sales',
+  salesNew: '/salesNew',
   receives: '/receives',
   items: '/items',
   newItem: '/items/new',
@@ -40,6 +41,7 @@ const TOP_MENU_HIDE_ROUTES = {
 
 const SIDE_MENU_HIDE_ROUTES = {
   [PAGE_ROUTES.login]: true,
+  [PAGE_ROUTES.salesNew]: true,
 };
 
 export const TOP_MENU_ITEMS = [
@@ -71,6 +73,12 @@ export const TOP_MENU_ITEMS = [
     key: 'sales',
     path: PAGE_ROUTES.sales,
     title: 'Sales',
+    icon: AttachMoneyIcon,
+  },
+  {
+    key: 'sales-new',
+    path: PAGE_ROUTES.salesNew,
+    title: 'Sales New',
     icon: AttachMoneyIcon,
   },
   {

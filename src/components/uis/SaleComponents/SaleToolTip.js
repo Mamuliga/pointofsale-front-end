@@ -2,21 +2,31 @@ import React from 'react';
 import useStyles from '../../../styles/useStyles';
 
 const SaleToolTip = ({ option }) => {
+  const {
+    salesPrice,
+    quantity,
+    supplier: { firstName },
+    expDate,
+    manuDate,
+  } = option;
   const classes = useStyles();
+  const infoArray = [
+    { key: 'Price', value: salesPrice },
+    { key: 'Qty', value: quantity },
+    { key: 'Exp Date', value: expDate },
+    { key: 'Man. Date', value: manuDate },
+    { key: 'Supplier', value: firstName },
+  ];
   return (
-    <li className={classes.searchItemSuggestionBox}>
+    <div className={classes.searchItemSuggestionBox}>
       <div className={`${classes.toolTipRows} ${classes.toolTipFirstRow}`}>
-        <span>{`Price : ${option.salesPrice}`}</span>
-        <span>{`Available qty : ${option.quantity}`}</span>
-        <span>
-          {`Supp. name : ${option.supplier.firstName} ${option.supplier.lastName}`}
-        </span>
+        {infoArray.map(({ key, value }) => (
+          <span className={classes.toolTipItemDisplay}>
+            <div>{key}</div> <div className={classes.toolTipValue}>{value}</div>
+          </span>
+        ))}
       </div>
-      <div className={`${classes.toolTipRows} ${classes.toolTipSecondRow}`}>
-        <span>{`Exp. date : ${option.expDate}`}</span>
-        <span>{`Manu. date : ${option.manuDate}`}</span>
-      </div>
-    </li>
+    </div>
   );
 };
 

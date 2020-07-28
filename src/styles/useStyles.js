@@ -9,6 +9,99 @@ export default makeStyles(theme => ({
   root: {
     display: 'flex',
   },
+  container: {
+    paddingTop: 72, // Space for top bar
+  },
+  salesItemTable: {
+    margin: 0,
+    width: '65%',
+  },
+  cardSales: {
+    margin: '20px',
+    padding: '20px',
+  },
+  salesCustomerInfo: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  materialIcon: {
+    cursor: 'pointer',
+  },
+  displaySalesCustomerInfo: {
+    width: '90%',
+  },
+  removeCustomerIcon: {
+    margin: 'auto',
+    width: '10%',
+  },
+  removePaymentTypeIcon: {
+    width: '10%',
+  },
+  salesContainer: {
+    display: 'inline-flex',
+    width: '100%',
+    justifyContent: 'space-around',
+  },
+  salesRightSideMenu: {
+    width: '32%',
+  },
+  salesTotalAndDueDisplay: {
+    color: theme.palette.secondary.main,
+  },
+  totalDueAmountContainer: {
+    columnCount: 2,
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+  salesDisplayAmountBox: {
+    textAlign: 'center',
+    padding: 10,
+    minWidth: '50px',
+    fontSize: '1.5rem',
+  },
+  paymentMethodButtons: {
+    width: '100%',
+    display: 'inline-flex',
+    justifyContent: 'space-between',
+  },
+  addSubmitPayment: {
+    width: '100%',
+  },
+  salesAddAmount: {
+    width: '100%',
+    margin: '20px 0',
+    fontSize: '1.5rem',
+  },
+  salesAddPayAmountButton: {
+    width: '100%',
+    margin: '20px 0',
+    fontSize: '1.5rem',
+  },
+  salesTotalAmountDisplay: {
+    color: theme.palette.success.main,
+    fontSize: '3rem',
+  },
+  salesDueAmountDisplay: {
+    color: theme.palette.secondary.main,
+    fontSize: '3rem',
+  },
+  salesPaymentTypeContainer: {
+    display: 'flex',
+    width: '100%',
+  },
+  salesPayContainerRow: {
+    width: '90%',
+    marginTop: 0,
+    fontSize: '1.2rem',
+  },
+  salesPayContainerRowAmount: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  salesdueDateCalendar: {
+    width: '66%',
+  },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: LEFT_SIDE_BAR_WIDTH,
@@ -17,10 +110,10 @@ export default makeStyles(theme => ({
     },
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: LEFT_SIDE_BAR_WIDTH,
-      zIndex: '20000 !important',
-    },
+    // [theme.breakpoints.up('sm')]: {
+    //   marginLeft: LEFT_SIDE_BAR_WIDTH,
+    //   zIndex: '20000 !important',
+    // },
   },
   topMenu: {
     display: 'inline-flex',
@@ -102,7 +195,10 @@ export default makeStyles(theme => ({
     display: 'flex',
     width: '100%',
     justifyContent: 'space-between',
-    marginTop: '10px',
+    padding: '10px',
+  },
+  searchSaleItems: {
+    fontSize: '2rem !important',
   },
   searchIcon: {
     height: '100%',
@@ -142,11 +238,20 @@ export default makeStyles(theme => ({
     width: '100%',
   },
   searchItemSuggestionBox: {
-    background: theme.palette.grey[400],
-    padding: '10px',
-    width: '100%',
+    background: theme.palette.success.main,
+    padding: theme.spacing(0.5),
+    width: '98%',
     position: 'absolute',
-    top: '400px',
+    top: '-125px',
+    left: '0px',
+    color: '#FFFFFF',
+    borderRadius: theme.shape.borderRadius,
+  },
+  toolTipItemDisplay: {
+    textAlign: 'center',
+  },
+  toolTipValue: {
+    fontSize: '1.5rem',
   },
   sideMenuPageBottomInputs: {
     position: 'fixed',
@@ -276,9 +381,6 @@ export default makeStyles(theme => ({
   },
   toolTipRows: {
     display: 'flex',
-    fontWeight: 'bold',
-  },
-  toolTipFirstRow: {
     justifyContent: 'space-between',
   },
   toolTipSecondRow: {

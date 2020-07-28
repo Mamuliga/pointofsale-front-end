@@ -8,7 +8,7 @@ import TopMenu from './components/uis/TopMenu';
 import {
   showTopMenuForRoute,
   showSideMenuForRoute,
-  PAGE_ROUTES
+  PAGE_ROUTES,
 } from './services/routeService';
 import SideMenuRoutes from './routes/SideMenuRoutes';
 import { getUserList } from './http/usersApi';
@@ -30,6 +30,8 @@ function App(props) {
   let sideBar = classes.mainRouteViewLeftSidebar;
   if (pathname === PAGE_ROUTES.sales || pathname === PAGE_ROUTES.receives) {
     sideBar = classes.mainRouteViewRightSidebar;
+  } else if (pathname === PAGE_ROUTES.salesNew) {
+    sideBar = '';
   }
 
   return (
@@ -37,7 +39,7 @@ function App(props) {
       {showTopMenuForRoute(pathname) && (
         <TopMenu selectedKey={pathname} onLogoutPress={props.onLogoutPress} />
       )}
-      <div>
+      <div className={classes.container}>
         {showSideMenuForRoute(pathname) && <SideMenuRoutes />}
         <div className={sideBar}>
           <Routes {...props} />
@@ -49,12 +51,12 @@ function App(props) {
 }
 
 const mapStateToProps = ({ global }) => ({
-  ...global
+  ...global,
 });
 
 const mapDispatchToProps = {
   loadAuthData: setPersistentData,
-  onLogoutPress: logout
+  onLogoutPress: logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
