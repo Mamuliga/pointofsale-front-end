@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCartItems } from '../../../store/actions/saleActions';
 import { TableRow, TableCell, TextField } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -62,8 +61,6 @@ const mapStateToProps = ({ global, sale }) => {
   return { ...global, ...sale };
 };
 
-const mapActionToProps = {
-  setCartItems,
-};
+const mapActionToProps = {};
 
 export default connect(mapStateToProps, mapActionToProps)(SaleTableRows);

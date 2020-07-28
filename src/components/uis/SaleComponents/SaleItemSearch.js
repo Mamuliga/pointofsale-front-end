@@ -6,7 +6,6 @@ import SaleToolTip from './SaleToolTip';
 import { TextField, CircularProgress } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { setFetchApiInfo } from '../../../store/actions/globalAction';
-import { setCartItems } from '../../../store/actions/saleActions';
 import { itemSearch } from '../../../http/itemApi';
 
 const SaleItemSearch = ({
@@ -124,7 +123,6 @@ const mapStateToProps = ({ global, sale }) => {
 
 const mapActionToProps = {
   setFetchApiInfo,
-  setCartItems,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(SaleItemSearch);

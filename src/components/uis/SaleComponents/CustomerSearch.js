@@ -5,7 +5,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField, CircularProgress, Card } from '@material-ui/core';
-import { setCartItems } from '../../../store/actions/saleActions';
 import { setFetchApiInfo, fetchApi } from '../../../store/actions/globalAction';
 import { searchCustomer } from '../../../http/customerApi';
 
@@ -99,7 +98,6 @@ const CustomerSearch = ({
 const mapStateToProps = ({ global, sale }) => ({ ...global, ...sale });
 
 const mapActionToProps = {
-  setCartItems,
   setFetchApiInfo,
   fetchApi,
 };

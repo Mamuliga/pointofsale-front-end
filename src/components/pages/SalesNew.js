@@ -6,7 +6,6 @@ import { getSaleTableHeaders } from '../../utilities/helpers/tableHelpers';
 import useStyles from '../../styles/useStyles';
 import { setFetchApiInfo, fetchApi } from '../../store/actions/globalAction';
 import { getItemTotal } from '../../utilities/helpers/saleHelpers';
-import { setCartItems } from '../../store/actions/saleActions';
 import CustomerSearch from '../uis/SaleComponents/CustomerSearch';
 import TotalDueCard from '../uis/SaleComponents/TotalDueCard';
 import PaymentMethodsInfo from '../uis/SaleComponents/PaymentTypeTableNew';
@@ -15,7 +14,7 @@ import { createSale } from '../../http/saleApi';
 import SaleItemSearch from '../uis/SaleComponents/SaleItemSearch';
 import SaleTableRows from '../uis/SaleComponents/SaleTableRows';
 
-const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
+const SalesNew = ({ setFetchApiInfo }) => {
   const classes = useStyles();
   const revdAmount = 0;
   const defaultCustomer = {
@@ -31,6 +30,7 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   const [payAmount, setPayAmount] = useState(0);
   const [buttonName, setButtonName] = useState(SALE_PAY_BUTTON_NAMES[0]);
   const [dueDate, setDueDate] = useState('2020-02-02');
+  const [cartItems, setCartItems] = useState([]);
   const [customer, setCustomer] = useState({
     id: 2,
     firstName: 'Marjan',
@@ -224,6 +224,8 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
         getItemTotal={getItemTotal}
         row={row}
         rowIndex={rowIndex}
+        setCartItems={setCartItems}
+        cartItems={cartItems}
       />
     ));
 
@@ -234,7 +236,11 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
           tableData={[]}
           tableHeaders={getSaleTableHeaders}
           tableTopUis={
-            <SaleItemSearch updateDisplayTotal={updateDisplayTotal} />
+            <SaleItemSearch
+              updateDisplayTotal={updateDisplayTotal}
+              setCartItems={setCartItems}
+              cartItems={cartItems}
+            />
           }
           hidePagination
           tableRows={getTableRows().reverse()}
@@ -279,7 +285,6 @@ const mapStateToProps = ({ global, sale }) => {
 
 const mapActionToProps = {
   setFetchApiInfo,
-  setCartItems,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(SalesNew);
