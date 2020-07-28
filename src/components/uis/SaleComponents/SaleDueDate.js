@@ -16,6 +16,10 @@ const SaleDueDatePicker = ({ dueDate, handleDueDateChange }) => {
     className = classes.salesDueDateCalendarExpand;
   }
 
+  const handleRemoveDate = () => {
+    handleDueDateChange(null);
+  };
+
   return (
     <div className={classes.salesdueDateCalendar}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -26,10 +30,13 @@ const SaleDueDatePicker = ({ dueDate, handleDueDateChange }) => {
           error={false}
           format=' yyyy / MM / dd'
           helperText='Due Date'
-          minDate={new Date().toJSON().slice(0, 10)}
+          minDate={new Date().toLocaleDateString()}
+          InputProps={{
+            readOnly: true,
+          }}
         />
       </MuiPickersUtilsProvider>
-      {dueDate && <RemoveCircleIcon onClick={handleDueDateChange} />}
+      {dueDate && <RemoveCircleIcon onClick={handleRemoveDate} />}
     </div>
   );
 };

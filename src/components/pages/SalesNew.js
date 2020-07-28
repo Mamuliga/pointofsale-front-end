@@ -31,12 +31,7 @@ const SalesNew = ({ setFetchApiInfo, fetchApi }) => {
   const [buttonName, setButtonName] = useState(SALE_PAY_BUTTON_NAMES[0]);
   const [dueDate, setDueDate] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const [customer, setCustomer] = useState({
-    id: 2,
-    firstName: 'Marjan',
-    lastName: 'Mukram',
-    email: 'marjan.emeraldit@gmail.com',
-  });
+  const [customer, setCustomer] = useState(defaultCustomer);
 
   const handleCartTotal = () => {
     let cartTotal = 0;
@@ -130,11 +125,7 @@ const SalesNew = ({ setFetchApiInfo, fetchApi }) => {
   };
 
   const handleDueDateChange = date => {
-    if (date instanceof Date && !isNaN(date)) {
-      setDueDate(date);
-    } else {
-      setDueDate(null);
-    }
+    setDueDate(date);
   };
 
   const addPaymentMethod = () => {
@@ -151,6 +142,7 @@ const SalesNew = ({ setFetchApiInfo, fetchApi }) => {
     fetchApi(false);
     setCartItems([]);
     setPaymentMethods([]);
+    setDueDate(null);
     setPayAmount(parseFloat(0).toFixed(2));
     setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
   };
@@ -181,7 +173,7 @@ const SalesNew = ({ setFetchApiInfo, fetchApi }) => {
       balance: 0,
       revdAmount,
       itemSales: getItemSales(cartItems),
-      dueDate: null,
+      dueDate,
     };
     fetchApi(true);
     createSale(newSale)
