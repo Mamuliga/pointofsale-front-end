@@ -1,21 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import {
-  Container,
-  TextField,
-  TableRow,
-  TableCell,
-  CircularProgress,
-} from '@material-ui/core';
+import { Container, TextField, TableRow, TableCell } from '@material-ui/core';
 import TableBuilder from '../uis/TableBuilder';
 import { getSaleTableHeaders } from '../../utilities/helpers/tableHelpers';
 import useStyles from '../../styles/useStyles';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import SaleToolTip from '../uis/SaleComponents/SaleToolTip';
 import DeleteIcon from '@material-ui/icons/Delete';
-import SearchIcon from '@material-ui/icons/Search';
 import { setFetchApiInfo, fetchApi } from '../../store/actions/globalAction';
-import { itemSearch } from '../../http/itemApi';
 import { getItemTotal } from '../../utilities/helpers/saleHelpers';
 import { setCartItems } from '../../store/actions/saleActions';
 import '../../styles/style.css';
@@ -24,19 +14,12 @@ import TotalDueCard from '../uis/SaleComponents/TotalDueCard';
 import PaymentMethodsInfo from '../uis/SaleComponents/PaymentTypeTableNew';
 import PaymentMethodSelection from '../uis/SaleComponents/PaymentMethodSelection';
 import { createSale } from '../../http/saleApi';
+import SaleItemSearch from '../uis/SaleComponents/SaleItemSearch';
 
 const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   const classes = useStyles();
+  const revdAmount = 0;
   const editableRowIndexes = ['quantity', 'discount'];
-  const [searchWord, setSearchWord] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
-  const [highlightedOption, setHighlightedOption] = useState();
-  const [fetchItems, setFetchItems] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState('cash');
-  const [paymentMethods, setPaymentMethods] = useState([]);
-  const [payAmount, setPayAmount] = useState(0);
-  const [buttonName, setButtonName] = useState('Complete Sale');
-  const [dueDate, setDueDate] = useState('2020-02-02');
   const defaultCustomer = {
     id: 1,
     firstName: 'Default',
@@ -44,21 +27,54 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     email: 'defaultCustomer@gmail.com',
   };
 
-  const getCartTotal = useCallback(() => {
+  const [paymentMethod, setPaymentMethod] = useState('cash');
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [payAmount, setPayAmount] = useState(0);
+  const [buttonName, setButtonName] = useState('Complete Sale');
+  const [dueDate, setDueDate] = useState('2020-02-02');
+  const [customer, setCustomer] = useState({
+    id: 2,
+    firstName: 'Marjan',
+    lastName: 'Mukram',
+    email: 'marjan.emeraldit@gmail.com',
+  });
+
+  const handleCartTotal = () => {
     let cartTotal = 0;
     cartItems.forEach(row => {
       cartTotal = cartTotal + parseFloat(getItemTotal(row));
     });
     return parseFloat(cartTotal).toFixed(2);
-  }, [cartItems]);
+  };
 
-  const getTotalReceivedAmount = useCallback(() => {
+  const handleTotalReceivedAmount = () => {
     let totalReceivedAmount = 0;
     paymentMethods.forEach(method => {
       totalReceivedAmount = totalReceivedAmount + parseFloat(method.amount);
     });
     return parseFloat(totalReceivedAmount).toFixed(2);
-  }, [paymentMethods]);
+  };
+
+  const getItemSales = () => {
+    const itemSales = [];
+    cartItems.forEach(item => {
+      const {
+        id,
+        quantity,
+        discount,
+        itemStatId,
+        salesPrice: sellingPrice,
+      } = item;
+      itemSales.push({
+        itemId: id,
+        sellingPrice,
+        quantity,
+        discount,
+        itemStatId,
+      });
+    });
+    return itemSales;
+  };
 
   const getBalance = () => {
     if (getTotalReceivedAmount() > 0) {
@@ -75,46 +91,8 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     setPaymentMethod(payMethod);
   };
 
-  useEffect(() => {
-    const handleItemSearchSuccuess = resp => {
-      setFetchItems(false);
-      if (Array.isArray(resp.data)) {
-        setSuggestions(resp.data);
-      }
-    };
-
-    const handleItemSearchErr = err => {
-      setFetchItems(false);
-      setFetchApiInfo({ type: 'error', error: 'Unable to search items' });
-      console.log(err);
-    };
-    setFetchItems(true);
-    itemSearch(searchWord)
-      .then(handleItemSearchSuccuess)
-      .catch(handleItemSearchErr);
-  }, [searchWord, setFetchApiInfo]);
   const handleFocus = event => event.target.select();
-  const handleItemSearchSubmit = (_e, value) => {
-    setHighlightedOption();
-    if (value) {
-      const {
-        item: { id, itemName },
-        salesPrice,
-        id: itemStatId,
-      } = value;
-      cartItems.push({
-        id,
-        itemName,
-        salesPrice: parseFloat(salesPrice).toFixed(2),
-        quantity: 1,
-        discount: parseFloat(0).toFixed(2),
-        total: parseFloat(salesPrice).toFixed(2),
-        itemStatId,
-      });
-      setCartItems([...cartItems]);
-      updateDisplayTotal();
-    }
-  };
+
   const handleKeyDown = cell => {
     const keyDown = e => {
       if (e.key === 'Tab' && cell === 'discount') {
@@ -125,6 +103,121 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     };
     return keyDown;
   };
+
+  const handleSearchCustomerSubmit = (_e, value) => {
+    setCustomer(value);
+  };
+
+  const handleRemoveSelectedCustomer = () => {
+    setCustomer(defaultCustomer);
+  };
+
+  const handleAddSubmit = e => {
+    e.preventDefault();
+    if (buttonName === 'Add Payment') {
+      addPaymentMethod();
+    }
+    if (buttonName === 'Complete Sale') {
+      addPaymentMethod();
+      handleCreateSale();
+    }
+  };
+
+  const handleSetPayAmount = () => {
+    if ((getCartTotal() - getTotalReceivedAmount()).toFixed(2) > 0) {
+      setPayAmount(
+        parseFloat(getCartTotal() - getTotalReceivedAmount()).toFixed(2)
+      );
+    } else {
+      setPayAmount(parseFloat(0).toFixed(2));
+    }
+  };
+
+  const handlePayAmount = e => {
+    if (e.target.value >= 0) {
+      setPayAmount(e.target.value);
+    }
+  };
+
+  const handleDueDateChange = date => {
+    setDueDate(date);
+  };
+
+  const addPaymentMethod = () => {
+    setPaymentMethods([
+      ...paymentMethods,
+      {
+        type: paymentMethod,
+        amount: parseFloat(payAmount).toFixed(2),
+      },
+    ]);
+  };
+
+  const getPaymentTypeObject = () => {
+    const paymentType = {};
+    paymentMethods.forEach(({ amount, type }) => {
+      paymentType[`${type}`] = amount;
+    });
+    paymentType[`${paymentMethod}`] = parseFloat(payAmount).toFixed(2);
+    return paymentType;
+  };
+
+  const handleCreateSale = () => {
+    const newSale = {
+      customerId: customer.id,
+      total: getCartTotal(),
+      totalDiscount: 0,
+      paymentType: getPaymentTypeObject(),
+      balance: getBalance(),
+      revdAmount,
+      itemSales: getItemSales(cartItems),
+      dueDate,
+    };
+
+    const handleCreateSaleSuccuess = () => {
+      fetchApi(false);
+      setCartItems([]);
+      setPayAmount(parseFloat(0).toFixed(2));
+      setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
+    };
+
+    const handlereateSaleError = () => {
+      fetchApi(false);
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Error occured in bill creation',
+      });
+    };
+    fetchApi(true);
+    createSale(newSale)
+      .then(handleCreateSaleSuccuess)
+      .catch(handlereateSaleError);
+  };
+
+  const handlePayButtonName = () => {
+    if (
+      parseFloat(getTotalReceivedAmount()) + parseFloat(payAmount) >=
+      parseFloat(getCartTotal())
+    ) {
+      setButtonName('Complete Sale');
+    } else {
+      setButtonName('Add Payment');
+    }
+  };
+
+  const getCartTotal = useCallback(handleCartTotal, [cartItems]);
+
+  const getTotalReceivedAmount = useCallback(handleTotalReceivedAmount, [
+    paymentMethods,
+  ]);
+
+  useEffect(handleSetPayAmount, [getCartTotal, getTotalReceivedAmount]);
+
+  useEffect(handlePayButtonName, [
+    getCartTotal,
+    getTotalReceivedAmount,
+    payAmount,
+  ]);
 
   const tableRows = cartItems.map((row, rowIndex) => {
     if (row.id) {
@@ -173,182 +266,8 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     return null;
   });
 
-  const handleSearchChange = e => setSearchWord(e.target.value);
-
-  const handleSearchCustomerSubmit = (_e, value) => {
-    setCustomer(value);
-  };
-
-  const handleRemoveSelectedCustomer = () => {
-    setCustomer(defaultCustomer);
-  };
-  const [customer, setCustomer] = useState({
-    id: 2,
-    firstName: 'Marjan',
-    lastName: 'Mukram',
-    email: 'marjan.emeraldit@gmail.com',
-  });
-
-  const itemSales = [];
-  cartItems.forEach(item => {
-    const {
-      id,
-      quantity,
-      discount,
-      itemStatId,
-      salesPrice: sellingPrice,
-    } = item;
-    itemSales.push({
-      itemId: id,
-      sellingPrice,
-      quantity,
-      discount,
-      itemStatId,
-    });
-  });
-
-  const revdAmount = 0;
-  const handleAddSubmit = e => {
-    e.preventDefault();
-    if (buttonName === 'Add Payment') {
-      addPaymentMethod();
-    }
-    if (buttonName === 'Complete Sale') {
-      addPaymentMethod();
-      handleCreateSale();
-    }
-  };
-
-  useEffect(() => {
-    if ((getCartTotal() - getTotalReceivedAmount()).toFixed(2) > 0) {
-      setPayAmount(
-        parseFloat(getCartTotal() - getTotalReceivedAmount()).toFixed(2)
-      );
-    } else {
-      setPayAmount(parseFloat(0).toFixed(2));
-    }
-  }, [getCartTotal, getTotalReceivedAmount]);
-
-  const addPaymentMethod = () => {
-    setPaymentMethods([
-      ...paymentMethods,
-      {
-        type: paymentMethod,
-        amount: parseFloat(payAmount).toFixed(2),
-      },
-    ]);
-  };
-
-  const handleCreateSale = () => {
-    const paymentType = {};
-    paymentMethods.forEach(({ amount, type }) => {
-      paymentType[`${type}`] = amount;
-    });
-    paymentType[`${paymentMethod}`] = parseFloat(payAmount).toFixed(2);
-    const newSale = {
-      customerId: customer.id,
-      total: getCartTotal(),
-      totalDiscount: 0,
-      paymentType,
-      balance: getBalance(),
-      revdAmount,
-      itemSales,
-      dueDate,
-    };
-
-    const handleCreateSaleSuccuess = () => {
-      fetchApi(false);
-      setCartItems([]);
-      setPayAmount(parseFloat(0).toFixed(2));
-      setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
-    };
-
-    const handlereateSaleError = () => {
-      fetchApi(false);
-      setFetchApiInfo({
-        type: 'error',
-        message: 'Error occured in bill creation',
-      });
-    };
-    fetchApi(true);
-    createSale(newSale)
-      .then(handleCreateSaleSuccuess)
-      .catch(handlereateSaleError);
-  };
-
-  useEffect(() => {
-    if (
-      parseFloat(getTotalReceivedAmount()) + parseFloat(payAmount) >=
-      parseFloat(getCartTotal())
-    ) {
-      setButtonName('Complete Sale');
-    } else {
-      setButtonName('Add Payment');
-    }
-  }, [getCartTotal, getTotalReceivedAmount, payAmount]);
-
-  const handleButtonName = () => {};
-
-  const handlePayAmount = e => {
-    if (e.target.value >= 0) {
-      setPayAmount(e.target.value);
-      handleButtonName();
-    }
-  };
-
-  const handleDueDateChange = date => {
-    setDueDate(date);
-  };
-
   const searchComponent = (
-    <div className={classes.inputsTop}>
-      <div className={classes.searchTab}>
-        <Autocomplete
-          id='sales-item-search'
-          renderOption={option => {
-            if (option.detail) {
-              return <SaleToolTip option={option} />;
-            }
-            return <div>{`${option.item.id}-${option.item.itemName}`}</div>;
-          }}
-          getOptionLabel={option => `${option.item.id}-${option.item.itemName}`}
-          options={
-            highlightedOption
-              ? [...suggestions, { ...highlightedOption, detail: true }]
-              : suggestions
-          }
-          onChange={handleItemSearchSubmit}
-          onHighlightChange={(_event, selectedOpt) => {
-            setHighlightedOption(selectedOpt);
-          }}
-          getOptionDisabled={opt => opt.detail}
-          disabledItemsFocusable
-          loading={fetchItems}
-          onFocus={handleFocus}
-          renderInput={params => (
-            <TextField
-              autoFocus
-              {...params}
-              label='Enter an Item Code, Item Name or Item Id'
-              noOptionsText={'No items found'}
-              onChange={handleSearchChange}
-              InputProps={{
-                ...params.InputProps,
-                startAdornment: <SearchIcon />,
-                endAdornment: (
-                  <React.Fragment>
-                    {fetchItems && (
-                      <CircularProgress color='inherit' size={20} />
-                    )}
-                    {params.InputProps.endAdornment}
-                  </React.Fragment>
-                ),
-              }}
-            />
-          )}
-        />
-      </div>
-    </div>
+    <SaleItemSearch updateDisplayTotal={updateDisplayTotal} />
   );
 
   return (
