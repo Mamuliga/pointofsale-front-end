@@ -9,7 +9,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
 const PaymentMethodsInfo = ({
-  paymentMethod,
+  paymentMethods,
   setPaymentMethod,
   handleDueDateChange,
   dueDate,
@@ -18,17 +18,16 @@ const PaymentMethodsInfo = ({
 
   const handleDelete = i => {
     const deletePaymentMethod = () => {
-      paymentMethod.splice(i, 1);
-      console.log(paymentMethod);
-
-      setPaymentMethod([...paymentMethod]);
+      paymentMethods.splice(i, 1);
+      console.log(paymentMethods);
+      setPaymentMethod([...paymentMethods]);
     };
     return deletePaymentMethod;
   };
   return (
     <Card className={classes.cardSales}>
       <div>
-        {paymentMethod.map((row, i) => {
+        {paymentMethods.map((row, i) => {
           return (
             <div className={classes.salesPaymentTypeContainer} key={`row-${i}`}>
               <div className={classes.removePaymentTypeIcon}>

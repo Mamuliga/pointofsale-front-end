@@ -9,22 +9,16 @@ import { setCartItems } from '../../../store/actions/saleActions';
 import { setFetchApiInfo, fetchApi } from '../../../store/actions/globalAction';
 import { searchCustomer } from '../../../http/customerApi';
 
-const CustomerSearch = ({ setFetchApiInfo }) => {
+const CustomerSearch = ({
+  setFetchApiInfo,
+  handleRemoveSelectedCustomer,
+  handleSearchCustomerSubmit,
+  customer,
+}) => {
   const classes = useStyles();
-  const defaultCustomer = {
-    id: 1,
-    firstName: 'Default',
-    lastName: 'Customer',
-    email: 'defaultCustomer@gmail.com',
-  };
+
   const [suggestions, setSuggestions] = useState([]);
   const [fetchCustomers, setFetchCustomers] = useState(false);
-  const [customer, setCustomer] = useState({
-    id: 2,
-    firstName: 'Marjan',
-    lastName: 'Mukram',
-    email: 'marjan.emeraldit@gmail.com',
-  });
 
   const handleSearchChange = e => {
     const searchSuccess = res => {
@@ -45,13 +39,6 @@ const CustomerSearch = ({ setFetchApiInfo }) => {
       .catch(searchErr);
   };
 
-  const handleSearchSubmit = (_e, value) => {
-    setCustomer(value);
-  };
-
-  const handleRemoveSelectedCustomer = () => {
-    setCustomer(defaultCustomer);
-  };
   if (customer.id > 1) {
     const { firstName, lastName, email } = customer;
     return (
@@ -79,7 +66,7 @@ const CustomerSearch = ({ setFetchApiInfo }) => {
             id='customer search-item-search'
             getOptionLabel={option => `${option.firstName} ${option.lastName}`}
             options={suggestions}
-            onChange={handleSearchSubmit}
+            onChange={handleSearchCustomerSubmit}
             loading={fetchCustomers}
             renderInput={params => (
               <TextField

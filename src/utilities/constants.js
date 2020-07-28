@@ -7,3 +7,6 @@ export const TOP_MENU_MAX_HEIGHT = 70;
 
 export const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 export const phoneRegex = /^\d{10}$/;
+
+export const PAYMENT_METHODS = ['cash', 'due', 'cheque', 'e-card'];
+export const CURRENCY = 'Rs';

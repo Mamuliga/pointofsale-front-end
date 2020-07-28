@@ -14,7 +14,7 @@ export default makeStyles(theme => ({
   },
   salesItemTable: {
     margin: 0,
-    width: '72%',
+    width: '65%',
   },
   cardSales: {
     margin: '20px',
@@ -43,19 +43,46 @@ export default makeStyles(theme => ({
     justifyContent: 'space-around',
   },
   salesRightSideMenu: {
-    width: '25%',
+    width: '32%',
+  },
+  salesTotalAndDueDisplay: {
+    color: theme.palette.secondary.main,
   },
   totalDueAmountContainer: {
     columnCount: 2,
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
   salesDisplayAmountBox: {
     textAlign: 'center',
     padding: 10,
     minWidth: '50px',
+    fontSize: '1.5rem',
   },
-  totalDueAmount: {
+  paymentMethodButtons: {
+    width: '100%',
+    display: 'inline-flex',
+    justifyContent: 'space-between',
+  },
+  addSubmitPayment: {
+    width: '100%',
+  },
+  salesAddAmount: {
+    width: '100%',
+    margin: '20px 0',
+    fontSize: '1.5rem',
+  },
+  salesAddPayAmountButton: {
+    width: '100%',
+    margin: '20px 0',
+    fontSize: '1.5rem',
+  },
+  salesTotalAmountDisplay: {
+    color: theme.palette.success.main,
+    fontSize: '3rem',
+  },
+  salesDueAmountDisplay: {
+    color: theme.palette.secondary.main,
     fontSize: '3rem',
   },
   salesPaymentTypeContainer: {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import {
   Container,
@@ -6,7 +6,6 @@ import {
   TableRow,
   TableCell,
   CircularProgress,
-  Card,
 } from '@material-ui/core';
 import TableBuilder from '../uis/TableBuilder';
 import { getSaleTableHeaders } from '../../utilities/helpers/tableHelpers';
@@ -15,7 +14,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import SaleToolTip from '../uis/SaleComponents/SaleToolTip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SearchIcon from '@material-ui/icons/Search';
-import { setFetchApiInfo } from '../../store/actions/globalAction';
+import { setFetchApiInfo, fetchApi } from '../../store/actions/globalAction';
 import { itemSearch } from '../../http/itemApi';
 import { getItemTotal } from '../../utilities/helpers/saleHelpers';
 import { setCartItems } from '../../store/actions/saleActions';
@@ -23,6 +22,8 @@ import '../../styles/style.css';
 import CustomerSearch from '../uis/SaleComponents/CustomerSearch';
 import TotalDueCard from '../uis/SaleComponents/TotalDueCard';
 import PaymentMethodsInfo from '../uis/SaleComponents/PaymentTypeTableNew';
+import PaymentMethodSelection from '../uis/SaleComponents/PaymentMethodSelection';
+import { createSale } from '../../http/saleApi';
 
 const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   const classes = useStyles();
@@ -31,6 +32,48 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [highlightedOption, setHighlightedOption] = useState();
   const [fetchItems, setFetchItems] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState('cash');
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [payAmount, setPayAmount] = useState(0);
+  const [buttonName, setButtonName] = useState('Complete Sale');
+  const [dueDate, setDueDate] = useState('2020-02-02');
+  const defaultCustomer = {
+    id: 1,
+    firstName: 'Default',
+    lastName: 'Customer',
+    email: 'defaultCustomer@gmail.com',
+  };
+
+  const getCartTotal = useCallback(() => {
+    let cartTotal = 0;
+    cartItems.forEach(row => {
+      cartTotal = cartTotal + parseFloat(getItemTotal(row));
+    });
+    return parseFloat(cartTotal).toFixed(2);
+  }, [cartItems]);
+
+  const getTotalReceivedAmount = useCallback(() => {
+    let totalReceivedAmount = 0;
+    paymentMethods.forEach(method => {
+      totalReceivedAmount = totalReceivedAmount + parseFloat(method.amount);
+    });
+    return parseFloat(totalReceivedAmount).toFixed(2);
+  }, [paymentMethods]);
+
+  const getBalance = () => {
+    if (getTotalReceivedAmount() > 0) {
+      return parseFloat(getTotalReceivedAmount() - getCartTotal()).toFixed(2);
+    }
+    return getTotalReceivedAmount();
+  };
+
+  const updateDisplayTotal = () => {
+    setPayAmount(getCartTotal());
+  };
+
+  const handlePaymentMethod = payMethod => {
+    setPaymentMethod(payMethod);
+  };
 
   useEffect(() => {
     const handleItemSearchSuccuess = resp => {
@@ -51,7 +94,7 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
       .catch(handleItemSearchErr);
   }, [searchWord, setFetchApiInfo]);
   const handleFocus = event => event.target.select();
-  const handleSearchSubmit = (_e, value) => {
+  const handleItemSearchSubmit = (_e, value) => {
     setHighlightedOption();
     if (value) {
       const {
@@ -69,12 +112,13 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
         itemStatId,
       });
       setCartItems([...cartItems]);
+      updateDisplayTotal();
     }
   };
   const handleKeyDown = cell => {
     const keyDown = e => {
       if (e.key === 'Tab' && cell === 'discount') {
-        document.getElementById('sale-total-inputs').focus();
+        document.getElementById('sales-payment-amount').focus();
       } else if (e.key === 'Enter') {
         document.getElementById('sales-item-search').focus();
       }
@@ -99,6 +143,7 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
                   console.log(value);
                   row[cell] = value;
                   setCartItems([...cartItems]);
+                  updateDisplayTotal();
                 }
               };
 
@@ -130,6 +175,131 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
 
   const handleSearchChange = e => setSearchWord(e.target.value);
 
+  const handleSearchCustomerSubmit = (_e, value) => {
+    setCustomer(value);
+  };
+
+  const handleRemoveSelectedCustomer = () => {
+    setCustomer(defaultCustomer);
+  };
+  const [customer, setCustomer] = useState({
+    id: 2,
+    firstName: 'Marjan',
+    lastName: 'Mukram',
+    email: 'marjan.emeraldit@gmail.com',
+  });
+
+  const itemSales = [];
+  cartItems.forEach(item => {
+    const {
+      id,
+      quantity,
+      discount,
+      itemStatId,
+      salesPrice: sellingPrice,
+    } = item;
+    itemSales.push({
+      itemId: id,
+      sellingPrice,
+      quantity,
+      discount,
+      itemStatId,
+    });
+  });
+
+  const revdAmount = 0;
+  const handleAddSubmit = e => {
+    e.preventDefault();
+    if (buttonName === 'Add Payment') {
+      addPaymentMethod();
+    }
+    if (buttonName === 'Complete Sale') {
+      addPaymentMethod();
+      handleCreateSale();
+    }
+  };
+
+  useEffect(() => {
+    if ((getCartTotal() - getTotalReceivedAmount()).toFixed(2) > 0) {
+      setPayAmount(
+        parseFloat(getCartTotal() - getTotalReceivedAmount()).toFixed(2)
+      );
+    } else {
+      setPayAmount(parseFloat(0).toFixed(2));
+    }
+  }, [getCartTotal, getTotalReceivedAmount]);
+
+  const addPaymentMethod = () => {
+    setPaymentMethods([
+      ...paymentMethods,
+      {
+        type: paymentMethod,
+        amount: parseFloat(payAmount).toFixed(2),
+      },
+    ]);
+  };
+
+  const handleCreateSale = () => {
+    const paymentType = {};
+    paymentMethods.forEach(({ amount, type }) => {
+      paymentType[`${type}`] = amount;
+    });
+    paymentType[`${paymentMethod}`] = parseFloat(payAmount).toFixed(2);
+    const newSale = {
+      customerId: customer.id,
+      total: getCartTotal(),
+      totalDiscount: 0,
+      paymentType,
+      balance: getBalance(),
+      revdAmount,
+      itemSales,
+      dueDate,
+    };
+
+    const handleCreateSaleSuccuess = () => {
+      fetchApi(false);
+      setCartItems([]);
+      setPayAmount(parseFloat(0).toFixed(2));
+      setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
+    };
+
+    const handlereateSaleError = () => {
+      fetchApi(false);
+      setFetchApiInfo({
+        type: 'error',
+        message: 'Error occured in bill creation',
+      });
+    };
+    fetchApi(true);
+    createSale(newSale)
+      .then(handleCreateSaleSuccuess)
+      .catch(handlereateSaleError);
+  };
+
+  useEffect(() => {
+    if (
+      parseFloat(getTotalReceivedAmount()) + parseFloat(payAmount) >=
+      parseFloat(getCartTotal())
+    ) {
+      setButtonName('Complete Sale');
+    } else {
+      setButtonName('Add Payment');
+    }
+  }, [getCartTotal, getTotalReceivedAmount, payAmount]);
+
+  const handleButtonName = () => {};
+
+  const handlePayAmount = e => {
+    if (e.target.value >= 0) {
+      setPayAmount(e.target.value);
+      handleButtonName();
+    }
+  };
+
+  const handleDueDateChange = date => {
+    setDueDate(date);
+  };
+
   const searchComponent = (
     <div className={classes.inputsTop}>
       <div className={classes.searchTab}>
@@ -147,7 +317,7 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
               ? [...suggestions, { ...highlightedOption, detail: true }]
               : suggestions
           }
-          onChange={handleSearchSubmit}
+          onChange={handleItemSearchSubmit}
           onHighlightChange={(_event, selectedOpt) => {
             setHighlightedOption(selectedOpt);
           }}
@@ -180,6 +350,7 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
       </div>
     </div>
   );
+
   return (
     <div className={classes.salesContainer}>
       <Container className={classes.salesItemTable}>
@@ -191,28 +362,34 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
           tableRows={tableRows.reverse()}
         />
       </Container>
+
       <div className={classes.salesRightMenu}>
-        <CustomerSearch />
-        <PaymentMethodsInfo
-          paymentMethod={[
-            {
-              type: 'cash',
-              amount: '50.00',
-            },
-            {
-              type: 'cheque',
-              amount: '250.00',
-            },
-            {
-              type: 'due',
-              amount: '150.00',
-            },
-          ]}
+        <CustomerSearch
+          handleSearchCustomerSubmit={handleSearchCustomerSubmit}
+          handleRemoveSelectedCustomer={handleRemoveSelectedCustomer}
+          customer={customer}
         />
-        <TotalDueCard />
-        <Card>
-          <h1>Select payment type</h1>
-        </Card>
+        <PaymentMethodsInfo
+          paymentMethods={paymentMethods}
+          totalPayAmount={getTotalReceivedAmount()}
+          handleDueDateChange={handleDueDateChange}
+          dueDate={dueDate}
+        />
+        <TotalDueCard
+          total={getCartTotal()}
+          totalPayAmount={getTotalReceivedAmount()}
+        />
+        <PaymentMethodSelection
+          handlePaymentMethod={handlePaymentMethod}
+          paymentMethod={paymentMethod}
+          handleAddSubmit={handleAddSubmit}
+          handlePayAmount={handlePayAmount}
+          payAmount={payAmount}
+          buttonDisabled={!(payAmount > 0 && getCartTotal() > 0)}
+          buttonName={buttonName}
+          dueDate={dueDate}
+          handleDueDateChange={handleDueDateChange}
+        />
       </div>
     </div>
   );

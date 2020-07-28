@@ -8,3 +8,11 @@
 #salesDueDates {
   width: 55% !important;
 }
+
+#sales-payment-amount {
+  font-size: 2rem;
+}
+
+.MuiTypography-body1 {
+  font-size: 2rem !important;
+}
