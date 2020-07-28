@@ -157,6 +157,7 @@ const SalesNew = ({ setFetchApiInfo, fetchApi }) => {
   const handleCreateSaleSuccuess = () => {
     fetchApi(false);
     setCartItems([]);
+    setPaymentMethods([]);
     setPayAmount(parseFloat(0).toFixed(2));
     setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
   };
