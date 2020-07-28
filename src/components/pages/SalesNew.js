@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { Container, TextField, TableRow, TableCell } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import TableBuilder from '../uis/TableBuilder';
 import { getSaleTableHeaders } from '../../utilities/helpers/tableHelpers';
 import useStyles from '../../styles/useStyles';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { setFetchApiInfo, fetchApi } from '../../store/actions/globalAction';
 import { getItemTotal } from '../../utilities/helpers/saleHelpers';
 import { setCartItems } from '../../store/actions/saleActions';
@@ -15,22 +14,23 @@ import PaymentMethodsInfo from '../uis/SaleComponents/PaymentTypeTableNew';
 import PaymentMethodSelection from '../uis/SaleComponents/PaymentMethodSelection';
 import { createSale } from '../../http/saleApi';
 import SaleItemSearch from '../uis/SaleComponents/SaleItemSearch';
+import SaleTableRows from '../uis/SaleComponents/SaleTableRows';
 
 const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
   const classes = useStyles();
   const revdAmount = 0;
-  const editableRowIndexes = ['quantity', 'discount'];
   const defaultCustomer = {
     id: 1,
     firstName: 'Default',
     lastName: 'Customer',
     email: 'defaultCustomer@gmail.com',
   };
+  const SALE_PAY_BUTTON_NAMES = ['Complete Sale', 'Add Payment'];
 
   const [paymentMethod, setPaymentMethod] = useState('cash');
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [payAmount, setPayAmount] = useState(0);
-  const [buttonName, setButtonName] = useState('Complete Sale');
+  const [buttonName, setButtonName] = useState(SALE_PAY_BUTTON_NAMES[0]);
   const [dueDate, setDueDate] = useState('2020-02-02');
   const [customer, setCustomer] = useState({
     id: 2,
@@ -91,8 +91,6 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     setPaymentMethod(payMethod);
   };
 
-  const handleFocus = event => event.target.select();
-
   const handleKeyDown = cell => {
     const keyDown = e => {
       if (e.key === 'Tab' && cell === 'discount') {
@@ -114,10 +112,10 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
 
   const handleAddSubmit = e => {
     e.preventDefault();
-    if (buttonName === 'Add Payment') {
+    if (buttonName === SALE_PAY_BUTTON_NAMES[1]) {
       addPaymentMethod();
     }
-    if (buttonName === 'Complete Sale') {
+    if (buttonName === SALE_PAY_BUTTON_NAMES[0]) {
       addPaymentMethod();
       handleCreateSale();
     }
@@ -199,9 +197,9 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
       parseFloat(getTotalReceivedAmount()) + parseFloat(payAmount) >=
       parseFloat(getCartTotal())
     ) {
-      setButtonName('Complete Sale');
+      setButtonName(SALE_PAY_BUTTON_NAMES[0]);
     } else {
-      setButtonName('Add Payment');
+      setButtonName(SALE_PAY_BUTTON_NAMES[1]);
     }
   };
 
@@ -219,52 +217,15 @@ const SalesNew = ({ setFetchApiInfo, cartItems, setCartItems }) => {
     payAmount,
   ]);
 
-  const tableRows = cartItems.map((row, rowIndex) => {
-    if (row.id) {
-      const deleteClick = () => {
-        cartItems.splice(rowIndex, 1);
-        setCartItems([...cartItems]);
-      };
-      return (
-        <TableRow hover key={`${rowIndex}+${row.id}`}>
-          {Object.keys(row).map(cell => {
-            row.total = getItemTotal(row);
-            if (editableRowIndexes.includes(cell)) {
-              const handleTextInputChange = event => {
-                const { value } = event.target;
-                if (value >= 0) {
-                  console.log(value);
-                  row[cell] = value;
-                  setCartItems([...cartItems]);
-                  updateDisplayTotal();
-                }
-              };
-
-              console.log(row[cell]);
-              return (
-                <TableCell key={cell}>
-                  <TextField
-                    id={cell}
-                    name={cell}
-                    onFocus={handleFocus}
-                    autoFocus={cell === 'quantity'}
-                    value={row[cell]}
-                    onChange={handleTextInputChange}
-                    onKeyDown={handleKeyDown(cell)}
-                  />
-                </TableCell>
-              );
-            }
-            return <TableCell key={cell}>{row[cell]}</TableCell>;
-          })}
-          <TableCell key={'delete'} align='right'>
-            <DeleteIcon onClick={deleteClick} />
-          </TableCell>
-        </TableRow>
-      );
-    }
-    return null;
-  });
+  const tableRows = cartItems.map((row, rowIndex) => (
+    <SaleTableRows
+      updateDisplayTotal={updateDisplayTotal}
+      handleKeyDown={handleKeyDown}
+      getItemTotal={getItemTotal}
+      row={row}
+      rowIndex={rowIndex}
+    />
+  ));
 
   const searchComponent = (
     <SaleItemSearch updateDisplayTotal={updateDisplayTotal} />
