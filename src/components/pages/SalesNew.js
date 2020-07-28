@@ -75,13 +75,6 @@ const SalesNew = ({ setFetchApiInfo, fetchApi }) => {
     return itemSales;
   };
 
-  const getBalance = () => {
-    if (getTotalReceivedAmount() > 0) {
-      return parseFloat(getTotalReceivedAmount() - getCartTotal()).toFixed(2);
-    }
-    return getTotalReceivedAmount();
-  };
-
   const updateDisplayTotal = () => {
     setPayAmount(getCartTotal());
   };
@@ -185,7 +178,7 @@ const SalesNew = ({ setFetchApiInfo, fetchApi }) => {
       total: getCartTotal(),
       totalDiscount: 0,
       paymentType: getPaymentTypeObject(),
-      balance: getBalance(),
+      balance: 0,
       revdAmount,
       itemSales: getItemSales(cartItems),
       dueDate: null,
