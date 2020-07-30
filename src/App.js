@@ -5,11 +5,7 @@ import { setPersistentData, logout } from './store/actions/authActions';
 import Routes from './routes';
 import { AUTH_LOCAL_STORAGE } from './utilities/constants';
 import TopMenu from './components/uis/TopMenu';
-import {
-  showTopMenuForRoute,
-  showSideMenuForRoute,
-  PAGE_ROUTES,
-} from './services/routeService';
+import { showTopMenuForRoute, showSideMenuForRoute, PAGE_ROUTES } from './services/routeService';
 import SideMenuRoutes from './routes/SideMenuRoutes';
 import { getUserList } from './http/usersApi';
 import useStyles from './styles/useStyles';
@@ -30,7 +26,7 @@ function App(props) {
   let sideBar = classes.mainRouteViewLeftSidebar;
   if (pathname === PAGE_ROUTES.sales || pathname === PAGE_ROUTES.receives) {
     sideBar = classes.mainRouteViewRightSidebar;
-  } else if (pathname === PAGE_ROUTES.salesNew) {
+  } else if (pathname === PAGE_ROUTES.salesNew || pathname === PAGE_ROUTES.receivesNew) {
     sideBar = '';
   }
 

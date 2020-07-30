@@ -21,6 +21,7 @@ import {
   settingsRoutes,
   dashboardRoutes,
   saleNewRoutes,
+  receiveNewRoutes,
 } from './routeHelper';
 
 const Routes = props => (
@@ -89,6 +90,14 @@ const Routes = props => (
       />
     ))}
     {saleNewRoutes.map(route => (
+      <ProtectedRoute
+        exact
+        path={route.path}
+        component={route.component}
+        key={route.path}
+      />
+    ))}
+    {receiveNewRoutes.map(route => (
       <ProtectedRoute
         exact
         path={route.path}
