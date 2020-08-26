@@ -8,27 +8,27 @@ import { setFetchApiInfo, fetchApi } from '../../store/actions/globalAction';
 import { getItemTotal } from '../../utilities/helpers/receiveHelpers';
 import CustomerSearch from '../uis/SaleComponents/CustomerSearch';
 import TotalDueCard from '../uis/SaleComponents/TotalDueCard';
-import PaymentMethodsInfo from '../uis/SaleComponents/PaymentTypeTableNew';
+import PaymentMethodsInfo from '../uis/SaleComponents/PaymentMethodsInfo';
 import PaymentMethodSelection from '../uis/SaleComponents/PaymentMethodSelection';
 import { createReceive } from '../../http/receiveApi';
-import SaleItemSearch from '../uis/SaleComponents/SaleItemSearch';
-import SaleTableRows from '../uis/SaleComponents/SaleTableRows';
+import ReceiveTableRows from '../uis/SaleComponents/ReceiveTableRows';
+import ReceiveItemSearch from '../uis/SaleComponents/ReceiveItemSearch';
 
 const ReceivesNew = ({ setFetchApiInfo }) => {
   const classes = useStyles();
   const revdAmount = 0;
-  const defaultCustomer = {
+  const defaultSupplier = {
     id: 1,
     firstName: 'Default',
-    lastName: 'Customer',
-    email: 'defaultCustomer@gmail.com',
+    lastName: 'Supplier',
+    email: 'defaultSupplier@gmail.com',
   };
-  const SALE_PAY_BUTTON_NAMES = ['Complete Sale', 'Add Payment'];
+  const RECEIVE_PAY_BUTTON_NAMES = ['Complete Sale', 'Add Payment'];
 
   const [paymentMethod, setPaymentMethod] = useState('cash');
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [payAmount, setPayAmount] = useState(0);
-  const [buttonName, setButtonName] = useState(SALE_PAY_BUTTON_NAMES[0]);
+  const [buttonName, setButtonName] = useState(RECEIVE_PAY_BUTTON_NAMES[0]);
   const [dueDate, setDueDate] = useState('2020-02-02');
   const [cartItems, setCartItems] = useState([]);
   const [customer, setCustomer] = useState({
@@ -57,7 +57,13 @@ const ReceivesNew = ({ setFetchApiInfo }) => {
   const getItemSales = () => {
     const itemSales = [];
     cartItems.forEach(item => {
-      const { id, quantity, discount, itemStatId, salesPrice: sellingPrice } = item;
+      const {
+        id,
+        quantity,
+        discount,
+        itemStatId,
+        salesPrice: sellingPrice,
+      } = item;
       itemSales.push({
         itemId: id,
         sellingPrice,
@@ -87,9 +93,9 @@ const ReceivesNew = ({ setFetchApiInfo }) => {
   const handleKeyDown = cell => {
     const keyDown = e => {
       if (e.key === 'Tab' && cell === 'discount') {
-        document.getElementById('sales-payment-amount').focus();
+        document.getElementById('receive-total-inputs').focus();
       } else if (e.key === 'Enter') {
-        document.getElementById('sales-item-search').focus();
+        document.getElementById('receive-item-search').focus();
       }
     };
     return keyDown;
@@ -100,23 +106,25 @@ const ReceivesNew = ({ setFetchApiInfo }) => {
   };
 
   const handleRemoveSelectedCustomer = () => {
-    setCustomer(defaultCustomer);
+    setCustomer(defaultSupplier);
   };
 
   const handleAddSubmit = e => {
     e.preventDefault();
-    if (buttonName === SALE_PAY_BUTTON_NAMES[1]) {
+    if (buttonName === RECEIVE_PAY_BUTTON_NAMES[1]) {
       addPaymentMethod();
     }
-    if (buttonName === SALE_PAY_BUTTON_NAMES[0]) {
+    if (buttonName === RECEIVE_PAY_BUTTON_NAMES[0]) {
       addPaymentMethod();
-      handleCreateSale();
+      handleCreateReceive();
     }
   };
 
   const handleSetPayAmount = () => {
     if ((getCartTotal() - getTotalReceivedAmount()).toFixed(2) > 0) {
-      setPayAmount(parseFloat(getCartTotal() - getTotalReceivedAmount()).toFixed(2));
+      setPayAmount(
+        parseFloat(getCartTotal() - getTotalReceivedAmount()).toFixed(2)
+      );
     } else {
       setPayAmount(parseFloat(0).toFixed(2));
     }
@@ -151,7 +159,7 @@ const ReceivesNew = ({ setFetchApiInfo }) => {
     return paymentType;
   };
 
-  const handleCreateSale = () => {
+  const handleCreateReceive = () => {
     const newReceive = {
       customerId: customer.id,
       total: getCartTotal(),
@@ -163,14 +171,14 @@ const ReceivesNew = ({ setFetchApiInfo }) => {
       dueDate,
     };
 
-    const handleCreateSaleSuccuess = () => {
+    const handleCreateReceiveSuccuess = () => {
       fetchApi(false);
       setCartItems([]);
       setPayAmount(parseFloat(0).toFixed(2));
       setFetchApiInfo({ type: 'success', message: 'Bill created succuess' });
     };
 
-    const handlereateSaleError = () => {
+    const handleCreateReceiveError = () => {
       fetchApi(false);
       setFetchApiInfo({
         type: 'error',
@@ -178,7 +186,9 @@ const ReceivesNew = ({ setFetchApiInfo }) => {
       });
     };
     fetchApi(true);
-    createReceive(newReceive).then(handleCreateSaleSuccuess).catch(handlereateSaleError);
+    createReceive(newReceive)
+      .then(handleCreateReceiveSuccuess)
+      .catch(handleCreateReceiveError);
   };
 
   const handlePayButtonName = () => {
@@ -186,23 +196,29 @@ const ReceivesNew = ({ setFetchApiInfo }) => {
       parseFloat(getTotalReceivedAmount()) + parseFloat(payAmount) >=
       parseFloat(getCartTotal())
     ) {
-      setButtonName(SALE_PAY_BUTTON_NAMES[0]);
+      setButtonName(RECEIVE_PAY_BUTTON_NAMES[0]);
     } else {
-      setButtonName(SALE_PAY_BUTTON_NAMES[1]);
+      setButtonName(RECEIVE_PAY_BUTTON_NAMES[1]);
     }
   };
 
   const getCartTotal = useCallback(handleCartTotal, [cartItems]);
 
-  const getTotalReceivedAmount = useCallback(handleTotalReceivedAmount, [paymentMethods]);
+  const getTotalReceivedAmount = useCallback(handleTotalReceivedAmount, [
+    paymentMethods,
+  ]);
 
   useEffect(handleSetPayAmount, [getCartTotal, getTotalReceivedAmount]);
 
-  useEffect(handlePayButtonName, [getCartTotal, getTotalReceivedAmount, payAmount]);
+  useEffect(handlePayButtonName, [
+    getCartTotal,
+    getTotalReceivedAmount,
+    payAmount,
+  ]);
 
   const getTableRows = () =>
     cartItems.map((row, rowIndex) => (
-      <SaleTableRows
+      <ReceiveTableRows
         updateDisplayTotal={updateDisplayTotal}
         handleKeyDown={handleKeyDown}
         getItemTotal={getItemTotal}
@@ -220,7 +236,7 @@ const ReceivesNew = ({ setFetchApiInfo }) => {
           tableData={[]}
           tableHeaders={getReceiveTableHeaders}
           tableTopUis={
-            <SaleItemSearch
+            <ReceiveItemSearch
               updateDisplayTotal={updateDisplayTotal}
               setCartItems={setCartItems}
               cartItems={cartItems}
@@ -243,7 +259,10 @@ const ReceivesNew = ({ setFetchApiInfo }) => {
           handleDueDateChange={handleDueDateChange}
           dueDate={dueDate}
         />
-        <TotalDueCard total={getCartTotal()} totalPayAmount={getTotalReceivedAmount()} />
+        <TotalDueCard
+          total={getCartTotal()}
+          totalPayAmount={getTotalReceivedAmount()}
+        />
         <PaymentMethodSelection
           handlePaymentMethod={handlePaymentMethod}
           paymentMethod={paymentMethod}
