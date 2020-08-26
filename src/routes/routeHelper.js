@@ -22,6 +22,7 @@ import PaymentTypeAnalytics from '../components/pages/dashboard/PaymentTypeAnaly
 import LineGraph from '../components/pages/dashboard/LineGraph';
 import LowInventory from '../components/pages/dashboard/LowInventory';
 import SalesNew from '../components/pages/SalesNew';
+import ReceivesNew from '../components/pages/ReceivesNew';
 
 export const customerRoutes = [
   {
@@ -115,6 +116,13 @@ export const receiveRoutes = [
   {
     path: PAGE_ROUTES.receives,
     component: Receives,
+  },
+];
+
+export const receiveNewRoutes = [
+  {
+    path: PAGE_ROUTES.receivesNew,
+    component: ReceivesNew,
   },
 ];
 

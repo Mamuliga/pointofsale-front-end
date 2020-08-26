@@ -145,9 +145,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value)
-      .then(searchSuccess)
-      .catch(searchErr);
+    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
   };
 
   const handleAddPayment = () => {
