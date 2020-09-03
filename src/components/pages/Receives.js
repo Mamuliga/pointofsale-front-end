@@ -14,7 +14,7 @@ import { createReceive } from '../../http/receiveApi';
 import ReceiveTableRows from '../uis/SaleComponents/ReceiveTableRows';
 import ReceiveItemSearch from '../uis/SaleComponents/ReceiveItemSearch';
 
-const ReceivesNew = ({ setFetchApiInfo }) => {
+const Receives = ({ setFetchApiInfo }) => {
   const classes = useStyles();
   const revdAmount = 0;
   const defaultSupplier = {
@@ -287,4 +287,4 @@ const mapActionToProps = {
   setFetchApiInfo,
 };
 
-export default connect(mapStateToProps, mapActionToProps)(ReceivesNew);
+export default connect(mapStateToProps, mapActionToProps)(Receives);

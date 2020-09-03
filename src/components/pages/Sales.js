@@ -14,7 +14,7 @@ import { createSale } from '../../http/saleApi';
 import SaleItemSearch from '../uis/SaleComponents/SaleItemSearch';
 import SaleTableRows from '../uis/SaleComponents/SaleTableRows';
 
-const SalesNew = ({ setFetchApiInfo, fetchApi }) => {
+const Sales = ({ setFetchApiInfo, fetchApi }) => {
   const classes = useStyles();
   const revdAmount = 0;
   const defaultCustomer = {
@@ -278,4 +278,4 @@ const mapActionToProps = {
   fetchApi,
 };
 
-export default connect(mapStateToProps, mapActionToProps)(SalesNew);
+export default connect(mapStateToProps, mapActionToProps)(Sales);
