@@ -35,14 +35,12 @@ function App(props) {
     <div className={classes.mainContianer}>
       <div className={classes.header}>
         <div className={classes.headerCompanyName}>EIT POS</div>
-        <div className={classes.logoutButtonContainer}>
-          <Button
-            label=''
-            className={classes.logoutButton}
-            onClick={handleLogoutClick}
-            endIcon={<ExitToAppIcon />}
-          />
-        </div>
+        <Button
+          label=''
+          className={classes.logoutButton}
+          onClick={handleLogoutClick}
+          endIcon={<ExitToAppIcon />}
+        />
       </div>
       {showTopMenuForRoute(pathname) && (
         <SideMenu selectedKey={pathname} onLogoutPress={props.onLogoutPress} />

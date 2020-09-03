@@ -1,16 +1,8 @@
 import { makeStyles } from '@material-ui/core';
-import {
-  LEFT_SIDE_BAR_WIDTH,
-  TOP_MENU_MAX_HEIGHT,
-  RIGHT_SIDE_BAR_WIDTH,
-} from '../utilities/constants';
 
 export default makeStyles(theme => ({
   root: {
     display: 'flex',
-  },
-  container: {
-    paddingTop: 72, // Space for top bar
   },
   salesItemTable: {
     margin: 0,
@@ -41,12 +33,6 @@ export default makeStyles(theme => ({
     display: 'inline-flex',
     width: '100%',
     justifyContent: 'space-around',
-  },
-  salesRightSideMenu: {
-    width: '32%',
-  },
-  salesTotalAndDueDisplay: {
-    color: theme.palette.secondary.main,
   },
   totalDueAmountContainer: {
     columnCount: 2,
@@ -115,81 +101,27 @@ export default makeStyles(theme => ({
   mainContianer: {
     display: 'flex',
   },
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: LEFT_SIDE_BAR_WIDTH,
-      flexShrink: 0,
-      zIndex: '1 !important',
-    },
-  },
   topMenu: {
     position: 'absolute',
     height: '100vh',
-    top: 65,
+    top: 50,
     left: 0,
     flexGrow: 1,
     backgroundColor: theme.palette.grey[900],
     display: 'flex',
     color: 'white',
   },
-  sideMenuContainer: {
-    marginTop: TOP_MENU_MAX_HEIGHT,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
-  toolbar: theme.mixins.toolbar,
-  drawerPaperRight: {
-    width: LEFT_SIDE_BAR_WIDTH,
-  },
-  drawerPaperLeft: {
-    width: RIGHT_SIDE_BAR_WIDTH,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  customerContainer: {
+  customerSupplierContainer: {
     width: '100%',
     margin: '3%',
-  },
-  mainRouteViewLeftSidebar: {
-    maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH})`,
-    marginLeft: LEFT_SIDE_BAR_WIDTH,
-    marginTop: TOP_MENU_MAX_HEIGHT,
-  },
-  mainRouteViewRightSidebar: {
-    maxWidth: `calc(100% - ${RIGHT_SIDE_BAR_WIDTH})`,
-    marginRight: RIGHT_SIDE_BAR_WIDTH,
-    marginTop: TOP_MENU_MAX_HEIGHT,
-  },
-  navButton: {
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-  },
-  innerButton: {
-    padding: theme.spacing(1),
   },
   logoutButton: {
     color: 'white',
   },
-  logoutButtonContainer: {},
   headerCompanyName: {
     display: 'flex',
     justifyContent: 'start',
     fontSize: '32px',
-  },
-  copyrightLabel: {
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: theme.palette.primary.dark,
-    textAlign: 'center',
-    width: '100%',
-    color: theme.palette.grey[100],
-    lineHeight: 0.2,
   },
   customAvatarStyles: {
     margin: theme.spacing(1),
@@ -215,30 +147,6 @@ export default makeStyles(theme => ({
     justifyContent: 'space-between',
     padding: '10px',
   },
-  searchSaleItems: {
-    fontSize: '2rem !important',
-  },
-  searchIcon: {
-    height: '100%',
-    pointerEvents: 'none',
-    paddingTop: theme.spacing(0.6),
-  },
-  searchInputRoot: {
-    color: 'inherit',
-    width: '100%',
-  },
-  searchInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
   searchTab: {
     border: 0,
     width: '80%',
@@ -247,13 +155,6 @@ export default makeStyles(theme => ({
     position: 'relative',
     minWidth: 0,
     verticalAlign: 'top',
-  },
-  searchField: {
-    display: 'inline-flex',
-    width: '100%',
-  },
-  searchForm: {
-    width: '100%',
   },
   searchItemSuggestionBox: {
     background: theme.palette.success.main,
@@ -271,62 +172,6 @@ export default makeStyles(theme => ({
   toolTipValue: {
     fontSize: '1.5rem',
   },
-  sideMenuPageBottomInputs: {
-    position: 'fixed',
-    bottom: 0,
-  },
-  total: {
-    textAlign: 'left',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    padding: '4px',
-    flexDirection: 'column',
-    paddingTop: theme.spacing(1),
-  },
-  cash: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    padding: '4px',
-    flexDirection: 'column',
-    paddingTop: theme.spacing(1),
-  },
-  balance: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    padding: '4px',
-    flexDirection: 'column',
-    paddingTop: theme.spacing(1),
-  },
-  customerName: {
-    marginBottom: theme.spacing(20),
-    paddingTop: theme.spacing(1),
-    padding: '4px',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  Id: {
-    paddingTop: theme.spacing(1),
-    padding: '4px',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-
-  button: {
-    width: '100%',
-    marginBottom: theme.spacing(1),
-  },
-  payment: {
-    width: '56%',
-    marginLeft: '124px',
-    marginBottom: theme.spacing(1),
-    backgroundColor: '#f44336',
-  },
-  barcode: {
-    width: '100%',
-    margin: 'auto',
-    textAlign: 'center',
-  },
-  /*Login styles */
   loginHeading: {
     textAlign: 'center',
   },
@@ -360,7 +205,7 @@ export default makeStyles(theme => ({
   loginputField: {
     width: theme.spacing(36),
   },
-  loginForgetPassword: {
+  loginForgotPassword: {
     width: theme.spacing(80),
     marginTop: theme.spacing(3),
   },
@@ -379,8 +224,6 @@ export default makeStyles(theme => ({
       marginLeft: theme.spacing(2),
     },
   },
-  /*Login styles end*/
-  /* Form builder styles*/
   formbuilderForm: {
     marginTop: theme.spacing(3),
   },
@@ -400,9 +243,6 @@ export default makeStyles(theme => ({
   toolTipRows: {
     display: 'flex',
     justifyContent: 'space-between',
-  },
-  toolTipSecondRow: {
-    justifyContent: 'space-around',
   },
   paymentdropDown: {
     width: '100%',
@@ -426,10 +266,6 @@ export default makeStyles(theme => ({
     margin: '3%',
     marginTop: 50,
     marginLeft: '175px',
-  },
-  mainViewCustomer: {
-    width: '100%',
-    margin: '3%',
   },
   header: {
     height: 50,

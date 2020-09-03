@@ -212,7 +212,7 @@ const Login = props => {
               </Box>
             </form>
             <Box
-              className={classes.loginForgetPassword}
+              className={classes.loginForgotPassword}
               display='flex'
               height={50}
               alignItems='left'

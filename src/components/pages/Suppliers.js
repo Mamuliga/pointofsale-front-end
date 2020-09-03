@@ -52,7 +52,9 @@ const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
     };
 
     fetchApi(true);
-    getSupplierList().then(handleGetSupplierResp).catch(handleGetSupplierErr);
+    getSupplierList()
+      .then(handleGetSupplierResp)
+      .catch(handleGetSupplierErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = supplier => {
@@ -78,7 +80,9 @@ const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
       setFetchSuppliers(false);
     };
     setFetchSuppliers(true);
-    searchSupplier(e.target.value).then(searchSuccess).catch(searchErr);
+    searchSupplier(e.target.value)
+      .then(searchSuccess)
+      .catch(searchErr);
   };
 
   const searchComponent = (
@@ -118,7 +122,7 @@ const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
   );
 
   return (
-    <div className={classes.customerContainer}>
+    <div className={classes.customerSupplierContainer}>
       {searchComponent}
       <TableBuilder
         tableData={supplierList}
