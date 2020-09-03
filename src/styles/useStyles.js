@@ -173,9 +173,12 @@ export default makeStyles(theme => ({
     padding: theme.spacing(1),
   },
   logoutButton: {
-    padding: theme.spacing(1),
-    color: 'inherit',
-    opacity: 0.7,
+    padding: theme.spacing(3),
+    color: 'white',
+  },
+  logoutButtonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
   copyrightLabel: {
     position: 'absolute',
