@@ -14,6 +14,7 @@ import {
   CircularProgress,
   Switch,
   FormControlLabel,
+  Button,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -157,10 +158,16 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
     };
     return handlePayClick;
   };
+
+  const handleCreateNew = () => {};
+
   return (
     <Fragment>
       <div className={classes.customerSupplierContainer}>
         {searchComponent}
+        <Button color='primary' variant='contained' onClick={handleCreateNew}>
+          Create New{' '}
+        </Button>
         <div>
           <FormControlLabel
             control={
