@@ -41,9 +41,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
     };
     fetchApi(true);
-    getCustomerList()
-      .then(handleGetCustomerResp)
-      .catch(handleGetCustomerErr);
+    getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = customer => {
@@ -93,9 +91,7 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
     };
     setFetchCustomers(true);
     if (e.target.value.length) {
-      searchCustomer(e.target.value)
-        .then(searchSuccess)
-        .catch(searchErr);
+      searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
     } else {
       setCustomerList(allCustomerList);
     }

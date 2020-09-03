@@ -4,11 +4,11 @@ import { useLocation } from 'react-router-dom';
 import { setPersistentData, logout } from './store/actions/authActions';
 import Routes from './routes';
 import { AUTH_LOCAL_STORAGE } from './utilities/constants';
-import TopMenu from './components/uis/TopMenu';
+import SideMenu from './components/uis/SideMenu';
 import {
   showTopMenuForRoute,
   showSideMenuForRoute,
-  PAGE_ROUTES
+  PAGE_ROUTES,
 } from './services/routeService';
 import SideMenuRoutes from './routes/SideMenuRoutes';
 import { getUserList } from './http/usersApi';
@@ -33,28 +33,29 @@ function App(props) {
   }
 
   return (
-    <div className='App'>
+    <div className={classes.mainContianer}>
+      <div className={classes.header}>Header</div>
       {showTopMenuForRoute(pathname) && (
-        <TopMenu selectedKey={pathname} onLogoutPress={props.onLogoutPress} />
+        <SideMenu selectedKey={pathname} onLogoutPress={props.onLogoutPress} />
       )}
-      <div>
-        {showSideMenuForRoute(pathname) && <SideMenuRoutes />}
-        <div className={sideBar}>
-          <Routes {...props} />
-        </div>
+      {/* <div> */}
+      {/* {showSideMenuForRoute(pathname) && <SideMenuRoutes />} */}
+      <div className={classes.mainPageView}>
+        <Routes {...props} />
       </div>
+      {/* </div> */}
       <ErrorDisplay info={props.messageInfo} />
     </div>
   );
 }
 
 const mapStateToProps = ({ global }) => ({
-  ...global
+  ...global,
 });
 
 const mapDispatchToProps = {
   loadAuthData: setPersistentData,
-  onLogoutPress: logout
+  onLogoutPress: logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -9,6 +9,9 @@ export default makeStyles(theme => ({
   root: {
     display: 'flex',
   },
+  mainContianer: {
+    display: 'flex',
+  },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: LEFT_SIDE_BAR_WIDTH,
@@ -23,8 +26,13 @@ export default makeStyles(theme => ({
     },
   },
   topMenu: {
-    display: 'inline-flex',
-    justifyContent: 'space-between',
+    position: 'absolute',
+    top: 70,
+    left: 0,
+    flexGrow: 1,
+    backgroundColor: theme.palette.grey[900],
+    display: 'flex',
+    color: 'white',
   },
   sideMenuContainer: {
     marginTop: TOP_MENU_MAX_HEIGHT,
@@ -47,7 +55,8 @@ export default makeStyles(theme => ({
     padding: theme.spacing(3),
   },
   customerContainer: {
-    marginTop: '13%',
+    width: '100%',
+    margin: '3%',
   },
   mainRouteViewLeftSidebar: {
     maxWidth: `calc(100% - ${LEFT_SIDE_BAR_WIDTH})`,
@@ -299,5 +308,24 @@ export default makeStyles(theme => ({
   dropdownChips: {
     display: 'flex',
     flexWrap: 'wrap',
+  },
+  mainPageView: {
+    display: 'flex',
+    width: '100%',
+    margin: '3%',
+    marginTop: 70,
+    marginLeft: '175px',
+  },
+  mainViewCustomer: {
+    width: '100%',
+    margin: '3%',
+  },
+  header: {
+    height: 70,
+    backgroundColor: theme.palette.grey[900],
+    width: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
 }));

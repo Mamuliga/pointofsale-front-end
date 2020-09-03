@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import useStyle from '../../../styles/useStyles';
 import { LinearProgress, Tabs, Tab } from '@material-ui/core';
 
-const TopMenu = props => {
+const SideMenu = props => {
   const { push, location } = useHistory();
   const classes = useStyle();
 
@@ -25,37 +25,38 @@ const TopMenu = props => {
   });
   const [value, setValue] = React.useState(topMenuValue);
   return (
-    <div>
-      <AppBar className={classes.appBar} color='primary'>
-        <div className={classes.topMenu}>
-          <Tabs
-            value={value}
-            variant='scrollable'
-            scrollButtons='auto'
-            onChange={(_event, newValue) => {
-              const menuItem = TOP_MENU_ITEMS[newValue];
-              push(menuItem.path);
-              setValue(newValue);
-            }}
-          >
-            {TOP_MENU_ITEMS.map(menuItem => (
-              <Tab
-                label={menuItem.title}
-                key={menuItem.key}
-                icon={<menuItem.icon />}
-              />
-            ))}
-          </Tabs>
-          <Button
+    // <div>
+    /* <AppBar className={classes.appBar} color='primary'> */
+    <div className={classes.topMenu}>
+      <Tabs
+        orientation='vertical'
+        value={value}
+        variant='scrollable'
+        scrollButtons='auto'
+        onChange={(_event, newValue) => {
+          const menuItem = TOP_MENU_ITEMS[newValue];
+          push(menuItem.path);
+          setValue(newValue);
+        }}
+      >
+        {TOP_MENU_ITEMS.map(menuItem => (
+          <Tab
+            label={menuItem.title}
+            icon={<menuItem.icon />}
+            key={menuItem.key}
+          />
+        ))}
+      </Tabs>
+      {/* <Button
             label=''
             className={classes.logoutButton}
             onClick={handleLogoutClick}
             endIcon={<ExitToAppIcon />}
-          />
-        </div>
-        {props.isFetching && <LinearProgress color='secondary' />}
-      </AppBar>
+          /> */}
+      {props.isFetching && <LinearProgress color='secondary' />}
     </div>
+    /* </AppBar> */
+    // </div>
   );
 };
 
@@ -63,4 +64,4 @@ const mapStateToProps = ({ global }) => {
   return { ...global };
 };
 
-export default connect(mapStateToProps)(TopMenu);
+export default connect(mapStateToProps)(SideMenu);
