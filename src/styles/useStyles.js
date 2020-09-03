@@ -125,7 +125,7 @@ export default makeStyles(theme => ({
   topMenu: {
     position: 'absolute',
     height: '100vh',
-    top: 70,
+    top: 65,
     left: 0,
     flexGrow: 1,
     backgroundColor: theme.palette.grey[900],
@@ -174,12 +174,13 @@ export default makeStyles(theme => ({
     padding: theme.spacing(1),
   },
   logoutButton: {
-    padding: theme.spacing(3),
     color: 'white',
   },
-  logoutButtonContainer: {
+  logoutButtonContainer: {},
+  headerCompanyName: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'start',
+    fontSize: '32px',
   },
   copyrightLabel: {
     position: 'absolute',
@@ -423,7 +424,7 @@ export default makeStyles(theme => ({
     display: 'flex',
     width: '100%',
     margin: '3%',
-    marginTop: 70,
+    marginTop: 50,
     marginLeft: '175px',
   },
   mainViewCustomer: {
@@ -431,11 +432,15 @@ export default makeStyles(theme => ({
     margin: '3%',
   },
   header: {
-    height: 70,
+    height: 50,
     backgroundColor: theme.palette.grey[900],
     width: '100%',
     position: 'absolute',
     top: 0,
     left: 0,
+    color: 'white',
+    display: 'inline-flex',
+    justifyContent: 'space-between',
+    padding: theme.spacing(1),
   },
 }));

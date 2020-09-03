@@ -34,6 +34,7 @@ function App(props) {
   return (
     <div className={classes.mainContianer}>
       <div className={classes.header}>
+        <div className={classes.headerCompanyName}>EIT POS</div>
         <div className={classes.logoutButtonContainer}>
           <Button
             label=''
