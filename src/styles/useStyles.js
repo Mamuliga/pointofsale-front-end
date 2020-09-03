@@ -124,6 +124,7 @@ export default makeStyles(theme => ({
   },
   topMenu: {
     position: 'absolute',
+    height: '100vh',
     top: 70,
     left: 0,
     flexGrow: 1,
