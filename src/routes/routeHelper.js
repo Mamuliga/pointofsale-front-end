@@ -10,8 +10,6 @@ import {
   FormItem,
   Cashbooks,
   FormCashbook,
-  Sales,
-  Receives,
   FormSettings,
   Dashboard,
 } from '../components/pages';
@@ -99,23 +97,10 @@ export const cashbookRoutes = [
   },
 ];
 
-export const saleRoutes = [
-  {
-    path: PAGE_ROUTES.sales,
-    component: Sales,
-  },
-];
 export const saleNewRoutes = [
   {
     path: PAGE_ROUTES.salesNew,
     component: SalesNew,
-  },
-];
-
-export const receiveRoutes = [
-  {
-    path: PAGE_ROUTES.receives,
-    component: Receives,
   },
 ];
 

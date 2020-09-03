@@ -72,21 +72,9 @@ export const TOP_MENU_ITEMS = [
     icon: PeopleIcon,
   },
   {
-    key: 'sales',
-    path: PAGE_ROUTES.sales,
-    title: 'Sales',
-    icon: AttachMoneyIcon,
-  },
-  {
     key: 'sales-new',
     path: PAGE_ROUTES.salesNew,
     title: 'Sales New',
-    icon: AttachMoneyIcon,
-  },
-  {
-    key: 'receives',
-    path: PAGE_ROUTES.receives,
-    title: 'Receives',
     icon: AttachMoneyIcon,
   },
   {

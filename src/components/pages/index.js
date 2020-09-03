@@ -12,8 +12,6 @@ import FormItem from './FormItem';
 import Employees from './Employees';
 import Suppliers from './Suppliers';
 import Cashbooks from './Cashbooks';
-import Sales from './Sales';
-import Receives from './Receives';
 
 export {
   Dashboard,
@@ -21,8 +19,6 @@ export {
   Customers,
   Employees,
   Suppliers,
-  Sales,
-  Receives,
   Items,
   Cashbooks,
   NotFoundPage,
