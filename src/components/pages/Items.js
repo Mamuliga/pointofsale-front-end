@@ -5,10 +5,13 @@ import { useHistory } from 'react-router-dom';
 import { getItemTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getItemList } from '../../http/itemApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
+import CreateNew from '../uis/CreateNew.js';
+import useStyles from '../../styles/useStyles.js';
 
 const Items = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
   const [itemList, setItemList] = useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
     const handleGetItemResp = res => {
@@ -28,7 +31,9 @@ const Items = ({ fetchApi, setFetchApiInfo }) => {
     };
 
     fetchApi(true);
-    getItemList().then(handleGetItemResp).catch(handleGetItemErr);
+    getItemList()
+      .then(handleGetItemResp)
+      .catch(handleGetItemErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = item => {
@@ -38,12 +43,15 @@ const Items = ({ fetchApi, setFetchApiInfo }) => {
     return editClick;
   };
   return (
-    <TableBuilder
-      tableData={itemList}
-      tableHeaders={getItemTableHeaders}
-      title={'Items'}
-      handleEdit={handleEdit}
-    />
+    <div className={classes.pageContainer}>
+      <CreateNew type='items' />
+      <TableBuilder
+        tableData={itemList}
+        tableHeaders={getItemTableHeaders}
+        title={'Items'}
+        handleEdit={handleEdit}
+      />
+    </div>
   );
 };
 const mapStateToProps = ({ global }) => {

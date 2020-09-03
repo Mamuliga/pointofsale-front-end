@@ -111,7 +111,7 @@ export default makeStyles(theme => ({
     display: 'flex',
     color: 'white',
   },
-  customerSupplierContainer: {
+  pageContainer: {
     width: '100%',
     margin: '3%',
   },
@@ -278,5 +278,9 @@ export default makeStyles(theme => ({
     display: 'inline-flex',
     justifyContent: 'space-between',
     padding: theme.spacing(1),
+  },
+  createNewButton: {
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
 }));
