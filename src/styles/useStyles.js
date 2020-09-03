@@ -103,8 +103,8 @@ export default makeStyles(theme => ({
   },
   topMenu: {
     position: 'absolute',
-    height: '100vh',
-    top: 50,
+    height: 'calc(100vh - 65px)',
+    top: 65,
     left: 0,
     flexGrow: 1,
     backgroundColor: theme.palette.grey[900],
