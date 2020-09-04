@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import useStyles from '../../styles/useStyles';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
 import DatePicker from './../uis/FormComponents/DatePicker';
+import CreateNew from '../uis/CreateNew.js';
 
 const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
   const classes = useStyles();
@@ -89,14 +90,17 @@ const Cashbooks = ({ fetchApi, setFetchApiInfo }) => {
   );
 
   return (
-    <TableBuilder
-      tableData={cashbookList}
-      tableHeaders={getCashbookTableHeaders}
-      handleEdit={handleEdit}
-      title={'Cashbooks'}
-      tableTopUis={dateComponent}
-      hideEditIcon
-    />
+    <div className={classes.pageContainer}>
+      <CreateNew type='cashbooks' />
+      <TableBuilder
+        tableData={cashbookList}
+        tableHeaders={getCashbookTableHeaders}
+        handleEdit={handleEdit}
+        title={'Cashbooks'}
+        tableTopUis={dateComponent}
+        hideEditIcon
+      />
+    </div>
   );
 };
 

@@ -10,6 +10,7 @@ import { searchSupplier } from '../../http/supplierApi';
 import { TextField, CircularProgress } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import CreateNew from '../uis/CreateNew.js';
 
 const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
@@ -52,7 +53,9 @@ const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
     };
 
     fetchApi(true);
-    getSupplierList().then(handleGetSupplierResp).catch(handleGetSupplierErr);
+    getSupplierList()
+      .then(handleGetSupplierResp)
+      .catch(handleGetSupplierErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = supplier => {
@@ -78,7 +81,9 @@ const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
       setFetchSuppliers(false);
     };
     setFetchSuppliers(true);
-    searchSupplier(e.target.value).then(searchSuccess).catch(searchErr);
+    searchSupplier(e.target.value)
+      .then(searchSuccess)
+      .catch(searchErr);
   };
 
   const searchComponent = (
@@ -118,7 +123,8 @@ const Suppliers = ({ fetchApi, setFetchApiInfo }) => {
   );
 
   return (
-    <div className={classes.customerContainer}>
+    <div className={classes.pageContainer}>
+      <CreateNew type='suppliers' />
       {searchComponent}
       <TableBuilder
         tableData={supplierList}

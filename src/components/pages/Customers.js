@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import CreateNew from '../uis/CreateNew.js';
 
 const Customers = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
@@ -41,7 +42,9 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
       fetchApi(false);
     };
     fetchApi(true);
-    getCustomerList().then(handleGetCustomerResp).catch(handleGetCustomerErr);
+    getCustomerList()
+      .then(handleGetCustomerResp)
+      .catch(handleGetCustomerErr);
   }, [fetchApi, setFetchApiInfo]);
 
   const handleEdit = customer => {
@@ -91,7 +94,9 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
     };
     setFetchCustomers(true);
     if (e.target.value.length) {
-      searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
+      searchCustomer(e.target.value)
+        .then(searchSuccess)
+        .catch(searchErr);
     } else {
       setCustomerList(allCustomerList);
     }
@@ -153,9 +158,11 @@ const Customers = ({ fetchApi, setFetchApiInfo }) => {
     };
     return handlePayClick;
   };
+
   return (
     <Fragment>
-      <div className={classes.customerContainer}>
+      <div className={classes.pageContainer}>
+        <CreateNew type='customers' />
         {searchComponent}
         <div>
           <FormControlLabel

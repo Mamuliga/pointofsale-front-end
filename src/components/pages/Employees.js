@@ -5,10 +5,14 @@ import { useHistory } from 'react-router-dom';
 import { getEmployeeTableHeaders } from '../../utilities/helpers/tableHelpers.js';
 import { getEmployeeList } from '../../http/employeeApi';
 import { fetchApi, setFetchApiInfo } from '../../store/actions/globalAction.js';
+import CreateNew from '../uis/CreateNew.js';
+import useStyles from '../../styles/useStyles.js';
 
 const Employees = ({ fetchApi, setFetchApiInfo }) => {
   const { location, push } = useHistory();
   const [employeeList, setEmployeeList] = useState([]);
+
+  const classes = useStyles();
 
   useEffect(() => {
     const handleGetEmployeeResp = res => {
@@ -41,12 +45,15 @@ const Employees = ({ fetchApi, setFetchApiInfo }) => {
   };
 
   return (
-    <TableBuilder
-      tableData={employeeList}
-      tableHeaders={getEmployeeTableHeaders}
-      handleEdit={handleEdit}
-      title={'Employees'}
-    />
+    <div className={classes.pageContainer}>
+      <CreateNew type='employees' />
+      <TableBuilder
+        tableData={employeeList}
+        tableHeaders={getEmployeeTableHeaders}
+        handleEdit={handleEdit}
+        title={'Employees'}
+      />
+    </div>
   );
 };
 
@@ -56,7 +63,7 @@ const mapStateToProps = ({ global }) => {
 
 const mapActionToProps = {
   fetchApi,
-  setFetchApiInfo
+  setFetchApiInfo,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Employees);

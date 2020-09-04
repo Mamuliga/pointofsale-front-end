@@ -28,6 +28,7 @@ const BestSellingCustomer = () => {
     responsiveOptions,
     listener,
   } = emailsSubscriptionChartOptions;
+
   return (
     <div onClick={onClick}>
       <ChartistGraph

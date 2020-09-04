@@ -21,9 +21,7 @@ export const PAGE_ROUTES = {
   newSupplier: '/suppliers/new',
   editSupplier: '/suppliers/edit/:id',
   sales: '/sales',
-  salesNew: '/salesNew',
   receives: '/receives',
-  receivesNew: '/receivesNew',
   items: '/items',
   newItem: '/items/new',
   editItem: '/items/edit/:id',
@@ -38,12 +36,6 @@ export const PAGE_ROUTES = {
 
 const TOP_MENU_HIDE_ROUTES = {
   [PAGE_ROUTES.login]: true,
-};
-
-const SIDE_MENU_HIDE_ROUTES = {
-  [PAGE_ROUTES.login]: true,
-  [PAGE_ROUTES.salesNew]: true,
-  [PAGE_ROUTES.receivesNew]: true,
 };
 
 export const TOP_MENU_ITEMS = [
@@ -78,21 +70,9 @@ export const TOP_MENU_ITEMS = [
     icon: AttachMoneyIcon,
   },
   {
-    key: 'sales-new',
-    path: PAGE_ROUTES.salesNew,
-    title: 'Sales New',
-    icon: AttachMoneyIcon,
-  },
-  {
     key: 'receives',
     path: PAGE_ROUTES.receives,
     title: 'Receives',
-    icon: AttachMoneyIcon,
-  },
-  {
-    key: 'receives-new',
-    path: PAGE_ROUTES.receivesNew,
-    title: 'Receives New',
     icon: AttachMoneyIcon,
   },
   {
@@ -117,8 +97,4 @@ export const TOP_MENU_ITEMS = [
 
 export const showTopMenuForRoute = route => {
   return !TOP_MENU_HIDE_ROUTES[route];
-};
-
-export const showSideMenuForRoute = route => {
-  return !SIDE_MENU_HIDE_ROUTES[route];
 };

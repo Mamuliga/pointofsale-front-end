@@ -6,13 +6,21 @@ import Routes from './routes';
 import { AUTH_LOCAL_STORAGE } from './utilities/constants';
 import { showTopMenuForRoute } from './services/routeService';
 import SideMenu from './components/uis/SideMenu';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { getUserList } from './http/usersApi';
 import useStyles from './styles/useStyles';
 import ErrorDisplay from './components/uis/ErrorDisplay';
+import { Button } from '@material-ui/core';
 
 function App(props) {
   const { pathname } = useLocation();
   const classes = useStyles();
+
+  const handleLogoutClick = () => {
+    if (typeof props.onLogoutPress === 'function') {
+      props.onLogoutPress();
+    }
+  };
 
   const loadPersistentAuthData = () => {
     getUserList()
@@ -25,7 +33,15 @@ function App(props) {
 
   return (
     <div className={classes.mainContianer}>
-      <div className={classes.header}>Header</div>
+      <div className={classes.header}>
+        <div className={classes.headerCompanyName}>EIT POS</div>
+        <Button
+          label=''
+          className={classes.logoutButton}
+          onClick={handleLogoutClick}
+          endIcon={<ExitToAppIcon />}
+        />
+      </div>
       {showTopMenuForRoute(pathname) && (
         <SideMenu selectedKey={pathname} onLogoutPress={props.onLogoutPress} />
       )}

@@ -26,14 +26,6 @@ const Dashboard = () => {
     const handleGetBestSelllingItemsResponse = res => {
       console.log(res);
       fetchApi(false);
-      // if (Array.isArray(res.data)) {
-      //   const displayCustomerList = res.data.map(
-      //     ({ id, firstName, lastName, phoneNo, gender, bankAccount }) => {
-      //       return { id, firstName, lastName, phoneNo, gender, bankAccount };
-      //     }
-      //   );
-      //   // setCustomerList(displayCustomerList);
-      // }
     };
     const handleBestSellingItemsErr = () => {
       setFetchApiInfo({
@@ -87,8 +79,6 @@ const Dashboard = () => {
       .then(handleTotalCountOfEntries)
       .catch(handleBestSellingItemsErr);
   }, []);
-
-  const countSummary = [];
 
   const dataVisualizationChartPropsArray = [
     {

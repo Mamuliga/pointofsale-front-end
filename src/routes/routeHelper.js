@@ -10,8 +10,6 @@ import {
   FormItem,
   Cashbooks,
   FormCashbook,
-  Sales,
-  Receives,
   FormSettings,
   Dashboard,
 } from '../components/pages';
@@ -21,8 +19,8 @@ import MostSellingItems from '../components/pages/dashboard/MostSellingItems';
 import PaymentTypeAnalytics from '../components/pages/dashboard/PaymentTypeAnalytics';
 import LineGraph from '../components/pages/dashboard/LineGraph';
 import LowInventory from '../components/pages/dashboard/LowInventory';
-import SalesNew from '../components/pages/SalesNew';
-import ReceivesNew from '../components/pages/ReceivesNew';
+import Sales from '../components/pages/Sales';
+import Receives from '../components/pages/Receives';
 
 export const customerRoutes = [
   {
@@ -52,6 +50,7 @@ export const employeeRoutes = [
     component: FormEmployee,
   },
 ];
+
 export const supplierRoutes = [
   {
     path: PAGE_ROUTES.suppliers,
@@ -66,6 +65,7 @@ export const supplierRoutes = [
     component: FormSupplier,
   },
 ];
+
 export const itemRoutes = [
   {
     path: PAGE_ROUTES.items,
@@ -80,6 +80,7 @@ export const itemRoutes = [
     component: FormItem,
   },
 ];
+
 export const cashbookRoutes = [
   {
     path: PAGE_ROUTES.cashbooks,
@@ -99,30 +100,17 @@ export const cashbookRoutes = [
   },
 ];
 
-export const saleRoutes = [
+export const saleNewRoutes = [
   {
     path: PAGE_ROUTES.sales,
     component: Sales,
   },
 ];
-export const saleNewRoutes = [
-  {
-    path: PAGE_ROUTES.salesNew,
-    component: SalesNew,
-  },
-];
-
-export const receiveRoutes = [
-  {
-    path: PAGE_ROUTES.receives,
-    component: Receives,
-  },
-];
 
 export const receiveNewRoutes = [
   {
-    path: PAGE_ROUTES.receivesNew,
-    component: ReceivesNew,
+    path: PAGE_ROUTES.receives,
+    component: Receives,
   },
 ];
 
@@ -132,6 +120,7 @@ export const settingsRoutes = [
     component: FormSettings,
   },
 ];
+
 export const dashboardRoutes = [
   {
     path: PAGE_ROUTES.home,
