@@ -6,24 +6,24 @@ import { getReceiveTableHeaders } from '../../utilities/helpers/tableHelpers';
 import useStyles from '../../styles/useStyles';
 import { setFetchApiInfo, fetchApi } from '../../store/actions/globalAction';
 import { getItemTotal } from '../../utilities/helpers/receiveHelpers';
-import CustomerSearch from '../uis/SaleComponents/CustomerSearch';
 import TotalDueCard from '../uis/SaleComponents/TotalDueCard';
 import PaymentMethodsInfo from '../uis/SaleComponents/PaymentMethodsInfo';
 import PaymentMethodSelection from '../uis/SaleComponents/PaymentMethodSelection';
 import { createReceive } from '../../http/receiveApi';
 import ReceiveTableRows from '../uis/SaleComponents/ReceiveTableRows';
 import ReceiveItemSearch from '../uis/SaleComponents/ReceiveItemSearch';
+import SupplierSearch from '../uis/ReceiveComponents/SupplierSearch';
 
 const Receives = ({ setFetchApiInfo }) => {
   const classes = useStyles();
-  const revdAmount = 0;
+  const payedAmount = 0;
   const defaultSupplier = {
     id: 1,
     firstName: 'Default',
     lastName: 'Supplier',
     email: 'defaultSupplier@gmail.com',
   };
-  const RECEIVE_PAY_BUTTON_NAMES = ['Complete Sale', 'Add Payment'];
+  const RECEIVE_PAY_BUTTON_NAMES = ['Complete Receive', 'Add Receive'];
 
   const [paymentMethod, setPaymentMethod] = useState('cash');
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -31,7 +31,7 @@ const Receives = ({ setFetchApiInfo }) => {
   const [buttonName, setButtonName] = useState(RECEIVE_PAY_BUTTON_NAMES[0]);
   const [dueDate, setDueDate] = useState('2020-02-02');
   const [cartItems, setCartItems] = useState([]);
-  const [customer, setCustomer] = useState({
+  const [supplier, setSupplier] = useState({
     id: 2,
     firstName: 'Marjan',
     lastName: 'Mukram',
@@ -54,8 +54,8 @@ const Receives = ({ setFetchApiInfo }) => {
     return parseFloat(totalReceivedAmount).toFixed(2);
   };
 
-  const getItemSales = () => {
-    const itemSales = [];
+  const getItemReceives = () => {
+    const itemReceives = [];
     cartItems.forEach(item => {
       const {
         id,
@@ -64,7 +64,7 @@ const Receives = ({ setFetchApiInfo }) => {
         itemStatId,
         salesPrice: sellingPrice,
       } = item;
-      itemSales.push({
+      itemReceives.push({
         itemId: id,
         sellingPrice,
         quantity,
@@ -72,7 +72,7 @@ const Receives = ({ setFetchApiInfo }) => {
         itemStatId,
       });
     });
-    return itemSales;
+    return itemReceives;
   };
 
   const getBalance = () => {
@@ -101,12 +101,12 @@ const Receives = ({ setFetchApiInfo }) => {
     return keyDown;
   };
 
-  const handleSearchCustomerSubmit = (_e, value) => {
-    setCustomer(value);
+  const handleSearchSupplierSubmit = (_e, value) => {
+    setSupplier(value);
   };
 
-  const handleRemoveSelectedCustomer = () => {
-    setCustomer(defaultSupplier);
+  const handleRemoveSelectedSupplier = () => {
+    setSupplier(defaultSupplier);
   };
 
   const handleAddSubmit = e => {
@@ -161,13 +161,13 @@ const Receives = ({ setFetchApiInfo }) => {
 
   const handleCreateReceive = () => {
     const newReceive = {
-      customerId: customer.id,
+      supplierId: supplier.id,
       total: getCartTotal(),
       totalDiscount: 0,
       paymentType: getPaymentTypeObject(),
       balance: getBalance(),
-      revdAmount,
-      itemSales: getItemSales(cartItems),
+      payedAmount,
+      itemReceives: getItemReceives(cartItems),
       dueDate,
     };
 
@@ -248,10 +248,10 @@ const Receives = ({ setFetchApiInfo }) => {
       </Container>
 
       <div className={classes.salesRightMenu}>
-        <CustomerSearch
-          handleSearchCustomerSubmit={handleSearchCustomerSubmit}
-          handleRemoveSelectedCustomer={handleRemoveSelectedCustomer}
-          customer={customer}
+        <SupplierSearch
+          handleRemoveSelectedSupplier={handleRemoveSelectedSupplier}
+          handleSearchSupplierSubmit={handleSearchSupplierSubmit}
+          supplier={supplier}
         />
         <PaymentMethodsInfo
           paymentMethods={paymentMethods}
