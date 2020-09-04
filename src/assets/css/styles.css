@@ -225,3 +225,18 @@ body {
   background-color: var(--success-color);
   padding: 0;
 }
+
+.MuiAutocomplete-inputRoot {
+  font-size: 1.3rem !important;
+}
+
+.MuiAutocomplete-root .MuiFormLabel-root.MuiInputLabel-root {
+  font-size: 1.3rem !important;
+}
+#salesDueDates {
+  width: 55% !important;
+}
+
+#sales-payment-amount {
+  font-size: 2rem;
+}

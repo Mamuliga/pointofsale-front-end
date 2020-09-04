@@ -27,7 +27,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
     'cash'
   );
   const [paymentTypeInTable, setPaymentTypeInTable] = useState([]);
-  const [dueDate, setDueDate] = useState(null);
+  const [dueDate, setDueDate] = useState(new Date());
 
   const handleDueDateChange = date => {
     setDueDate(date);
@@ -145,9 +145,7 @@ const Sale = ({ cartItems, setCartItems, setFetchApiInfo, fetchApi }) => {
       setFetchCustomers(false);
     };
     setFetchCustomers(true);
-    searchCustomer(e.target.value)
-      .then(searchSuccess)
-      .catch(searchErr);
+    searchCustomer(e.target.value).then(searchSuccess).catch(searchErr);
   };
 
   const handleAddPayment = () => {

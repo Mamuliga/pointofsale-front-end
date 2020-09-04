@@ -174,67 +174,65 @@ export default function TableBuilder({
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <EnhancedTableToolbar headers={headers} title={title} />
-        {tableTopUis}
-        <TableContainer>
-          <Table className={classes.table} size={'medium'}>
-            <EnhancedTableHead
-              classes={classes}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              headers={headers}
-            />
-            <TableBody>
-              {tableRows ||
-                stableSort(rows, getSorting(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(row => {
-                    return (
-                      <TableRow hover tabIndex={-1} key={row.id}>
-                        {Object.values(row).map((cell, index) => {
-                          return <TableCell key={index}>{cell}</TableCell>;
-                        })}
-                        {payButton && (
-                          <TableCell key={'payButton'}>
-                            <Button
-                              variant='contained'
-                              color='secondary'
-                              onClick={payButtonClick(row)}
-                            >
-                              Pay
-                            </Button>
-                          </TableCell>
-                        )}
-                        {!hideEditIcon && (
-                          <TableCell key={'edit'} align='right'>
-                            <EditIcon onClick={handleEdit(row)} />
-                          </TableCell>
-                        )}
-                      </TableRow>
-                    );
-                  })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {!hidePagination && (
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component='div'
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
+      <EnhancedTableToolbar headers={headers} title={title} />
+      {tableTopUis}
+      <TableContainer component={Paper}>
+        <Table className={classes.table} size={'medium'}>
+          <EnhancedTableHead
+            classes={classes}
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+            headers={headers}
           />
-        )}
-      </Paper>
+          <TableBody>
+            {tableRows ||
+              stableSort(rows, getSorting(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map(row => {
+                  return (
+                    <TableRow hover tabIndex={-1} key={row.id}>
+                      {Object.values(row).map((cell, index) => {
+                        return <TableCell key={index}>{cell}</TableCell>;
+                      })}
+                      {payButton && (
+                        <TableCell key={'payButton'}>
+                          <Button
+                            variant='contained'
+                            color='secondary'
+                            onClick={payButtonClick(row)}
+                          >
+                            Pay
+                          </Button>
+                        </TableCell>
+                      )}
+                      {!hideEditIcon && (
+                        <TableCell key={'edit'} align='right'>
+                          <EditIcon onClick={handleEdit(row)} />
+                        </TableCell>
+                      )}
+                    </TableRow>
+                  );
+                })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {!hidePagination && (
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component='div'
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      )}
     </div>
   );
 }
