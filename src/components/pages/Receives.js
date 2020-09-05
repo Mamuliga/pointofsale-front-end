@@ -32,10 +32,10 @@ const Receives = ({ setFetchApiInfo }) => {
   const [dueDate, setDueDate] = useState('2020-02-02');
   const [cartItems, setCartItems] = useState([]);
   const [supplier, setSupplier] = useState({
-    id: 2,
-    firstName: 'Marjan',
-    lastName: 'Mukram',
-    email: 'marjan.emeraldit@gmail.com',
+    id: 1,
+    firstName: 'Default',
+    lastName: 'Supplier',
+    email: 'defaultSupplier@gmail.com',
   });
 
   const handleCartTotal = () => {
