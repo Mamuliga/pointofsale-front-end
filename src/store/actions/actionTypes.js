@@ -1,4 +1,3 @@
-export const SIMPLE_ACTION = 'SIMPLE_ACTION';
 export const AUTHENTICATION = 'AUHENTICATION';
 export const LOAD_AUTH_DATA = 'LOAD_AUTH_DATA';
 export const POST_REQUEST = 'POST_REQUEST';
