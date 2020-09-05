@@ -33,9 +33,9 @@ const Receives = ({ setFetchApiInfo }) => {
   const [cartItems, setCartItems] = useState([]);
   const [supplier, setSupplier] = useState({
     id: 1,
-    firstName: 'Marjan',
-    lastName: 'Mukram',
-    email: 'marjan.emeraldit@gmail.com',
+    firstName: 'Default',
+    lastName: 'Supplier',
+    email: 'defaultSupplier@gmail.com',
   });
 
   const handleCartTotal = () => {
