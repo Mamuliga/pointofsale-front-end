@@ -14,94 +14,97 @@ import {
   saleNewRoutes,
   receiveNewRoutes,
 } from './routeHelper';
+import { LinearProgress } from '@material-ui/core';
 
 const Routes = () => (
   <Switch>
-    {dashboardRoutes.map(route => (
+    <React.Suspense fallback={<LinearProgress color='secondary' />}>
+      {dashboardRoutes.map(route => (
+        <ProtectedRoute
+          exact
+          path={route.path}
+          component={route.component}
+          key={route.path}
+        />
+      ))}
       <ProtectedRoute
         exact
-        path={route.path}
-        component={route.component}
-        key={route.path}
+        path={PAGE_ROUTES.login}
+        component={Login}
+        authRequired={false}
       />
-    ))}
-    <ProtectedRoute
-      exact
-      path={PAGE_ROUTES.login}
-      component={Login}
-      authRequired={false}
-    />
-    {customerRoutes.map(route => (
+      {customerRoutes.map(route => (
+        <ProtectedRoute
+          exact
+          path={route.path}
+          component={route.component}
+          key={route.path}
+          isAuthenticated={null}
+        />
+      ))}
+      {employeeRoutes.map(route => (
+        <ProtectedRoute
+          exact
+          path={route.path}
+          component={route.component}
+          key={route.path}
+        />
+      ))}
+      {supplierRoutes.map(route => (
+        <ProtectedRoute
+          exact
+          path={route.path}
+          component={route.component}
+          key={route.path}
+        />
+      ))}
+      {itemRoutes.map(route => (
+        <ProtectedRoute
+          exact
+          path={route.path}
+          component={route.component}
+          key={route.path}
+        />
+      ))}
+      {cashbookRoutes.map(route => (
+        <ProtectedRoute
+          exact
+          path={route.path}
+          component={route.component}
+          key={route.path}
+        />
+      ))}
+      {saleNewRoutes.map(route => (
+        <ProtectedRoute
+          exact
+          path={route.path}
+          component={route.component}
+          key={route.path}
+        />
+      ))}
+      {receiveNewRoutes.map(route => (
+        <ProtectedRoute
+          exact
+          path={route.path}
+          component={route.component}
+          key={route.path}
+        />
+      ))}
+      {settingsRoutes.map(route => (
+        <ProtectedRoute
+          exact
+          path={route.path}
+          component={route.component}
+          key={route.path}
+        />
+      ))}
+      <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
       <ProtectedRoute
         exact
-        path={route.path}
-        component={route.component}
-        key={route.path}
-        isAuthenticated={null}
+        path={PAGE_ROUTES.settings}
+        component={FormSettings}
       />
-    ))}
-    {employeeRoutes.map(route => (
-      <ProtectedRoute
-        exact
-        path={route.path}
-        component={route.component}
-        key={route.path}
-      />
-    ))}
-    {supplierRoutes.map(route => (
-      <ProtectedRoute
-        exact
-        path={route.path}
-        component={route.component}
-        key={route.path}
-      />
-    ))}
-    {itemRoutes.map(route => (
-      <ProtectedRoute
-        exact
-        path={route.path}
-        component={route.component}
-        key={route.path}
-      />
-    ))}
-    {cashbookRoutes.map(route => (
-      <ProtectedRoute
-        exact
-        path={route.path}
-        component={route.component}
-        key={route.path}
-      />
-    ))}
-    {saleNewRoutes.map(route => (
-      <ProtectedRoute
-        exact
-        path={route.path}
-        component={route.component}
-        key={route.path}
-      />
-    ))}
-    {receiveNewRoutes.map(route => (
-      <ProtectedRoute
-        exact
-        path={route.path}
-        component={route.component}
-        key={route.path}
-      />
-    ))}
-    {settingsRoutes.map(route => (
-      <ProtectedRoute
-        exact
-        path={route.path}
-        component={route.component}
-        key={route.path}
-      />
-    ))}
-    <ProtectedRoute exact path={PAGE_ROUTES.items} component={Items} />
-    <ProtectedRoute
-      exact
-      path={PAGE_ROUTES.settings}
-      component={FormSettings}
-    />
+    </React.Suspense>
     <ProtectedRoute component={NotFoundPage} authRequired={false} />
   </Switch>
 );
